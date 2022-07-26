@@ -1,0 +1,45 @@
+{
+  "main": {
+    "title": "Slov Dice"
+  },
+  "landing": {
+    "title": "Slov Dice",
+    "subTitle": "D&D scenarios playground",
+    "start": "Start game"
+  },
+  "auth": {
+    "registration": "Create an Account",
+    "login": "Login to Account",
+    "restore": "Restore password",
+    "email": "Email",
+    "google": "Google",
+    "discord": "Discord",
+    "guest": "As guest",
+    "bottom": {
+      "has": "Have an account?",
+      "login": "Login",
+      "registration": "Sign up",
+      "restore": "Forgot your password?"
+    },
+    "form": {
+      "email": "Email",
+      "nickname": "Nickname",
+      "password": "Password",
+      "rePassword": "Repeat password",
+      "registration": "Sign up",
+      "login": "Sign in",
+      "loading": "Loading",
+      "send": "Send"
+    }
+  },
+  "sideMenu": {
+    "auth": "Authentication",
+    "translator": "Translator",
+    "createRoom": "Create",
+    "joinRoom": "Join",
+    "users": "Users",
+    "chat": "Chat",
+    "settings": "Settings",
+    "logout": "Logout"
+  }
+}

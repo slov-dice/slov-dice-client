@@ -1,0 +1,45 @@
+{
+  "main": {
+    "title": "Slov Dice"
+  },
+  "landing": {
+    "title": "Slov Dice",
+    "subTitle": "Площадка D&D сценариев",
+    "start": "Начать игру"
+  },
+  "auth": {
+    "registration": "Создать аккаунт",
+    "login": "Войти в аккаунт",
+    "restore": "Восстановить пароль",
+    "email": "Почта",
+    "google": "Google",
+    "discord": "Discord",
+    "guest": "Как гость",
+    "bottom": {
+      "has": "Есть аккаунт?",
+      "login": "Войти",
+      "registration": "Регистрация",
+      "restore": "Забыли пароль?"
+    },
+    "form": {
+      "email": "Почта",
+      "nickname": "Ник",
+      "password": "Пароль",
+      "rePassword": "Повторите пароль",
+      "registration": "Зарегистрироваться",
+      "login": "Войти",
+      "loading": "Загрузка",
+      "send": "Отправить"
+    }
+  },
+  "sideMenu": {
+    "auth": "Авторизация",
+    "translator": "Перевод",
+    "createRoom": "Создать",
+    "joinRoom": "Присоединиться",
+    "users": "Пользователи",
+    "chat": "Чат",
+    "settings": "Настройки",
+    "logout": "Выйти"
+  }
+}
