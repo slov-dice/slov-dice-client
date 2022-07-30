@@ -3,8 +3,9 @@
     "title": "Slov Dice"
   },
   "landing": {
-    "title": "Slov Dice",
-    "subTitle": "Площадка D&D сценариев",
+    "title1": "Slov",
+    "title2": "Dice",
+    "paragraph1": "Площадка D&D сценариев",
     "start": "Начать игру"
   },
   "auth": {

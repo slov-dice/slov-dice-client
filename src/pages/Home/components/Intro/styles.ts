@@ -1,4 +1,4 @@
-import styled, { css, DefaultTheme } from 'styled-components'
+import styled, { css } from 'styled-components'
 
 import { E_ParagraphType } from './'
 
@@ -9,102 +9,28 @@ export const IntroWrapper = styled.div`
 
   height: max(800px, 100vh);
   padding-top: 96px;
-
-  background: linear-gradient(0deg, #211b29 0%, #212121 100%);
 `
 
 export const Intro = styled.div`
   position: relative;
   z-index: 5;
 
+  font-weight: 300;
+`
+
+export const TopSection = styled.div`
   display: flex;
   gap: 24px;
   justify-content: center;
 `
-
-interface I_IntroParagraphBox {
-  type: E_ParagraphType
-}
-
-export const IntroParagraphBox = styled.div<I_IntroParagraphBox>`
+export const TopSectionMobile = styled.div`
   display: flex;
-  align-items: ${({ type }) => (type === E_ParagraphType.first ? 'flex-start' : 'flex-end')};
+  flex-direction: column;
+  gap: 12px;
   justify-content: center;
 
-  width: 100%;
-  max-width: 256px;
+  margin-top: 96px;
 `
-
-interface I_IntroParagraphProps {
-  type: E_ParagraphType
-}
-
-export const IntroParagraph = styled.p<I_IntroParagraphProps>`
-  position: relative;
-
-  width: 100%;
-  height: fit-content;
-  margin-bottom: calc(100% - 48px);
-
-  font-size: 16px;
-
-  ${({ type, theme }) => getParagraphVariants(type, theme)}
-`
-
-const getParagraphVariants = (type: E_ParagraphType, theme: DefaultTheme) => {
-  switch (type) {
-    case E_ParagraphType.first:
-      return css`
-        margin-top: 100%;
-
-        &::before {
-          content: '';
-
-          position: absolute;
-          top: -16px;
-
-          width: 15%;
-          height: 1px;
-
-          background: ${theme.colors.crimson};
-          box-shadow: 0 0 15px 0 rgb(0 0 0 / 32%);
-        }
-
-        &::after {
-          content: '';
-
-          position: absolute;
-          right: 0;
-          bottom: -16px;
-
-          width: 30%;
-          height: 1px;
-
-          background: #fff;
-          box-shadow: 0 0 15px 0 rgb(0 0 0 / 32%);
-        }
-      `
-
-    case E_ParagraphType.second:
-      return css`
-        margin-bottom: calc(100% - 48px);
-
-        &::before {
-          content: '';
-
-          position: absolute;
-          top: -16px;
-          left: 0;
-
-          width: 30%;
-          height: 1px;
-
-          background: #fff;
-          box-shadow: 0 0 15px 0 rgb(0 0 0 / 32%);
-        }
-      `
-  }
-}
 
 export const LogoTextBox = styled.div`
   display: flex;
@@ -112,6 +38,12 @@ export const LogoTextBox = styled.div`
   gap: 24px;
 
   width: fit-content;
+`
+export const LogoTextBoxMobile = styled.div`
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  justify-content: center;
 `
 
 export const LogoText = styled.div`
@@ -124,4 +56,175 @@ export const LogoText = styled.div`
   word-wrap: break-word;
 
   background-color: transparent;
+`
+
+export const LogoTextMobile = styled.div`
+  font-size: 64px;
+  text-align: center;
+  text-transform: uppercase;
+  word-wrap: break-word;
+
+  background-color: transparent;
+
+  @media (min-width: 525px) {
+    font-size: 96px;
+  }
+`
+
+interface I_SectionBox {
+  type: E_ParagraphType
+}
+
+export const SectionBox = styled.div<I_SectionBox>`
+  display: flex;
+  justify-content: center;
+
+  width: 100%;
+  max-width: 312px;
+
+  ${({ type }) =>
+    type === E_ParagraphType.first
+      ? css`
+          align-items: flex-start;
+        `
+      : css`
+          align-items: flex-end;
+        `};
+`
+
+export const SectionBoxMobile = styled.div`
+  display: flex;
+  justify-content: center;
+
+  width: 100%;
+`
+
+export const SectionParagraph = styled.p`
+  position: relative;
+
+  width: 100%;
+  height: fit-content;
+  margin-top: calc(100% - 48px);
+
+  font-size: 18px;
+  text-align: right;
+
+  &::before {
+    content: '';
+
+    position: absolute;
+    top: -16px;
+
+    width: 15%;
+    height: 1px;
+
+    background: ${({ theme }) => theme.colors.crimson};
+    box-shadow: 0 0 15px 0 rgb(0 0 0 / 32%);
+  }
+
+  &::after {
+    content: '';
+
+    position: absolute;
+    right: 0;
+    bottom: -16px;
+
+    width: 30%;
+    height: 1px;
+
+    background: #fff;
+    box-shadow: 0 0 15px 0 rgb(0 0 0 / 32%);
+  }
+`
+
+export const SectionParagraphMobile = styled.p`
+  @media (min-width: 525px) {
+    font-size: 24px;
+  }
+`
+
+export const SectionFeatures = styled.ul`
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  width: 100%;
+  height: fit-content;
+  margin-bottom: calc(100% - 100px);
+
+  font-size: 16px;
+
+  &::before {
+    content: '';
+
+    position: absolute;
+    top: -16px;
+    left: 0;
+
+    width: 30%;
+    height: 1px;
+
+    background: #fff;
+    box-shadow: 0 0 15px 0 rgb(0 0 0 / 32%);
+  }
+
+  li {
+    position: relative;
+
+    &::before {
+      content: '';
+
+      position: absolute;
+      top: 2px;
+      left: -9px;
+
+      width: 3px;
+      height: 12px;
+
+      opacity: 0.9;
+      background-color: ${({ theme }) => theme.colors.crimson};
+      border-radius: 3px;
+    }
+  }
+`
+export const SectionFeaturesMobile = styled.ul`
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  font-size: 16px;
+
+  li {
+    position: relative;
+
+    &::before {
+      content: '';
+
+      position: absolute;
+      top: 2px;
+      left: -9px;
+
+      width: 3px;
+      height: 12px;
+
+      opacity: 0.9;
+      background-color: ${({ theme }) => theme.colors.crimson};
+      border-radius: 3px;
+    }
+  }
+
+  @media (min-width: 525px) {
+    font-size: 18px;
+  }
+`
+
+export const BottomSection = styled.div`
+  position: relative;
+
+  max-width: 320px;
+  margin: 0 auto;
 `

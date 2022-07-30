@@ -1,3 +1,10 @@
+export enum E_MediaQuery {
+  xl = '(max-width: 1140px)',
+  lg = '(max-width: 960px)',
+  md = '(max-width: 720px)',
+  sm = '(max-width: 540px)',
+}
+
 export const theme = {
   colors: {
     // Pallette
@@ -18,6 +25,8 @@ export const theme = {
     black_50: '#212121' + '80',
     black_80: '#212121' + 'CC',
 
+    authForm: '#32343d' + 'CC',
+
     // Statuses
     online: '#53BF3B',
     inRoom: '#573BBF',
@@ -26,10 +35,10 @@ export const theme = {
 
   // Source: https://getbootstrap.com/docs/4.0/layout/grid/
   media: {
-    extraLarge: '(max-width: 1140px)',
-    large: '(max-width: 960px)',
-    medium: '(max-width: 720px)',
-    small: '(max-width: 540px)',
+    xl: E_MediaQuery.xl,
+    lg: E_MediaQuery.lg,
+    md: E_MediaQuery.md,
+    sm: E_MediaQuery.sm,
   },
 
   // in px

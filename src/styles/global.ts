@@ -4,13 +4,16 @@ export const GlobalStyles = createGlobalStyle`
   html,
   body {
     overflow-x: hidden;
-
+    
+    min-height:  100vh;
     margin: 0;
     padding: 0;
     
     font-family: Rubik, sans-serif;
     font-size: 16px;
 
+    background: #211b29;
+    
     ::-webkit-scrollbar {
       width: 2px;
     }

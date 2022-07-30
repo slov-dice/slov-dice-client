@@ -1,18 +1,24 @@
-import { Navigate, Route, Routes } from 'react-router-dom'
+import { AnimatePresence } from 'framer-motion'
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 
 import { IntroduceRoute } from './IntroduceRoute'
 
+import { Header } from 'features/Header'
 import * as Pages from 'pages'
 import { E_Routes } from 'utils/constants/routes'
 
 export const AppRoutes = () => {
+  const location = useLocation()
   return (
-    <Routes>
-      <Route element={<IntroduceRoute />}>
-        <Route path={E_Routes.home} element={<Pages.Home />} />
-      </Route>
-      <Route path='*' element={<Navigate to={E_Routes.home} />} />
-      <Route path={E_Routes.auth} element={<Pages.Auth />} />
-    </Routes>
+    <AnimatePresence exitBeforeEnter>
+      {location.pathname !== '/auth' && <Header />}
+      <Routes key={location.key} location={location}>
+        <Route element={<IntroduceRoute />}>
+          <Route path={E_Routes.home} element={<Pages.Home />} />
+        </Route>
+        <Route path={E_Routes.auth} element={<Pages.Auth />} />
+        <Route path='*' element={<Navigate to={E_Routes.home} />} />
+      </Routes>
+    </AnimatePresence>
   )
 }

@@ -12,7 +12,7 @@ export const Container = styled(motion.div)`
 
   background: ${({ theme }) => theme.colors.black};
 
-  @media ${({ theme }) => theme.media.small} {
+  @media ${({ theme }) => theme.media.sm} {
     width: 100%;
   }
 `
