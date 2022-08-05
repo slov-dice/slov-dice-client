@@ -3,9 +3,41 @@
     "title": "Slov Dice"
   },
   "landing": {
-    "title": "Slov Dice",
-    "subTitle": "D&D scenarios playground",
-    "start": "Start game"
+    "intro": {
+      "title1": "Slov",
+      "title2": "Dice",
+      "paragraph1": "D&D playground",
+      "feature1": "Versatile implementations of mechanics",
+      "feature2": "Comfortable time spent",
+      "feature3": "All necessary tools",
+      "feature4": "Flexible setup",
+      "start": "Start game"
+    },
+    "about": {
+      "title": "About",
+      "infoTitle": "Team",
+      "paragraph1": "Did you want to create your own universe or become a legendary hero?",
+      "paragraph2": "Find the right team, take on the role of Game Master or player, and start exploring!",
+      "featuresTitle": "Features",
+      "feature1": "Battlefield",
+      "feature2": "Inventory",
+      "feature3": "Mini games",
+      "feature4": "Live player",
+      "feature5": "Text editor",
+      "feature6": "Character editor",
+      "feature7": "Save/load game",
+      "start": "Start"
+    }
+  },
+  "modals": {
+    "translator": {
+      "title": "Translation",
+      "paragraph1": "The translation only includes UI texts.",
+      "paragraph2": "Custom messages and titles will not be translated!",
+      "actions": {
+        "cancel": "Cancel"
+      }
+    }
   },
   "auth": {
     "registration": "Create an Account",

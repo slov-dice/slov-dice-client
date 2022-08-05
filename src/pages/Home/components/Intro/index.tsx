@@ -6,7 +6,6 @@ import { Button } from 'components/Button'
 import { HeroBackground } from 'features/HeroBackground'
 import { useMediaQuery } from 'hooks/useMediaQuery'
 import { t } from 'languages'
-import * as C from 'styles/components'
 import { E_MediaQuery } from 'styles/theme'
 import { E_Routes } from 'utils/constants/routes'
 
@@ -25,44 +24,43 @@ export const Intro = () => {
         {isMatch ? (
           <S.TopSectionMobile>
             <S.LogoTextBoxMobile>
-              <S.LogoTextMobile>{t('landing.title1')}</S.LogoTextMobile>
-              <S.LogoTextMobile>{t('landing.title2')}</S.LogoTextMobile>
+              <S.LogoTextMobile>{t('landing.intro.title1')}</S.LogoTextMobile>
+              <S.LogoTextMobile>{t('landing.intro.title2')}</S.LogoTextMobile>
             </S.LogoTextBoxMobile>
             <S.SectionBoxMobile>
-              <S.SectionParagraphMobile>{t('landing.paragraph1')}</S.SectionParagraphMobile>
+              <S.SectionParagraphMobile>{t('landing.intro.paragraph1')}</S.SectionParagraphMobile>
             </S.SectionBoxMobile>
             <S.SectionBoxMobile>
               <S.SectionFeaturesMobile>
-                <li>Разносторонние реализации механик</li>
-                <li>Комфортное время препровождения</li>
-                <li>Все необходимые инструменты</li>
-                <li>Гибкая настройка</li>
+                <li>{t('landing.intro.feature1')}</li>
+                <li>{t('landing.intro.feature2')}</li>
+                <li>{t('landing.intro.feature3')}</li>
+                <li>{t('landing.intro.feature4')}</li>
               </S.SectionFeaturesMobile>
             </S.SectionBoxMobile>
           </S.TopSectionMobile>
         ) : (
           <S.TopSection>
             <S.SectionBox type={E_ParagraphType.first}>
-              <S.SectionParagraph>{t('landing.paragraph1')}</S.SectionParagraph>
+              <S.SectionParagraph>{t('landing.intro.paragraph1')}</S.SectionParagraph>
             </S.SectionBox>
             <S.LogoTextBox>
-              <S.LogoText>{t('landing.title1')}</S.LogoText>
-              <S.LogoText>{t('landing.title2')}</S.LogoText>
+              <S.LogoText>{t('landing.intro.title1')}</S.LogoText>
+              <S.LogoText>{t('landing.intro.title2')}</S.LogoText>
             </S.LogoTextBox>
             <S.SectionBox type={E_ParagraphType.second}>
               <S.SectionFeatures>
-                <li>Разносторонние реализации механик</li>
-                <li>Комфортное время препровождения</li>
-                <li>Все необходимые инструменты</li>
-                <li>Гибкая настройка</li>
+                <li>{t('landing.intro.feature1')}</li>
+                <li>{t('landing.intro.feature2')}</li>
+                <li>{t('landing.intro.feature3')}</li>
+                <li>{t('landing.intro.feature4')}</li>
               </S.SectionFeatures>
             </S.SectionBox>
           </S.TopSection>
         )}
-        <C.Brick h={48} />
         <S.BottomSection>
           <Button onClick={() => navigate(E_Routes.auth)} fullWidth>
-            {t('landing.start')}
+            {t('landing.intro.start')}
           </Button>
         </S.BottomSection>
       </S.Intro>

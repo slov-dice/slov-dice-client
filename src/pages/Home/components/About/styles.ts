@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 export const About = styled.div`
@@ -6,7 +7,7 @@ export const About = styled.div`
 
   overflow: hidden;
 
-  background-color: #1e1939;
+  background-color: ${({ theme }) => theme.colors.black};
 `
 
 export const AboutInner = styled.div`
@@ -17,7 +18,7 @@ export const AboutInner = styled.div`
   width: 100%;
   max-width: 1268px;
   margin: 0 auto;
-  padding: 164px 24px;
+  padding: 164px 24px 81px;
 
   @media (max-width: 968px) {
     display: flex;
@@ -32,12 +33,10 @@ export const Title = styled.div`
   top: -2.5%;
   left: 5%;
 
-  font-family: Arial, sans-serif;
   font-size: 112px;
   font-weight: 600;
+  color: ${({ theme }) => theme.colors.white_30};
   text-transform: uppercase;
-
-  opacity: 0.35;
 
   @media (max-width: 968px) {
     top: -1%;
@@ -66,13 +65,13 @@ export const InfoBox = styled.div`
   }
 `
 
-export const InfoTitle = styled.h2`
+export const InfoTitle = styled.div`
   position: relative;
 
   font-size: 42px;
-  font-weight: 400;
+  font-weight: 600;
+  color: ${({ theme }) => theme.colors.primary};
   text-transform: uppercase;
-  letter-spacing: 6px;
 
   &::before {
     content: '';
@@ -84,7 +83,7 @@ export const InfoTitle = styled.h2`
     width: 72px;
     height: 1px;
 
-    background: #fff;
+    background: ${({ theme }) => theme.colors.primary};
     box-shadow: 0 0 15px 0 rgb(0 0 0 / 32%);
   }
 
@@ -95,13 +94,10 @@ export const InfoTitle = styled.h2`
   }
 `
 
-export const InfoSubTitle = styled.p`
+export const InfoContent = styled.div`
   position: relative;
 
-  font-size: 15px;
-  font-weight: 500;
-  color: #4e486e;
-  word-break: break-all;
+  max-width: 400px;
 
   &::before {
     content: '';
@@ -110,32 +106,72 @@ export const InfoSubTitle = styled.p`
     top: 50%;
     left: -48px;
 
+    width: 32px;
+    height: 1px;
+
+    background: ${({ theme }) => theme.colors.white};
+  }
+
+  &::after {
+    content: '';
+
+    position: absolute;
+    top: 12%;
+    left: -48px;
+
     width: 24px;
     height: 1px;
 
-    background: #fff;
-    box-shadow: 0 0 15px 0 rgb(0 0 0 / 32%);
+    background: ${({ theme }) => theme.colors.white};
   }
 
   @media (max-width: 1472px) {
     &::before {
       display: none;
     }
+
+    &::after {
+      display: none;
+    }
   }
 `
 
-export const InfoMoreButton = styled.button`
-  cursor: pointer;
+export const Features = styled.div``
 
+export const FeaturesList = styled.ul`
   position: relative;
 
-  font-family: Rubik, sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+
+  font-size: 16px;
+
+  li {
+    position: relative;
+
+    &::before {
+      content: '';
+
+      position: absolute;
+      top: 2px;
+      left: -9px;
+
+      width: 3px;
+      height: 12px;
+
+      opacity: 0.9;
+      background-color: ${({ theme }) => theme.colors.primary};
+      border-radius: 3px;
+    }
+  }
+`
+
+export const InfoMoreButton = styled(Link)`
+  position: relative;
+
   font-size: 16px;
   color: #fff;
-
-  background-color: transparent;
-  border: 0;
-  outline: 0;
 
   &::before {
     content: '';
@@ -147,8 +183,7 @@ export const InfoMoreButton = styled.button`
     width: 32px;
     height: 1px;
 
-    background: #3c2051;
-    box-shadow: 0 0 15px 0 rgb(0 0 0 / 32%);
+    background: ${({ theme }) => theme.colors.primary};
   }
 
   &::after {
@@ -161,14 +196,13 @@ export const InfoMoreButton = styled.button`
     width: 24px;
     height: 2px;
 
-    background: #3c2051;
-    box-shadow: 0 0 15px 0 rgb(0 0 0 / 32%);
+    background: ${({ theme }) => theme.colors.primary};
   }
 `
 
 export const MediaBox = styled.div`
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, 2fr);
   gap: 6px;
   align-items: center;
   justify-self: center;

@@ -4,7 +4,7 @@ import {
   I_TaskItem,
   E_TaskItemVisibility,
   E_TaskItemActionType,
-} from 'types/ui'
+} from 'models/ui'
 import { E_Routes } from 'utils/constants/routes'
 import { E_Icon } from 'utils/helpers/icons'
 

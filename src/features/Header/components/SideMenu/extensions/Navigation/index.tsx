@@ -8,14 +8,14 @@ import { NavigationItem, NavigationDivider } from '../NavigationItem'
 
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { useStoreSelector } from 'hooks/useStoreSelector'
-import { openModal, openSidePanel } from 'store/ui'
 import {
   E_Modals,
   E_Panels,
   E_TaskItemActionType,
   E_TaskItemVisibility,
   T_TaskItemActionPayload,
-} from 'types/ui'
+} from 'models/ui'
+import { openModal, openSidePanel } from 'store/ui'
 import { E_Routes } from 'utils/constants/routes'
 import { E_Icon } from 'utils/helpers/icons'
 

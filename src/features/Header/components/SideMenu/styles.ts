@@ -25,5 +25,6 @@ export const Overlay = styled(motion.div)`
   bottom: 0;
   left: 0;
 
-  background-color: ${({ theme }) => theme.colors.black_50};
+  background-color: ${({ theme }) => theme.colors.white_05};
+  backdrop-filter: blur(2px);
 `

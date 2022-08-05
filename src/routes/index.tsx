@@ -11,12 +11,12 @@ export const AppRoutes = () => {
   const location = useLocation()
   return (
     <AnimatePresence exitBeforeEnter>
-      {location.pathname !== '/auth' && <Header />}
+      {location.pathname !== E_Routes.auth && <Header />}
       <Routes key={location.key} location={location}>
         <Route element={<IntroduceRoute />}>
           <Route path={E_Routes.home} element={<Pages.Home />} />
+          <Route path={E_Routes.auth} element={<Pages.Auth />} />
         </Route>
-        <Route path={E_Routes.auth} element={<Pages.Auth />} />
         <Route path='*' element={<Navigate to={E_Routes.home} />} />
       </Routes>
     </AnimatePresence>

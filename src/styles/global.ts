@@ -11,6 +11,7 @@ export const GlobalStyles = createGlobalStyle`
     
     font-family: Rubik, sans-serif;
     font-size: 16px;
+    font-weight: 400;
 
     background: #211b29;
     
@@ -42,5 +43,9 @@ export const GlobalStyles = createGlobalStyle`
 
   ul {
     list-style-type: none;
+  }
+
+  a {
+    text-decoration: none;
   }
 `

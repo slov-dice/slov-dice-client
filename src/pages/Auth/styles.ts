@@ -38,7 +38,7 @@ export const AuthForm = styled.div`
   border-radius: 16px;
 
   ${({ theme }) => css`
-    box-shadow: rgba(0, 0, 0, 0.5) 0 3px 7px -3px, 0 6px 0 0 ${theme.colors.crimson};
+    box-shadow: rgba(0, 0, 0, 0.5) 0 3px 7px -3px, 0 6px 0 0 ${theme.colors.primary};
   `}
 
   @media ${({ theme }) => theme.media.md} {

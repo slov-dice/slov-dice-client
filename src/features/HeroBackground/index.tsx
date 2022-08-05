@@ -1,5 +1,5 @@
-import { useTransform, useViewportScroll } from 'framer-motion'
-import { useEffect, useState } from 'react'
+import { useTransform, useScroll } from 'framer-motion'
+import { useState } from 'react'
 
 import { IconWrapper } from './components/IconWrapper'
 import { itemsPosition } from './data'
@@ -11,7 +11,7 @@ import { E_MediaQuery } from 'styles/theme'
 
 export const HeroBackground = () => {
   const isMatch = useMediaQuery(E_MediaQuery.lg)
-  const { scrollY } = useViewportScroll()
+  const { scrollY } = useScroll()
   const y = useTransform(scrollY, [0, 1000], [0, 200])
 
   const [icons] = useState(getRandomIconValues())

@@ -46,7 +46,7 @@ export const Button = styled(motion.button)<ButtonProps>`
     switch ($variants) {
       case ButtonVariants.primary:
         return css`
-          box-shadow: rgba(0, 0, 0, 0.5) 0 3px 7px -3px, 0 4px 0 0 ${theme.colors.crimson};
+          box-shadow: rgba(0, 0, 0, 0.5) 0 3px 7px -3px, 0 4px 0 0 ${theme.colors.primary};
         `
       case ButtonVariants.secondary:
         return css`
@@ -56,7 +56,7 @@ export const Button = styled(motion.button)<ButtonProps>`
   }};
 
   :focus-visible {
-    border: 1px solid ${({ theme }) => theme.colors.crimson};
+    border: 1px solid ${({ theme }) => theme.colors.primary};
     outline: none;
   }
 
@@ -64,7 +64,7 @@ export const Button = styled(motion.button)<ButtonProps>`
     width: 24px;
     height: 24px;
 
-    fill: ${({ theme }) => theme.colors.crimson};
+    fill: ${({ theme }) => theme.colors.primary};
 
     ${({ $onlyIcon }) =>
       $onlyIcon

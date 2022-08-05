@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-import type { I_Profile } from 'types/profile'
+import type { I_Profile } from 'models/profile'
 
 const initialState: I_Profile = {
   id: 0,

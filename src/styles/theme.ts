@@ -10,7 +10,9 @@ export const theme = {
     // Pallette
     purple: '#5122BB',
     cobaltBlue: '#211b29',
-    crimson: '#ff3d6f',
+    primary: '#ff3d6f',
+    primary_50: '#ff3d6f' + '80',
+    primary_80: '#ff3d6f' + 'CC',
 
     white: '#F5F5F5',
     white_05: '#F5F5F5' + '0D',
@@ -44,7 +46,7 @@ export const theme = {
   // in px
   sizes: {
     header: { height: 56 },
-    modal: { width: 540 },
+    modal: { width: 640 },
     authForm: { width: 540, height: 800 },
     sidePanel: { width: 320 },
   },

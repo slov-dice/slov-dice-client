@@ -14,8 +14,6 @@ export const IntroWrapper = styled.div`
 export const Intro = styled.div`
   position: relative;
   z-index: 5;
-
-  font-weight: 300;
 `
 
 export const TopSection = styled.div`
@@ -59,15 +57,15 @@ export const LogoText = styled.div`
 `
 
 export const LogoTextMobile = styled.div`
-  font-size: 64px;
+  font-size: 96px;
   text-align: center;
   text-transform: uppercase;
   word-wrap: break-word;
 
   background-color: transparent;
 
-  @media (min-width: 525px) {
-    font-size: 96px;
+  @media ${({ theme }) => theme.media.sm} {
+    font-size: 64px;
   }
 `
 
@@ -106,7 +104,7 @@ export const SectionParagraph = styled.p`
   height: fit-content;
   margin-top: calc(100% - 48px);
 
-  font-size: 18px;
+  font-size: 24px;
   text-align: right;
 
   &::before {
@@ -118,7 +116,7 @@ export const SectionParagraph = styled.p`
     width: 15%;
     height: 1px;
 
-    background: ${({ theme }) => theme.colors.crimson};
+    background: ${({ theme }) => theme.colors.primary};
     box-shadow: 0 0 15px 0 rgb(0 0 0 / 32%);
   }
 
@@ -184,7 +182,7 @@ export const SectionFeatures = styled.ul`
       height: 12px;
 
       opacity: 0.9;
-      background-color: ${({ theme }) => theme.colors.crimson};
+      background-color: ${({ theme }) => theme.colors.primary};
       border-radius: 3px;
     }
   }
@@ -212,7 +210,7 @@ export const SectionFeaturesMobile = styled.ul`
       height: 12px;
 
       opacity: 0.9;
-      background-color: ${({ theme }) => theme.colors.crimson};
+      background-color: ${({ theme }) => theme.colors.primary};
       border-radius: 3px;
     }
   }
@@ -227,4 +225,9 @@ export const BottomSection = styled.div`
 
   max-width: 320px;
   margin: 0 auto;
+  margin-top: 5%;
+
+  @media ${({ theme }) => theme.media.lg} {
+    margin-top: 20%;
+  }
 `

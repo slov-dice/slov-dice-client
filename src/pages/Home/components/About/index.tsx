@@ -1,24 +1,44 @@
 import * as S from './styles'
 
+import { t } from 'languages'
+import * as C from 'styles/components'
+import { E_Routes } from 'utils/constants/routes'
+
 export const About = () => {
   return (
     <S.About>
-      <S.Title>About</S.Title>
+      <S.Title>{t('landing.about.title')}</S.Title>
       <S.AboutInner>
         <S.InfoBox>
-          <S.InfoTitle>About</S.InfoTitle>
-          <S.InfoSubTitle>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Deserunt ex vel quia quo
-            deleniti distinctio fuga, iste molestiae possimus? At expedita sunt voluptatem pariatur
-            a, explicabo nihil earum reiciendis tempora incidunt et vero ipsum esse quasi
-            recusandae. Aut aliquam dolore explicabo architecto facere illum laudantium quaerat non
-            omnis? Laborum, molestias.
-          </S.InfoSubTitle>
+          <S.InfoTitle>{t('landing.about.infoTitle')}</S.InfoTitle>
+          <S.InfoContent>
+            <div>{t('landing.about.paragraph1')}</div>
+            <C.Divider />
+
+            <div>{t('landing.about.paragraph2')}</div>
+            <C.Divider />
+            <S.InfoTitle>{t('landing.about.featuresTitle')}</S.InfoTitle>
+            <S.Features>
+              <C.Divider h={24} hmd={16} />
+              <S.FeaturesList>
+                <li>{t('landing.about.feature1')}</li>
+                <li>{t('landing.about.feature2')}</li>
+                <li>{t('landing.about.feature3')}</li>
+                <li>{t('landing.about.feature4')}</li>
+                <li>{t('landing.about.feature5')}</li>
+                <li>{t('landing.about.feature6')}</li>
+                <li>{t('landing.about.feature7')}</li>
+              </S.FeaturesList>
+            </S.Features>
+          </S.InfoContent>
           <div>
-            <S.InfoMoreButton>Watch More</S.InfoMoreButton>
+            <S.InfoMoreButton to={E_Routes.auth}>{t('landing.about.start')}</S.InfoMoreButton>
           </div>
         </S.InfoBox>
         <S.MediaBox>
+          <S.Media />
+          <S.Media />
+          <S.Media />
           <S.Media />
           <S.Media />
           <S.Media />

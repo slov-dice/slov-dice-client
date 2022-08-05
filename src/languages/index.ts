@@ -1,7 +1,7 @@
 import EN from './en.json'
 import RU from './ru.json'
 
-import { E_Locale } from 'types/app'
+import { E_Locale } from 'models/app'
 import { LocalStorage } from 'utils/helpers/localStorage'
 
 const translations = { [E_Locale.ru]: RU, [E_Locale.en]: EN }

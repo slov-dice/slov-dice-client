@@ -34,6 +34,7 @@
   "rules": {
     "no-empty-source": null,
     "value-keyword-case": null,
-    "keyframes-name-pattern": null
+    "keyframes-name-pattern": null,
+    "color-function-notation": null
   }
 }

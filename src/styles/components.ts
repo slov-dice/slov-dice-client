@@ -1,16 +1,34 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
-export const Divider = styled.hr`
-  flex-shrink: 0;
+interface DividerProps {
+  h?: number
+  hmd?: number
 
-  margin: 0;
+  decorated?: boolean
+}
 
-  border-color: #444;
-  border-style: solid;
-  border-width: 0;
-  border-bottom-width: thin;
-`
+export const Divider = styled.div<DividerProps>`
+  position: relative;
 
-export const Brick = styled.div<{ h?: number }>`
-  height: ${({ h = 32 }) => h + 'px'};
+  height: ${({ h = 32 }) => h}px;
+
+  ${({ theme, decorated }) =>
+    decorated
+      ? css`
+          &::before {
+            content: '';
+
+            position: absolute;
+            top: 50%;
+
+            height: 1px;
+            width: 100%;
+            background-color: ${theme.colors.primary_50};
+          }
+        `
+      : css``}
+
+  @media ${({ theme }) => theme.media.md} {
+    height: ${({ hmd = 16 }) => hmd}px;
+  }
 `

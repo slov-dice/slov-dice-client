@@ -19,7 +19,7 @@ export const Container = styled.div`
   animation: ${neon} 2s alternate-reverse infinite;
 
   -webkit-text-fill-color: transparent;
-  -webkit-text-stroke: 1px ${({ theme }) => theme.colors.crimson};
+  -webkit-text-stroke: 1px ${({ theme }) => theme.colors.primary};
 `
 
 export const Text = styled.span`

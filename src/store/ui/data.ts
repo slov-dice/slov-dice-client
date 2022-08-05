@@ -1,4 +1,4 @@
-import { E_Locale } from 'types/app'
+import { E_Locale } from 'models/app'
 import {
   I_Modal,
   E_Modals,
@@ -7,7 +7,7 @@ import {
   I_TaskItem,
   E_TaskItemVisibility,
   E_TaskItemActionType,
-} from 'types/ui'
+} from 'models/ui'
 import { FullScreen } from 'utils/helpers/fullScreen'
 import { E_Icon } from 'utils/helpers/icons'
 import { LocalStorage } from 'utils/helpers/localStorage'

@@ -2,8 +2,8 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 import { initialState } from './data'
 
-import { E_Locale } from 'types/app'
-import { E_Modals, E_AuthContent, E_Panels, I_TaskItem } from 'types/ui'
+import { E_Locale } from 'models/app'
+import { E_Modals, E_AuthContent, E_Panels, I_TaskItem } from 'models/ui'
 import { E_Icon } from 'utils/helpers/icons'
 import { LocalStorage } from 'utils/helpers/localStorage'
 
@@ -14,10 +14,9 @@ const uiSlice = createSlice({
     switchAuthFormContent: (state, action: PayloadAction<E_AuthContent>) => {
       state.authFormContent = action.payload
     },
-    switchLanguage: (state) => {
-      const selectedLanguage = state.language === E_Locale.en ? E_Locale.ru : E_Locale.en
-      LocalStorage.setLanguage(selectedLanguage)
-      state.language = selectedLanguage
+    switchLanguage: (state, action: PayloadAction<E_Locale>) => {
+      LocalStorage.setLanguage(action.payload)
+      state.language = action.payload
     },
     openModal: (state, action: PayloadAction<E_Modals>) => {
       state.modals.push({ window: action.payload })
