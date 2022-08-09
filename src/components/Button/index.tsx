@@ -12,6 +12,7 @@ interface ButtonProps {
   type?: 'button' | 'submit'
   onlyIcon?: boolean
   variants?: ButtonVariants
+  rounded?: boolean
 }
 
 const ButtonComponent = ({
@@ -20,6 +21,7 @@ const ButtonComponent = ({
   type = 'button',
   onlyIcon = false,
   variants = ButtonVariants.primary,
+  rounded = false,
 }: PropsWithChildren<ButtonProps>) => (
   <S.Button
     type={type}
@@ -28,6 +30,7 @@ const ButtonComponent = ({
     onClick={onClick}
     $variants={variants}
     $onlyIcon={onlyIcon}
+    rounded={rounded}
   >
     {children}
   </S.Button>

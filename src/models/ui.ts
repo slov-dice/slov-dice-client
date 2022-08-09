@@ -1,13 +1,6 @@
+import { E_Modals } from 'features/Modals/models'
 import { E_Routes } from 'models/routes'
 import { E_Icon } from 'utils/helpers/icons'
-
-export enum E_Modals {
-  translator = 'translator',
-  settings = 'settings',
-  createRoom = 'createRoom',
-  joinRoom = 'joinRoom',
-  logout = 'logout',
-}
 
 export enum E_Panels {
   chat = 'chat',
@@ -16,10 +9,6 @@ export enum E_Panels {
 
 export enum E_CustomAction {
   logout = 'logout',
-}
-
-export interface I_Modal {
-  window: E_Modals
 }
 
 export enum E_TaskItemVisibility {

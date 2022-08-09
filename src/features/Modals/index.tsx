@@ -2,19 +2,19 @@ import { AnimatePresence } from 'framer-motion'
 import { useCallback } from 'react'
 
 import { ModalComponents } from './components'
+import { closeModal } from './slice'
 import * as S from './styles'
 
 import { useEventListener } from 'hooks/useEventListener'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { useStoreSelector } from 'hooks/useStoreSelector'
-import { closeModal } from 'store/ui'
 
 export const Modal = () => {
   const dispatch = useStoreDispatch()
-  const modals = useStoreSelector((state) => state.ui.modals)
+  const modals = useStoreSelector((state) => state.modalsManager.modals)
 
   const handleClose = useCallback(() => {
-    dispatch(closeModal(null))
+    dispatch(closeModal())
   }, [dispatch])
 
   const handleEsc = useCallback(

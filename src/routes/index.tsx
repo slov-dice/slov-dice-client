@@ -11,10 +11,10 @@ import * as Pages from 'pages'
 
 export const AppRoutes = () => {
   const location = useLocation()
-  const isAuthLayoutOpen = useStoreSelector((state) => state.ui.isAuthLayoutOpen)
+  const isAuthFormOpen = useStoreSelector((state) => state.authForm.isOpen)
   return (
     <>
-      <AnimatePresence exitBeforeEnter>{!isAuthLayoutOpen && <Header />}</AnimatePresence>
+      <AnimatePresence exitBeforeEnter>{!isAuthFormOpen && <Header />}</AnimatePresence>
       <AnimatePresence exitBeforeEnter>
         <Routes key={location.key} location={location}>
           <Route element={<FramerRoute />}>

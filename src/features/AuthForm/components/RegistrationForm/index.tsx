@@ -4,8 +4,7 @@ import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
 
 import { useSignUp } from './useSignUp'
 
-import { FormSignUp } from '../../models/forms'
-import { signUpSchema } from '../../utils/validations'
+import { I_FormSignUp } from '../../models/form'
 
 import { Button } from 'components/Button'
 import { FormField } from 'components/InputFields'
@@ -14,18 +13,19 @@ import { t } from 'languages'
 import { E_AuthType } from 'models/app'
 import * as C from 'styles/components'
 import { LocalStorage } from 'utils/helpers/localStorage'
+import { signUpSchema } from 'utils/validations/auth'
 
 export const RegistrationForm = () => {
   const dispatch = useStoreDispatch()
 
   const { fetchSignUp, signUpProgress } = useSignUp(dispatch)
 
-  const formSignUp = useForm<FormSignUp>({
+  const formSignUp = useForm<I_FormSignUp>({
     mode: 'onSubmit',
     resolver: yupResolver(signUpSchema),
   })
 
-  const handleSignUp: SubmitHandler<FormSignUp> = async (values) => {
+  const handleSignUp: SubmitHandler<I_FormSignUp> = async (values) => {
     LocalStorage.setAuthType(E_AuthType.email)
     const { rePassword, ...rest } = values
     await fetchSignUp({ ...rest })
@@ -33,11 +33,7 @@ export const RegistrationForm = () => {
 
   return (
     <FormProvider {...formSignUp}>
-      <motion.form
-        onSubmit={formSignUp.handleSubmit(handleSignUp)}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-      >
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
         <FormField name='email' placeholder={t('auth.form.email.label')} />
         <C.Divider h={16} />
         <FormField name='nickname' placeholder={t('auth.form.nickname.label')} />
@@ -46,12 +42,12 @@ export const RegistrationForm = () => {
         <C.Divider h={16} />
         <FormField name='rePassword' placeholder={t('auth.form.rePassword.label')} />
         <C.Divider />
-        <Button type='submit'>
+        <Button onClick={formSignUp.handleSubmit(handleSignUp)}>
           {signUpProgress.isLoading
             ? t('auth.form.actions.loading')
             : t('auth.form.actions.registration')}
         </Button>
-      </motion.form>
+      </motion.div>
     </FormProvider>
   )
 }

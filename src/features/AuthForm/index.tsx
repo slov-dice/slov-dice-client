@@ -1,9 +1,10 @@
 import { AnimatePresence } from 'framer-motion'
+import { useLayoutEffect } from 'react'
 
 import { AuthTitle, AuthArrow, AuthContent, AuthBottom } from './components'
 import { LanguageSwitcher } from './components/LanguageSwitcher'
 import { E_AuthContent } from './models'
-import { switchAuthFormContent } from './slice'
+import { closeAuthForm, openAuthForm, switchAuthFormContent } from './slice'
 import * as S from './styles'
 
 import BackIcon from 'assets/icons/arrow-left.svg'
@@ -17,6 +18,14 @@ import { t } from 'languages'
 export const AuthForm = () => {
   const dispatch = useStoreDispatch()
   const authFormContent = useStoreSelector((state) => state.authForm.content)
+
+  useLayoutEffect(() => {
+    dispatch(openAuthForm())
+
+    return () => {
+      dispatch(closeAuthForm())
+    }
+  }, [dispatch])
 
   const handleBackButton = () => {
     if (AuthArrow[authFormContent] === false) return

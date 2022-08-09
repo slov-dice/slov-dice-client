@@ -6,6 +6,7 @@ import { ButtonVariants } from '.'
 interface ButtonProps {
   $onlyIcon: boolean
   $variants: ButtonVariants
+  rounded: boolean
 }
 
 export const Button = styled(motion.button)<ButtonProps>`
@@ -20,18 +21,18 @@ export const Button = styled(motion.button)<ButtonProps>`
   justify-content: center;
 
   width: 100%;
-  height: 54px;
+  height: 48px;
   max-height: 100%;
   padding: 0 16px;
 
-  font-size: 21px;
+  font-size: 18px;
   font-weight: 400;
   line-height: 28px;
   color: ${({ theme }) => theme.colors.white};
 
   background: ${({ theme }) => theme.colors.white_10};
   border: none;
-  border-radius: 8px;
+  border-radius: ${({ rounded }) => (rounded ? 8 : 0)}px;
 
   ${({ theme, $variants }) => {
     switch ($variants) {
@@ -67,7 +68,7 @@ export const Button = styled(motion.button)<ButtonProps>`
         : css`
             position: absolute;
             left: 24px;
-            top: 18px;
+            top: 14px;
           `}
   }
 `

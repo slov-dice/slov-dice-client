@@ -8,6 +8,7 @@ interface I_FormFieldProps {
   name: string
   placeholder?: string
   type?: 'text' | 'email'
+  maxLength?: number
 }
 
 export const FormField = (props: I_FormFieldProps) => {
@@ -20,7 +21,12 @@ export const FormField = (props: I_FormFieldProps) => {
 
   return (
     <S.FormField>
-      <S.Input {...props} {...register(props.name)} autoComplete='off' />
+      <S.Input
+        {...props}
+        {...register(props.name)}
+        maxLength={props.maxLength || 48}
+        autoComplete='off'
+      />
       <S.Error>{t(error)}</S.Error>
     </S.FormField>
   )

@@ -18,6 +18,5 @@ export const LanguageSwitcher = styled(motion.div)`
   color: ${({ theme }) => theme.colors.white};
 
   background: ${({ theme }) => theme.colors.white_10};
-  border-radius: 10%;
   box-shadow: rgba(0, 0, 0, 50%) 0 3px 7px -3px, 0 3px 0 0 ${({ theme }) => theme.colors.primary};
 `

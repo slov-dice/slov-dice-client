@@ -6,9 +6,9 @@ export const BaseWindow = styled.div`
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
 
   width: 580px;
+  padding: 72px 30px 24px;
 
   color: ${({ theme }) => theme.colors.white};
 
@@ -33,7 +33,8 @@ export const BaseWindowClose = styled.span`
   user-select: none;
 
   position: absolute;
-  right: 24px;
+  top: 24px;
+  right: 30px;
 
   width: 24px;
   height: 24px;
@@ -44,4 +45,9 @@ export const BaseWindowClose = styled.span`
     width: 100%;
     height: 100%;
   }
+`
+
+export const BaseWindowActions = styled.div`
+  display: flex;
+  justify-self: flex-end;
 `

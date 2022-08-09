@@ -4,10 +4,11 @@ import { useState } from 'react'
 import * as S from './styles'
 
 import { Button } from 'components/Button'
+import { closeModal } from 'features/Modals/slice'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { useStoreSelector } from 'hooks/useStoreSelector'
 import { I_TaskItem } from 'models/ui'
-import { closeModal, updateToolbar } from 'store/ui'
+import { updateToolbar } from 'store/ui'
 import * as C from 'styles/components'
 import { getIcon } from 'utils/helpers/icons'
 
@@ -18,7 +19,7 @@ export const SettingsModal = () => {
   const [items, setItems] = useState(toolbar)
 
   const handleClose = () => {
-    dispatch(closeModal(null))
+    dispatch(closeModal())
   }
 
   const handleSaveItems = () => {

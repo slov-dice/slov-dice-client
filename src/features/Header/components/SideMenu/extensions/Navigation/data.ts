@@ -1,6 +1,6 @@
+import { E_Modals } from 'features/Modals/models'
 import { E_Routes } from 'models/routes'
 import {
-  E_Modals,
   E_Panels,
   I_TaskItem,
   E_TaskItemVisibility,

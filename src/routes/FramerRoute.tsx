@@ -9,7 +9,7 @@ const variants: Variants = {
 
 export const FramerRoute = () => {
   return (
-    <motion.div variants={variants} initial={'initial'} animate={'animate'} exit={'exit'}>
+    <motion.div {...variants}>
       <Outlet />
     </motion.div>
   )

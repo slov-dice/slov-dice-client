@@ -33,9 +33,15 @@
     "translator": {
       "title": "Translation",
       "paragraph1": "The translation only includes UI texts.",
-      "paragraph2": "Custom messages and titles will not be translated!",
+      "paragraph2": "Custom messages and titles will not be translated!"
+    },
+    "restorePassword": {
+      "title": "Восстановить пароль",
+      "paragraph": "Укажите подтверждённый адрес электронной почты, который привязан к вашей учётной записи и мы отправим на него письмо с кодом.",
       "actions": {
-        "cancel": "Cancel"
+        "cancel": "Отмена",
+        "next": "Далее",
+        "set": "Обновить"
       }
     }
   },

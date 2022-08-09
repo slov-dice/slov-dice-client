@@ -1,15 +1,16 @@
 import * as S from './styles'
 
+import { E_Modals } from 'features/Modals/models'
+import { openModal } from 'features/Modals/slice'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { useStoreSelector } from 'hooks/useStoreSelector'
 import {
-  E_Modals,
   E_Panels,
   E_TaskItemActionType,
   E_TaskItemVisibility,
   T_TaskItemActionPayload,
 } from 'models/ui'
-import { changeToolbarItemIcon, closeSidePanel, openModal, openSidePanel } from 'store/ui'
+import { changeToolbarItemIcon, closeSidePanel, openSidePanel } from 'store/ui'
 import { FullScreen } from 'utils/helpers/fullScreen'
 import { E_Icon, getIcon } from 'utils/helpers/icons'
 

@@ -7,7 +7,7 @@ interface LinkButtonProps {
 }
 
 export const LinkButton: FC<PropsWithChildren<LinkButtonProps>> = ({ children, onClick }) => (
-  <S.LinkButton whileHover={{ opacity: 0.75 }} onClick={onClick}>
+  <S.LinkButton type='button' onClick={onClick}>
     {children}
   </S.LinkButton>
 )

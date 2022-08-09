@@ -3,5 +3,4 @@ export enum E_AuthContent {
   registrationForm = 'registrationForm',
   loginEntry = 'loginEntry',
   loginForm = 'loginForm',
-  forgotPassword = 'forgetPassword',
 }

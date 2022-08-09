@@ -17,6 +17,7 @@ import profileSlice from './profile'
 import uiSlice from './ui'
 
 import authFormSlice from 'features/AuthForm/slice'
+import modalsManagerSlice from 'features/Modals/slice'
 
 import { authAPI } from 'services/auth'
 // import lobbyChatAPI from 'services/lobbyChat'
@@ -34,6 +35,7 @@ const rootReducer = combineReducers({
   // [lobbySlice.name]: lobbySlice.reducer,
   [uiSlice.name]: uiSlice.reducer,
   [authFormSlice.name]: authFormSlice.reducer,
+  [modalsManagerSlice.name]: modalsManagerSlice.reducer,
   [authAPI.reducerPath]: authAPI.reducer,
   // [lobbyChatAPI.reducerPath]: lobbyChatAPI.reducer,
   // [lobbyUsersAPI.reducerPath]: lobbyUsersAPI.reducer,

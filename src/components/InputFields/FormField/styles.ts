@@ -13,12 +13,12 @@ export const FormField = styled.div`
 export const Input = styled.input`
   width: 100%;
   max-width: 100%;
-  height: 54px;
+  height: 48px;
   max-height: 100%;
   margin-bottom: 12px;
   padding: 14px 20px;
 
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 400;
   font-style: normal;
   line-height: 24px;
@@ -37,7 +37,8 @@ export const Input = styled.input`
 export const Error = styled.span`
   position: absolute;
   bottom: -5px;
-  left: 10px;
+
+  min-width: 300px;
 
   font-size: 12px;
   color: ${({ theme }) => theme.colors.primary};

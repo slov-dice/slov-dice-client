@@ -3,11 +3,12 @@ import * as S from './styles'
 
 import CloseIcon from 'assets/icons/close.svg'
 import { Switch, T_SwitchOption } from 'components/Switch'
+import { closeModal } from 'features/Modals/slice'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { useStoreSelector } from 'hooks/useStoreSelector'
 import { t } from 'languages'
 import { E_Locale } from 'models/app'
-import { closeModal, switchLanguage } from 'store/ui'
+import { switchLanguage } from 'store/ui'
 import * as C from 'styles/components'
 
 export const TranslatorModal = () => {
@@ -15,7 +16,7 @@ export const TranslatorModal = () => {
   const dispatch = useStoreDispatch()
 
   const handleClose = () => {
-    dispatch(closeModal(null))
+    dispatch(closeModal())
   }
 
   const handleSwitchLanguage = (option: T_SwitchOption) => {

@@ -1,29 +1,19 @@
+import { E_Modals } from 'features/Modals/models'
 import { E_Locale } from 'models/app'
-import {
-  I_Modal,
-  E_Modals,
-  E_Panels,
-  I_TaskItem,
-  E_TaskItemVisibility,
-  E_TaskItemActionType,
-} from 'models/ui'
+import { E_Panels, I_TaskItem, E_TaskItemVisibility, E_TaskItemActionType } from 'models/ui'
 import { FullScreen } from 'utils/helpers/fullScreen'
 import { E_Icon } from 'utils/helpers/icons'
 import { LocalStorage } from 'utils/helpers/localStorage'
 
 interface UI {
-  isAuthLayoutOpen: boolean
   language: E_Locale
-  modals: I_Modal[]
   sidePanel: E_Panels | null
   sideMenu: boolean
   toolbar: I_TaskItem[]
 }
 
 export const initialState: UI = {
-  isAuthLayoutOpen: false,
   language: LocalStorage.getLanguage() || E_Locale.ru,
-  modals: [],
   sidePanel: null,
   sideMenu: false,
   toolbar: [
