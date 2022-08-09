@@ -16,7 +16,9 @@ import storage from 'redux-persist/lib/storage'
 import profileSlice from './profile'
 import uiSlice from './ui'
 
-// import { authAPI } from 'services/auth'
+import authFormSlice from 'features/AuthForm/slice'
+
+import { authAPI } from 'services/auth'
 // import lobbyChatAPI from 'services/lobbyChat'
 // import { lobbyUsersAPI } from 'services/lobbyUsers'
 
@@ -31,7 +33,8 @@ const rootReducer = combineReducers({
   // [roomSlice.name]: roomSlice.reducer,
   // [lobbySlice.name]: lobbySlice.reducer,
   [uiSlice.name]: uiSlice.reducer,
-  // [authAPI.reducerPath]: authAPI.reducer,
+  [authFormSlice.name]: authFormSlice.reducer,
+  [authAPI.reducerPath]: authAPI.reducer,
   // [lobbyChatAPI.reducerPath]: lobbyChatAPI.reducer,
   // [lobbyUsersAPI.reducerPath]: lobbyUsersAPI.reducer,
 })
@@ -45,8 +48,7 @@ export const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }),
-  // .concat(authAPI.middleware, lobbyChatAPI.middleware, lobbyUsersAPI.middleware),
+    }).concat(authAPI.middleware),
 })
 
 export const persistor = persistStore(store)

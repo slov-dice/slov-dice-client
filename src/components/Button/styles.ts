@@ -6,7 +6,6 @@ import { ButtonVariants } from '.'
 interface ButtonProps {
   $onlyIcon: boolean
   $variants: ButtonVariants
-  fullWidth: boolean
 }
 
 export const Button = styled(motion.button)<ButtonProps>`
@@ -20,6 +19,7 @@ export const Button = styled(motion.button)<ButtonProps>`
   align-items: center;
   justify-content: center;
 
+  width: 100%;
   height: 54px;
   max-height: 100%;
   padding: 0 16px;
@@ -32,15 +32,6 @@ export const Button = styled(motion.button)<ButtonProps>`
   background: ${({ theme }) => theme.colors.white_10};
   border: none;
   border-radius: 8px;
-
-  ${({ fullWidth }) =>
-    fullWidth
-      ? css`
-          width: 100%;
-        `
-      : css`
-          width: fit-content;
-        `}
 
   ${({ theme, $variants }) => {
     switch ($variants) {

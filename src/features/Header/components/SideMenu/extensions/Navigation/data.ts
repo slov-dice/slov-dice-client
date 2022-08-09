@@ -1,11 +1,12 @@
+import { E_Routes } from 'models/routes'
 import {
   E_Modals,
   E_Panels,
   I_TaskItem,
   E_TaskItemVisibility,
   E_TaskItemActionType,
+  E_CustomAction,
 } from 'models/ui'
-import { E_Routes } from 'utils/constants/routes'
 import { E_Icon } from 'utils/helpers/icons'
 
 export const data: I_TaskItem[] = [
@@ -14,7 +15,7 @@ export const data: I_TaskItem[] = [
     icon: E_Icon.login,
     visibility: E_TaskItemVisibility.unAuthenticated,
     actionType: E_TaskItemActionType.push,
-    actionPayload: E_Routes.auth,
+    actionPayload: E_Routes.lobby,
   },
   {
     name: 'sideMenu.createRoom',
@@ -70,6 +71,6 @@ export const data: I_TaskItem[] = [
     icon: E_Icon.logout,
     visibility: E_TaskItemVisibility.authenticated,
     actionType: E_TaskItemActionType.replace,
-    actionPayload: E_Routes.home,
+    actionPayload: E_CustomAction.logout,
   },
 ]

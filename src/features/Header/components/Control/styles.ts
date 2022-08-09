@@ -4,10 +4,6 @@ import styled from 'styled-components'
 export const Control = styled(motion.div).attrs(({ theme }) => ({
   whileHover: { backgroundColor: theme.colors.white_30 },
   whileTap: { scale: 0.95 },
-  variants: {
-    closed: { borderColor: theme.colors.white },
-    opened: { borderColor: theme.colors.purple },
-  },
 }))`
   cursor: pointer;
   user-select: none;

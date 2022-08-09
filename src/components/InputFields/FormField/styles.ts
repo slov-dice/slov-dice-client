@@ -24,11 +24,10 @@ export const Input = styled.input`
   line-height: 24px;
   color: ${({ theme }) => theme.colors.white};
 
-  background: ${({ theme }) => theme.colors.white_05};
+  background: ${({ theme }) => theme.colors.white_10};
   border: none;
-  border-radius: 8px;
   outline: none;
-  box-shadow: rgba(0, 0, 0, 0.1) 0 6px 12px -2px, rgba(0, 0, 0, 0.4) 0 3px 7px -3px;
+  box-shadow: rgba(0, 0, 0, 10%) 0 6px 12px -2px, rgba(0, 0, 0, 40%) 0 3px 7px -3px;
 
   ::placeholder {
     color: ${({ theme }) => theme.colors.white_50};
@@ -41,5 +40,5 @@ export const Error = styled.span`
   left: 10px;
 
   font-size: 12px;
-  color: ${({ theme }) => theme.colors.black};
+  color: ${({ theme }) => theme.colors.primary};
 `

@@ -17,7 +17,7 @@ export const Toolbar = () => {
   const { toolbar, sidePanel, isAuth } = useStoreSelector((state) => ({
     toolbar: state.ui.toolbar,
     sidePanel: state.ui.sidePanel,
-    isAuth: state.profile.isAuth,
+    isAuth: state.profile.statuses.isAuth,
   }))
   const dispatch = useStoreDispatch()
 

@@ -36,7 +36,7 @@ export const Header = () => {
   useEventListener('scroll', handleScroll)
 
   return (
-    <S.Header isTop={isTop}>
+    <S.Header isTop={isTop} key='header'>
       <motion.div initial={false} animate={sideMenuVisible ? 'opened' : 'closed'} exit='closed'>
         <Control onClick={handleToggleSideMenu} />
         <SideMenu />

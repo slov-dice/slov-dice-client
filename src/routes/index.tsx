@@ -1,24 +1,31 @@
 import { AnimatePresence } from 'framer-motion'
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 
-import { IntroduceRoute } from './IntroduceRoute'
+import { FramerRoute } from './FramerRoute'
+import { ProtectedRoute } from './ProtectedRoute'
 
 import { Header } from 'features/Header'
+import { useStoreSelector } from 'hooks/useStoreSelector'
+import { E_Routes } from 'models/routes'
 import * as Pages from 'pages'
-import { E_Routes } from 'utils/constants/routes'
 
 export const AppRoutes = () => {
   const location = useLocation()
+  const isAuthLayoutOpen = useStoreSelector((state) => state.ui.isAuthLayoutOpen)
   return (
-    <AnimatePresence exitBeforeEnter>
-      {location.pathname !== E_Routes.auth && <Header />}
-      <Routes key={location.key} location={location}>
-        <Route element={<IntroduceRoute />}>
-          <Route path={E_Routes.home} element={<Pages.Home />} />
-          <Route path={E_Routes.auth} element={<Pages.Auth />} />
-        </Route>
-        <Route path='*' element={<Navigate to={E_Routes.home} />} />
-      </Routes>
-    </AnimatePresence>
+    <>
+      <AnimatePresence exitBeforeEnter>{!isAuthLayoutOpen && <Header />}</AnimatePresence>
+      <AnimatePresence exitBeforeEnter>
+        <Routes key={location.key} location={location}>
+          <Route element={<FramerRoute />}>
+            <Route element={<ProtectedRoute />}>
+              <Route path={E_Routes.lobby} element={<Pages.Lobby />} />
+            </Route>
+            <Route path={E_Routes.home} element={<Pages.Home />} />
+            <Route path='*' element={<Navigate to={E_Routes.home} />} />
+          </Route>
+        </Routes>
+      </AnimatePresence>
+    </>
   )
 }

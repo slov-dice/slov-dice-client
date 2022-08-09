@@ -1,13 +1,5 @@
-import { E_Routes } from 'utils/constants/routes'
+import { E_Routes } from 'models/routes'
 import { E_Icon } from 'utils/helpers/icons'
-
-export enum E_AuthContent {
-  registerEntry = 'registerEntry',
-  registerForm = 'registerForm',
-  loginEntry = 'loginEntry',
-  loginForm = 'loginForm',
-  forgotPassword = 'forgetPassword',
-}
 
 export enum E_Modals {
   translator = 'translator',
@@ -20,6 +12,10 @@ export enum E_Modals {
 export enum E_Panels {
   chat = 'chat',
   users = 'users',
+}
+
+export enum E_CustomAction {
+  logout = 'logout',
 }
 
 export interface I_Modal {
@@ -42,7 +38,7 @@ export enum E_TaskItemActionType {
   none = 'none',
 }
 
-export type T_TaskItemActionPayload = E_Routes | E_Modals | E_Panels | null
+export type T_TaskItemActionPayload = E_Routes | E_Modals | E_Panels | E_CustomAction | null
 
 export interface I_TaskItem {
   name: string

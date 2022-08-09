@@ -8,15 +8,17 @@ import { NavigationItem, NavigationDivider } from '../NavigationItem'
 
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { useStoreSelector } from 'hooks/useStoreSelector'
+import { E_Routes } from 'models/routes'
 import {
+  E_CustomAction,
   E_Modals,
   E_Panels,
   E_TaskItemActionType,
   E_TaskItemVisibility,
   T_TaskItemActionPayload,
 } from 'models/ui'
+import { logout } from 'store/profile'
 import { openModal, openSidePanel } from 'store/ui'
-import { E_Routes } from 'utils/constants/routes'
 import { E_Icon } from 'utils/helpers/icons'
 
 interface NavigationProps {
@@ -33,8 +35,9 @@ export const Navigation = ({ toggleMenu }: NavigationProps) => {
     if (type === E_TaskItemActionType.push) {
       navigate(payload as E_Routes)
     } else if (type === E_TaskItemActionType.replace) {
-      if (payload === E_Routes.home) {
-        navigate(E_Routes.logout)
+      if (payload === E_CustomAction.logout) {
+        dispatch(logout())
+        return
       }
       navigate(payload as E_Routes)
     } else if (type === E_TaskItemActionType.modal) {
@@ -47,7 +50,7 @@ export const Navigation = ({ toggleMenu }: NavigationProps) => {
   return (
     <S.Navigation variants={navigationVariants}>
       {data.map((item) => {
-        if (profile.isAuth && item.visibility === E_TaskItemVisibility.authenticated) {
+        if (profile.statuses.isAuth && item.visibility === E_TaskItemVisibility.authenticated) {
           if (item.icon === E_Icon.divider) return <NavigationDivider key={item.name} />
           return (
             <NavigationItem
@@ -58,7 +61,7 @@ export const Navigation = ({ toggleMenu }: NavigationProps) => {
             />
           )
         }
-        if (!profile.isAuth && item.visibility === E_TaskItemVisibility.unAuthenticated) {
+        if (!profile.statuses.isAuth && item.visibility === E_TaskItemVisibility.unAuthenticated) {
           return (
             <NavigationItem
               key={item.name}

@@ -1,5 +1,11 @@
 import styled, { css } from 'styled-components'
 
+export const Title = styled.span`
+  font-size: 32px;
+  font-weight: 300;
+  text-transform: uppercase;
+`
+
 interface DividerProps {
   h?: number
   hmd?: number

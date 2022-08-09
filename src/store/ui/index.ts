@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { initialState } from './data'
 
 import { E_Locale } from 'models/app'
-import { E_Modals, E_AuthContent, E_Panels, I_TaskItem } from 'models/ui'
+import { E_Modals, E_Panels, I_TaskItem } from 'models/ui'
 import { E_Icon } from 'utils/helpers/icons'
 import { LocalStorage } from 'utils/helpers/localStorage'
 
@@ -11,8 +11,11 @@ const uiSlice = createSlice({
   name: 'ui',
   initialState,
   reducers: {
-    switchAuthFormContent: (state, action: PayloadAction<E_AuthContent>) => {
-      state.authFormContent = action.payload
+    openAuthLayout: (state) => {
+      state.isAuthLayoutOpen = true
+    },
+    closeAuthLayout: (state) => {
+      state.isAuthLayoutOpen = false
     },
     switchLanguage: (state, action: PayloadAction<E_Locale>) => {
       LocalStorage.setLanguage(action.payload)
@@ -53,7 +56,6 @@ const uiSlice = createSlice({
 })
 
 export const {
-  switchAuthFormContent,
   switchLanguage,
   openModal,
   closeModal,
@@ -62,6 +64,8 @@ export const {
   toggleSideMenu,
   updateToolbar,
   changeToolbarItemIcon,
+  openAuthLayout,
+  closeAuthLayout,
 } = uiSlice.actions
 
 export default uiSlice

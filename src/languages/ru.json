@@ -54,14 +54,36 @@
       "restore": "Забыли пароль?"
     },
     "form": {
-      "email": "Почта",
-      "nickname": "Ник",
-      "password": "Пароль",
-      "rePassword": "Повторите пароль",
-      "registration": "Зарегистрироваться",
-      "login": "Войти",
-      "loading": "Загрузка",
-      "send": "Отправить"
+      "email": {
+        "label": "Почта",
+        "rules": {
+          "isEmail": "Неверный формат почты"
+        }
+      },
+      "nickname": {
+        "label": "Ник"
+      },
+      "password": {
+        "label": "Пароль",
+        "rules": {
+          "min": "Минимальная длинна пароля 5 символов"
+        }
+      },
+      "rePassword": {
+        "label": "Повторите пароль",
+        "rules": {
+          "oneOf": "Пароли не совпадают"
+        }
+      },
+      "rules": {
+        "required": "Поле необходимо заполнить"
+      },
+      "actions": {
+        "registration": "Зарегистрироваться",
+        "login": "Войти",
+        "loading": "Загрузка",
+        "send": "Отправить"
+      }
     }
   },
   "sideMenu": {
@@ -73,5 +95,22 @@
     "chat": "Чат",
     "settings": "Настройки",
     "logout": "Выйти"
+  },
+  "notification": {
+    "auth": {
+      "registration": {
+        "success": "Вы успешно зарегистрировались!",
+        "error": "Ошибка:"
+      },
+      "login": {
+        "success": "Вы успешно вошли в аккаунт",
+        "error": "Ошибка:"
+      },
+      "restore": {
+        "success": "Письмо отправлено Вам на почту",
+        "error": "Ошибка:"
+      },
+      "unknownError": "Неизвестная ошибка"
+    }
   }
 }

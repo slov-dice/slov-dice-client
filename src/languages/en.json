@@ -54,14 +54,36 @@
       "restore": "Forgot your password?"
     },
     "form": {
-      "email": "Email",
-      "nickname": "Nickname",
-      "password": "Password",
-      "rePassword": "Repeat password",
-      "registration": "Sign up",
-      "login": "Sign in",
-      "loading": "Loading",
-      "send": "Send"
+      "email": {
+        "label": "Email",
+        "rules": {
+          "isEmail": "Invalid email format"
+        }
+      },
+      "nickname": {
+        "label": "Nickname"
+      },
+      "password": {
+        "label": "Password",
+        "rules": {
+          "min": "Minimum password length 5 characters"
+        }
+      },
+      "rePassword": {
+        "label": "Repeat password",
+        "rules": {
+          "oneOf": "Passwords don't match"
+        }
+      },
+      "rules": {
+        "required": "Enter the field"
+      },
+      "actions": {
+        "registration": "Sign up",
+        "login": "Sign in",
+        "loading": "Loading",
+        "send": "Send"
+      }
     }
   },
   "sideMenu": {
@@ -73,5 +95,22 @@
     "chat": "Chat",
     "settings": "Settings",
     "logout": "Logout"
+  },
+  "notification": {
+    "auth": {
+      "registration": {
+        "success": "You have successfully registered!",
+        "error": "Error:"
+      },
+      "login": {
+        "success": "You have successfully logged in",
+        "error": "Error:"
+      },
+      "restore": {
+        "success": "A letter has been sent to your email",
+        "error": "Error:"
+      },
+      "unknownError": "Unknown error"
+    }
   }
 }

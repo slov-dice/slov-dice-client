@@ -1,6 +1,6 @@
-import { About } from './components/About'
-import { GameMaster } from './components/GameMaster'
-import { Intro } from './components/Intro'
+import { About } from './extensions/About'
+import { GameMaster } from './extensions/GameMaster'
+import { Intro } from './extensions/Intro'
 import * as S from './styles'
 
 export const Home = () => {

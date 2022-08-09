@@ -12,6 +12,7 @@ export const GlobalStyles = createGlobalStyle`
     font-family: Rubik, sans-serif;
     font-size: 16px;
     font-weight: 400;
+    color: ${({ theme }) => theme.colors.white};
 
     background: #211b29;
     

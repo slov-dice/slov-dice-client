@@ -26,6 +26,7 @@ export const theme = {
     black_30: '#212121' + '4D',
     black_50: '#212121' + '80',
     black_80: '#212121' + 'CC',
+    black_90: '#212121' + 'E6',
 
     authForm: '#32343d' + 'CC',
 

@@ -27,7 +27,7 @@ export const TranslatorModal = () => {
       <S.WindowClose onClick={handleClose}>
         <CloseIcon />
       </S.WindowClose>
-      <S.WindowTitle>{t('modals.translator.title')}</S.WindowTitle>
+      <C.Title>{t('modals.translator.title')}</C.Title>
       <C.Divider />
 
       <S.WindowContent>

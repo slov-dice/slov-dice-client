@@ -2,7 +2,6 @@ import { E_Locale } from 'models/app'
 import {
   I_Modal,
   E_Modals,
-  E_AuthContent,
   E_Panels,
   I_TaskItem,
   E_TaskItemVisibility,
@@ -13,7 +12,7 @@ import { E_Icon } from 'utils/helpers/icons'
 import { LocalStorage } from 'utils/helpers/localStorage'
 
 interface UI {
-  authFormContent: E_AuthContent
+  isAuthLayoutOpen: boolean
   language: E_Locale
   modals: I_Modal[]
   sidePanel: E_Panels | null
@@ -22,7 +21,7 @@ interface UI {
 }
 
 export const initialState: UI = {
-  authFormContent: E_AuthContent.registerEntry,
+  isAuthLayoutOpen: false,
   language: LocalStorage.getLanguage() || E_Locale.ru,
   modals: [],
   sidePanel: null,
