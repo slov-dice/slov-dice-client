@@ -36,19 +36,27 @@
       "paragraph2": "Custom messages and titles will not be translated!"
     },
     "restorePassword": {
-      "title": "Восстановить пароль",
-      "paragraph": "Укажите подтверждённый адрес электронной почты, который привязан к вашей учётной записи и мы отправим на него письмо с кодом.",
+      "title": "Restore password",
+      "paragraph1": "Enter a verified email address associated with your account and we will send an email with a code to it.",
+      "paragraph2": "Enter the recovery code from the email.",
+      "paragraph3": "Enter a new password and try not to forget it again.",
+      "form": {
+        "email": "Email",
+        "code": "Code",
+        "password": "New password",
+        "rePassword": "Repeat password"
+      },
       "actions": {
-        "cancel": "Отмена",
-        "next": "Далее",
-        "set": "Обновить"
+        "send": "Send",
+        "cancel": "Cancel",
+        "next": "Next",
+        "set": "Update"
       }
     }
   },
   "auth": {
     "registration": "Create an Account",
     "login": "Login to Account",
-    "restore": "Restore password",
     "email": "Email",
     "google": "Google",
     "discord": "Discord",
@@ -60,35 +68,14 @@
       "restore": "Forgot your password?"
     },
     "form": {
-      "email": {
-        "label": "Email",
-        "rules": {
-          "isEmail": "Invalid email format"
-        }
-      },
-      "nickname": {
-        "label": "Nickname"
-      },
-      "password": {
-        "label": "Password",
-        "rules": {
-          "min": "Minimum password length 5 characters"
-        }
-      },
-      "rePassword": {
-        "label": "Repeat password",
-        "rules": {
-          "oneOf": "Passwords don't match"
-        }
-      },
-      "rules": {
-        "required": "Enter the field"
-      },
+      "email": "Email",
+      "nickname": "Nickname",
+      "password": "Password",
+      "rePassword": "Repeat password",
       "actions": {
         "registration": "Sign up",
         "login": "Sign in",
-        "loading": "Loading",
-        "send": "Send"
+        "loading": "Loading"
       }
     }
   },
@@ -118,5 +105,12 @@
       },
       "unknownError": "Unknown error"
     }
+  },
+  "validation": {
+    "required": "Enter the field",
+    "isEmail": "Invalid email format",
+    "passwordOneOf": "Passwords don't match",
+    "passwordMin": "Minimum password length 5 characters",
+    "codeMatches": "Invalid code format"
   }
 }

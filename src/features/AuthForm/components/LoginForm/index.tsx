@@ -41,9 +41,9 @@ export const LoginForm = () => {
     <>
       <FormProvider {...formSignIn}>
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-          <FormField name='email' placeholder={t('auth.form.email.label')} />
+          <FormField name='email' placeholder={t('auth.form.email')} />
           <C.Divider h={16} />
-          <FormField name='password' placeholder={t('auth.form.password.label')} />
+          <FormField name='password' placeholder={t('auth.form.password')} />
           <C.Divider />
           <Button onClick={formSignIn.handleSubmit(handleSignIn)}>
             {signInProgress.isLoading

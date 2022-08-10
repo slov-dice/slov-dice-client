@@ -2,13 +2,11 @@ import { createApi } from '@reduxjs/toolkit/query/react'
 
 import {
   I_AuthResponse,
-  ChangePasswordPayload,
-  EmailConfirmPayload,
-  LogoutPayload,
-  RestorePasswordPayload,
+  I_EmailConfirmPayload,
+  I_LogoutPayload,
   I_SignInPayload,
   I_SignUpPayload,
-  ThirdPartyAuthPayload,
+  I_ThirdPartyAuthPayload,
 } from './interfaces'
 
 import { I_LobbyUser, T_UserId } from 'models/app'
@@ -34,7 +32,7 @@ export const authAPI = createApi({
       }),
     }),
 
-    thirdPartyAuth: build.mutation<I_AuthResponse, ThirdPartyAuthPayload>({
+    thirdPartyAuth: build.mutation<I_AuthResponse, I_ThirdPartyAuthPayload>({
       query: (payload) => ({
         url: 'token',
         method: 'POST',
@@ -49,7 +47,7 @@ export const authAPI = createApi({
       }),
     }),
 
-    logout: build.mutation<void, LogoutPayload>({
+    logout: build.mutation<void, I_LogoutPayload>({
       query: (payload) => ({
         url: 'logout',
         method: 'POST',
@@ -57,25 +55,9 @@ export const authAPI = createApi({
       }),
     }),
 
-    emailConfirmation: build.mutation<void, EmailConfirmPayload>({
+    emailConfirmation: build.mutation<void, I_EmailConfirmPayload>({
       query: (payload) => ({
         url: 'confirm',
-        method: 'POST',
-        body: payload,
-      }),
-    }),
-
-    restorePassword: build.mutation<null, RestorePasswordPayload>({
-      query: (payload) => ({
-        url: 'restore',
-        method: 'POST',
-        body: payload,
-      }),
-    }),
-
-    changePassword: build.mutation<null, ChangePasswordPayload>({
-      query: (payload) => ({
-        url: 'change/password',
         method: 'POST',
         body: payload,
       }),

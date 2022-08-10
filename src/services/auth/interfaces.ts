@@ -16,24 +16,15 @@ export interface I_SignUpPayload {
   password: string
 }
 
-export interface ThirdPartyAuthPayload {
+export interface I_ThirdPartyAuthPayload {
   code: string
   authType: E_AuthType
 }
 
-export interface EmailConfirmPayload {
+export interface I_EmailConfirmPayload {
   token: string
 }
 
-export interface RestorePasswordPayload {
-  email: string
-}
-
-export interface ChangePasswordPayload {
-  password: string
-  token: string
-}
-
-export interface LogoutPayload {
+export interface I_LogoutPayload {
   from: E_AuthType
 }

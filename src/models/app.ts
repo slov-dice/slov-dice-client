@@ -27,6 +27,8 @@ export enum E_Locale {
   en = 'EN',
 }
 
+export type T_LocaleServerMessage = Record<E_Locale, string>
+
 export interface I_Profile {
   id: T_UserId
   email: string

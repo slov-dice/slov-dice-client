@@ -34,13 +34,13 @@ export const RegistrationForm = () => {
   return (
     <FormProvider {...formSignUp}>
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-        <FormField name='email' placeholder={t('auth.form.email.label')} />
+        <FormField name='email' placeholder={t('auth.form.email')} />
         <C.Divider h={16} />
-        <FormField name='nickname' placeholder={t('auth.form.nickname.label')} />
+        <FormField name='nickname' placeholder={t('auth.form.nickname')} />
         <C.Divider h={16} />
-        <FormField name='password' placeholder={t('auth.form.password.label')} />
+        <FormField name='password' placeholder={t('auth.form.password')} />
         <C.Divider h={16} />
-        <FormField name='rePassword' placeholder={t('auth.form.rePassword.label')} />
+        <FormField name='rePassword' placeholder={t('auth.form.rePassword')} />
         <C.Divider />
         <Button onClick={formSignUp.handleSubmit(handleSignUp)}>
           {signUpProgress.isLoading

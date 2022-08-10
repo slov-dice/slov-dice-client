@@ -8,6 +8,7 @@ import { E_ModalContent } from '../..'
 
 import { Button } from 'components/Button'
 import { FormField } from 'components/InputFields'
+import { restoreCheckEmail } from 'features/AuthForm/slice'
 import { I_FormRestore, I_FormCode } from 'features/Modals/models/form'
 import { closeModal } from 'features/Modals/slice'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
@@ -32,8 +33,8 @@ export const EmailConfirm = ({ setModalContent }: I_EmailConfirmProps) => {
     resolver: yupResolver(codeSchema),
   })
 
-  const handleConfirm: SubmitHandler<I_FormRestore> = (values) => {
-    console.log(values)
+  const handleCheckEmail: SubmitHandler<I_FormRestore> = (values) => {
+    dispatch(restoreCheckEmail({ email: values.email }))
   }
 
   const handleNext: SubmitHandler<I_FormCode> = (values) => {
@@ -46,17 +47,18 @@ export const EmailConfirm = ({ setModalContent }: I_EmailConfirmProps) => {
   }
 
   return (
-    <div
-      style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', flex: 1 }}
-    >
+    <S.Wrapper>
       <div>
-        <S.Paragraph>{t('modals.restorePassword.paragraph1')}</S.Paragraph>
+        <S.Paragraph>
+          <span>1. </span>
+          {t('modals.restorePassword.paragraph1')}
+        </S.Paragraph>
         <C.Divider h={16} />
         <FormProvider {...formRestore}>
           <S.WrapperEmailField>
-            <FormField name='email' placeholder={t('modals.restorePassword.form.email.label')} />{' '}
+            <FormField name='email' placeholder={t('modals.restorePassword.form.email')} />
             <Button
-              onClick={formRestore.handleSubmit(handleConfirm)}
+              onClick={formRestore.handleSubmit(handleCheckEmail)}
               type='submit'
               variants={Button.variants.secondary}
             >
@@ -65,14 +67,17 @@ export const EmailConfirm = ({ setModalContent }: I_EmailConfirmProps) => {
           </S.WrapperEmailField>
         </FormProvider>
         <C.Divider decorated />
-        <S.Paragraph>{t('modals.restorePassword.paragraph2')}</S.Paragraph>
+        <S.Paragraph>
+          <span>2. </span>
+          {t('modals.restorePassword.paragraph2')}
+        </S.Paragraph>
         <C.Divider h={16} />
         <FormProvider {...formCode}>
           <S.WrapperCodeField>
             <FormField
               name='code'
               maxLength={4}
-              placeholder={t('modals.restorePassword.form.code.label')}
+              placeholder={t('modals.restorePassword.form.code')}
             />
           </S.WrapperCodeField>
         </FormProvider>
@@ -86,6 +91,6 @@ export const EmailConfirm = ({ setModalContent }: I_EmailConfirmProps) => {
           {t('modals.restorePassword.actions.next')}
         </Button>
       </S.WrapperActions>
-    </div>
+    </S.Wrapper>
   )
 }
