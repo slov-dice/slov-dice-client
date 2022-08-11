@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const HeroBackground = styled.div`
   position: absolute;
-  z-index: 3;
+  z-index: ${({ theme }) => theme.order.hero};
   top: 0;
   right: 0;
   bottom: 0;

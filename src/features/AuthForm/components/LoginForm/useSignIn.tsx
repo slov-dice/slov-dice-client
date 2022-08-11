@@ -10,7 +10,7 @@ import { RootState } from 'store'
 import { LocalStorage } from 'utils/helpers/localStorage'
 
 export const useSignIn = (dispatch: ThunkDispatch<RootState, null, AnyAction>) => {
-  const [signIn, signInProgress] = authAPI.useSignInMutation()
+  const [fetchSignIn, signInProgress] = authAPI.useSignInMutation()
 
   const { data, isError, error, isSuccess } = signInProgress
 
@@ -32,5 +32,5 @@ export const useSignIn = (dispatch: ThunkDispatch<RootState, null, AnyAction>) =
     }
   }, [isError, error])
 
-  return { signIn, signInProgress }
+  return { fetchSignIn, signInProgress }
 }

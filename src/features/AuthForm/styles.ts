@@ -1,9 +1,9 @@
 import { motion } from 'framer-motion'
 import styled from 'styled-components'
 
-export const AuthForm = styled.div`
+export const Box = styled.div`
   position: relative;
-  z-index: 5;
+  z-index: ${({ theme }) => theme.order.content};
 
   overflow: hidden;
   display: flex;
@@ -25,7 +25,7 @@ export const AuthForm = styled.div`
   }
 `
 
-export const FormWrapper = styled.div`
+export const Content = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -51,7 +51,7 @@ export const Title = styled(motion.h2)`
   color: ${({ theme }) => theme.colors.white};
 `
 
-export const Bottom = styled.div`
+export const ContentBottom = styled.div`
   display: flex;
   justify-content: space-between;
 `

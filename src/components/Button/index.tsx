@@ -2,16 +2,16 @@ import { PropsWithChildren } from 'react'
 
 import * as S from './styles'
 
-export enum ButtonVariants {
+export enum E_ButtonVariants {
   primary = 'primary',
   secondary = 'secondary',
 }
 
-interface ButtonProps {
+interface I_ButtonProps {
   onClick?: () => void
   type?: 'button' | 'submit'
   onlyIcon?: boolean
-  variants?: ButtonVariants
+  variants?: E_ButtonVariants
   rounded?: boolean
 }
 
@@ -20,9 +20,9 @@ const ButtonComponent = ({
   onClick,
   type = 'button',
   onlyIcon = false,
-  variants = ButtonVariants.primary,
+  variants = E_ButtonVariants.primary,
   rounded = false,
-}: PropsWithChildren<ButtonProps>) => (
+}: PropsWithChildren<I_ButtonProps>) => (
   <S.Button
     type={type}
     whileHover={{ opacity: 0.75 }}
@@ -36,6 +36,6 @@ const ButtonComponent = ({
   </S.Button>
 )
 
-ButtonComponent.variants = ButtonVariants
+ButtonComponent.variants = E_ButtonVariants
 
 export const Button = ButtonComponent

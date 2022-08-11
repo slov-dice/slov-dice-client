@@ -8,7 +8,6 @@ import { RootState } from 'store'
 
 export const useGuestAuth = (dispatch: ThunkDispatch<RootState, null, AnyAction>) => {
   const [guestAuth, guestAuthProgress] = authAPI.useGuestAuthMutation()
-  const [socketSetOnline] = authAPI.useLazySetOnlineQuery()
 
   const { data, isError, error, isSuccess } = guestAuthProgress
 
@@ -16,9 +15,8 @@ export const useGuestAuth = (dispatch: ThunkDispatch<RootState, null, AnyAction>
   useEffect(() => {
     if (data && isSuccess) {
       connectAuthenticatedUser(data, dispatch)
-      socketSetOnline(data.id)
     }
-  }, [data, isSuccess, dispatch, socketSetOnline])
+  }, [data, isSuccess, dispatch])
 
   // Ошибка при авторизации
   useEffect(() => {

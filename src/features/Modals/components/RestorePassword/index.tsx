@@ -8,10 +8,10 @@ import * as S from './styles'
 import BackIcon from 'assets/icons/arrow-left.svg'
 import CloseIcon from 'assets/icons/close.svg'
 import { BackButton } from 'components/BackButton'
-import { getRestoreCheckEmail, restoreUnsubscribe } from 'features/AuthForm/slice'
 import { closeModal } from 'features/Modals/slice'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { t } from 'languages'
+import { getRestoreCheckEmail, restoreUnsubscribe } from 'store/auth'
 import * as C from 'styles/components'
 
 export enum E_ModalContent {

@@ -3,7 +3,10 @@ import styled from 'styled-components'
 
 import { getWrapperVariants } from './variants'
 
-export const Wrapper = styled(motion.div).attrs<Variants>(() => getWrapperVariants())`
+export const Wrapper = styled(motion.div).attrs<Variants>(() => ({
+  ...getWrapperVariants(),
+  transition: { duration: 0.15 },
+}))`
   display: flex;
   flex: 1;
   flex-direction: column;

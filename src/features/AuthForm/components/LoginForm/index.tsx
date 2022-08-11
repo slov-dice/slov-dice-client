@@ -21,7 +21,7 @@ import { signInSchema } from 'utils/validations/auth'
 export const LoginForm = () => {
   const dispatch = useStoreDispatch()
 
-  const { signIn, signInProgress } = useSignIn(dispatch)
+  const { fetchSignIn, signInProgress } = useSignIn(dispatch)
 
   const formSignIn = useForm<I_FormSignIn>({
     mode: 'onSubmit',
@@ -30,7 +30,7 @@ export const LoginForm = () => {
 
   const handleSignIn: SubmitHandler<I_FormSignIn> = async (values) => {
     LocalStorage.setAuthType(E_AuthType.email)
-    await signIn({ ...values })
+    await fetchSignIn({ ...values })
   }
 
   const handleOpenModal = () => {

@@ -39,8 +39,8 @@ export const AuthForm = () => {
   const Content = AuthContent[authFormContent]
 
   return (
-    <S.AuthForm>
-      <S.FormWrapper>
+    <S.Box>
+      <S.Content>
         <div>
           <div>
             <AnimatePresence exitBeforeEnter>
@@ -64,7 +64,7 @@ export const AuthForm = () => {
           </div>
           <Content />
         </div>
-        <S.Bottom>
+        <S.ContentBottom>
           <S.BottomAction>
             {t(AuthBottom[authFormContent].description)}
             &nbsp;
@@ -73,11 +73,11 @@ export const AuthForm = () => {
             </LinkButton>
           </S.BottomAction>
           <LanguageSwitcher />
-        </S.Bottom>
-      </S.FormWrapper>
+        </S.ContentBottom>
+      </S.Content>
       <S.BottomDecoration>
         <Logo relative />
       </S.BottomDecoration>
-    </S.AuthForm>
+    </S.Box>
   )
 }

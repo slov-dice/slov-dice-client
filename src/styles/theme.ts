@@ -49,6 +49,7 @@ export const theme = {
     header: { height: 56 },
     modal: { width: 640 },
     authForm: { width: 540, height: 800 },
+    verificationForm: { width: 480, height: 600 },
     sidePanel: { width: 320 },
   },
 
@@ -59,6 +60,8 @@ export const theme = {
 
   // z-index
   order: {
+    hero: 10,
+    content: 20,
     header: 50,
     sideMenuOverlay: 100,
     sideMenuContent: 110,

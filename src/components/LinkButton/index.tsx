@@ -1,12 +1,13 @@
-import { FC, PropsWithChildren } from 'react'
+import { ReactNode } from 'react'
 
 import * as S from './styles'
 
-interface LinkButtonProps {
+interface I_LinkButtonProps {
   onClick?: () => void
+  children: ReactNode
 }
 
-export const LinkButton: FC<PropsWithChildren<LinkButtonProps>> = ({ children, onClick }) => (
+export const LinkButton = ({ children, onClick }: I_LinkButtonProps) => (
   <S.LinkButton type='button' onClick={onClick}>
     {children}
   </S.LinkButton>

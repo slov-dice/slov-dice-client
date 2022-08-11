@@ -1,12 +1,10 @@
-import { motion } from 'framer-motion'
-
 import { HeroBackground } from 'features/HeroBackground'
 
 export const Lobby = () => {
   return (
-    <motion.div>
+    <div>
       LOBBY
       <HeroBackground />
-    </motion.div>
+    </div>
   )
 }

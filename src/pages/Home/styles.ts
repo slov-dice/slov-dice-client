@@ -1,6 +1,5 @@
-import { motion } from 'framer-motion'
 import styled from 'styled-components'
 
-export const Home = styled(motion.div)`
+export const Home = styled.div`
   position: relative;
 `

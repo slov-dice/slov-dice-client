@@ -7,9 +7,8 @@ import {
   I_SignInPayload,
   I_SignUpPayload,
   I_ThirdPartyAuthPayload,
-} from './interfaces'
+} from './models'
 
-import { I_LobbyUser, T_UserId } from 'models/app'
 import { baseQueryWithReAuth } from 'services/utils'
 
 export const authAPI = createApi({
@@ -61,16 +60,6 @@ export const authAPI = createApi({
         method: 'POST',
         body: payload,
       }),
-    }),
-
-    setOnline: build.query<I_LobbyUser[], T_UserId>({
-      queryFn: (userId) => {
-        // const socket = getSocket()
-        // const accessToken = getCookieValue(E_Cookies.access_token)
-        // const payload: EmitPayload[EmitNamespace.setUserOnline] = { accessToken, userId }
-        // socket.emit(EmitNamespace.setUserOnline, payload)
-        return { data: [] }
-      },
     }),
   }),
 })

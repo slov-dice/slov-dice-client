@@ -5,9 +5,9 @@ import { HeroBackground } from 'features/HeroBackground'
 
 export const AuthLayout = () => {
   return (
-    <S.AuthWrapper>
+    <S.Wrapper>
       <AuthForm />
       <HeroBackground />
-    </S.AuthWrapper>
+    </S.Wrapper>
   )
 }

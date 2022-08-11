@@ -8,11 +8,11 @@ import { E_ModalContent } from '../..'
 
 import { Button } from 'components/Button'
 import { FormField } from 'components/InputFields'
-import { restoreCheckEmail } from 'features/AuthForm/slice'
 import { I_FormRestore, I_FormCode } from 'features/Modals/models/form'
 import { closeModal } from 'features/Modals/slice'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { t } from 'languages'
+import { emitRestoreCheckEmail } from 'store/auth'
 import * as C from 'styles/components'
 import { restoreSchema, codeSchema } from 'utils/validations/auth'
 
@@ -34,7 +34,7 @@ export const EmailConfirm = ({ setModalContent }: I_EmailConfirmProps) => {
   })
 
   const handleCheckEmail: SubmitHandler<I_FormRestore> = (values) => {
-    dispatch(restoreCheckEmail({ email: values.email }))
+    dispatch(emitRestoreCheckEmail({ email: values.email }))
   }
 
   const handleNext: SubmitHandler<I_FormCode> = (values) => {

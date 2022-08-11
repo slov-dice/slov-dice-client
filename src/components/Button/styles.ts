@@ -1,11 +1,11 @@
 import { motion } from 'framer-motion'
 import styled, { css } from 'styled-components'
 
-import { ButtonVariants } from '.'
+import { E_ButtonVariants } from '.'
 
 interface ButtonProps {
   $onlyIcon: boolean
-  $variants: ButtonVariants
+  $variants: E_ButtonVariants
   rounded: boolean
 }
 
@@ -36,11 +36,11 @@ export const Button = styled(motion.button)<ButtonProps>`
 
   ${({ theme, $variants }) => {
     switch ($variants) {
-      case ButtonVariants.primary:
+      case E_ButtonVariants.primary:
         return css`
           box-shadow: rgba(0, 0, 0, 0.5) 0 3px 7px -3px, 0 4px 0 0 ${theme.colors.primary};
         `
-      case ButtonVariants.secondary:
+      case E_ButtonVariants.secondary:
         return css`
           box-shadow: rgba(0, 0, 0, 0.5) 0 3px 7px -3px, 0 6px 0 0 ${theme.colors.cobaltBlue};
         `

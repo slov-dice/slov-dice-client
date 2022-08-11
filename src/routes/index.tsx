@@ -1,5 +1,5 @@
 import { AnimatePresence } from 'framer-motion'
-import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
+import { Route, Routes, useLocation } from 'react-router-dom'
 
 import { FramerRoute } from './FramerRoute'
 import { ProtectedRoute } from './ProtectedRoute'
@@ -22,7 +22,8 @@ export const AppRoutes = () => {
               <Route path={E_Routes.lobby} element={<Pages.Lobby />} />
             </Route>
             <Route path={E_Routes.home} element={<Pages.Home />} />
-            <Route path='*' element={<Navigate to={E_Routes.home} />} />
+            <Route path={E_Routes.verification} element={<Pages.Verification />} />
+            <Route path='*' element={<Pages.NotFound />} />
           </Route>
         </Routes>
       </AnimatePresence>

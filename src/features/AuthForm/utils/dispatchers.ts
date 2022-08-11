@@ -1,6 +1,6 @@
 import { AnyAction, ThunkDispatch } from '@reduxjs/toolkit'
 
-import { I_AuthResponse } from 'services/auth/interfaces'
+import { I_AuthResponse } from 'services/auth/models'
 import { RootState } from 'store'
 import { setProfile } from 'store/profile'
 

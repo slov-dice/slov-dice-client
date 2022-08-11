@@ -13,7 +13,7 @@ export const IntroWrapper = styled.div`
 
 export const Intro = styled.div`
   position: relative;
-  z-index: 5;
+  z-index: ${({ theme }) => theme.order.content};
 `
 
 export const TopSection = styled.div`

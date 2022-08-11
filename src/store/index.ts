@@ -11,8 +11,7 @@ import {
 } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 
-// import lobbySlice from './lobby'
-// import roomSlice from './room'
+import authSlice from './auth'
 import profileSlice from './profile'
 import uiSlice from './ui'
 
@@ -20,8 +19,6 @@ import authFormSlice from 'features/AuthForm/slice'
 import modalsManagerSlice from 'features/Modals/slice'
 
 import { authAPI } from 'services/auth'
-// import lobbyChatAPI from 'services/lobbyChat'
-// import { lobbyUsersAPI } from 'services/lobbyUsers'
 
 const persistConfig = {
   key: 'slov-dice',
@@ -30,15 +27,14 @@ const persistConfig = {
 }
 
 const rootReducer = combineReducers({
+  [authSlice.name]: authSlice.reducer,
   [profileSlice.name]: profileSlice.reducer,
-  // [roomSlice.name]: roomSlice.reducer,
-  // [lobbySlice.name]: lobbySlice.reducer,
   [uiSlice.name]: uiSlice.reducer,
+
   [authFormSlice.name]: authFormSlice.reducer,
   [modalsManagerSlice.name]: modalsManagerSlice.reducer,
+
   [authAPI.reducerPath]: authAPI.reducer,
-  // [lobbyChatAPI.reducerPath]: lobbyChatAPI.reducer,
-  // [lobbyUsersAPI.reducerPath]: lobbyUsersAPI.reducer,
 })
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
