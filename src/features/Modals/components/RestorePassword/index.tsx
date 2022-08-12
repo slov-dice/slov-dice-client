@@ -1,8 +1,10 @@
 import { AnimatePresence } from 'framer-motion'
-import { useLayoutEffect, useState } from 'react'
+import { useLayoutEffect } from 'react'
 
 import { ChangePassword } from './extensions/ChangePassword'
 import { EmailConfirm } from './extensions/EmailConfirm'
+import { E_ModalContent } from './models'
+import { setContent, subscribe, unsubscribe } from './slice'
 import * as S from './styles'
 
 import BackIcon from 'assets/icons/arrow-left.svg'
@@ -10,17 +12,12 @@ import CloseIcon from 'assets/icons/close.svg'
 import { BackButton } from 'components/BackButton'
 import { closeModal } from 'features/Modals/slice'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
+import { useStoreSelector } from 'hooks/useStoreSelector'
 import { t } from 'languages'
-import { getRestoreCheckEmail, restoreUnsubscribe } from 'store/auth'
 import * as C from 'styles/components'
 
-export enum E_ModalContent {
-  emailConfirm = 'emailConfirm',
-  changePassword = 'changePassword',
-}
-
 export const ResetPasswordModal = () => {
-  const [modalContent, setModalContent] = useState<E_ModalContent>(E_ModalContent.emailConfirm)
+  const content = useStoreSelector((store) => store.restore.content)
 
   const dispatch = useStoreDispatch()
 
@@ -29,21 +26,21 @@ export const ResetPasswordModal = () => {
   }
 
   const handleBackButton = () => {
-    setModalContent(E_ModalContent.emailConfirm)
+    dispatch(setContent(E_ModalContent.emailConfirm))
   }
 
   useLayoutEffect(() => {
-    dispatch(getRestoreCheckEmail())
+    dispatch(subscribe())
 
     return () => {
-      restoreUnsubscribe()
+      unsubscribe()
     }
   }, [dispatch])
 
   return (
     <S.Window>
       <AnimatePresence exitBeforeEnter>
-        {modalContent === E_ModalContent.changePassword && (
+        {content === E_ModalContent.changePassword && (
           <BackButton onClick={handleBackButton}>
             <BackIcon />
           </BackButton>
@@ -55,11 +52,7 @@ export const ResetPasswordModal = () => {
       <C.Title>{t('modals.restorePassword.title')}</C.Title>
       <C.Divider />
       <AnimatePresence exitBeforeEnter>
-        {modalContent === E_ModalContent.emailConfirm ? (
-          <EmailConfirm key='EmailConfirm' setModalContent={setModalContent} />
-        ) : (
-          <ChangePassword key='ChangePassword' />
-        )}
+        {content === E_ModalContent.emailConfirm ? <EmailConfirm /> : <ChangePassword />}
       </AnimatePresence>
     </S.Window>
   )

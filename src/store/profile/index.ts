@@ -12,7 +12,7 @@ const initialState: I_Profile = {
   },
 }
 
-const profileSlice = createSlice({
+export const profileSlice = createSlice({
   name: 'profile',
   initialState,
   reducers: {
@@ -22,5 +22,3 @@ const profileSlice = createSlice({
 })
 
 export const { setProfile, logout } = profileSlice.actions
-
-export default profileSlice

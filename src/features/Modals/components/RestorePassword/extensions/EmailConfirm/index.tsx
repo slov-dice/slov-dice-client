@@ -1,26 +1,20 @@
 import { yupResolver } from '@hookform/resolvers/yup'
-import { Dispatch, SetStateAction } from 'react'
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
 
 import * as S from './styles'
 
-import { E_ModalContent } from '../..'
+import { I_FormRestore, I_FormCode } from '../../models/form'
+import { emitRestoreCheckCode, emitRestoreCheckEmail } from '../../slice'
 
 import { Button } from 'components/Button'
 import { FormField } from 'components/InputFields'
-import { I_FormRestore, I_FormCode } from 'features/Modals/models/form'
 import { closeModal } from 'features/Modals/slice'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { t } from 'languages'
-import { emitRestoreCheckEmail } from 'store/auth'
 import * as C from 'styles/components'
 import { restoreSchema, codeSchema } from 'utils/validations/auth'
 
-interface I_EmailConfirmProps {
-  setModalContent: Dispatch<SetStateAction<E_ModalContent>>
-}
-
-export const EmailConfirm = ({ setModalContent }: I_EmailConfirmProps) => {
+export const EmailConfirm = () => {
   const dispatch = useStoreDispatch()
 
   const formRestore = useForm<I_FormRestore>({
@@ -38,8 +32,7 @@ export const EmailConfirm = ({ setModalContent }: I_EmailConfirmProps) => {
   }
 
   const handleNext: SubmitHandler<I_FormCode> = (values) => {
-    console.log(values)
-    setModalContent(E_ModalContent.changePassword)
+    dispatch(emitRestoreCheckCode({ code: values.code }))
   }
 
   const handleCloseModal = () => {
@@ -59,7 +52,6 @@ export const EmailConfirm = ({ setModalContent }: I_EmailConfirmProps) => {
             <FormField name='email' placeholder={t('modals.restorePassword.form.email')} />
             <Button
               onClick={formRestore.handleSubmit(handleCheckEmail)}
-              type='submit'
               variants={Button.variants.secondary}
             >
               {t('modals.restorePassword.actions.send')}

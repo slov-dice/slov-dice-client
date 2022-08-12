@@ -24,5 +24,3 @@ export const modalsSlice = createSlice({
 })
 
 export const { openModal, closeModal } = modalsSlice.actions
-
-export default modalsSlice

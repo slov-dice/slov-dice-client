@@ -7,7 +7,7 @@ import { E_Panels, I_TaskItem } from 'models/ui'
 import { E_Icon } from 'utils/helpers/icons'
 import { LocalStorage } from 'utils/helpers/localStorage'
 
-const uiSlice = createSlice({
+export const uiSlice = createSlice({
   name: 'ui',
   initialState,
   reducers: {
@@ -47,5 +47,3 @@ export const {
   updateToolbar,
   changeToolbarItemIcon,
 } = uiSlice.actions
-
-export default uiSlice

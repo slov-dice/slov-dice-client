@@ -1,9 +1,4 @@
-import { E_StatusServerMessage, T_LocaleServerMessage } from 'models/app'
-
-export type T_RestoreData = {
-  message: T_LocaleServerMessage
-  status: E_StatusServerMessage
-}
+import { T_RestoreData } from '.'
 
 export enum E_AuthSubscribe {
   getRestoreCheckEmail = 'getRestoreCheckEmail',

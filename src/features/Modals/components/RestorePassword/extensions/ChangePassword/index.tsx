@@ -3,9 +3,11 @@ import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
 
 import * as S from './styles'
 
+import { I_FormChangePassword } from '../../models/form'
+import { emitRestoreChangePassword } from '../../slice'
+
 import { Button } from 'components/Button'
 import { FormField } from 'components/InputFields'
-import { I_FormChangePassword } from 'features/Modals/models/form'
 import { closeModal } from 'features/Modals/slice'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { t } from 'languages'
@@ -21,7 +23,7 @@ export const ChangePassword = () => {
   })
 
   const handleChangePassword: SubmitHandler<I_FormChangePassword> = (values) => {
-    console.log(values)
+    dispatch(emitRestoreChangePassword({ password: values.password }))
   }
 
   const handleCloseModal = () => {

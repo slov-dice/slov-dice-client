@@ -20,7 +20,8 @@ export const signUpSchema = Yup.object({
 }).concat(signInSchema)
 
 export const changePasswordSchema = Yup.object({
+  password: Yup.string().min(5, 'validation.passwordMin').required('validation.required'),
   rePassword: Yup.string()
     .oneOf([Yup.ref('password'), null], 'validation.passwordOneOf')
     .required('validation.required'),
-}).concat(signInSchema)
+})

@@ -9,7 +9,8 @@ import { authAPI } from 'services/auth'
 export const Verification = () => {
   const [searchParams] = useSearchParams()
   const token = searchParams.get('token')
-  const [fetchEmailConfirmation, { isSuccess, isError }] = authAPI.useEmailConfirmationMutation()
+  const [fetchEmailConfirmation, { isSuccess, isError, error }] =
+    authAPI.useEmailConfirmationMutation()
 
   const [statuses, setStatuses] = useState<string[]>([])
 
@@ -39,6 +40,7 @@ export const Verification = () => {
         {statuses.map((status) => (
           <div key={status}>{status}</div>
         ))}
+        {JSON.stringify(error)}
       </S.Box>
       <HeroBackground />
     </S.Wrapper>

@@ -11,12 +11,12 @@ import {
 } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'
 
-import authSlice from './auth'
-import profileSlice from './profile'
-import uiSlice from './ui'
+import { profileSlice } from './profile'
+import { uiSlice } from './ui'
 
-import authFormSlice from 'features/AuthForm/slice'
-import modalsManagerSlice from 'features/Modals/slice'
+import { authFormSlice } from 'features/AuthForm/slice'
+import { restoreSlice } from 'features/Modals/components/RestorePassword/slice'
+import { modalsSlice } from 'features/Modals/slice'
 
 import { authAPI } from 'services/auth'
 
@@ -27,12 +27,13 @@ const persistConfig = {
 }
 
 const rootReducer = combineReducers({
-  [authSlice.name]: authSlice.reducer,
   [profileSlice.name]: profileSlice.reducer,
   [uiSlice.name]: uiSlice.reducer,
 
   [authFormSlice.name]: authFormSlice.reducer,
-  [modalsManagerSlice.name]: modalsManagerSlice.reducer,
+  [modalsSlice.name]: modalsSlice.reducer,
+
+  [restoreSlice.name]: restoreSlice.reducer,
 
   [authAPI.reducerPath]: authAPI.reducer,
 })
