@@ -8,11 +8,11 @@ import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { useStoreSelector } from 'hooks/useStoreSelector'
 import { t } from 'languages'
 import { E_Locale } from 'models/app'
-import { switchLanguage } from 'store/ui'
+import { switchLanguage } from 'store/app'
 import * as C from 'styles/components'
 
 export const TranslatorModal = () => {
-  const language = useStoreSelector((state) => state.ui.language)
+  const language = useStoreSelector((state) => state.app.language)
   const dispatch = useStoreDispatch()
 
   const handleClose = () => {

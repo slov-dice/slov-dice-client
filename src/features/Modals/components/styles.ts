@@ -8,7 +8,7 @@ export const BaseWindow = styled.div`
   flex-direction: column;
 
   width: 580px;
-  padding: 72px 30px 24px;
+  padding: 64px 30px 24px;
 
   color: ${({ theme }) => theme.colors.white};
 

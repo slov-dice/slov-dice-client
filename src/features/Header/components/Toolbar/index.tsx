@@ -1,23 +1,24 @@
 import * as S from './styles'
 
-import { E_Modals } from 'features/Modals/models'
-import { openModal } from 'features/Modals/slice'
-import { useStoreDispatch } from 'hooks/useStoreDispatch'
-import { useStoreSelector } from 'hooks/useStoreSelector'
 import {
   E_Panels,
   E_TaskItemActionType,
   E_TaskItemVisibility,
   T_TaskItemActionPayload,
-} from 'models/ui'
-import { changeToolbarItemIcon, closeSidePanel, openSidePanel } from 'store/ui'
+} from 'features/Header/models'
+import { changeToolbarItemIcon } from 'features/Header/slice'
+import { E_Modals } from 'features/Modals/models'
+import { openModal } from 'features/Modals/slice'
+import { useStoreDispatch } from 'hooks/useStoreDispatch'
+import { useStoreSelector } from 'hooks/useStoreSelector'
+import { closeSidePanel, openSidePanel } from 'store/app'
 import { FullScreen } from 'utils/helpers/fullScreen'
 import { E_Icon, getIcon } from 'utils/helpers/icons'
 
 export const Toolbar = () => {
   const { toolbar, sidePanel, isAuth } = useStoreSelector((state) => ({
-    toolbar: state.ui.toolbar,
-    sidePanel: state.ui.sidePanel,
+    toolbar: state.header.toolbar,
+    sidePanel: state.app.sidePanel,
     isAuth: state.profile.statuses.isAuth,
   }))
   const dispatch = useStoreDispatch()

@@ -4,18 +4,19 @@ import { useState } from 'react'
 import { Control } from './components/Control'
 import { SideMenu } from './components/SideMenu'
 import { Toolbar } from './components/Toolbar'
+import { toggleSideMenu } from './slice'
 import * as S from './styles'
 
 import { Logo } from 'components/Logo'
 import { useEventListener } from 'hooks/useEventListener'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { useStoreSelector } from 'hooks/useStoreSelector'
-import { closeSidePanel, toggleSideMenu } from 'store/ui'
+import { closeSidePanel } from 'store/app'
 
 export const Header = () => {
   const { sideMenuVisible, sidePanel } = useStoreSelector((state) => ({
-    sideMenuVisible: state.ui.sideMenu,
-    sidePanel: state.ui.sidePanel,
+    sideMenuVisible: state.header.sideMenu,
+    sidePanel: state.app.sidePanel,
   }))
 
   const dispatch = useStoreDispatch()

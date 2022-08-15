@@ -45,10 +45,11 @@ export const LoginForm = () => {
           <C.Divider h={16} />
           <FormField name='password' placeholder={t('auth.form.password')} />
           <C.Divider />
-          <Button onClick={formSignIn.handleSubmit(handleSignIn)}>
-            {signInProgress.isLoading
-              ? t('auth.form.actions.loading')
-              : t('auth.form.actions.login')}
+          <Button
+            disabled={signInProgress.isLoading}
+            onClick={formSignIn.handleSubmit(handleSignIn)}
+          >
+            {signInProgress.isLoading ? t('auth.loading') : t('auth.form.actions.login')}
           </Button>
           <C.Divider />
           <LinkButton onClick={handleOpenModal}>{t('auth.bottom.restore')}</LinkButton>

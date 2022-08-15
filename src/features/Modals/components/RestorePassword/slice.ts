@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { toast } from 'react-toastify'
 
-import { E_ModalContent } from './models'
+import { E_ModalContent, E_StatusName, I_InitialState } from './models'
 import { E_AuthEmit, I_EmitPayload, E_AuthSubscribe, I_SubscriptionData } from './models/socket'
 
 import { closeModal } from 'features/Modals/slice'
@@ -16,14 +16,21 @@ export const subscribe = createAsyncThunk('restore/restoreCheckEmail', async (_,
       const language = LocalStorage.getLanguage()
       const message = data.message[language]
       toast[data.status](message)
+      dispatch(setStatus({ status: E_StatusName.checkEmail, value: false }))
+
+      if (data.status === E_StatusServerMessage.success) {
+        dispatch(setCooldown(true))
+      }
     },
   )
 
   socket.on(
     E_AuthSubscribe.getRestoreCheckCode,
     (data: I_SubscriptionData[E_AuthSubscribe.getRestoreCheckCode]) => {
+      dispatch(setStatus({ status: E_StatusName.checkEmail, value: false }))
+
       if (data.status === E_StatusServerMessage.success) {
-        dispatch(setContent(E_ModalContent.changePassword))
+        dispatch(setRestoreModalContent(E_ModalContent.changePassword))
         return
       }
 
@@ -36,7 +43,7 @@ export const subscribe = createAsyncThunk('restore/restoreCheckEmail', async (_,
   socket.on(
     E_AuthSubscribe.getRestoreChangePassword,
     (data: I_SubscriptionData[E_AuthSubscribe.getRestoreChangePassword]) => {
-      console.log(data)
+      dispatch(setStatus({ status: E_StatusName.checkEmail, value: false }))
 
       if (data.status === E_StatusServerMessage.success) {
         dispatch(closeModal())
@@ -55,12 +62,20 @@ export const unsubscribe = () => {
   socket.off(E_AuthSubscribe.getRestoreChangePassword)
 }
 
-interface I_InitialState {
-  content: E_ModalContent
-}
-
 const initialState: I_InitialState = {
   content: E_ModalContent.emailConfirm,
+  statuses: {
+    checkEmail: {
+      isLoading: false,
+      isCooldown: false,
+    },
+    checkCode: {
+      isLoading: false,
+    },
+    changePassword: {
+      isLoading: false,
+    },
+  },
 }
 
 export const restoreSlice = createSlice({
@@ -68,25 +83,34 @@ export const restoreSlice = createSlice({
   initialState: initialState,
   reducers: {
     emitRestoreCheckEmail: (
-      _,
+      state,
       action: PayloadAction<I_EmitPayload[E_AuthEmit.restoreCheckEmail]>,
     ) => {
+      state.statuses.checkEmail.isLoading = true
       socket.emit(E_AuthEmit.restoreCheckEmail, action.payload)
     },
     emitRestoreCheckCode: (
-      _,
+      state,
       action: PayloadAction<I_EmitPayload[E_AuthEmit.restoreCheckCode]>,
     ) => {
+      state.statuses.checkCode.isLoading = true
       socket.emit(E_AuthEmit.restoreCheckCode, action.payload)
     },
     emitRestoreChangePassword: (
-      _,
+      state,
       action: PayloadAction<I_EmitPayload[E_AuthEmit.restoreChangePassword]>,
     ) => {
+      state.statuses.changePassword.isLoading = true
       socket.emit(E_AuthEmit.restoreChangePassword, action.payload)
     },
-    setContent: (state, action: PayloadAction<E_ModalContent>) => {
+    setRestoreModalContent: (state, action: PayloadAction<E_ModalContent>) => {
       state.content = action.payload
+    },
+    setStatus: (state, action: PayloadAction<{ status: E_StatusName; value: boolean }>) => {
+      state.statuses[action.payload.status].isLoading = action.payload.value
+    },
+    setCooldown: (state, action: PayloadAction<boolean>) => {
+      state.statuses.checkEmail.isCooldown = action.payload
     },
   },
 })
@@ -95,5 +119,7 @@ export const {
   emitRestoreCheckEmail,
   emitRestoreCheckCode,
   emitRestoreChangePassword,
-  setContent,
+  setRestoreModalContent,
+  setStatus,
+  setCooldown,
 } = restoreSlice.actions

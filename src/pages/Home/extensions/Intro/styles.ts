@@ -152,8 +152,6 @@ export const SectionFeatures = styled.ul`
   height: fit-content;
   margin-bottom: calc(100% - 100px);
 
-  font-size: 16px;
-
   &::before {
     content: '';
 

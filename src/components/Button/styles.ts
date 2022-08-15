@@ -1,15 +1,19 @@
 import { motion } from 'framer-motion'
 import styled, { css } from 'styled-components'
 
-import { E_ButtonVariants } from '.'
+import { E_ButtonMod } from '.'
 
 interface ButtonProps {
   $onlyIcon: boolean
-  $variants: E_ButtonVariants
+  $mod: E_ButtonMod
   rounded: boolean
+  disabled: boolean
 }
 
-export const Button = styled(motion.button)<ButtonProps>`
+export const Button = styled(motion.button).attrs<ButtonProps>(({ disabled }) => ({
+  whileHover: { opacity: 0.9 },
+  whileTap: { scale: disabled ? 1 : 0.99 },
+}))<ButtonProps>`
   cursor: pointer;
   user-select: none;
 
@@ -28,19 +32,20 @@ export const Button = styled(motion.button)<ButtonProps>`
   font-size: 18px;
   font-weight: 400;
   line-height: 28px;
-  color: ${({ theme }) => theme.colors.white};
+  color: ${({ theme, disabled }) => (disabled ? theme.colors.white_50 : theme.colors.white)};
 
   background: ${({ theme }) => theme.colors.white_10};
   border: none;
   border-radius: ${({ rounded }) => (rounded ? 8 : 0)}px;
 
-  ${({ theme, $variants }) => {
-    switch ($variants) {
-      case E_ButtonVariants.primary:
+  ${({ theme, $mod, disabled }) => {
+    switch ($mod) {
+      case E_ButtonMod.primary:
         return css`
-          box-shadow: rgba(0, 0, 0, 0.5) 0 3px 7px -3px, 0 4px 0 0 ${theme.colors.primary};
+          box-shadow: rgba(0, 0, 0, 0.5) 0 3px 7px -3px,
+            0 4px 0 0 ${disabled ? theme.colors.primary_50 : theme.colors.primary};
         `
-      case E_ButtonVariants.secondary:
+      case E_ButtonMod.secondary:
         return css`
           box-shadow: rgba(0, 0, 0, 0.5) 0 3px 7px -3px, 0 6px 0 0 ${theme.colors.cobaltBlue};
         `

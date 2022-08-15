@@ -6,21 +6,23 @@ import { navigationVariants } from './variants'
 
 import { NavigationItem, NavigationDivider } from '../NavigationItem'
 
-import { E_Modals } from 'features/Modals/models'
-import { openModal } from 'features/Modals/slice'
-import { useStoreDispatch } from 'hooks/useStoreDispatch'
-import { useStoreSelector } from 'hooks/useStoreSelector'
-import { E_Routes } from 'models/routes'
 import {
   E_CustomAction,
   E_Panels,
   E_TaskItemActionType,
   E_TaskItemVisibility,
   T_TaskItemActionPayload,
-} from 'models/ui'
+} from 'features/Header/models'
+import { E_Modals } from 'features/Modals/models'
+import { openModal } from 'features/Modals/slice'
+import { useStoreDispatch } from 'hooks/useStoreDispatch'
+import { useStoreSelector } from 'hooks/useStoreSelector'
+import { E_Routes } from 'models/routes'
+import { authAPI } from 'services/auth'
+import { openSidePanel } from 'store/app'
 import { logout } from 'store/profile'
-import { openSidePanel } from 'store/ui'
 import { E_Icon } from 'utils/helpers/icons'
+import { LocalStorage } from 'utils/helpers/localStorage'
 
 interface NavigationProps {
   toggleMenu: () => void
@@ -31,6 +33,8 @@ export const Navigation = ({ toggleMenu }: NavigationProps) => {
   const dispatch = useStoreDispatch()
   const profile = useStoreSelector((state) => state.profile)
 
+  const [fetchLogout] = authAPI.useLogoutMutation()
+
   const handleAction = (type: E_TaskItemActionType, payload: T_TaskItemActionPayload) => () => {
     toggleMenu()
     if (type === E_TaskItemActionType.push) {
@@ -38,6 +42,8 @@ export const Navigation = ({ toggleMenu }: NavigationProps) => {
     } else if (type === E_TaskItemActionType.replace) {
       if (payload === E_CustomAction.logout) {
         dispatch(logout())
+        const authType = LocalStorage.getAuthType()
+        fetchLogout({ from: authType })
         return
       }
       navigate(payload as E_Routes)

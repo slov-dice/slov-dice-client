@@ -17,8 +17,11 @@ export const useSignUp = (dispatch: ThunkDispatch<RootState, null, AnyAction>) =
   // Успешная регистрация
   useEffect(() => {
     if (data && isSuccess) {
+      const language = LocalStorage.getLanguage()
+      const successMessage = data.message[language]
+      toast.success(successMessage)
+
       connectAuthenticatedUser(data, dispatch)
-      toast.success(t('notification.auth.registration.success'))
     }
   }, [data, isSuccess, dispatch])
 
@@ -26,9 +29,9 @@ export const useSignUp = (dispatch: ThunkDispatch<RootState, null, AnyAction>) =
   useEffect(() => {
     if (isError) {
       const language = LocalStorage.getLanguage()
-      const errorMessage = (error as any).data[language] || t('notification.auth.unknownError')
+      const errorMessage = (error as any).data?.[language] || t('notification.unknownError')
       console.log(JSON.stringify(error))
-      toast.error(t('notification.auth.registration.error') + ' ' + errorMessage)
+      toast.error(errorMessage)
     }
   }, [isError, error])
 

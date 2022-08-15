@@ -25,8 +25,8 @@ export const Box = styled.div`
   flex-direction: column;
   justify-content: space-between;
 
-  width: min(${({ theme }) => theme.sizes.verificationForm.width}px, 100%);
-  height: ${({ theme }) => theme.sizes.verificationForm.height}px;
+  width: min(${({ theme }) => theme.sizes.authCallbackForm.width}px, 100%);
+  height: ${({ theme }) => theme.sizes.authCallbackForm.height}px;
 
   background: ${({ theme }) => theme.colors.black};
   border-radius: 2px;

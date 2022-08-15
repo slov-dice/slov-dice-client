@@ -8,7 +8,7 @@ import 'assets/fonts/rubik/rubik.css'
 import 'react-toastify/dist/ReactToastify.css'
 
 export const App = () => {
-  useStoreSelector((state) => state.ui.language)
+  useStoreSelector((state) => state.app.language)
 
   return (
     <>

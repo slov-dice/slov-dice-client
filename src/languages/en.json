@@ -61,6 +61,7 @@
     "google": "Google",
     "discord": "Discord",
     "guest": "As guest",
+    "loading": "Loading...",
     "bottom": {
       "has": "Have an account?",
       "login": "Login",
@@ -74,9 +75,28 @@
       "rePassword": "Repeat password",
       "actions": {
         "registration": "Sign up",
-        "login": "Sign in",
-        "loading": "Loading"
+        "login": "Sign in"
       }
+    }
+  },
+  "verification": {
+    "title": "Email verification",
+    "stepPrepare": "Prepare...",
+    "stepVerification": "Verification...",
+    "stepError": "Request error",
+    "stepSuccess": "Request was successful",
+    "actions": {
+      "continue": "Continue"
+    }
+  },
+  "authCallback": {
+    "title": "Third party Authentication",
+    "stepPrepare": "Prepare...",
+    "stepAuthorizing": "Authorizing...",
+    "stepError": "Request error",
+    "stepSuccess": "Request was successful",
+    "actions": {
+      "continue": "Продолжить"
     }
   },
   "sideMenu": {
@@ -90,21 +110,7 @@
     "logout": "Logout"
   },
   "notification": {
-    "auth": {
-      "registration": {
-        "success": "You have successfully registered!",
-        "error": "Error:"
-      },
-      "login": {
-        "success": "You have successfully logged in",
-        "error": "Error:"
-      },
-      "restore": {
-        "success": "A letter has been sent to your email",
-        "error": "Error:"
-      },
-      "unknownError": "Unknown error"
-    }
+    "unknownError": "Unknown error"
   },
   "validation": {
     "required": "Enter the field",

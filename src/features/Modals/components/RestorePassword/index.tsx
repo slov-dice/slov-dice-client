@@ -4,7 +4,7 @@ import { useLayoutEffect } from 'react'
 import { ChangePassword } from './extensions/ChangePassword'
 import { EmailConfirm } from './extensions/EmailConfirm'
 import { E_ModalContent } from './models'
-import { setContent, subscribe, unsubscribe } from './slice'
+import { setRestoreModalContent, subscribe, unsubscribe } from './slice'
 import * as S from './styles'
 
 import BackIcon from 'assets/icons/arrow-left.svg'
@@ -26,7 +26,7 @@ export const ResetPasswordModal = () => {
   }
 
   const handleBackButton = () => {
-    dispatch(setContent(E_ModalContent.emailConfirm))
+    dispatch(setRestoreModalContent(E_ModalContent.emailConfirm))
   }
 
   useLayoutEffect(() => {

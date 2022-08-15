@@ -48,8 +48,9 @@ export const theme = {
   sizes: {
     header: { height: 56 },
     modal: { width: 640 },
-    authForm: { width: 540, height: 800 },
-    verificationForm: { width: 480, height: 600 },
+    authForm: { width: 520, height: 800 },
+    verificationForm: { width: 520, height: 460 },
+    authCallbackForm: { width: 520, height: 460 },
     sidePanel: { width: 320 },
   },
 

@@ -1,21 +1,37 @@
 import { yupResolver } from '@hookform/resolvers/yup'
+import { useCallback, useEffect, useState } from 'react'
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
 
 import * as S from './styles'
 
 import { I_FormRestore, I_FormCode } from '../../models/form'
-import { emitRestoreCheckCode, emitRestoreCheckEmail } from '../../slice'
+import { emitRestoreCheckCode, emitRestoreCheckEmail, setCooldown } from '../../slice'
 
 import { Button } from 'components/Button'
 import { FormField } from 'components/InputFields'
 import { closeModal } from 'features/Modals/slice'
+import { useCooldown } from 'hooks/useCooldown'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
+import { useStoreSelector } from 'hooks/useStoreSelector'
 import { t } from 'languages'
 import * as C from 'styles/components'
 import { restoreSchema, codeSchema } from 'utils/validations/auth'
 
 export const EmailConfirm = () => {
   const dispatch = useStoreDispatch()
+  const { isLoading: isCheckEmailLoading, isCooldown: isCheckEmailCooldown } = useStoreSelector(
+    (state) => state.restore.statuses.checkEmail,
+  )
+
+  const isCheckCodeLoading = useStoreSelector((state) => state.restore.statuses.checkCode.isLoading)
+
+  const { cooldown, isCooldown } = useCooldown(isCheckEmailCooldown)
+
+  useEffect(() => {
+    if (!isCooldown) {
+      dispatch(setCooldown(false))
+    }
+  }, [dispatch, isCooldown])
 
   const formRestore = useForm<I_FormRestore>({
     mode: 'onSubmit',
@@ -51,10 +67,15 @@ export const EmailConfirm = () => {
           <S.WrapperEmailField>
             <FormField name='email' placeholder={t('modals.restorePassword.form.email')} />
             <Button
+              disabled={isCheckEmailLoading || isCooldown}
               onClick={formRestore.handleSubmit(handleCheckEmail)}
-              variants={Button.variants.secondary}
+              mod={Button.mod.secondary}
             >
-              {t('modals.restorePassword.actions.send')}
+              {isCheckEmailLoading
+                ? t('auth.loading')
+                : isCooldown
+                ? cooldown
+                : t('modals.restorePassword.actions.send')}
             </Button>
           </S.WrapperEmailField>
         </FormProvider>
@@ -76,11 +97,11 @@ export const EmailConfirm = () => {
         <C.Divider />
       </div>
       <S.WrapperActions>
-        <Button onClick={handleCloseModal} variants={Button.variants.secondary}>
+        <Button onClick={handleCloseModal} mod={Button.mod.secondary}>
           {t('modals.restorePassword.actions.cancel')}
         </Button>
-        <Button onClick={formCode.handleSubmit(handleNext)}>
-          {t('modals.restorePassword.actions.next')}
+        <Button disabled={isCheckCodeLoading} onClick={formCode.handleSubmit(handleNext)}>
+          {isCheckCodeLoading ? t('auth.loading') : t('modals.restorePassword.actions.next')}
         </Button>
       </S.WrapperActions>
     </S.Wrapper>

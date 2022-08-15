@@ -1,47 +1,58 @@
-import { useEffect, useLayoutEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
 import * as S from './styles'
 
 import { Logo } from 'components/Logo'
+import { connectAuthenticatedUser } from 'features/AuthForm/utils/dispatchers'
 import { HeroBackground } from 'features/HeroBackground'
+import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { t } from 'languages'
 import { authAPI } from 'services/auth'
 import * as C from 'styles/components'
 import { LocalStorage } from 'utils/helpers/localStorage'
 
-export const Verification = () => {
+export const AuthCallback = () => {
   const [searchParams] = useSearchParams()
-  const token = searchParams.get('token')
-  const [fetchEmailConfirmation, { isSuccess, data, isError, error }] =
-    authAPI.useEmailConfirmationMutation()
+  const code = searchParams.get('code')
 
-  const [statuses, setStatuses] = useState<string[]>(['verification.stepPrepare'])
+  const dispatch = useStoreDispatch()
+  const [thirdPartyAuth, { data, isError, error, isSuccess }] = authAPI.useThirdPartyAuthMutation()
 
-  useLayoutEffect(() => {
-    if (token) {
-      fetchEmailConfirmation({ token })
-      setStatuses((prev) => [...prev, 'verification.stepVerification'])
-    }
-  }, [fetchEmailConfirmation, token])
+  const [statuses, setStatuses] = useState<string[]>(['authCallback.stepPrepare'])
 
   useEffect(() => {
-    if (isSuccess && data) {
-      setStatuses((prev) => [...prev, 'verification.stepSuccess'])
+    const handleAuth = async () => {
+      if (code) {
+        const authType = LocalStorage.getAuthType()
+        setStatuses((prev) => [...prev, 'authCallback.stepAuthorizing'])
+        thirdPartyAuth({ code, authType })
+      }
+    }
+    handleAuth()
+  }, [thirdPartyAuth, code])
+
+  // Успешная авторизация
+  useEffect(() => {
+    if (data && isSuccess) {
       const language = LocalStorage.getLanguage()
       const successMessage = data.message[language]
       toast.success(successMessage)
-    }
-  }, [isSuccess, data])
 
+      connectAuthenticatedUser(data, dispatch)
+      setStatuses((prev) => [...prev, 'authCallback.stepSuccess'])
+    }
+  }, [data, isSuccess, dispatch])
+
+  // Ошибка при авторизации
   useEffect(() => {
     if (isError) {
       const language = LocalStorage.getLanguage()
       const errorMessage = (error as any).data?.[language] || t('notification.unknownError')
       console.log(JSON.stringify(error))
       toast.error(errorMessage)
-      setStatuses((prev) => [...prev, 'verification.stepError'])
+      setStatuses((prev) => [...prev, 'authCallback.stepError'])
     }
   }, [isError, error])
 
@@ -51,7 +62,7 @@ export const Verification = () => {
         <S.TopSection>
           <div>
             <div>
-              <C.Title>{t('verification.title')}</C.Title>
+              <C.Title>{t('authCallback.title')}</C.Title>
               <C.Divider />
             </div>
             <S.StatusList>

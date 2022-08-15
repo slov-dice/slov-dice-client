@@ -1,10 +1,12 @@
+import * as S from './styles'
+
 import { HeroBackground } from 'features/HeroBackground'
 
 export const Lobby = () => {
   return (
-    <div>
+    <S.Container>
       LOBBY
       <HeroBackground />
-    </div>
+    </S.Container>
   )
 }

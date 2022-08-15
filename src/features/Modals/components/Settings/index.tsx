@@ -4,16 +4,16 @@ import { useState } from 'react'
 import * as S from './styles'
 
 import { Button } from 'components/Button'
+import { I_TaskItem } from 'features/Header/models'
+import { updateToolbar } from 'features/Header/slice'
 import { closeModal } from 'features/Modals/slice'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { useStoreSelector } from 'hooks/useStoreSelector'
-import { I_TaskItem } from 'models/ui'
-import { updateToolbar } from 'store/ui'
 import * as C from 'styles/components'
 import { getIcon } from 'utils/helpers/icons'
 
 export const SettingsModal = () => {
-  const toolbar = useStoreSelector((state) => state.ui.toolbar)
+  const toolbar = useStoreSelector((state) => state.header.toolbar)
   const dispatch = useStoreDispatch()
 
   const [items, setItems] = useState(toolbar)

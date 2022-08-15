@@ -1,8 +1,19 @@
+import { motion } from 'framer-motion'
 import styled, { css } from 'styled-components'
 
-import { neon } from './keyframes'
-
-export const Container = styled.div<{ relative: boolean }>`
+export const Container = styled(motion.div).attrs(({ theme }) => ({
+  initial: {
+    textShadow: `0 0 10px ${theme.colors.primary}, 0 0 40px ${theme.colors.primary}, 0 0 100px ${theme.colors.primary}`,
+  },
+  animate: {
+    textShadow: `0 0 5px ${theme.colors.primary}, 0 0 20px ${theme.colors.primary}, 0 0 60px ${theme.colors.primary}`,
+  },
+  transition: {
+    duration: 3,
+    repeat: Infinity,
+    repeatType: 'reverse',
+  },
+}))<{ relative: boolean }>`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -10,9 +21,8 @@ export const Container = styled.div<{ relative: boolean }>`
   height: 100%;
 
   font-size: 48px;
+  color: ${({ theme }) => theme.colors.primary};
   letter-spacing: -6px;
-
-  animation: ${neon} 2s alternate-reverse infinite;
 
   ${({ relative }) =>
     relative
@@ -29,7 +39,7 @@ export const Container = styled.div<{ relative: boolean }>`
   -webkit-text-stroke: 1px ${({ theme }) => theme.colors.primary};
 `
 
-export const Text = styled.span`
+export const Link = styled.a`
   cursor: pointer;
   user-select: none;
 `

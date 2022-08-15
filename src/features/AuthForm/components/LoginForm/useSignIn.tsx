@@ -18,7 +18,9 @@ export const useSignIn = (dispatch: ThunkDispatch<RootState, null, AnyAction>) =
   useEffect(() => {
     if (data && isSuccess) {
       connectAuthenticatedUser(data, dispatch)
-      toast.success(t('notification.auth.login.success'))
+      const language = LocalStorage.getLanguage()
+      const successMessage = data.message[language]
+      toast.success(successMessage)
     }
   }, [data, isSuccess, dispatch])
 
@@ -26,9 +28,9 @@ export const useSignIn = (dispatch: ThunkDispatch<RootState, null, AnyAction>) =
   useEffect(() => {
     if (isError) {
       const language = LocalStorage.getLanguage()
-      const errorMessage = (error as any).data[language] || t('notification.auth.unknownError')
+      const errorMessage = (error as any).data?.[language] || t('notification.unknownError')
       console.log(JSON.stringify(error))
-      toast.error(t('notification.auth.login.error') + ' ' + errorMessage)
+      toast.error(errorMessage)
     }
   }, [isError, error])
 

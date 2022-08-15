@@ -7,7 +7,7 @@ import {
 import { io, Socket } from 'socket.io-client'
 
 import { logout } from 'store/profile'
-import { E_Cookies, getCookieValue } from 'utils/helpers/cookies'
+import { LocalStorage } from 'utils/helpers/localStorage'
 
 let socket: Socket
 export const getSocket = (): Socket => {
@@ -20,8 +20,9 @@ export const getSocket = (): Socket => {
 export const baseQuery = fetchBaseQuery({
   baseUrl: `${import.meta.env.VITE_SERVER_API}/auth`,
   credentials: 'include',
+  mode: 'cors',
   prepareHeaders: (headers) => {
-    const accessToken = getCookieValue(E_Cookies.access_token)
+    const accessToken = LocalStorage.getAccessToken()
     if (accessToken) {
       headers.set('Authorization', `Bearer ${accessToken}`)
     }

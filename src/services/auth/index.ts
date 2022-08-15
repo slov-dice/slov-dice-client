@@ -7,6 +7,7 @@ import {
   I_SignInPayload,
   I_SignUpPayload,
   I_ThirdPartyAuthPayload,
+  I_EmailConfirmResponse,
 } from './models'
 
 import { baseQueryWithReAuth } from 'services/utils'
@@ -54,7 +55,7 @@ export const authAPI = createApi({
       }),
     }),
 
-    emailConfirmation: build.mutation<void, I_EmailConfirmPayload>({
+    emailConfirmation: build.mutation<I_EmailConfirmResponse, I_EmailConfirmPayload>({
       query: (payload) => ({
         url: 'confirm',
         method: 'POST',

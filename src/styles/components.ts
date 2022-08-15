@@ -1,6 +1,7 @@
+import { motion } from 'framer-motion'
 import styled, { css } from 'styled-components'
 
-export const Title = styled.span`
+export const Title = styled(motion.span)`
   font-size: 32px;
   font-weight: 300;
   text-transform: uppercase;

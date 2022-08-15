@@ -22,7 +22,7 @@ import { LocalStorage } from 'utils/helpers/localStorage'
 export const Entry = () => {
   const navigate = useNavigate()
   const dispatch = useStoreDispatch()
-  const { guestAuth } = useGuestAuth(dispatch)
+  const { fetchGuestAuth, guestAuthProgress } = useGuestAuth(dispatch)
   const authFormContent = useStoreSelector((state) => state.authForm.content)
 
   const handleReplaceToEmail = () => {
@@ -35,17 +35,17 @@ export const Entry = () => {
 
   const handleGoogleAuth = () => {
     LocalStorage.setAuthType(E_AuthType.google)
-    navigate(import.meta.env.VITE_GOOGLE_AUTH_URL!, { replace: true })
+    location.replace(import.meta.env.VITE_GOOGLE_AUTH_URL)
   }
 
   const handleDiscordAuth = () => {
     LocalStorage.setAuthType(E_AuthType.discord)
-    navigate(import.meta.env.VITE_DISCORD_AUTH_URL!, { replace: true })
+    location.replace(import.meta.env.VITE_DISCORD_AUTH_URL)
   }
 
   const handleGuestAuth = () => {
     LocalStorage.setAuthType(E_AuthType.guest)
-    guestAuth()
+    fetchGuestAuth()
   }
 
   return (
@@ -64,9 +64,9 @@ export const Entry = () => {
         {t('auth.discord')}
       </Button>
       <C.Divider h={72} hmd={56} />
-      <Button onClick={handleGuestAuth}>
+      <Button disabled={guestAuthProgress.isLoading} onClick={handleGuestAuth}>
         <GuestIcon />
-        {t('auth.guest')}
+        {guestAuthProgress.isLoading ? t('auth.loading') : t('auth.guest')}
       </Button>
     </motion.div>
   )

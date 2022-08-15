@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion'
 import styled from 'styled-components'
 
 export const Box = styled.div`
@@ -25,30 +24,17 @@ export const Box = styled.div`
   }
 `
 
-export const Content = styled.div`
+export const TopSection = styled.div`
   display: flex;
+  flex: 1;
   flex-direction: column;
   justify-content: space-between;
 
-  height: 680px;
-  padding: 64px 81px 32px;
+  padding: 64px 64px 32px;
 
   @media ${({ theme }) => theme.media.md} {
-    padding: 64px 36px 0;
+    padding: 64px 32px 0;
   }
-`
-
-export const Title = styled(motion.h2)`
-  display: flex;
-  align-items: flex-start;
-
-  width: 100%;
-  margin: 24px 0 32px;
-
-  font-size: 28px;
-  font-weight: 500;
-  font-style: normal;
-  color: ${({ theme }) => theme.colors.white};
 `
 
 export const ContentBottom = styled.div`
@@ -64,7 +50,7 @@ export const BottomAction = styled.div`
   color: ${({ theme }) => theme.colors.white};
 `
 
-export const BottomDecoration = styled.div`
+export const BottomSection = styled.div`
   width: 100%;
   height: 120px;
 

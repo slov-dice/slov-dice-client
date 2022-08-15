@@ -14,6 +14,7 @@ import { Logo } from 'components/Logo'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { useStoreSelector } from 'hooks/useStoreSelector'
 import { t } from 'languages'
+import * as C from 'styles/components'
 
 export const AuthForm = () => {
   const dispatch = useStoreDispatch()
@@ -40,7 +41,7 @@ export const AuthForm = () => {
 
   return (
     <S.Box>
-      <S.Content>
+      <S.TopSection>
         <div>
           <div>
             <AnimatePresence exitBeforeEnter>
@@ -51,7 +52,7 @@ export const AuthForm = () => {
               )}
             </AnimatePresence>
             <AnimatePresence exitBeforeEnter>
-              <S.Title
+              <C.Title
                 key={AuthTitle[authFormContent]}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -59,8 +60,9 @@ export const AuthForm = () => {
                 transition={{ duration: 0.1 }}
               >
                 {t(AuthTitle[authFormContent])}
-              </S.Title>
+              </C.Title>
             </AnimatePresence>
+            <C.Divider h={48} />
           </div>
           <Content />
         </div>
@@ -74,10 +76,10 @@ export const AuthForm = () => {
           </S.BottomAction>
           <LanguageSwitcher />
         </S.ContentBottom>
-      </S.Content>
-      <S.BottomDecoration>
+      </S.TopSection>
+      <S.BottomSection>
         <Logo relative />
-      </S.BottomDecoration>
+      </S.BottomSection>
     </S.Box>
   )
 }

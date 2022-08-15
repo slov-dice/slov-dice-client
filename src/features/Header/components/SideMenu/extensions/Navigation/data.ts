@@ -1,12 +1,12 @@
-import { E_Modals } from 'features/Modals/models'
-import { E_Routes } from 'models/routes'
 import {
   E_Panels,
   I_TaskItem,
   E_TaskItemVisibility,
   E_TaskItemActionType,
   E_CustomAction,
-} from 'models/ui'
+} from 'features/Header/models'
+import { E_Modals } from 'features/Modals/models'
+import { E_Routes } from 'models/routes'
 import { E_Icon } from 'utils/helpers/icons'
 
 export const data: I_TaskItem[] = [

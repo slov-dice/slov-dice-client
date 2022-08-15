@@ -42,10 +42,8 @@ export const RegistrationForm = () => {
         <C.Divider h={16} />
         <FormField name='rePassword' placeholder={t('auth.form.rePassword')} />
         <C.Divider />
-        <Button onClick={formSignUp.handleSubmit(handleSignUp)}>
-          {signUpProgress.isLoading
-            ? t('auth.form.actions.loading')
-            : t('auth.form.actions.registration')}
+        <Button disabled={signUpProgress.isLoading} onClick={formSignUp.handleSubmit(handleSignUp)}>
+          {signUpProgress.isLoading ? t('auth.loading') : t('auth.form.actions.registration')}
         </Button>
       </motion.div>
     </FormProvider>

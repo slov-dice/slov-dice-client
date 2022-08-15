@@ -12,9 +12,15 @@ import * as Pages from 'pages'
 export const AppRoutes = () => {
   const location = useLocation()
   const isAuthFormOpen = useStoreSelector((state) => state.authForm.isOpen)
+
+  const isHeaderVisible =
+    !isAuthFormOpen &&
+    location.pathname !== E_Routes.verification &&
+    location.pathname !== E_Routes.authCallback
+
   return (
     <>
-      <AnimatePresence exitBeforeEnter>{!isAuthFormOpen && <Header />}</AnimatePresence>
+      <AnimatePresence exitBeforeEnter>{isHeaderVisible && <Header />}</AnimatePresence>
       <AnimatePresence exitBeforeEnter>
         <Routes key={location.key} location={location}>
           <Route element={<FramerRoute />}>
@@ -23,6 +29,7 @@ export const AppRoutes = () => {
             </Route>
             <Route path={E_Routes.home} element={<Pages.Home />} />
             <Route path={E_Routes.verification} element={<Pages.Verification />} />
+            <Route path={E_Routes.authCallback} element={<Pages.AuthCallback />} />
             <Route path='*' element={<Pages.NotFound />} />
           </Route>
         </Routes>

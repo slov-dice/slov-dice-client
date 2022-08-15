@@ -4,14 +4,15 @@ import { Navigation } from './extensions/Navigation'
 import * as S from './styles'
 import { sideMenuContainerVariants, sideMenuOverlayVariants } from './variants'
 
+import { toggleSideMenu } from 'features/Header/slice'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { useStoreSelector } from 'hooks/useStoreSelector'
-import { closeSidePanel, toggleSideMenu } from 'store/ui'
+import { closeSidePanel } from 'store/app'
 
 export const SideMenu = () => {
   const { sideMenuVisible, sidePanel } = useStoreSelector((state) => ({
-    sideMenuVisible: state.ui.sideMenu,
-    sidePanel: state.ui.sidePanel,
+    sideMenuVisible: state.header.sideMenu,
+    sidePanel: state.app.sidePanel,
   }))
   const dispatch = useStoreDispatch()
 

@@ -61,6 +61,7 @@
     "google": "Google",
     "discord": "Discord",
     "guest": "Как гость",
+    "loading": "Загрузка...",
     "bottom": {
       "has": "Есть аккаунт?",
       "login": "Войти",
@@ -75,9 +76,28 @@
       "actions": {
         "registration": "Зарегистрироваться",
         "login": "Войти",
-        "loading": "Загрузка",
         "send": "Отправить"
       }
+    }
+  },
+  "verification": {
+    "title": "Подтверждение почты",
+    "stepPrepare": "Подготовка...",
+    "stepVerification": "Подтверждение...",
+    "stepError": "Ошибка при запросе",
+    "stepSuccess": "Запрос прошёл успешно",
+    "actions": {
+      "continue": "Продолжить"
+    }
+  },
+  "authCallback": {
+    "title": "Сторонняя авторизация",
+    "stepPrepare": "Подготовка...",
+    "stepAuthorizing": "Авторизация...",
+    "stepError": "Ошибка при запросе",
+    "stepSuccess": "Запрос прошёл успешно",
+    "actions": {
+      "continue": "Продолжить"
     }
   },
   "sideMenu": {
@@ -91,21 +111,7 @@
     "logout": "Выйти"
   },
   "notification": {
-    "auth": {
-      "registration": {
-        "success": "Вы успешно зарегистрировались!",
-        "error": "Ошибка:"
-      },
-      "login": {
-        "success": "Вы успешно вошли в аккаунт",
-        "error": "Ошибка:"
-      },
-      "restore": {
-        "success": "Письмо отправлено Вам на почту",
-        "error": "Ошибка:"
-      },
-      "unknownError": "Неизвестная ошибка"
-    }
+    "unknownError": "Неизвестная ошибка"
   },
   "validation": {
     "required": "Поле необходимо заполнить",

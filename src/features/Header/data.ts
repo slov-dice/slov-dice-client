@@ -1,6 +1,7 @@
+import { E_Panels, I_TaskItem, E_TaskItemVisibility, E_TaskItemActionType } from './models'
+
 import { E_Modals } from 'features/Modals/models'
 import { E_Locale } from 'models/app'
-import { E_Panels, I_TaskItem, E_TaskItemVisibility, E_TaskItemActionType } from 'models/ui'
 import { FullScreen } from 'utils/helpers/fullScreen'
 import { E_Icon } from 'utils/helpers/icons'
 import { LocalStorage } from 'utils/helpers/localStorage'

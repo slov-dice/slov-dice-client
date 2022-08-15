@@ -10,12 +10,16 @@ import { Button } from 'components/Button'
 import { FormField } from 'components/InputFields'
 import { closeModal } from 'features/Modals/slice'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
+import { useStoreSelector } from 'hooks/useStoreSelector'
 import { t } from 'languages'
 import * as C from 'styles/components'
 import { changePasswordSchema } from 'utils/validations/auth'
 
 export const ChangePassword = () => {
   const dispatch = useStoreDispatch()
+  const isChangePasswordLoading = useStoreSelector(
+    (state) => state.restore.statuses.changePassword.isLoading,
+  )
 
   const formChangePassword = useForm<I_FormChangePassword>({
     mode: 'onSubmit',
@@ -46,11 +50,14 @@ export const ChangePassword = () => {
         <C.Divider />
       </div>
       <S.WrapperActions>
-        <Button onClick={handleCloseModal} variants={Button.variants.secondary}>
+        <Button onClick={handleCloseModal} mod={Button.mod.secondary}>
           {t('modals.restorePassword.actions.cancel')}
         </Button>
-        <Button onClick={formChangePassword.handleSubmit(handleChangePassword)}>
-          {t('modals.restorePassword.actions.set')}
+        <Button
+          disabled={isChangePasswordLoading}
+          onClick={formChangePassword.handleSubmit(handleChangePassword)}
+        >
+          {isChangePasswordLoading ? t('auth.loading') : t('modals.restorePassword.actions.set')}
         </Button>
       </S.WrapperActions>
     </S.Wrapper>
