@@ -5,7 +5,6 @@ export const useCooldown = (dependency: boolean) => {
 
   useEffect(() => {
     let intervalId: any
-    console.log(dependency)
     if (dependency) {
       setCooldown('30')
       intervalId = setInterval(() => {

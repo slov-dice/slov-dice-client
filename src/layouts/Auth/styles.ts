@@ -1,7 +1,6 @@
-import { motion } from 'framer-motion'
 import styled from 'styled-components'
 
-export const Layout = styled(motion.div)`
+export const Layout = styled.div`
   position: relative;
 
   overflow: hidden;

@@ -5,7 +5,7 @@ export const LocalStorage = {
   getAuthType: () => localStorage.getItem('authType') as E_AuthType,
 
   setLanguage: (locale: E_Locale) => localStorage.setItem('language', locale),
-  getLanguage: () => localStorage.getItem('language') as E_Locale,
+  getLanguage: () => (localStorage.getItem('language') as E_Locale) || E_Locale.ru,
 
   setAccessToken: (accessToken: string) => localStorage.setItem('access_token', accessToken),
   getAccessToken: () => localStorage.getItem('access_token'),

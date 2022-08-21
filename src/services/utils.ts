@@ -4,18 +4,10 @@ import {
   fetchBaseQuery,
   FetchBaseQueryError,
 } from '@reduxjs/toolkit/dist/query'
-import { io, Socket } from 'socket.io-client'
 
+import { T_Tokens } from 'models/app'
 import { logout } from 'store/profile'
 import { LocalStorage } from 'utils/helpers/localStorage'
-
-let socket: Socket
-export const getSocket = (): Socket => {
-  if (!socket) {
-    socket = io(import.meta.env.VITE_SERVER_API, { autoConnect: false })
-  }
-  return socket
-}
 
 export const baseQuery = fetchBaseQuery({
   baseUrl: `${import.meta.env.VITE_SERVER_API}/auth`,
@@ -39,6 +31,8 @@ export const baseQueryWithReAuth: BaseQueryFn<
 
   if (result.error && result.error.status === 401) {
     const refreshResult = await baseQuery({ url: 'refresh', method: 'POST' }, api, extraOptions)
+
+    LocalStorage.setAccessToken((refreshResult.data as T_Tokens).access_token)
 
     if (refreshResult.data) {
       result = await baseQuery(args, api, extraOptions)

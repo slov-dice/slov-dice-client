@@ -8,7 +8,7 @@ import { closeAuthForm, openAuthForm, switchAuthFormContent } from './slice'
 import * as S from './styles'
 
 import BackIcon from 'assets/icons/arrow-left.svg'
-import { BackButton } from 'components/BackButton'
+import { BackButton } from 'components/Buttons/BackButton'
 import { LinkButton } from 'components/LinkButton'
 import { Logo } from 'components/Logo'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
@@ -37,7 +37,11 @@ export const AuthForm = () => {
     dispatch(switchAuthFormContent(AuthBottom[authFormContent].action))
   }
 
-  const Content = AuthContent[authFormContent]
+  const getContent = () => {
+    const Content = AuthContent[authFormContent]
+
+    return <Content />
+  }
 
   return (
     <S.Box>
@@ -52,19 +56,11 @@ export const AuthForm = () => {
               )}
             </AnimatePresence>
             <AnimatePresence exitBeforeEnter>
-              <C.Title
-                key={AuthTitle[authFormContent]}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.1 }}
-              >
-                {t(AuthTitle[authFormContent])}
-              </C.Title>
+              <C.Title>{t(AuthTitle[authFormContent])}</C.Title>
             </AnimatePresence>
             <C.Divider h={48} />
           </div>
-          <Content />
+          {getContent()}
         </div>
         <S.ContentBottom>
           <S.BottomAction>

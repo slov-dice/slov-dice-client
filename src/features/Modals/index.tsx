@@ -30,7 +30,7 @@ export const Modal = () => {
   return (
     <AnimatePresence exitBeforeEnter>
       {Boolean(modals.length) && (
-        <S.Wrap>
+        <S.Wrapper>
           <AnimatePresence>
             {modals.map((modal, index) => {
               const ModalWindow = ModalComponents[modal.window]
@@ -42,7 +42,7 @@ export const Modal = () => {
               )
             })}
           </AnimatePresence>
-        </S.Wrap>
+        </S.Wrapper>
       )}
     </AnimatePresence>
   )

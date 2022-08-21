@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom'
 
 import * as S from './styles'
 
-import { Button } from 'components/Button'
+import { Button } from 'components/Buttons'
 import { HeroBackground } from 'features/HeroBackground'
 import { useMediaQuery } from 'hooks/useMediaQuery'
 import { t } from 'languages'

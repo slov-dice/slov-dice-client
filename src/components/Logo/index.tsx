@@ -8,8 +8,8 @@ interface I_LogoProps {
 
 export const Logo = ({ relative = false }: I_LogoProps) => {
   return (
-    <S.Container relative={relative}>
-      <S.Link href={E_Routes.home}>SD</S.Link>
-    </S.Container>
+    <S.Wrapper relative={relative}>
+      <S.TextLink to={E_Routes.home}>SD</S.TextLink>
+    </S.Wrapper>
   )
 }

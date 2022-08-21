@@ -18,6 +18,9 @@ import { authFormSlice } from 'features/AuthForm/slice'
 import { headerSlice } from 'features/Header/slice'
 import { restoreSlice } from 'features/Modals/components/RestorePassword/slice'
 import { modalsSlice } from 'features/Modals/slice'
+import { sideMenuSlice } from 'features/SideMenu/slice'
+import { usersPanelSlice } from 'features/SidePanel/components/UsersPanel/slice'
+import { sidePanelSlice } from 'features/SidePanel/slice'
 
 import { authAPI } from 'services/auth'
 
@@ -34,8 +37,11 @@ const rootReducer = combineReducers({
   [authFormSlice.name]: authFormSlice.reducer,
   [modalsSlice.name]: modalsSlice.reducer,
   [headerSlice.name]: headerSlice.reducer,
+  [sideMenuSlice.name]: sideMenuSlice.reducer,
+  [sidePanelSlice.name]: sidePanelSlice.reducer,
 
   [restoreSlice.name]: restoreSlice.reducer,
+  [usersPanelSlice.name]: usersPanelSlice.reducer,
 
   [authAPI.reducerPath]: authAPI.reducer,
 })

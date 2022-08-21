@@ -1,4 +1,5 @@
 import { AnimatePresence } from 'framer-motion'
+import { useLayoutEffect } from 'react'
 import { Route, Routes, useLocation } from 'react-router-dom'
 
 import { FramerRoute } from './FramerRoute'
@@ -7,11 +8,23 @@ import { ProtectedRoute } from './ProtectedRoute'
 import { Header } from 'features/Header'
 import { useStoreSelector } from 'hooks/useStoreSelector'
 import { E_Routes } from 'models/routes'
+import { E_Emit } from 'models/socket/lobbyUsers'
 import * as Pages from 'pages'
+import { socket } from 'services/socket'
 
 export const AppRoutes = () => {
   const location = useLocation()
-  const isAuthFormOpen = useStoreSelector((state) => state.authForm.isOpen)
+  const { isAuthFormOpen, isAuth, profileId } = useStoreSelector((state) => ({
+    isAuthFormOpen: state.authForm.isOpen,
+    isAuth: state.profile.statuses.isAuth,
+    profileId: state.profile.id,
+  }))
+
+  useLayoutEffect(() => {
+    if (isAuth && profileId) {
+      socket.emit(E_Emit.setLobbyUserOnline, { userId: profileId })
+    }
+  }, [isAuth, profileId])
 
   const isHeaderVisible =
     !isAuthFormOpen &&

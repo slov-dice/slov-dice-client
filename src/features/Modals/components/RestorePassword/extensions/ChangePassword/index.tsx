@@ -6,7 +6,7 @@ import * as S from './styles'
 import { I_FormChangePassword } from '../../models/form'
 import { emitRestoreChangePassword } from '../../slice'
 
-import { Button } from 'components/Button'
+import { Button } from 'components/Buttons'
 import { FormField } from 'components/InputFields'
 import { closeModal } from 'features/Modals/slice'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'

@@ -9,9 +9,6 @@ export const headerSlice = createSlice({
   name: 'header',
   initialState,
   reducers: {
-    toggleSideMenu: (state) => {
-      state.sideMenu = !state.sideMenu
-    },
     updateToolbar: (state, action: PayloadAction<I_TaskItem[]>) => {
       state.toolbar = action.payload
     },
@@ -26,4 +23,4 @@ export const headerSlice = createSlice({
   },
 })
 
-export const { toggleSideMenu, updateToolbar, changeToolbarItemIcon } = headerSlice.actions
+export const { updateToolbar, changeToolbarItemIcon } = headerSlice.actions

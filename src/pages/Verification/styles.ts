@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion'
 import styled from 'styled-components'
 
+import { statusItemAttrs } from './motion'
+
 export const Page = styled.div`
   position: relative;
 
@@ -62,19 +64,7 @@ export const StatusList = styled.ul`
   font-size: 18px;
 `
 
-export const StatusItem = styled(motion.li).attrs(({ theme }) => ({
-  variants: {
-    hidden: {
-      x: -theme.sizes.verificationForm.width,
-    },
-    visible: (i: number) => ({
-      x: 0,
-      transition: {
-        delay: i * 0.5,
-      },
-    }),
-  },
-}))`
+export const StatusItem = styled(motion.li).attrs(({ theme }) => statusItemAttrs(theme))`
   position: relative;
 
   &::before {

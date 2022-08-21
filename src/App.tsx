@@ -1,4 +1,5 @@
 import { Modal } from 'features/Modals'
+import { SidePanel } from 'features/SidePanel'
 import { useStoreSelector } from 'hooks/useStoreSelector'
 import { AppRoutes } from 'routes'
 import { GlobalStyles } from 'styles/global'
@@ -15,6 +16,7 @@ export const App = () => {
       <AppRoutes />
       <GlobalStyles />
       <Modal />
+      <SidePanel />
       <CustomToast />
     </>
   )

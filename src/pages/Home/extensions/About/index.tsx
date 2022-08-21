@@ -19,7 +19,7 @@ export const About = () => {
             <C.Divider />
             <S.InfoTitle>{t('landing.about.featuresTitle')}</S.InfoTitle>
             <S.Features>
-              <C.Divider h={24} hmd={16} />
+              <C.Divider h={24} md={16} />
               <S.FeaturesList>
                 <li>{t('landing.about.feature1')}</li>
                 <li>{t('landing.about.feature2')}</li>

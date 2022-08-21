@@ -1,12 +1,13 @@
 import { yupResolver } from '@hookform/resolvers/yup'
-import { motion } from 'framer-motion'
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
+
+import * as S from './styles'
 
 import { useSignIn } from './useSignIn'
 
 import { I_FormSignIn } from '../../models/form'
 
-import { Button } from 'components/Button'
+import { Button } from 'components/Buttons'
 import { FormField } from 'components/InputFields'
 import { LinkButton } from 'components/LinkButton'
 import { E_Modals } from 'features/Modals/models'
@@ -38,23 +39,18 @@ export const LoginForm = () => {
   }
 
   return (
-    <>
+    <S.Wrapper>
       <FormProvider {...formSignIn}>
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-          <FormField name='email' placeholder={t('auth.form.email')} />
-          <C.Divider h={16} />
-          <FormField name='password' placeholder={t('auth.form.password')} />
-          <C.Divider />
-          <Button
-            disabled={signInProgress.isLoading}
-            onClick={formSignIn.handleSubmit(handleSignIn)}
-          >
-            {signInProgress.isLoading ? t('auth.loading') : t('auth.form.actions.login')}
-          </Button>
-          <C.Divider />
-          <LinkButton onClick={handleOpenModal}>{t('auth.bottom.restore')}</LinkButton>
-        </motion.div>
+        <FormField name='email' placeholder={t('auth.form.email')} />
+        <C.Divider h={16} />
+        <FormField name='password' placeholder={t('auth.form.password')} />
+        <C.Divider />
+        <Button disabled={signInProgress.isLoading} onClick={formSignIn.handleSubmit(handleSignIn)}>
+          {signInProgress.isLoading ? t('auth.loading') : t('auth.form.actions.login')}
+        </Button>
+        <C.Divider />
+        <LinkButton onClick={handleOpenModal}>{t('auth.bottom.restore')}</LinkButton>
       </FormProvider>
-    </>
+    </S.Wrapper>
   )
 }

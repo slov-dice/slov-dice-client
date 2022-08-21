@@ -1,6 +1,7 @@
-import { E_Panels, I_TaskItem, E_TaskItemVisibility, E_TaskItemActionType } from './models'
+import { I_TaskItem, E_TaskItemVisibility, E_TaskItemActionType } from './models'
 
 import { E_Modals } from 'features/Modals/models'
+import { E_Panels } from 'features/SidePanel/models'
 import { E_Locale } from 'models/app'
 import { FullScreen } from 'utils/helpers/fullScreen'
 import { E_Icon } from 'utils/helpers/icons'
@@ -9,14 +10,12 @@ import { LocalStorage } from 'utils/helpers/localStorage'
 interface UI {
   language: E_Locale
   sidePanel: E_Panels | null
-  sideMenu: boolean
   toolbar: I_TaskItem[]
 }
 
 export const initialState: UI = {
   language: LocalStorage.getLanguage() || E_Locale.ru,
   sidePanel: null,
-  sideMenu: false,
   toolbar: [
     {
       name: 'sideMenu.users',

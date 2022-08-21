@@ -1,12 +1,9 @@
-import { motion, Variants } from 'framer-motion'
+import { motion } from 'framer-motion'
 import styled from 'styled-components'
 
-import { getWrapperVariants } from './variants'
+import { wrapperAttrs } from './motion'
 
-export const Wrapper = styled(motion.div).attrs<Variants>(() => ({
-  ...getWrapperVariants(),
-  transition: { duration: 0.15 },
-}))`
+export const Wrapper = styled(motion.div).attrs(wrapperAttrs)`
   display: flex;
   flex: 1;
   flex-direction: column;

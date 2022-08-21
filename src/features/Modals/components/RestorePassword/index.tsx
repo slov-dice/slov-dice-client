@@ -9,7 +9,7 @@ import * as S from './styles'
 
 import BackIcon from 'assets/icons/arrow-left.svg'
 import CloseIcon from 'assets/icons/close.svg'
-import { BackButton } from 'components/BackButton'
+import { BackButton } from 'components/Buttons'
 import { closeModal } from 'features/Modals/slice'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { useStoreSelector } from 'hooks/useStoreSelector'
@@ -49,11 +49,11 @@ export const ResetPasswordModal = () => {
       <S.WindowClose onClick={handleClose}>
         <CloseIcon />
       </S.WindowClose>
-      <C.Title>{t('modals.restorePassword.title')}</C.Title>
+      <C.Title onClick={() => dispatch(setRestoreModalContent(E_ModalContent.changePassword))}>
+        {t('modals.restorePassword.title')}
+      </C.Title>
       <C.Divider />
-      <AnimatePresence exitBeforeEnter>
-        {content === E_ModalContent.emailConfirm ? <EmailConfirm /> : <ChangePassword />}
-      </AnimatePresence>
+      {content === E_ModalContent.emailConfirm ? <EmailConfirm /> : <ChangePassword />}
     </S.Window>
   )
 }

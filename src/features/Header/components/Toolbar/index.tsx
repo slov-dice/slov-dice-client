@@ -1,7 +1,6 @@
 import * as S from './styles'
 
 import {
-  E_Panels,
   E_TaskItemActionType,
   E_TaskItemVisibility,
   T_TaskItemActionPayload,
@@ -9,16 +8,17 @@ import {
 import { changeToolbarItemIcon } from 'features/Header/slice'
 import { E_Modals } from 'features/Modals/models'
 import { openModal } from 'features/Modals/slice'
+import { E_Panels } from 'features/SidePanel/models'
+import { closeSidePanel, openSidePanel } from 'features/SidePanel/slice'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { useStoreSelector } from 'hooks/useStoreSelector'
-import { closeSidePanel, openSidePanel } from 'store/app'
 import { FullScreen } from 'utils/helpers/fullScreen'
 import { E_Icon, getIcon } from 'utils/helpers/icons'
 
 export const Toolbar = () => {
   const { toolbar, sidePanel, isAuth } = useStoreSelector((state) => ({
     toolbar: state.header.toolbar,
-    sidePanel: state.app.sidePanel,
+    sidePanel: state.sidePanel.panel,
     isAuth: state.profile.statuses.isAuth,
   }))
   const dispatch = useStoreDispatch()
@@ -34,11 +34,11 @@ export const Toolbar = () => {
       dispatch(openSidePanel(payload as E_Panels))
     } else if (type === E_TaskItemActionType.fullScreen) {
       FullScreen.toggle()
-      // НЕ - потому что toggle возвращает promise
-      const icon = !FullScreen.getValue() ? E_Icon.compress : E_Icon.expand
+      const icon = FullScreen.getValue() ? E_Icon.expand : E_Icon.compress
       dispatch(changeToolbarItemIcon({ name: 'full-screen', icon }))
     }
   }
+
   return (
     <S.Toolbar>
       {toolbar.map((item) => {

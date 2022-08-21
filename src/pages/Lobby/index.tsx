@@ -4,9 +4,9 @@ import { HeroBackground } from 'features/HeroBackground'
 
 export const Lobby = () => {
   return (
-    <S.Container>
-      LOBBY
+    <S.Page>
+      <S.Container>LOBBY</S.Container>
       <HeroBackground />
-    </S.Container>
+    </S.Page>
   )
 }

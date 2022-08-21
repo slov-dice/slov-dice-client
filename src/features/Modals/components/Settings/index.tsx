@@ -3,7 +3,7 @@ import { useState } from 'react'
 
 import * as S from './styles'
 
-import { Button } from 'components/Button'
+import { Button } from 'components/Buttons'
 import { I_TaskItem } from 'features/Header/models'
 import { updateToolbar } from 'features/Header/slice'
 import { closeModal } from 'features/Modals/slice'

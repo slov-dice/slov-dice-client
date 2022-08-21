@@ -18,15 +18,9 @@ export const LanguageSwitcher = () => {
 
   return (
     <AnimatePresence exitBeforeEnter initial={false}>
-      <S.LanguageSwitcher
-        onClick={handleSwitchLanguage}
-        whileHover={{ opacity: 0.75 }}
-        whileTap={{ scale: 0.95 }}
-      >
-        <motion.span key={language} initial={{ y: 28 }} animate={{ y: 0 }} exit={{ y: 28 }}>
-          {language}
-        </motion.span>
-      </S.LanguageSwitcher>
+      <S.Wrapper onClick={handleSwitchLanguage}>
+        <S.Label key={language}>{language}</S.Label>
+      </S.Wrapper>
     </AnimatePresence>
   )
 }

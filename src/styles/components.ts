@@ -1,20 +1,22 @@
 import { motion } from 'framer-motion'
 import styled, { css } from 'styled-components'
 
-export const Title = styled(motion.span)`
+import { titleAttrs } from './motion'
+
+export const Title = styled(motion.span).attrs(titleAttrs)`
   font-size: 32px;
   font-weight: 300;
   text-transform: uppercase;
 `
 
-interface DividerProps {
+interface I_DividerProps {
   h?: number
-  hmd?: number
+  md?: number
 
   decorated?: boolean
 }
 
-export const Divider = styled.div<DividerProps>`
+export const Divider = styled.div<I_DividerProps>`
   position: relative;
 
   height: ${({ h = 32 }) => h}px;
@@ -36,6 +38,6 @@ export const Divider = styled.div<DividerProps>`
       : css``}
 
   @media ${({ theme }) => theme.media.md} {
-    height: ${({ hmd = 16 }) => hmd}px;
+    height: ${({ md = 16 }) => md}px;
   }
 `

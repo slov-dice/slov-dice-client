@@ -1,11 +1,7 @@
 import { E_Modals } from 'features/Modals/models'
+import { E_Panels } from 'features/SidePanel/models'
 import { E_Routes } from 'models/routes'
 import { E_Icon } from 'utils/helpers/icons'
-
-export enum E_Panels {
-  chat = 'chat',
-  users = 'users',
-}
 
 export enum E_CustomAction {
   logout = 'logout',

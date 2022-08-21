@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion'
 import styled, { css } from 'styled-components'
 
+import { toolbarItemAttrs } from './motion'
+
 export const Toolbar = styled.div`
   display: flex;
   gap: 4px;
@@ -12,11 +14,8 @@ interface I_ToolbarItemProps {
   $isDivider: boolean
 }
 
-export const ToolbarItem = styled(motion.div).attrs<I_ToolbarItemProps>(
-  ({ theme, $isDivider }) => ({
-    whileHover: $isDivider ? {} : { backgroundColor: theme.colors.white_30 },
-    whileTap: $isDivider ? {} : { scale: 0.95 },
-  }),
+export const ToolbarItem = styled(motion.div).attrs<I_ToolbarItemProps>(({ theme, $isDivider }) =>
+  toolbarItemAttrs(theme, $isDivider),
 )<I_ToolbarItemProps>`
   user-select: none;
 

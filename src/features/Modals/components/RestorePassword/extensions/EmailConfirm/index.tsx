@@ -1,5 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup'
-import { useCallback, useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
 
 import * as S from './styles'
@@ -7,7 +7,7 @@ import * as S from './styles'
 import { I_FormRestore, I_FormCode } from '../../models/form'
 import { emitRestoreCheckCode, emitRestoreCheckEmail, setCooldown } from '../../slice'
 
-import { Button } from 'components/Button'
+import { Button } from 'components/Buttons'
 import { FormField } from 'components/InputFields'
 import { closeModal } from 'features/Modals/slice'
 import { useCooldown } from 'hooks/useCooldown'

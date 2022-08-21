@@ -1,5 +1,7 @@
-import { motion, Transition, Variants } from 'framer-motion'
+import { motion } from 'framer-motion'
 import styled from 'styled-components'
+
+import { dotAttrs } from './motion'
 
 export const Loader = styled(motion.div)`
   user-select: none;
@@ -16,41 +18,7 @@ export const Loader = styled(motion.div)`
   background: transparent;
 `
 
-export const Dot = styled(motion.div).attrs(({ theme }) => ({
-  variants: {
-    loading: {
-      opacity: 1,
-      x: [-18, 18],
-      y: [0, -30],
-      boxShadow: [
-        `0 0 5px ${theme.colors.primary}, 0 0 20px ${theme.colors.primary}, 0 0 50px ${theme.colors.primary}`,
-        `0 0 2px ${theme.colors.primary}, 0 0 10px ${theme.colors.primary}, 0 0 30px ${theme.colors.primary}`,
-      ],
-      transition: {
-        x: { repeatType: 'reverse', repeat: Infinity, duration: 0.8 },
-        y: { repeatType: 'reverse', repeat: Infinity, duration: 0.4, ease: 'easeOut' },
-        boxShadow: { repeatType: 'reverse', repeat: Infinity, duration: 3 },
-      },
-    },
-    success: {
-      scale: 1.5,
-      x: 0,
-      y: -20,
-    },
-    error: {
-      scale: 1.5,
-      x: 0,
-      y: -20,
-      boxShadow: [
-        `0 0 5px ${theme.colors.primary}, 0 0 20px ${theme.colors.primary}, 0 0 50px ${theme.colors.primary}`,
-        `0 0 2px ${theme.colors.primary}, 0 0 10px ${theme.colors.primary}, 0 0 30px ${theme.colors.primary}`,
-      ],
-      transition: {
-        boxShadow: { repeatType: 'reverse', repeat: Infinity, duration: 3 },
-      },
-    },
-  },
-}))`
+export const Dot = styled(motion.div).attrs(({ theme }) => dotAttrs(theme))`
   position: absolute;
 
   display: flex;

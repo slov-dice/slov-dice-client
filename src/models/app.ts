@@ -3,25 +3,34 @@ export type T_UserId = number
 export type T_RoomId = string
 export type T_AccessToken = string
 
+export type T_Tokens = {
+  access_token: string
+  refresh_token: string
+}
+
 export enum E_UserStatus {
   offline = 'offline',
   online = 'online',
   inRoom = 'inRoom',
 }
+
 export enum E_RoomType {
   public = 'PUBLIC',
   private = 'PRIVATE',
 }
+
 export enum E_RoomMessageType {
   custom = 'custom',
   command = 'command',
 }
+
 export enum E_AuthType {
   email = 'EMAIL',
   google = 'GOOGLE',
   discord = 'DISCORD',
   guest = 'GUEST',
 }
+
 export enum E_Locale {
   ru = 'RU',
   en = 'EN',
@@ -45,7 +54,7 @@ export interface I_Profile {
   }
 }
 
-export interface Lobby {
+export interface I_Lobby {
   users: I_LobbyUser[]
   chat: I_LobbyChat[]
   rooms: I_PreviewRoom[]
@@ -55,6 +64,7 @@ export interface I_LobbyUser {
   socketId: T_SocketId
   id: T_UserId
   nickname: string
+  from: E_AuthType
   status: E_UserStatus
 }
 
