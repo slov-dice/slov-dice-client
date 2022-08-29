@@ -13,15 +13,19 @@ import storage from 'redux-persist/lib/storage'
 
 import { appSlice } from './app'
 import { profileSlice } from './profile'
+import { roomSlice } from './room'
 
 import { authFormSlice } from 'features/AuthForm/slice'
 import { headerSlice } from 'features/Header/slice'
 import { restoreSlice } from 'features/Modals/components/RestorePassword/slice'
 import { modalsSlice } from 'features/Modals/slice'
 import { sideMenuSlice } from 'features/SideMenu/slice'
+import { chatPanelSlice } from 'features/SidePanel/components/ChatPanel/slice'
 import { usersPanelSlice } from 'features/SidePanel/components/UsersPanel/slice'
 import { sidePanelSlice } from 'features/SidePanel/slice'
-
+import { rtkQueryErrorLogger } from 'middlewares/rtkQueryErrorLogger'
+import { rtkQueryFulfilledLogger } from 'middlewares/rtkQueryFulfilledLogger'
+import { lobbyRoomsSlice } from 'pages/Lobby/slice'
 import { authAPI } from 'services/auth'
 
 const persistConfig = {
@@ -31,18 +35,25 @@ const persistConfig = {
 }
 
 const rootReducer = combineReducers({
+  // Global slices
   [profileSlice.name]: profileSlice.reducer,
   [appSlice.name]: appSlice.reducer,
+  [roomSlice.name]: roomSlice.reducer,
 
+  // Feature slices
   [authFormSlice.name]: authFormSlice.reducer,
   [modalsSlice.name]: modalsSlice.reducer,
   [headerSlice.name]: headerSlice.reducer,
   [sideMenuSlice.name]: sideMenuSlice.reducer,
   [sidePanelSlice.name]: sidePanelSlice.reducer,
 
+  // Component slices
   [restoreSlice.name]: restoreSlice.reducer,
   [usersPanelSlice.name]: usersPanelSlice.reducer,
+  [chatPanelSlice.name]: chatPanelSlice.reducer,
+  [lobbyRoomsSlice.name]: lobbyRoomsSlice.reducer,
 
+  // Services
   [authAPI.reducerPath]: authAPI.reducer,
 })
 
@@ -55,7 +66,7 @@ export const store = configureStore({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }).concat(authAPI.middleware),
+    }).concat(authAPI.middleware, rtkQueryErrorLogger, rtkQueryFulfilledLogger),
 })
 
 export const persistor = persistStore(store)

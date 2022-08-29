@@ -18,7 +18,7 @@ export const Page = styled.div`
   }
 `
 
-export const Box = styled.div`
+export const Container = styled.div`
   position: relative;
   z-index: ${({ theme }) => theme.order.content};
 

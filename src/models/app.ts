@@ -36,6 +36,11 @@ export enum E_Locale {
   en = 'EN',
 }
 
+export type T_SocketDataStatus = {
+  message: T_LocaleServerMessage
+  status: E_StatusServerMessage
+}
+
 export type T_LocaleServerMessage = Record<E_Locale, string>
 
 export enum E_StatusServerMessage {
@@ -54,12 +59,6 @@ export interface I_Profile {
   }
 }
 
-export interface I_Lobby {
-  users: I_LobbyUser[]
-  chat: I_LobbyChat[]
-  rooms: I_PreviewRoom[]
-}
-
 export interface I_LobbyUser {
   socketId: T_SocketId
   id: T_UserId
@@ -68,7 +67,7 @@ export interface I_LobbyUser {
   status: E_UserStatus
 }
 
-export interface I_LobbyChat {
+export interface I_LobbyMessage {
   id: string
   authorId: T_UserId
   author: string

@@ -1,14 +1,15 @@
 import { useLayoutEffect } from 'react'
 
-import { RoomList } from './extensions/RoomList'
-import { emitRequestPreviewRooms } from './slice'
 import { subscribe, unsubscribe } from './socket'
 import * as S from './styles'
 
 import { HeroBackground } from 'features/HeroBackground'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
+import { useStoreSelector } from 'hooks/useStoreSelector'
+import { emitRequestPreviewRooms } from 'pages/Lobby/slice'
 
-export const Lobby = () => {
+export const Room = () => {
+  const room = useStoreSelector((store) => store.room)
   const dispatch = useStoreDispatch()
 
   useLayoutEffect(() => {
@@ -23,7 +24,7 @@ export const Lobby = () => {
   return (
     <S.Page>
       <S.Container>
-        <RoomList />
+        {room.id ? <pre>{JSON.stringify(room, null, 2)}</pre> : 'Room not found'}
       </S.Container>
       <HeroBackground />
     </S.Page>

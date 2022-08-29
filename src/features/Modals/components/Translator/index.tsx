@@ -36,11 +36,7 @@ export const TranslatorModal = () => {
       </S.WindowContent>
       <C.Divider decorated />
 
-      <Switch
-        value={language}
-        options={switchOptions}
-        onChange={(option) => handleSwitchLanguage(option)}
-      />
+      <Switch value={language} options={switchOptions} onChange={handleSwitchLanguage} />
 
       <C.Divider />
     </S.Window>

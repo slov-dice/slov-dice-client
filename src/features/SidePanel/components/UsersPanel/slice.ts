@@ -1,25 +1,8 @@
-import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 import { I_LobbyUser } from 'models/app'
 import { E_Subscribe, I_SubscriptionData, E_Emit } from 'models/socket/lobbyUsers'
 import { socket } from 'services/socket'
-
-export const subscribe = createAsyncThunk('restore/restoreCheckEmail', async (_, { dispatch }) => {
-  socket.on(E_Subscribe.getLobbyUsers, (data: I_SubscriptionData[E_Subscribe.getLobbyUsers]) => {
-    dispatch(setUsers(data))
-  })
-
-  socket.on(
-    E_Subscribe.getUpdatedLobbyUser,
-    (data: I_SubscriptionData[E_Subscribe.getUpdatedLobbyUser]) => {
-      dispatch(updateUser(data))
-    },
-  )
-})
-
-export const unsubscribe = () => {
-  socket.off(E_Subscribe.getLobbyUsers)
-}
 
 interface I_InitialState {
   users: I_LobbyUser[]
@@ -36,10 +19,7 @@ export const usersPanelSlice = createSlice({
     setUsers: (state, action: PayloadAction<I_SubscriptionData[E_Subscribe.getLobbyUsers]>) => {
       state.users = action.payload.users
     },
-    updateUser: (
-      state,
-      action: PayloadAction<I_SubscriptionData[E_Subscribe.getUpdatedLobbyUser]>,
-    ) => {
+    updateUser: (state, action: PayloadAction<I_SubscriptionData[E_Subscribe.getLobbyUser]>) => {
       const index = state.users.findIndex((user) => user.id === action.payload.user.id)
 
       // Если nickname пустой (логоут гостя)

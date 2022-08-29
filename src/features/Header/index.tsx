@@ -1,3 +1,4 @@
+import { AnimatePresence } from 'framer-motion'
 import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 
@@ -15,9 +16,10 @@ import { useStoreSelector } from 'hooks/useStoreSelector'
 import { E_Routes } from 'models/routes'
 
 export const Header = () => {
-  const { sideMenuVisible, sidePanel } = useStoreSelector((state) => ({
+  const { isAuthFormOpen, sideMenuVisible, sidePanel } = useStoreSelector((state) => ({
     sideMenuVisible: state.sideMenu.isOpen,
     sidePanel: state.sidePanel.panel,
+    isAuthFormOpen: state.authForm.isOpen,
   }))
 
   const { pathname } = useLocation()
@@ -25,6 +27,11 @@ export const Header = () => {
   const dispatch = useStoreDispatch()
 
   const [isTransparent, setTransparent] = useState(true)
+
+  const isVisible =
+    !isAuthFormOpen &&
+    location.pathname !== E_Routes.verification &&
+    location.pathname !== E_Routes.authCallback
 
   const handleToggleSideMenu = () => {
     dispatch(toggleSideMenu())
@@ -40,7 +47,7 @@ export const Header = () => {
   useEventListener('scroll', handleScroll)
 
   useEffect(() => {
-    if (pathname === E_Routes.lobby) {
+    if (pathname === E_Routes.lobby || pathname.includes('/room')) {
       setTransparent(false)
     } else {
       setTransparent(true)
@@ -48,13 +55,17 @@ export const Header = () => {
   }, [pathname])
 
   return (
-    <S.Header isTransparent={isTransparent} key='header'>
-      <S.WrapperControl sideMenuVisible={sideMenuVisible}>
-        <Control onClick={handleToggleSideMenu} />
-        <SideMenu />
-      </S.WrapperControl>
-      <Logo />
-      <Toolbar />
-    </S.Header>
+    <AnimatePresence exitBeforeEnter>
+      {isVisible && (
+        <S.Header isTransparent={isTransparent} key='header'>
+          <S.WrapperControl sideMenuVisible={sideMenuVisible}>
+            <Control onClick={handleToggleSideMenu} />
+            <SideMenu />
+          </S.WrapperControl>
+          <Logo />
+          <Toolbar />
+        </S.Header>
+      )}
+    </AnimatePresence>
   )
 }

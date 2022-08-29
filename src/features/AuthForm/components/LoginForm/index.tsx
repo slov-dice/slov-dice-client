@@ -2,7 +2,6 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { FormProvider, SubmitHandler, useForm } from 'react-hook-form'
 
 import * as S from './styles'
-
 import { useSignIn } from './useSignIn'
 
 import { I_FormSignIn } from '../../models/form'

@@ -47,7 +47,7 @@ export const Verification = () => {
 
   return (
     <S.Page>
-      <S.Box>
+      <S.Container>
         <S.TopSection>
           <div>
             <div>
@@ -67,7 +67,7 @@ export const Verification = () => {
         <S.BottomSection>
           <Logo relative />
         </S.BottomSection>
-      </S.Box>
+      </S.Container>
       <HeroBackground />
     </S.Page>
   )

@@ -4,37 +4,45 @@ export const WrapperSelect = styled.div<{ isOpened: boolean }>`
   position: relative;
 
   ::after {
+    pointer-events: none;
     content: '';
+
     position: absolute;
-    right: 15px;
     top: 50%;
+    right: 15px;
+    transform: translateY(-50%) ${({ isOpened }) => (isOpened ? 'rotate(180deg)' : 'rotate(0)')};
+
     display: block;
-    border-style: solid;
-    border-width: 6px 4px 0;
-    border-color: ${({ theme }) => theme.colors.white} transparent transparent;
+
     width: 0;
     height: 0;
-    transform: translateY(-50%) ${({ isOpened }) => (isOpened ? 'rotate(180deg)' : 'rotate(0)')};
+
+    border-color: ${({ theme }) => theme.colors.white} transparent transparent;
+    border-style: solid;
+    border-width: 6px 4px 0;
+
     transition: transform 0.2s ease;
-    pointer-events: none;
   }
 `
 
 export const Select = styled.select<{ fullWidth: boolean }>`
-  appearance: none;
-  outline: none;
-  border: none;
-  border-radius: 8px;
-  padding: 12px 18px;
   width: ${({ fullWidth }) => (fullWidth ? '100%' : '256px')};
-  height: 54px;
   max-width: 100%;
+  height: 54px;
   max-height: 100%;
-  box-shadow: rgba(0, 0, 0, 0.1) 0 6px 12px -2px, rgba(0, 0, 0, 0.4) 0 3px 7px -3px;
+  padding: 12px 18px;
+
   font-size: 16px;
   line-height: 24px;
   color: ${({ theme }) => theme.colors.white};
+
   background: ${({ theme }) => theme.colors.white_05};
+  border: none;
+  border-radius: 8px;
+  outline: none;
+  box-shadow: rgba(0, 0, 0, 10%) 0 6px 12px -2px, rgba(0, 0, 0, 40%) 0 3px 7px -3px;
+
+  appearance: none;
 
   ::placeholder {
     color: ${({ theme }) => theme.colors.white_50};

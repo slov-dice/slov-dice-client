@@ -14,8 +14,7 @@ import { socket } from 'services/socket'
 
 export const AppRoutes = () => {
   const location = useLocation()
-  const { isAuthFormOpen, isAuth, profileId } = useStoreSelector((state) => ({
-    isAuthFormOpen: state.authForm.isOpen,
+  const { isAuth, profileId } = useStoreSelector((state) => ({
     isAuth: state.profile.statuses.isAuth,
     profileId: state.profile.id,
   }))
@@ -26,14 +25,9 @@ export const AppRoutes = () => {
     }
   }, [isAuth, profileId])
 
-  const isHeaderVisible =
-    !isAuthFormOpen &&
-    location.pathname !== E_Routes.verification &&
-    location.pathname !== E_Routes.authCallback
-
   return (
     <>
-      <AnimatePresence exitBeforeEnter>{isHeaderVisible && <Header />}</AnimatePresence>
+      <Header />
       <AnimatePresence exitBeforeEnter>
         <Routes key={location.key} location={location}>
           <Route element={<FramerRoute />}>
@@ -41,6 +35,7 @@ export const AppRoutes = () => {
               <Route path={E_Routes.lobby} element={<Pages.Lobby />} />
             </Route>
             <Route path={E_Routes.home} element={<Pages.Home />} />
+            <Route path={E_Routes.room} element={<Pages.Room />} />
             <Route path={E_Routes.verification} element={<Pages.Verification />} />
             <Route path={E_Routes.authCallback} element={<Pages.AuthCallback />} />
             <Route path='*' element={<Pages.NotFound />} />

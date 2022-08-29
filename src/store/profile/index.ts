@@ -18,7 +18,13 @@ export const profileSlice = createSlice({
   reducers: {
     setProfile: (_, action: PayloadAction<I_Profile>) => action.payload,
     logout: () => initialState,
+    joinRoom: (state) => {
+      state.statuses.inRoom = true
+    },
+    leaveRoom: (state) => {
+      state.statuses.inRoom = false
+    },
   },
 })
 
-export const { setProfile, logout } = profileSlice.actions
+export const { setProfile, logout, joinRoom, leaveRoom } = profileSlice.actions

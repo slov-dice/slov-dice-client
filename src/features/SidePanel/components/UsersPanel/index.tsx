@@ -1,6 +1,7 @@
 import { useLayoutEffect } from 'react'
 
-import { emitRequestUsers, subscribe, unsubscribe } from './slice'
+import { emitRequestUsers } from './slice'
+import { subscribe, unsubscribe } from './socket'
 import * as S from './styles'
 
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
