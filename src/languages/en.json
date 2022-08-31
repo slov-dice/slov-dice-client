@@ -110,7 +110,8 @@
     "logout": "Logout"
   },
   "notification": {
-    "unknownError": "Unknown error"
+    "unknownError": "Unknown error",
+    "roomFull": "Room is full"
   },
   "validation": {
     "required": "Enter the field",

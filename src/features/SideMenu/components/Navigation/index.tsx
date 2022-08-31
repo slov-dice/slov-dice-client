@@ -18,9 +18,7 @@ import { openSidePanel } from 'features/SidePanel/slice'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { useStoreSelector } from 'hooks/useStoreSelector'
 import { E_Routes } from 'models/routes'
-import { E_Emit } from 'models/socket/lobbyUsers'
 import { authAPI } from 'services/auth'
-import { socket } from 'services/socket'
 import { logout } from 'store/profile'
 import { E_Icon } from 'utils/helpers/icons'
 import { LocalStorage } from 'utils/helpers/localStorage'
@@ -32,7 +30,10 @@ interface NavigationProps {
 export const Navigation = ({ toggleMenu }: NavigationProps) => {
   const navigate = useNavigate()
   const dispatch = useStoreDispatch()
-  const profile = useStoreSelector((state) => state.profile)
+  const { statuses, roomId } = useStoreSelector((state) => ({
+    statuses: state.profile.statuses,
+    roomId: state.room.id,
+  }))
 
   const [fetchLogout] = authAPI.useLogoutMutation()
 
@@ -42,10 +43,10 @@ export const Navigation = ({ toggleMenu }: NavigationProps) => {
       navigate(payload as E_Routes)
     } else if (type === E_TaskItemActionType.replace) {
       if (payload === E_CustomAction.logout) {
-        dispatch(logout())
         const authType = LocalStorage.getAuthType()
+        dispatch(logout({ roomId }))
         fetchLogout({ from: authType })
-        socket.emit(E_Emit.logoutLobbyUser)
+        navigate('/')
         return
       }
       navigate(payload as E_Routes)
@@ -59,7 +60,7 @@ export const Navigation = ({ toggleMenu }: NavigationProps) => {
   return (
     <S.Navigation>
       {data.map((item) => {
-        if (profile.statuses.isAuth && item.visibility === E_TaskItemVisibility.authenticated) {
+        if (statuses.isAuth && item.visibility === E_TaskItemVisibility.authenticated) {
           if (item.icon === E_Icon.divider) return <NavigationDivider key={item.name} />
           return (
             <NavigationItem
@@ -70,7 +71,7 @@ export const Navigation = ({ toggleMenu }: NavigationProps) => {
             />
           )
         }
-        if (!profile.statuses.isAuth && item.visibility === E_TaskItemVisibility.unAuthenticated) {
+        if (!statuses.isAuth && item.visibility === E_TaskItemVisibility.unAuthenticated) {
           return (
             <NavigationItem
               key={item.name}

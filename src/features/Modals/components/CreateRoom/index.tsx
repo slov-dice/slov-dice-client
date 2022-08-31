@@ -11,7 +11,7 @@ import { Switch, T_SwitchOption } from 'components/Switch'
 import { closeModal } from 'features/Modals/slice'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { E_RoomType } from 'models/app'
-import { emitCreateRoom } from 'pages/Lobby/slice'
+import { emitCreateRoom } from 'store/room'
 import * as C from 'styles/components'
 
 export const CreateRoomModal = () => {
@@ -76,7 +76,7 @@ export const CreateRoomModal = () => {
         value={form['room-name']}
         onChange={handleChangeForm}
         name='room-name'
-        placeholder='Название...'
+        placeholder='name...'
         fullWidth
       />
       <C.Divider />

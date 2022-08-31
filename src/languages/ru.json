@@ -111,7 +111,8 @@
     "logout": "Выйти"
   },
   "notification": {
-    "unknownError": "Неизвестная ошибка"
+    "unknownError": "Неизвестная ошибка",
+    "roomFull": "Нет места"
   },
   "validation": {
     "required": "Поле необходимо заполнить",

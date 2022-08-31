@@ -1,4 +1,5 @@
 import { useLayoutEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import { RoomList } from './extensions/RoomList'
 import { emitRequestPreviewRooms } from './slice'
@@ -10,15 +11,16 @@ import { useStoreDispatch } from 'hooks/useStoreDispatch'
 
 export const Lobby = () => {
   const dispatch = useStoreDispatch()
+  const navigate = useNavigate()
 
   useLayoutEffect(() => {
-    dispatch(subscribe())
+    dispatch(subscribe(navigate))
     dispatch(emitRequestPreviewRooms())
 
     return () => {
       unsubscribe()
     }
-  }, [dispatch])
+  }, [dispatch, navigate])
 
   return (
     <S.Page>

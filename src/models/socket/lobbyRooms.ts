@@ -4,6 +4,7 @@ import {
   I_FullRoom,
   I_PreviewRoom,
   T_LocaleServerMessage,
+  T_RoomId,
 } from 'models/app'
 
 export enum E_Subscribe {
@@ -26,6 +27,7 @@ export enum E_Emit {
   requestPreviewRooms = 'requestPreviewRooms',
   createRoom = 'createRoom',
   joinRoom = 'joinRoom',
+  leaveRoom = 'leaveRoom',
 }
 
 export interface I_EmitPayload {
@@ -37,7 +39,10 @@ export interface I_EmitPayload {
     roomType: E_RoomType
   }
   [E_Emit.joinRoom]: {
-    roomId: string
-    password: string
+    roomId: T_RoomId
+    password?: string
+  }
+  [E_Emit.leaveRoom]: {
+    roomId: T_RoomId
   }
 }

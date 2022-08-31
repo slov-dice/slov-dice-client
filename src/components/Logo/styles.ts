@@ -30,6 +30,10 @@ export const Wrapper = styled(motion.div).attrs(({ theme }) => wrapperAttrs(them
 
   -webkit-text-fill-color: transparent;
   -webkit-text-stroke: 1px ${({ theme }) => theme.colors.primary};
+
+  @media ${({ theme }) => theme.media.sm} {
+    display: none;
+  }
 `
 
 export const TextLink = styled(Link)`

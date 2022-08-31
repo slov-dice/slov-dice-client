@@ -24,25 +24,26 @@ export const lobbyRoomsSlice = createSlice({
 
       // Если комната не найдена
       if (index < 0) {
-        // Добавляем
+        // Добавляем комнату
         state.rooms.unshift(action.payload.previewRoom)
+        return
+      }
+
+      // Если комната пустая
+      if (action.payload.previewRoom.currentSize === 0) {
+        // Удаляем комнату
+        state.rooms.splice(index, 1)
         return
       }
 
       // Обновляем
       state.rooms[index] = action.payload.previewRoom
     },
-    emitCreateRoom: (_, action: PayloadAction<I_EmitPayload[E_Emit.createRoom]>) => {
-      socket.emit(E_Emit.createRoom, action.payload)
-    },
-    emitJoinRoom: (_, action: PayloadAction<I_EmitPayload[E_Emit.joinRoom]>) => {
-      socket.emit(E_Emit.joinRoom, action.payload)
-    },
+
     emitRequestPreviewRooms: () => {
       socket.emit(E_Emit.requestPreviewRooms)
     },
   },
 })
 
-export const { setRooms, updateRoom, emitCreateRoom, emitJoinRoom, emitRequestPreviewRooms } =
-  lobbyRoomsSlice.actions
+export const { setRooms, updateRoom, emitRequestPreviewRooms } = lobbyRoomsSlice.actions
