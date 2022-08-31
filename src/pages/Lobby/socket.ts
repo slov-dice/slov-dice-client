@@ -28,9 +28,11 @@ export const subscribe = createAsyncThunk(
     )
 
     socket.on(E_Subscribe.getFullRoom, (data: I_SubscriptionData[E_Subscribe.getFullRoom]) => {
-      const language = LocalStorage.getLanguage()
-      const message = data.message[language]
-      toast[data.status](message)
+      if (data.message && data.status) {
+        const language = LocalStorage.getLanguage()
+        const message = data.message[language]
+        toast[data.status](message)
+      }
 
       if (!data.fullRoom) return
       dispatch(setRoom(data.fullRoom))
