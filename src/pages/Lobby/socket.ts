@@ -11,7 +11,7 @@ import { setRoom } from 'store/room'
 import { LocalStorage } from 'utils/helpers/localStorage'
 
 export const subscribe = createAsyncThunk(
-  'lobbyRooms',
+  'lobbyPage',
   async (navigate: NavigateFunction, { dispatch }) => {
     socket.on(
       E_Subscribe.getPreviewRooms,

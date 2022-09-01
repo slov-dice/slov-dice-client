@@ -47,7 +47,7 @@ export const Header = () => {
   useEventListener('scroll', handleScroll)
 
   useEffect(() => {
-    if (pathname === E_Routes.lobby || pathname.includes('/room')) {
+    if (pathname.includes('/lobby') || pathname.includes('/room')) {
       setTransparent(false)
     } else {
       setTransparent(true)

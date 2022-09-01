@@ -25,7 +25,8 @@ import { usersPanelSlice } from 'features/SidePanel/components/UsersPanel/slice'
 import { sidePanelSlice } from 'features/SidePanel/slice'
 import { rtkQueryErrorLogger } from 'middlewares/rtkQueryErrorLogger'
 import { rtkQueryFulfilledLogger } from 'middlewares/rtkQueryFulfilledLogger'
-import { lobbyRoomsSlice } from 'pages/Lobby/slice'
+import { lobbyPageSlice } from 'pages/Lobby/slice'
+import { roomPageSlice } from 'pages/Room/slice'
 import { authAPI } from 'services/auth'
 
 const persistConfig = {
@@ -51,7 +52,8 @@ const rootReducer = combineReducers({
   [restoreSlice.name]: restoreSlice.reducer,
   [usersPanelSlice.name]: usersPanelSlice.reducer,
   [chatPanelSlice.name]: chatPanelSlice.reducer,
-  [lobbyRoomsSlice.name]: lobbyRoomsSlice.reducer,
+  [lobbyPageSlice.name]: lobbyPageSlice.reducer,
+  [roomPageSlice.name]: roomPageSlice.reducer,
 
   // Services
   [authAPI.reducerPath]: authAPI.reducer,

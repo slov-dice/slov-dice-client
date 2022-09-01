@@ -13,7 +13,7 @@ export const RoomList = () => {
   const dispatch = useStoreDispatch()
   const navigate = useNavigate()
   const { rooms, currentRoomId, isUserInRoom } = useStoreSelector((state) => ({
-    rooms: state.lobbyRooms.rooms,
+    rooms: state.lobbyPage.rooms,
     currentRoomId: state.room.id,
     isUserInRoom: state.profile.statuses.inRoom,
   }))

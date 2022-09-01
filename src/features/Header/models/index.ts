@@ -11,6 +11,7 @@ export enum E_TaskItemVisibility {
   all = 'all',
   authenticated = 'authenticated',
   unAuthenticated = 'unAuthenticated',
+  inLobby = 'inLobby',
   inRoom = 'inRoom',
 }
 
@@ -28,7 +29,7 @@ export type T_TaskItemActionPayload = E_Routes | E_Modals | E_Panels | E_CustomA
 export interface I_TaskItem {
   name: string
   icon: E_Icon
-  visibility: E_TaskItemVisibility
+  visibility: E_TaskItemVisibility[]
   actionType: E_TaskItemActionType
   actionPayload: T_TaskItemActionPayload
 }

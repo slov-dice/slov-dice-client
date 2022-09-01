@@ -3,15 +3,15 @@ import styled from 'styled-components'
 
 import { navigationItemAttrs } from './motion'
 
-export const NavigationItem = styled(motion.li).attrs(navigationItemAttrs)`
+export const NavigationItem = styled(motion.li).attrs(({ theme }) => navigationItemAttrs(theme))`
   cursor: pointer;
   user-select: none;
 
   display: flex;
   align-items: center;
 
-  margin-bottom: 10px;
-  padding: 4px;
+  margin-bottom: 6px;
+  padding: 4px 4px 4px 0;
 
   color: ${({ theme }) => theme.colors.white};
 

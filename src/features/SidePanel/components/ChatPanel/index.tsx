@@ -37,6 +37,9 @@ export const ChatPanel = () => {
   return (
     <S.ChatPanel>
       <span>Chat</span>
+      <div>
+        <span>LOBBY</span> | <span>ROOM</span>
+      </div>
       <pre style={{ overflow: 'auto', height: 600 }}>
         {lobbyMessages.length ? JSON.stringify(lobbyMessages, undefined, 2) : '...'}
       </pre>

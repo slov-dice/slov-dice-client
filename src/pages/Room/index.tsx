@@ -1,6 +1,7 @@
 import { useLayoutEffect } from 'react'
 
 import { RoomInfo } from './extensions/RoomInfo'
+import { closeRoomPage, openRoomPage } from './slice'
 import { subscribe, unsubscribe } from './socket'
 import * as S from './styles'
 
@@ -12,8 +13,10 @@ export const Room = () => {
 
   useLayoutEffect(() => {
     dispatch(subscribe())
+    dispatch(openRoomPage())
 
     return () => {
+      dispatch(closeRoomPage())
       unsubscribe()
     }
   }, [dispatch])

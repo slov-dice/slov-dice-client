@@ -108,7 +108,20 @@
     "users": "Пользователи",
     "chat": "Чат",
     "settings": "Настройки",
-    "logout": "Выйти"
+    "logout": "Выйти",
+    "roomSettings": "Настройки комнаты",
+    "saveGame": "Сохранить игру",
+    "loadGames": "Загрузить игру",
+    "leaveRoom": "Покинуть комнату",
+    "returnRoom": "Вернуться в комнату",
+    "window": {
+      "characters": "Персонажи",
+      "inventory": "Инвентарь",
+      "market": "Магазин",
+      "battlefield": "Поле боя",
+      "player": "Плеер",
+      "textEditor": "Текстовой редактор"
+    }
   },
   "notification": {
     "unknownError": "Неизвестная ошибка",

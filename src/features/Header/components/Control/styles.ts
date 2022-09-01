@@ -1,10 +1,9 @@
 import { motion, Transition, Variants } from 'framer-motion'
 import styled from 'styled-components'
 
-export const Control = styled(motion.div).attrs(({ theme }) => ({
-  whileHover: { backgroundColor: theme.colors.white_30 },
-  whileTap: { scale: 0.95 },
-}))`
+import { controlAttrs } from './motion'
+
+export const Control = styled(motion.div).attrs(({ theme }) => controlAttrs(theme))`
   cursor: pointer;
   user-select: none;
 

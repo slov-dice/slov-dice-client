@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 import { I_PreviewRoom } from 'models/app'
-import { E_Emit, I_EmitPayload, I_SubscriptionData, E_Subscribe } from 'models/socket/lobbyRooms'
+import { E_Emit, I_SubscriptionData, E_Subscribe } from 'models/socket/lobbyRooms'
 import { socket } from 'services/socket'
 
 interface I_InitialState {
@@ -12,8 +12,8 @@ const initialState: I_InitialState = {
   rooms: [],
 }
 
-export const lobbyRoomsSlice = createSlice({
-  name: 'lobbyRooms',
+export const lobbyPageSlice = createSlice({
+  name: 'lobbyPage',
   initialState,
   reducers: {
     setRooms: (state, action: PayloadAction<I_SubscriptionData[E_Subscribe.getPreviewRooms]>) => {
@@ -46,4 +46,4 @@ export const lobbyRoomsSlice = createSlice({
   },
 })
 
-export const { setRooms, updateRoom, emitRequestPreviewRooms } = lobbyRoomsSlice.actions
+export const { setRooms, updateRoom, emitRequestPreviewRooms } = lobbyPageSlice.actions

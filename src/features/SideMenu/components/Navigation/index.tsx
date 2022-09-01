@@ -30,9 +30,10 @@ interface NavigationProps {
 export const Navigation = ({ toggleMenu }: NavigationProps) => {
   const navigate = useNavigate()
   const dispatch = useStoreDispatch()
-  const { statuses, roomId } = useStoreSelector((state) => ({
+  const { statuses, roomId, isRoomPageOpen } = useStoreSelector((state) => ({
     statuses: state.profile.statuses,
     roomId: state.room.id,
+    isRoomPageOpen: state.roomPage.isOpen,
   }))
 
   const [fetchLogout] = authAPI.useLogoutMutation()
@@ -60,8 +61,33 @@ export const Navigation = ({ toggleMenu }: NavigationProps) => {
   return (
     <S.Navigation>
       {data.map((item) => {
-        if (statuses.isAuth && item.visibility === E_TaskItemVisibility.authenticated) {
-          if (item.icon === E_Icon.divider) return <NavigationDivider key={item.name} />
+        if (statuses.isAuth && item.visibility.includes(E_TaskItemVisibility.authenticated)) {
+          if (isRoomPageOpen && item.visibility.includes(E_TaskItemVisibility.inRoom)) {
+            if (item.icon === E_Icon.divider) return <NavigationDivider key={item.name} />
+            return (
+              <NavigationItem
+                key={item.name}
+                onClick={handleAction(item.actionType, item.actionPayload)}
+                name={item.name}
+                icon={item.icon}
+              />
+            )
+          } else if (!isRoomPageOpen && item.visibility.includes(E_TaskItemVisibility.inLobby)) {
+            if (item.icon === E_Icon.divider) return <NavigationDivider key={item.name} />
+            if (item.icon === E_Icon.enterRoom && !statuses.inRoom) return
+            if ((item.icon === E_Icon.create || item.icon === E_Icon.join) && statuses.inRoom)
+              return
+            return (
+              <NavigationItem
+                key={item.name}
+                onClick={handleAction(item.actionType, item.actionPayload)}
+                name={item.name}
+                icon={item.icon}
+              />
+            )
+          }
+        }
+        if (!statuses.isAuth && item.visibility.includes(E_TaskItemVisibility.unAuthenticated)) {
           return (
             <NavigationItem
               key={item.name}
@@ -71,17 +97,7 @@ export const Navigation = ({ toggleMenu }: NavigationProps) => {
             />
           )
         }
-        if (!statuses.isAuth && item.visibility === E_TaskItemVisibility.unAuthenticated) {
-          return (
-            <NavigationItem
-              key={item.name}
-              onClick={handleAction(item.actionType, item.actionPayload)}
-              name={item.name}
-              icon={item.icon}
-            />
-          )
-        }
-        if (item.visibility === E_TaskItemVisibility.all) {
+        if (item.visibility.includes(E_TaskItemVisibility.all)) {
           return (
             <NavigationItem
               key={item.name}

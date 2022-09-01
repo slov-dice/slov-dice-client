@@ -107,7 +107,20 @@
     "users": "Users",
     "chat": "Chat",
     "settings": "Settings",
-    "logout": "Logout"
+    "logout": "Logout",
+    "roomSettings": "Room settings",
+    "saveGame": "Save game",
+    "loadGames": "Load game",
+    "leaveRoom": "Leave room",
+    "returnRoom": "Return to room",
+    "window": {
+      "characters": "Characters",
+      "inventory": "Inventory",
+      "market": "Market",
+      "battlefield": "Battlefield",
+      "player": "player",
+      "textEditor": "Text Editor"
+    }
   },
   "notification": {
     "unknownError": "Unknown error",

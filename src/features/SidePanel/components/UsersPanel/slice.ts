@@ -5,11 +5,13 @@ import { E_Subscribe, I_SubscriptionData, E_Emit } from 'models/socket/lobbyUser
 import { socket } from 'services/socket'
 
 interface I_InitialState {
-  users: I_LobbyUser[]
+  lobbyUsers: I_LobbyUser[]
+  roomUsers: I_LobbyUser[]
 }
 
 const initialState: I_InitialState = {
-  users: [],
+  lobbyUsers: [],
+  roomUsers: [],
 }
 
 export const usersPanelSlice = createSlice({
@@ -17,27 +19,27 @@ export const usersPanelSlice = createSlice({
   initialState: initialState,
   reducers: {
     setUsers: (state, action: PayloadAction<I_SubscriptionData[E_Subscribe.getLobbyUsers]>) => {
-      state.users = action.payload.users
+      state.lobbyUsers = action.payload.users
     },
     updateUser: (state, action: PayloadAction<I_SubscriptionData[E_Subscribe.getLobbyUser]>) => {
-      const index = state.users.findIndex((user) => user.id === action.payload.user.id)
+      const index = state.lobbyUsers.findIndex((user) => user.id === action.payload.user.id)
 
       // Если nickname пустой (логоут гостя)
       if (!action.payload.user.nickname) {
         // Удаляем пользователя
-        state.users.splice(index, 1)
+        state.lobbyUsers.splice(index, 1)
         return
       }
 
       // Если пользователь не найден
       if (index < 0) {
         // Добавляем
-        state.users.push(action.payload.user)
+        state.lobbyUsers.push(action.payload.user)
         return
       }
 
       // Обновляем
-      state.users[index] = action.payload.user
+      state.lobbyUsers[index] = action.payload.user
     },
     emitRequestUsers: () => {
       socket.emit(E_Emit.requestLobbyUsers)
