@@ -49,12 +49,12 @@ export const UsersPanel = () => {
       <div>
         <Button mod={Button.mod.secondary} onClick={handleOpenLobbyUsers}>
           LOBBY
-        </Button>{' '}
+        </Button>
         <Button mod={Button.mod.secondary} onClick={handleOpenRoomUsers}>
           ROOM
         </Button>
       </div>
-      <pre style={{ overflow: 'auto', height: 800 }}>
+      <pre style={{ overflow: 'auto', height: 600 }}>
         {isLobbyUsers
           ? lobbyUsers.length
             ? JSON.stringify(lobbyUsers, undefined, 2)

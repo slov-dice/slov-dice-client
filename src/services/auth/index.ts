@@ -32,6 +32,13 @@ export const authAPI = createApi({
       }),
     }),
 
+    check: build.mutation<I_AuthResponse, void>({
+      query: () => ({
+        url: 'check',
+        method: 'POST',
+      }),
+    }),
+
     thirdPartyAuth: build.mutation<I_AuthResponse, I_ThirdPartyAuthPayload>({
       query: (payload) => ({
         url: 'token',

@@ -12,7 +12,10 @@ import { useStoreSelector } from 'hooks/useStoreSelector'
 export const ChatPanel = () => {
   const dispatch = useStoreDispatch()
 
-  const lobbyMessages = useStoreSelector((state) => state.chatPanel.lobbyMessages)
+  const { lobbyMessages, roomMessages } = useStoreSelector((state) => ({
+    lobbyMessages: state.chatPanel.lobbyMessages,
+    roomMessages: state.room.messages,
+  }))
 
   useLayoutEffect(() => {
     dispatch(subscribe())
@@ -24,6 +27,7 @@ export const ChatPanel = () => {
   }, [dispatch])
 
   const [message, setMessage] = useState('')
+  const [isLobbyChat, setIsLobbyChat] = useState(true)
 
   const handleChangeMessage = ({ target }: ChangeEvent<HTMLInputElement>) => {
     setMessage(target.value)
@@ -34,14 +38,33 @@ export const ChatPanel = () => {
     setMessage('')
   }
 
+  const handleOpenLobbyChat = () => {
+    setIsLobbyChat(true)
+  }
+
+  const handleOpenRoomChat = () => {
+    setIsLobbyChat(false)
+  }
+
   return (
     <S.ChatPanel>
       <span>Chat</span>
       <div>
-        <span>LOBBY</span> | <span>ROOM</span>
+        <Button mod={Button.mod.secondary} onClick={handleOpenLobbyChat}>
+          LOBBY
+        </Button>
+        <Button mod={Button.mod.secondary} onClick={handleOpenRoomChat}>
+          ROOM
+        </Button>
       </div>
-      <pre style={{ overflow: 'auto', height: 600 }}>
-        {lobbyMessages.length ? JSON.stringify(lobbyMessages, undefined, 2) : '...'}
+      <pre style={{ overflow: 'auto', height: 500 }}>
+        {isLobbyChat
+          ? lobbyMessages.length
+            ? JSON.stringify(lobbyMessages, undefined, 2)
+            : '...'
+          : roomMessages.length
+          ? JSON.stringify(roomMessages, undefined, 2)
+          : '...'}
       </pre>
       <ChatField value={message} onChange={handleChangeMessage} />{' '}
       <Button onClick={handleSend}>Send</Button>

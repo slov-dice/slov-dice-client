@@ -30,6 +30,7 @@ export enum E_Emit {
   joinRoom = 'joinRoom',
   rejoinRoom = 'rejoinRoom',
   leaveRoom = 'leaveRoom',
+  sendMessageRoom = 'sendMessageRoom',
 }
 
 export interface I_EmitPayload {
@@ -49,5 +50,9 @@ export interface I_EmitPayload {
   }
   [E_Emit.leaveRoom]: {
     roomId: T_RoomId
+  }
+  [E_Emit.sendMessageRoom]: {
+    roomId: T_RoomId
+    message: string
   }
 }

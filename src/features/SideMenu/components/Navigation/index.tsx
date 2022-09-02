@@ -30,9 +30,8 @@ interface NavigationProps {
 export const Navigation = ({ toggleMenu }: NavigationProps) => {
   const navigate = useNavigate()
   const dispatch = useStoreDispatch()
-  const { statuses, roomId, isRoomPageOpen } = useStoreSelector((state) => ({
+  const { statuses, isRoomPageOpen } = useStoreSelector((state) => ({
     statuses: state.profile.statuses,
-    roomId: state.room.id,
     isRoomPageOpen: state.roomPage.isOpen,
   }))
 
@@ -45,7 +44,7 @@ export const Navigation = ({ toggleMenu }: NavigationProps) => {
     } else if (type === E_TaskItemActionType.replace) {
       if (payload === E_CustomAction.logout) {
         const authType = LocalStorage.getAuthType()
-        dispatch(logout({ roomId }))
+        dispatch(logout())
         fetchLogout({ from: authType })
         navigate('/')
         return
