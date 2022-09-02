@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 import { E_RoomType, I_FullRoom } from 'models/app'
-import { E_Emit, I_EmitPayload } from 'models/socket/lobbyRooms'
+import { E_Emit, I_EmitPayload, E_Subscribe, I_SubscriptionData } from 'models/socket/lobbyRooms'
 import { socket } from 'services/socket'
 
 const initialState: I_FullRoom = {
@@ -21,6 +21,12 @@ export const roomSlice = createSlice({
   initialState,
   reducers: {
     setRoom: (_, action: PayloadAction<I_FullRoom>) => action.payload,
+    setRoomMessage: (
+      state,
+      action: PayloadAction<I_SubscriptionData[E_Subscribe.getRoomMessage]>,
+    ) => {
+      state.messages.unshift(action.payload.message)
+    },
     emitCreateRoom: (_, action: PayloadAction<I_EmitPayload[E_Emit.createRoom]>) => {
       socket.emit(E_Emit.createRoom, action.payload)
     },
@@ -34,4 +40,5 @@ export const roomSlice = createSlice({
   },
 })
 
-export const { setRoom, emitCreateRoom, emitJoinRoom, emitLeaveRoom } = roomSlice.actions
+export const { setRoom, setRoomMessage, emitCreateRoom, emitJoinRoom, emitLeaveRoom } =
+  roomSlice.actions

@@ -1,6 +1,6 @@
 import { ChangeEvent, useLayoutEffect, useState } from 'react'
 
-import { emitRequestLobbyChat, emitSendLobbyMessage } from './slice'
+import { emitRequestLobbyChat, emitSendLobbyMessage, emitSendRoomMessage } from './slice'
 import { subscribe, unsubscribe } from './socket'
 import * as S from './styles'
 
@@ -12,9 +12,10 @@ import { useStoreSelector } from 'hooks/useStoreSelector'
 export const ChatPanel = () => {
   const dispatch = useStoreDispatch()
 
-  const { lobbyMessages, roomMessages } = useStoreSelector((state) => ({
+  const { lobbyMessages, roomMessages, roomId } = useStoreSelector((state) => ({
     lobbyMessages: state.chatPanel.lobbyMessages,
     roomMessages: state.room.messages,
+    roomId: state.room.id,
   }))
 
   useLayoutEffect(() => {
@@ -34,7 +35,13 @@ export const ChatPanel = () => {
   }
 
   const handleSend = () => {
-    dispatch(emitSendLobbyMessage({ text: message }))
+    if (isLobbyChat) {
+      dispatch(emitSendLobbyMessage({ text: message }))
+    } else if (roomId) {
+      dispatch(emitSendRoomMessage({ text: message, roomId }))
+    } else {
+      alert('Вы не в комнате')
+    }
     setMessage('')
   }
 

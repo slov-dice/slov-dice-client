@@ -24,6 +24,8 @@ export const Header = () => {
 
   const { pathname } = useLocation()
 
+  const isGameRoutes = pathname.includes('/lobby') || pathname.includes('/room')
+
   const dispatch = useStoreDispatch()
 
   const [isTransparent, setTransparent] = useState(true)
@@ -42,12 +44,14 @@ export const Header = () => {
   }
 
   const handleScroll = () => {
-    setTransparent(window.scrollY <= 0)
+    if (!isGameRoutes) {
+      setTransparent(window.scrollY <= 0)
+    }
   }
   useEventListener('scroll', handleScroll)
 
   useEffect(() => {
-    if (pathname.includes('/lobby') || pathname.includes('/room')) {
+    if (isGameRoutes) {
       setTransparent(false)
     } else {
       setTransparent(true)

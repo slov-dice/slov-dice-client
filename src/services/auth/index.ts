@@ -39,6 +39,12 @@ export const authAPI = createApi({
       }),
     }),
 
+    checkToken: build.query({
+      query: () => ({
+        url: `/check/token`,
+      }),
+    }),
+
     thirdPartyAuth: build.mutation<I_AuthResponse, I_ThirdPartyAuthPayload>({
       query: (payload) => ({
         url: 'token',

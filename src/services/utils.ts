@@ -6,6 +6,7 @@ import {
 } from '@reduxjs/toolkit/dist/query'
 
 import { T_Tokens } from 'models/app'
+import { RootState } from 'store'
 import { logout } from 'store/profile'
 import { LocalStorage } from 'utils/helpers/localStorage'
 
@@ -37,7 +38,8 @@ export const baseQueryWithReAuth: BaseQueryFn<
     if (refreshResult.data) {
       result = await baseQuery(args, api, extraOptions)
     } else {
-      api.dispatch(logout())
+      const roomId = (api.getState() as RootState).room.id
+      api.dispatch(logout({ roomId }))
     }
   }
   return result
