@@ -47,6 +47,10 @@ export const BaseWindowClose = styled.span`
   }
 `
 
+export const BaseWindowContent = styled.div`
+  color: ${({ theme }) => theme.colors.white_50};
+`
+
 export const BaseWindowActions = styled.div`
   display: flex;
   justify-self: flex-end;

@@ -35,6 +35,18 @@
       "paragraph1": "The translation only includes UI texts.",
       "paragraph2": "Custom messages and titles will not be translated!"
     },
+    "createRoom": {
+      "title": "Create a room"
+    },
+    "joinRoom": {
+      "title": "Join to room"
+    },
+    "settings": {
+      "title": "Profile settings"
+    },
+    "roomSettings": {
+      "title": "Room settings"
+    },
     "restorePassword": {
       "title": "Restore password",
       "paragraph1": "Enter a verified email address associated with your account and we will send an email with a code to it.",

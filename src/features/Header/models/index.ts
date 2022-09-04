@@ -1,5 +1,6 @@
 import { E_Modals } from 'features/Modals/models'
 import { E_Panels } from 'features/SidePanel/models'
+import { E_Window } from 'features/WindowManager/models'
 import { E_Routes } from 'models/routes'
 import { E_Icon } from 'utils/helpers/icons'
 
@@ -20,11 +21,18 @@ export enum E_TaskItemActionType {
   push = 'push',
   modal = 'modal',
   panel = 'panel',
+  window = 'window',
   fullScreen = 'fullScreen',
   none = 'none',
 }
 
-export type T_TaskItemActionPayload = E_Routes | E_Modals | E_Panels | E_CustomAction | null
+export type T_TaskItemActionPayload =
+  | E_Routes
+  | E_Modals
+  | E_Panels
+  | E_Window
+  | E_CustomAction
+  | null
 
 export interface I_TaskItem {
   name: string

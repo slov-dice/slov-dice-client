@@ -9,17 +9,20 @@ import {
   E_CustomAction,
   E_TaskItemActionType,
   E_TaskItemVisibility,
-  T_TaskItemActionPayload,
+  I_TaskItem,
 } from 'features/Header/models'
 import { E_Modals } from 'features/Modals/models'
 import { openModal } from 'features/Modals/slice'
 import { E_Panels } from 'features/SidePanel/models'
 import { openSidePanel } from 'features/SidePanel/slice'
+import { E_Window } from 'features/WindowManager/models'
+import { openWindow } from 'features/WindowManager/slice'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { useStoreSelector } from 'hooks/useStoreSelector'
 import { E_Routes } from 'models/routes'
 import { authAPI } from 'services/auth'
-import { logout } from 'store/profile'
+import { leaveRoom, logout } from 'store/profile'
+import { emitLeaveRoom } from 'store/room'
 import { E_Icon } from 'utils/helpers/icons'
 import { LocalStorage } from 'utils/helpers/localStorage'
 
@@ -38,23 +41,39 @@ export const Navigation = ({ toggleMenu }: NavigationProps) => {
 
   const [fetchLogout] = authAPI.useLogoutMutation()
 
-  const handleAction = (type: E_TaskItemActionType, payload: T_TaskItemActionPayload) => () => {
+  const handleAction = (item: I_TaskItem) => () => {
     toggleMenu()
-    if (type === E_TaskItemActionType.push) {
-      navigate(payload as E_Routes)
-    } else if (type === E_TaskItemActionType.replace) {
-      if (payload === E_CustomAction.logout) {
+    if (item.actionType === E_TaskItemActionType.push) {
+      navigate(item.actionPayload as E_Routes)
+    }
+
+    if (item.actionType === E_TaskItemActionType.replace) {
+      if (item.actionPayload === E_CustomAction.logout) {
         const authType = LocalStorage.getAuthType()
         dispatch(logout({ roomId }))
         fetchLogout({ from: authType })
         navigate('/')
         return
       }
-      navigate(payload as E_Routes)
-    } else if (type === E_TaskItemActionType.modal) {
-      dispatch(openModal(payload as E_Modals))
-    } else if (type === E_TaskItemActionType.panel) {
-      dispatch(openSidePanel(payload as E_Panels))
+      navigate(item.actionPayload as E_Routes)
+    }
+
+    if (item.actionType === E_TaskItemActionType.modal) {
+      dispatch(openModal(item.actionPayload as E_Modals))
+    }
+
+    if (item.actionType === E_TaskItemActionType.window) {
+      dispatch(openWindow(item.actionPayload as E_Window))
+    }
+
+    if (item.actionType === E_TaskItemActionType.panel) {
+      dispatch(openSidePanel(item.actionPayload as E_Panels))
+    }
+
+    if (item.icon === E_Icon.leaveRoom) {
+      dispatch(emitLeaveRoom())
+      dispatch(leaveRoom())
+      navigate('/lobby')
     }
   }
 
@@ -67,7 +86,7 @@ export const Navigation = ({ toggleMenu }: NavigationProps) => {
             return (
               <NavigationItem
                 key={item.name}
-                onClick={handleAction(item.actionType, item.actionPayload)}
+                onClick={handleAction(item)}
                 name={item.name}
                 icon={item.icon}
               />
@@ -80,7 +99,7 @@ export const Navigation = ({ toggleMenu }: NavigationProps) => {
             return (
               <NavigationItem
                 key={item.name}
-                onClick={handleAction(item.actionType, item.actionPayload)}
+                onClick={handleAction(item)}
                 name={item.name}
                 icon={item.icon}
               />
@@ -91,7 +110,7 @@ export const Navigation = ({ toggleMenu }: NavigationProps) => {
           return (
             <NavigationItem
               key={item.name}
-              onClick={handleAction(item.actionType, item.actionPayload)}
+              onClick={handleAction(item)}
               name={item.name}
               icon={item.icon}
             />
@@ -101,7 +120,7 @@ export const Navigation = ({ toggleMenu }: NavigationProps) => {
           return (
             <NavigationItem
               key={item.name}
-              onClick={handleAction(item.actionType, item.actionPayload)}
+              onClick={handleAction(item)}
               name={item.name}
               icon={item.icon}
             />

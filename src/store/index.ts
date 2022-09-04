@@ -23,6 +23,7 @@ import { sideMenuSlice } from 'features/SideMenu/slice'
 import { chatPanelSlice } from 'features/SidePanel/components/ChatPanel/slice'
 import { usersPanelSlice } from 'features/SidePanel/components/UsersPanel/slice'
 import { sidePanelSlice } from 'features/SidePanel/slice'
+import { windowManagerSlice } from 'features/WindowManager/slice'
 import { rtkQueryErrorLogger } from 'middlewares/rtkQueryErrorLogger'
 import { rtkQueryFulfilledLogger } from 'middlewares/rtkQueryFulfilledLogger'
 import { lobbyPageSlice } from 'pages/Lobby/slice'
@@ -47,6 +48,7 @@ const rootReducer = combineReducers({
   [headerSlice.name]: headerSlice.reducer,
   [sideMenuSlice.name]: sideMenuSlice.reducer,
   [sidePanelSlice.name]: sidePanelSlice.reducer,
+  [windowManagerSlice.name]: windowManagerSlice.reducer,
 
   // Component slices
   [restoreSlice.name]: restoreSlice.reducer,

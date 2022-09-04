@@ -42,7 +42,7 @@ export const Toolbar = () => {
   return (
     <S.Toolbar>
       {toolbar.map((item) => {
-        if (isAuth && item.visibility === E_TaskItemVisibility.authenticated)
+        if (isAuth && item.visibility.includes(E_TaskItemVisibility.authenticated))
           return (
             <ToolbarItem
               key={item.name}
@@ -51,7 +51,7 @@ export const Toolbar = () => {
             />
           )
 
-        if (item.visibility === E_TaskItemVisibility.all)
+        if (item.visibility.includes(E_TaskItemVisibility.all))
           return (
             <ToolbarItem
               key={item.name}

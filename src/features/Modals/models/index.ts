@@ -3,7 +3,7 @@ export enum E_Modals {
   settings = 'settings',
   createRoom = 'createRoom',
   joinRoom = 'joinRoom',
-  logout = 'logout',
+  roomSettings = 'roomSettings',
   restorePassword = 'restorePassword',
 }
 export interface I_Modal {

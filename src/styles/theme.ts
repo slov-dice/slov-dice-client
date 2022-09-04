@@ -52,6 +52,7 @@ export const theme = {
     verificationForm: { width: 520, height: 460 },
     authCallbackForm: { width: 520, height: 460 },
     sidePanel: { width: 320 },
+    window: { width: 420, height: 420 },
   },
 
   // in ms

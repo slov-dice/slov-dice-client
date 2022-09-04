@@ -37,7 +37,6 @@ export const subscribe = createAsyncThunk(
       if (!data.fullRoom) return
       dispatch(setRoom(data.fullRoom))
       dispatch(joinRoom())
-      navigate(`/room/${data.fullRoom.id}`)
     })
   },
 )

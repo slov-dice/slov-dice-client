@@ -3,6 +3,7 @@ import { toast } from 'react-toastify'
 
 import { E_Subscribe, I_SubscriptionData } from 'models/socket/lobbyRooms'
 import { socket } from 'services/socket'
+import { joinRoom } from 'store/profile'
 import { setRoom } from 'store/room'
 import { LocalStorage } from 'utils/helpers/localStorage'
 
@@ -17,6 +18,7 @@ export const subscribe = createAsyncThunk('room', async (_, { dispatch }) => {
 
     if (!data.fullRoom) return
     dispatch(setRoom(data.fullRoom))
+    dispatch(joinRoom())
   })
 })
 

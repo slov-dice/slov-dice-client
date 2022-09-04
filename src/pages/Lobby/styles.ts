@@ -2,6 +2,8 @@ import styled from 'styled-components'
 
 export const Page = styled.div`
   position: relative;
+
+  overflow: hidden;
 `
 
 export const Container = styled.div`

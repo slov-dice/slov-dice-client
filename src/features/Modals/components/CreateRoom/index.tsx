@@ -10,6 +10,7 @@ import { TextField, SelectField } from 'components/InputFields'
 import { Switch, T_SwitchOption } from 'components/Switch'
 import { closeModal } from 'features/Modals/slice'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
+import { t } from 'languages'
 import { E_RoomType } from 'models/app'
 import { emitCreateRoom } from 'store/room'
 import * as C from 'styles/components'
@@ -71,7 +72,9 @@ export const CreateRoomModal = () => {
       <S.WindowClose onClick={handleClose}>
         <CloseIcon />
       </S.WindowClose>
-      <C.Title>Room creation</C.Title>
+      <C.Title>{t('modals.createRoom.title')}</C.Title>
+      <C.Divider />
+
       <TextField
         value={form['room-name']}
         onChange={handleChangeForm}

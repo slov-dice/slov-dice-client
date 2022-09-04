@@ -6,6 +6,7 @@ import {
 } from 'features/Header/models'
 import { E_Modals } from 'features/Modals/models'
 import { E_Panels } from 'features/SidePanel/models'
+import { E_Window } from 'features/WindowManager/models'
 import { E_Routes } from 'models/routes'
 import { E_Icon } from 'utils/helpers/icons'
 
@@ -14,43 +15,43 @@ export const data: I_TaskItem[] = [
     name: 'sideMenu.window.characters',
     icon: E_Icon.fileUser,
     visibility: [E_TaskItemVisibility.authenticated, E_TaskItemVisibility.inRoom],
-    actionType: E_TaskItemActionType.modal,
-    actionPayload: E_Modals.createRoom,
+    actionType: E_TaskItemActionType.window,
+    actionPayload: E_Window.characters,
   },
   {
     name: 'sideMenu.window.inventory',
     icon: E_Icon.backpack,
     visibility: [E_TaskItemVisibility.authenticated, E_TaskItemVisibility.inRoom],
-    actionType: E_TaskItemActionType.modal,
-    actionPayload: E_Modals.createRoom,
+    actionType: E_TaskItemActionType.window,
+    actionPayload: E_Window.inventory,
   },
   {
     name: 'sideMenu.window.market',
     icon: E_Icon.store,
     visibility: [E_TaskItemVisibility.authenticated, E_TaskItemVisibility.inRoom],
-    actionType: E_TaskItemActionType.modal,
-    actionPayload: E_Modals.createRoom,
+    actionType: E_TaskItemActionType.window,
+    actionPayload: E_Window.market,
   },
   {
     name: 'sideMenu.window.battlefield',
     icon: E_Icon.swords,
     visibility: [E_TaskItemVisibility.authenticated, E_TaskItemVisibility.inRoom],
-    actionType: E_TaskItemActionType.modal,
-    actionPayload: E_Modals.createRoom,
+    actionType: E_TaskItemActionType.window,
+    actionPayload: E_Window.battlefield,
   },
   {
     name: 'sideMenu.window.player',
     icon: E_Icon.circlePlay,
     visibility: [E_TaskItemVisibility.authenticated, E_TaskItemVisibility.inRoom],
-    actionType: E_TaskItemActionType.modal,
-    actionPayload: E_Modals.createRoom,
+    actionType: E_TaskItemActionType.window,
+    actionPayload: E_Window.player,
   },
   {
     name: 'sideMenu.window.textEditor',
     icon: E_Icon.fileLines,
     visibility: [E_TaskItemVisibility.authenticated, E_TaskItemVisibility.inRoom],
-    actionType: E_TaskItemActionType.modal,
-    actionPayload: E_Modals.createRoom,
+    actionType: E_TaskItemActionType.window,
+    actionPayload: E_Window.textEditor,
   },
   {
     name: 'room-divider-0',
@@ -64,7 +65,7 @@ export const data: I_TaskItem[] = [
     icon: E_Icon.fort,
     visibility: [E_TaskItemVisibility.authenticated, E_TaskItemVisibility.inRoom],
     actionType: E_TaskItemActionType.modal,
-    actionPayload: E_Modals.createRoom,
+    actionPayload: E_Modals.roomSettings,
   },
   {
     name: 'sideMenu.saveGame',
@@ -84,8 +85,8 @@ export const data: I_TaskItem[] = [
     name: 'sideMenu.leaveRoom',
     icon: E_Icon.leaveRoom,
     visibility: [E_TaskItemVisibility.authenticated, E_TaskItemVisibility.inRoom],
-    actionType: E_TaskItemActionType.modal,
-    actionPayload: E_Modals.createRoom,
+    actionType: E_TaskItemActionType.none,
+    actionPayload: null,
   },
   {
     name: 'room-divider-1',
