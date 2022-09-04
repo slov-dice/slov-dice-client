@@ -6,6 +6,4 @@ export const Page = styled.div`
   overflow-y: none;
 
   height: 100%;
-
-  background-color: red;
 `

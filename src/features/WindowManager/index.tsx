@@ -1,9 +1,15 @@
+import { MutableRefObject } from 'react'
+
 import { WindowContentComponents } from './components'
 import { Window } from './extensions/Window'
 
 import { useStoreSelector } from 'hooks/useStoreSelector'
 
-export const WindowManager = ({ dragConstraints }: any) => {
+interface I_WindowManagerProps {
+  dragConstraintsRef: MutableRefObject<HTMLDivElement | null>
+}
+
+export const WindowManager = ({ dragConstraintsRef }: I_WindowManagerProps) => {
   const windows = useStoreSelector((state) => state.windowManager.windows)
 
   if (!windows.length) return null
@@ -14,7 +20,7 @@ export const WindowManager = ({ dragConstraints }: any) => {
         const WindowContent = WindowContentComponents[window.content]
 
         return (
-          <Window key={window.content} dragConstraints={dragConstraints}>
+          <Window key={window.content} dragConstraintsRef={dragConstraintsRef}>
             <WindowContent />
           </Window>
         )

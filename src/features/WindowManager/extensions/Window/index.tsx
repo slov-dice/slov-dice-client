@@ -1,6 +1,14 @@
 /* eslint-disable prefer-const */
 import { useDragControls, useMotionValue } from 'framer-motion'
-import { useRef, ReactNode, useState, useEffect, useCallback } from 'react'
+import {
+  useRef,
+  ReactNode,
+  useState,
+  useEffect,
+  useCallback,
+  RefObject,
+  MutableRefObject,
+} from 'react'
 
 import * as S from './styles'
 
@@ -17,16 +25,18 @@ export enum E_ResizerPosition {
   nw = 'nw',
 }
 
+const DEFAULT_SIZE = 420
+
 interface I_WindowProps {
   children: ReactNode
-  dragConstraints: any
+  dragConstraintsRef: MutableRefObject<HTMLDivElement | null>
 }
 
-export const Window = ({ children, dragConstraints }: I_WindowProps) => {
+export const Window = ({ children, dragConstraintsRef }: I_WindowProps) => {
   const wrapperRef = useRef<HTMLDivElement>(null)
 
-  const height = useMotionValue(420)
-  const width = useMotionValue(420)
+  const height = useMotionValue(DEFAULT_SIZE)
+  const width = useMotionValue(DEFAULT_SIZE)
   const y = useMotionValue(0)
   const x = useMotionValue(0)
   const dragControls = useDragControls()
@@ -57,47 +67,63 @@ export const Window = ({ children, dragConstraints }: I_WindowProps) => {
       if (!isResize) return
       const diffY = e.clientY - startMouseY
       const diffX = e.clientX - startMouseX
-      const containerWidth = dragConstraints.current.clientWidth
-      const containerHeight = dragConstraints.current.clientHeight
+      const containerWidth = dragConstraintsRef.current?.clientWidth ?? 0
+      const containerHeight = dragConstraintsRef.current?.clientHeight ?? 0
 
       const getStart = (startSize: number, start: number, diff: number) => {
         return {
-          size: Math.min(Math.max(startSize - diff, 0), start + startSize),
-          position: Math.max(start + Math.min(diff, startSize), 0),
+          size: Math.min(Math.max(startSize - diff, DEFAULT_SIZE), start + startSize),
+          position: Math.max(start + Math.min(diff, startSize - DEFAULT_SIZE), 0),
         }
       }
 
       const getEnd = (startSize: number, start: number, diff: number, containerSize: number) => {
         return {
-          size: Math.min(startSize + diff, containerSize - start),
+          size: Math.max(Math.min(startSize + diff, containerSize - start), DEFAULT_SIZE),
         }
       }
 
-      if (activeResizer === E_ResizerPosition.n) {
+      if (
+        activeResizer === E_ResizerPosition.n ||
+        activeResizer === E_ResizerPosition.ne ||
+        activeResizer === E_ResizerPosition.nw
+      ) {
         const dimensions = getStart(startHeight, startY, diffY)
         height.set(dimensions.size)
         y.set(dimensions.position)
       }
 
-      if (activeResizer === E_ResizerPosition.w) {
+      if (
+        activeResizer === E_ResizerPosition.w ||
+        activeResizer === E_ResizerPosition.nw ||
+        activeResizer === E_ResizerPosition.sw
+      ) {
         const dimensions = getStart(startWidth, startX, diffX)
         width.set(dimensions.size)
         x.set(dimensions.position)
       }
 
-      if (activeResizer === E_ResizerPosition.e) {
+      if (
+        activeResizer === E_ResizerPosition.e ||
+        activeResizer === E_ResizerPosition.ne ||
+        activeResizer === E_ResizerPosition.se
+      ) {
         const dimensions = getEnd(startWidth, startX, diffX, containerWidth)
         width.set(dimensions.size)
       }
 
-      if (activeResizer === E_ResizerPosition.s) {
+      if (
+        activeResizer === E_ResizerPosition.s ||
+        activeResizer === E_ResizerPosition.sw ||
+        activeResizer === E_ResizerPosition.se
+      ) {
         const dimensions = getEnd(startHeight, startY, diffY, containerHeight)
         height.set(dimensions.size)
       }
     },
     [
       activeResizer,
-      dragConstraints,
+      dragConstraintsRef,
       height,
       isResize,
       startHeight,
@@ -148,7 +174,12 @@ export const Window = ({ children, dragConstraints }: I_WindowProps) => {
         max: 200,
         timeConstant: 250,
       }}
-      dragConstraints={dragConstraints}
+      dragConstraints={{
+        top: 0,
+        right: (dragConstraintsRef.current?.clientWidth ?? 0) - width.get(),
+        bottom: (dragConstraintsRef.current?.clientHeight ?? 0) - height.get(),
+        left: 0,
+      }}
       dragListener={false}
       dragControls={dragControls}
       style={{ width, height, x, y }}
