@@ -10,12 +10,9 @@ import { StyledVariants } from 'models/styled'
 export const Wrapper = styled(motion.div).attrs(wrapperAttrs)`
   position: absolute;
   z-index: 1000;
-  top: ${({ theme }) => theme.sizes.header.height}px;
 
-  width: ${({ theme }) => theme.sizes.window.width}px;
-  min-width: ${({ theme }) => theme.sizes.window.width}px;
-  height: ${({ theme }) => theme.sizes.window.height}px;
-  min-height: ${({ theme }) => theme.sizes.window.height}px;
+  /* min-width: ${({ theme }) => theme.sizes.window.width}px;
+  min-height: ${({ theme }) => theme.sizes.window.height}px; */
 
   border: 2px solid ${({ theme }) => theme.colors.white_10};
 `

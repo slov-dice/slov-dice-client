@@ -1,4 +1,4 @@
-import { useLayoutEffect } from 'react'
+import { useLayoutEffect, useRef } from 'react'
 
 import { closeRoomPage, openRoomPage } from './slice'
 import { subscribe, unsubscribe } from './socket'
@@ -7,9 +7,11 @@ import * as S from './styles'
 import { HeroBackground } from 'features/HeroBackground'
 import { WindowManager } from 'features/WindowManager'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
+import * as C from 'styles/components'
 
 export const Room = () => {
   const dispatch = useStoreDispatch()
+  const pageRef = useRef(null)
 
   useLayoutEffect(() => {
     dispatch(subscribe())
@@ -25,9 +27,11 @@ export const Room = () => {
   }, [dispatch])
 
   return (
-    <S.Page>
-      <WindowManager />
-      <HeroBackground />
-    </S.Page>
+    <>
+      <S.Page ref={pageRef}>
+        <WindowManager dragConstraints={pageRef} />
+        <HeroBackground />
+      </S.Page>
+    </>
   )
 }

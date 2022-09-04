@@ -3,7 +3,7 @@ import { Window } from './extensions/Window'
 
 import { useStoreSelector } from 'hooks/useStoreSelector'
 
-export const WindowManager = () => {
+export const WindowManager = ({ dragConstraints }: any) => {
   const windows = useStoreSelector((state) => state.windowManager.windows)
 
   if (!windows.length) return null
@@ -14,7 +14,7 @@ export const WindowManager = () => {
         const WindowContent = WindowContentComponents[window.content]
 
         return (
-          <Window key={window.content}>
+          <Window key={window.content} dragConstraints={dragConstraints}>
             <WindowContent />
           </Window>
         )

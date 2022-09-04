@@ -4,7 +4,8 @@ export const GlobalStyles = createGlobalStyle`
   html,
   body {
     overflow-x: hidden;
-    
+  
+
     min-height:  100vh;
     margin: 0;
     padding: 0;
@@ -49,5 +50,10 @@ export const GlobalStyles = createGlobalStyle`
   a {
     color: inherit;
     text-decoration: none;
+  }
+
+  #root {
+    display: flex;
+    flex-direction: column;
   }
 `

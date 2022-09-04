@@ -1,5 +1,6 @@
 /* eslint-disable prefer-const */
-import { useState, useRef, ReactNode } from 'react'
+import { useDragControls, useMotionValue } from 'framer-motion'
+import { useRef, ReactNode, useState, useEffect, useCallback } from 'react'
 
 import * as S from './styles'
 
@@ -18,173 +19,152 @@ export enum E_ResizerPosition {
 
 interface I_WindowProps {
   children: ReactNode
+  dragConstraints: any
 }
 
-export const Window = ({ children }: I_WindowProps) => {
+export const Window = ({ children, dragConstraints }: I_WindowProps) => {
   const wrapperRef = useRef<HTMLDivElement>(null)
-  const [isResizing, setResizing] = useState(false)
 
-  // Передвижение окна
-  const handleHeadMouseDown = (headMouseEvent: React.MouseEvent<HTMLDivElement>) => {
-    if (wrapperRef.current && headMouseEvent.target) {
-      let prevX = headMouseEvent.clientX
-      let prevY = headMouseEvent.clientY
-      const headerHeight = theme.sizes.header.height
+  const height = useMotionValue(420)
+  const width = useMotionValue(420)
+  const y = useMotionValue(0)
+  const x = useMotionValue(0)
+  const dragControls = useDragControls()
 
-      const handleMouseMove = (windowMouseEvent: MouseEvent) => {
-        if (isResizing) return
-        const nextX = prevX - windowMouseEvent.clientX
-        const nextY = prevY - windowMouseEvent.clientY
-        if (wrapperRef.current) {
-          const rect: DOMRect = wrapperRef.current.getBoundingClientRect()
-          if ((rect.x > 0 || nextX < 0) && (rect.x + rect.width < window.innerWidth || nextX > 0)) {
-            wrapperRef.current.style.left = rect.left - nextX + 'px'
-          }
-          if (
-            (rect.y > headerHeight || nextY < 0) &&
-            (rect.y + rect.height < window.innerHeight || nextY > 0)
-          ) {
-            wrapperRef.current.style.top = rect.top - nextY + 'px'
-          }
-
-          prevX = windowMouseEvent.clientX
-          prevY = windowMouseEvent.clientY
-        }
-      }
-
-      const handleMouseUp = () => {
-        console.log('mouseup')
-        window.removeEventListener('mousemove', handleMouseMove)
-        window.removeEventListener('mouseup', handleMouseUp)
-      }
-
-      window.addEventListener('mousemove', handleMouseMove)
-      window.addEventListener('mouseup', handleMouseUp)
-    }
-  }
+  const [startMouseY, setStartMouseY] = useState(0)
+  const [startMouseX, setStartMouseX] = useState(0)
+  const [startY, setStartY] = useState(y.get())
+  const [startX, setStartX] = useState(x.get())
+  const [isResize, setIsResize] = useState(false)
+  const [startHeight, setStartHeight] = useState(height.get())
+  const [startWidth, setStartWidth] = useState(width.get())
+  const [activeResizer, setActiveResizer] = useState<string | null>(null)
 
   // Изменение размера окна
-  const handleControlsMouseDown = (resizerMouseEvent: React.MouseEvent<HTMLElement>) => {
-    if (wrapperRef.current && resizerMouseEvent.target) {
-      setResizing(true)
-      if (resizerMouseEvent.target) {
-        const currentElementId = resizerMouseEvent.currentTarget.id
-        let prevX: number = resizerMouseEvent.clientX
-        let prevY: number = resizerMouseEvent.clientY
-
-        const handleMouseMove = (windowMouseEvent: MouseEvent) => {
-          if (wrapperRef.current) {
-            const rect: DOMRect = wrapperRef.current.getBoundingClientRect()
-
-            // Если смещаем верхнюю границу
-            if (currentElementId === E_ResizerPosition.n) {
-              wrapperRef.current.style.height =
-                rect.height + (prevY - windowMouseEvent.clientY) + 'px'
-
-              // Перемещение окна выше
-              if (rect.height > theme.sizes.window.height)
-                wrapperRef.current.style.top = rect.top - (prevY - windowMouseEvent.clientY) + 'px'
-            }
-
-            // Если смещаем правый верхний угол
-            if (currentElementId === E_ResizerPosition.ne) {
-              wrapperRef.current.style.width =
-                rect.width - (prevX - windowMouseEvent.clientX) + 'px'
-              wrapperRef.current.style.height =
-                rect.height + (prevY - windowMouseEvent.clientY) + 'px'
-
-              // Перемещение окна выше
-              if (rect.height > theme.sizes.window.height)
-                wrapperRef.current.style.top = rect.top - (prevY - windowMouseEvent.clientY) + 'px'
-            }
-
-            // Если смещаем правую границу
-            if (currentElementId === E_ResizerPosition.e) {
-              wrapperRef.current.style.width =
-                rect.width - (prevX - windowMouseEvent.clientX) + 'px'
-            }
-
-            // Если смещаем правый нижний угол
-            if (currentElementId === E_ResizerPosition.se) {
-              wrapperRef.current.style.width =
-                rect.width - (prevX - windowMouseEvent.clientX) + 'px'
-              wrapperRef.current.style.height =
-                rect.height - (prevY - windowMouseEvent.clientY) + 'px'
-            }
-
-            // Если смещаем нижнюю границу
-            if (currentElementId === E_ResizerPosition.s) {
-              wrapperRef.current.style.height =
-                rect.height - (prevY - windowMouseEvent.clientY) + 'px'
-            }
-
-            // Если смещаем левый нижний угол
-            if (currentElementId === E_ResizerPosition.sw) {
-              wrapperRef.current.style.width =
-                rect.width + (prevX - windowMouseEvent.clientX) + 'px'
-              wrapperRef.current.style.height =
-                rect.height - (prevY - windowMouseEvent.clientY) + 'px'
-
-              // Перемещаем окно левее
-              if (rect.width > theme.sizes.window.width)
-                wrapperRef.current.style.left =
-                  rect.left - (prevX - windowMouseEvent.clientX) + 'px'
-            }
-
-            // Если смещаем левую границу
-            if (currentElementId === E_ResizerPosition.w) {
-              wrapperRef.current.style.width =
-                rect.width + (prevX - windowMouseEvent.clientX) + 'px'
-
-              // Перемещаем окно левее
-              if (rect.width > theme.sizes.window.width)
-                wrapperRef.current.style.left =
-                  rect.left - (prevX - windowMouseEvent.clientX) + 'px'
-            }
-
-            if (currentElementId === E_ResizerPosition.nw) {
-              wrapperRef.current.style.width =
-                rect.width + (prevX - windowMouseEvent.clientX) + 'px'
-              wrapperRef.current.style.height =
-                rect.height + (prevY - windowMouseEvent.clientY) + 'px'
-
-              // Перемещаем окно выше
-              if (rect.height > theme.sizes.window.height)
-                wrapperRef.current.style.top = rect.top - (prevY - windowMouseEvent.clientY) + 'px'
-
-              // Перемещаем окно левее
-              if (rect.width > theme.sizes.window.width)
-                wrapperRef.current.style.left =
-                  rect.left - (prevX - windowMouseEvent.clientX) + 'px'
-            }
-
-            prevX = windowMouseEvent.clientX
-            prevY = windowMouseEvent.clientY
-          }
-        }
-        const handleMouseUp = () => {
-          setResizing(false)
-          window.removeEventListener('mousemove', handleMouseMove)
-          window.removeEventListener('mouseup', handleMouseUp)
-        }
-
-        window.addEventListener('mousemove', handleMouseMove)
-        window.addEventListener('mouseup', handleMouseUp)
-      }
-    }
+  const handleMouseDown = (e: React.MouseEvent<HTMLElement>, direction: E_ResizerPosition) => {
+    setIsResize(true)
+    setStartHeight(height.get())
+    setStartWidth(width.get())
+    setStartY(y.get())
+    setStartX(x.get())
+    setStartMouseY(e.clientY)
+    setStartMouseX(e.clientX)
+    setActiveResizer(direction)
   }
 
+  const handleMouseMove = useCallback(
+    (e: MouseEvent) => {
+      if (!isResize) return
+      const diffY = e.clientY - startMouseY
+      const diffX = e.clientX - startMouseX
+      const containerWidth = dragConstraints.current.clientWidth
+      const containerHeight = dragConstraints.current.clientHeight
+
+      const getStart = (startSize: number, start: number, diff: number) => {
+        return {
+          size: Math.min(Math.max(startSize - diff, 0), start + startSize),
+          position: Math.max(start + Math.min(diff, startSize), 0),
+        }
+      }
+
+      const getEnd = (startSize: number, start: number, diff: number, containerSize: number) => {
+        return {
+          size: Math.min(startSize + diff, containerSize - start),
+        }
+      }
+
+      if (activeResizer === E_ResizerPosition.n) {
+        const dimensions = getStart(startHeight, startY, diffY)
+        height.set(dimensions.size)
+        y.set(dimensions.position)
+      }
+
+      if (activeResizer === E_ResizerPosition.w) {
+        const dimensions = getStart(startWidth, startX, diffX)
+        width.set(dimensions.size)
+        x.set(dimensions.position)
+      }
+
+      if (activeResizer === E_ResizerPosition.e) {
+        const dimensions = getEnd(startWidth, startX, diffX, containerWidth)
+        width.set(dimensions.size)
+      }
+
+      if (activeResizer === E_ResizerPosition.s) {
+        const dimensions = getEnd(startHeight, startY, diffY, containerHeight)
+        height.set(dimensions.size)
+      }
+    },
+    [
+      activeResizer,
+      dragConstraints,
+      height,
+      isResize,
+      startHeight,
+      startMouseX,
+      startMouseY,
+      startWidth,
+      startX,
+      startY,
+      width,
+      x,
+      y,
+    ],
+  )
+
+  const handleMouseUp = useCallback(
+    (e: MouseEvent) => {
+      setIsResize(false)
+      setStartHeight(height.get())
+      setStartWidth(width.get())
+      setStartY(0)
+      setStartX(0)
+      setStartMouseY(0)
+      setStartMouseX(0)
+      setActiveResizer(null)
+      window.removeEventListener('mousemove', handleMouseMove)
+      window.removeEventListener('mouseup', handleMouseUp)
+    },
+    [handleMouseMove, height, width],
+  )
+
+  useEffect(() => {
+    window.addEventListener('mousemove', handleMouseMove)
+    window.addEventListener('mouseup', handleMouseUp)
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove)
+      window.removeEventListener('mouseup', handleMouseUp)
+    }
+  }, [handleMouseMove, handleMouseUp])
+
   return (
-    <S.Wrapper ref={wrapperRef}>
+    <S.Wrapper
+      ref={wrapperRef}
+      drag
+      dragTransition={{
+        power: 0,
+        min: 0,
+        max: 200,
+        timeConstant: 250,
+      }}
+      dragConstraints={dragConstraints}
+      dragListener={false}
+      dragControls={dragControls}
+      style={{ width, height, x, y }}
+    >
       {Object.values(E_ResizerPosition).map((position) => (
         <S.Resizer
           key={position}
-          onMouseDown={handleControlsMouseDown}
-          id={position}
           position={position}
+          onMouseDown={(e) => handleMouseDown(e, position)}
         />
       ))}
-      <S.Head onMouseDown={handleHeadMouseDown}>
+      <S.Head
+        onPointerDown={(e) => {
+          dragControls.start(e)
+        }}
+      >
         <div>Название</div>
         <div>X</div>
       </S.Head>
