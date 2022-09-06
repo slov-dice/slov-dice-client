@@ -1,14 +1,6 @@
 /* eslint-disable prefer-const */
 import { useDragControls, useMotionValue } from 'framer-motion'
-import {
-  useRef,
-  ReactNode,
-  useState,
-  useEffect,
-  useCallback,
-  RefObject,
-  MutableRefObject,
-} from 'react'
+import { useRef, ReactNode, useState, useEffect, useCallback, MutableRefObject } from 'react'
 
 import * as S from './styles'
 

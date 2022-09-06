@@ -10,6 +10,10 @@ interface I_Header {
 export const Header = styled(motion.header).attrs<I_Header>(({ theme, isTransparent }) =>
   headerAttrs(isTransparent, theme),
 )<I_Header>`
+  position: fixed;
+  z-index: ${({ theme }) => theme.order.header};
+  top: 0;
+
   display: grid;
   grid: 1fr / 1fr 4fr;
   align-items: center;

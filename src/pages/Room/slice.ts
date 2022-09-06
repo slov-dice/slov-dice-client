@@ -5,7 +5,7 @@ interface I_InitialState {
 }
 
 const initialState: I_InitialState = {
-  isOpen: true,
+  isOpen: false,
 }
 
 export const roomPageSlice = createSlice({

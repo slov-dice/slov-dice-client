@@ -66,6 +66,7 @@ export const Header = () => {
             <Control onClick={handleToggleSideMenu} />
             <SideMenu />
           </S.WrapperControl>
+          <Logo />
           <Toolbar />
         </S.Header>
       )}

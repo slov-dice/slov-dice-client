@@ -4,6 +4,8 @@ export const Page = styled.div`
   position: relative;
 
   overflow: hidden;
+
+  height: 100%;
 `
 
 export const Container = styled.div`
