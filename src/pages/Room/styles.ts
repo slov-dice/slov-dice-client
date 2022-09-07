@@ -3,8 +3,6 @@ import styled from 'styled-components'
 export const Page = styled.div`
   position: relative;
 
-  overflow-y: none;
-
-  height: 100%;
+  height: calc(100vh - ${({ theme }) => theme.sizes.header.height}px);
   margin-top: ${({ theme }) => theme.sizes.header.height}px;
 `

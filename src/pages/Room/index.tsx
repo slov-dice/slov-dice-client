@@ -28,8 +28,6 @@ export const Room = () => {
     }
   }, [dispatch])
 
-  console.count()
-
   return (
     <>
       <S.Page ref={pageRef}>

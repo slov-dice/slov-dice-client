@@ -6,8 +6,8 @@ import {
   T_TaskItemActionPayload,
 } from 'features/Header/models'
 import { changeToolbarItemIcon } from 'features/Header/slice'
-import { E_Modals } from 'features/Modals/models'
-import { openModal } from 'features/Modals/slice'
+import { E_Modals } from 'features/ModalManager/models'
+import { openModal } from 'features/ModalManager/slice'
 import { E_Panels } from 'features/SidePanel/models'
 import { closeSidePanel, openSidePanel } from 'features/SidePanel/slice'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'

@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 export const About = styled.div`
   position: relative;
-  z-index: 5;
+  z-index: ${({ theme }) => theme.order.content};
 
   overflow: hidden;
 

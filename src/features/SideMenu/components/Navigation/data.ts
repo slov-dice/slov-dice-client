@@ -4,7 +4,7 @@ import {
   E_TaskItemActionType,
   E_CustomAction,
 } from 'features/Header/models'
-import { E_Modals } from 'features/Modals/models'
+import { E_Modals } from 'features/ModalManager/models'
 import { E_Panels } from 'features/SidePanel/models'
 import { E_Window } from 'features/WindowManager/models'
 import { E_Routes } from 'models/routes'

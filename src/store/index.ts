@@ -17,8 +17,8 @@ import { roomSlice } from './room'
 
 import { authFormSlice } from 'features/AuthForm/slice'
 import { headerSlice } from 'features/Header/slice'
-import { restoreSlice } from 'features/Modals/components/RestorePassword/slice'
-import { modalsSlice } from 'features/Modals/slice'
+import { restoreSlice } from 'features/ModalManager/components/RestorePassword/slice'
+import { modalManagerSlice } from 'features/ModalManager/slice'
 import { sideMenuSlice } from 'features/SideMenu/slice'
 import { chatPanelSlice } from 'features/SidePanel/components/ChatPanel/slice'
 import { usersPanelSlice } from 'features/SidePanel/components/UsersPanel/slice'
@@ -44,10 +44,10 @@ const rootReducer = combineReducers({
 
   // Feature slices
   [authFormSlice.name]: authFormSlice.reducer,
-  [modalsSlice.name]: modalsSlice.reducer,
   [headerSlice.name]: headerSlice.reducer,
   [sideMenuSlice.name]: sideMenuSlice.reducer,
   [sidePanelSlice.name]: sidePanelSlice.reducer,
+  [modalManagerSlice.name]: modalManagerSlice.reducer,
   [windowManagerSlice.name]: windowManagerSlice.reducer,
 
   // Component slices

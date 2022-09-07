@@ -10,8 +10,8 @@ const initialState: I_InitialState = {
   modals: [],
 }
 
-export const modalsSlice = createSlice({
-  name: 'modalsManager',
+export const modalManagerSlice = createSlice({
+  name: 'modalManager',
   initialState,
   reducers: {
     openModal: (state, action: PayloadAction<E_Modals>) => {
@@ -23,4 +23,4 @@ export const modalsSlice = createSlice({
   },
 })
 
-export const { openModal, closeModal } = modalsSlice.actions
+export const { openModal, closeModal } = modalManagerSlice.actions

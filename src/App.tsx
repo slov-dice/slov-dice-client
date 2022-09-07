@@ -1,14 +1,13 @@
 import { useLayoutEffect, useEffect } from 'react'
 
 import { connectAuthenticatedUser } from 'features/AuthForm/utils/dispatchers'
-import { Modal } from 'features/Modals'
+import { ModalManager } from 'features/ModalManager'
 import { SidePanel } from 'features/SidePanel'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { useStoreSelector } from 'hooks/useStoreSelector'
-import { E_Emit } from 'models/socket/lobbyUsers'
 import { AppRoutes } from 'routes'
 import { authAPI } from 'services/auth'
-import { socket } from 'services/socket'
+import { subscribe, unsubscribe } from 'store/room/socket'
 import { GlobalStyles } from 'styles/global'
 import { CustomToast } from 'styles/toastify'
 
@@ -22,11 +21,19 @@ export const App = () => {
     isAuth: state.profile.statuses.isAuth,
   }))
 
-  const [fetchCheck, { isSuccess, isLoading, data }] = authAPI.useCheckMutation()
+  const [fetchCheck, { isSuccess, data }] = authAPI.useCheckMutation()
   authAPI.useCheckTokenQuery(null, {
     pollingInterval: 60_000 * 10,
     skip: !isAuth,
   })
+
+  useEffect(() => {
+    dispatch(subscribe())
+
+    return () => {
+      unsubscribe()
+    }
+  }, [dispatch])
 
   useLayoutEffect(() => {
     fetchCheck()
@@ -40,9 +47,9 @@ export const App = () => {
 
   return (
     <>
-      {!isLoading && <AppRoutes />}
+      <AppRoutes />
       <GlobalStyles />
-      <Modal />
+      <ModalManager />
       <SidePanel />
       <CustomToast />
     </>

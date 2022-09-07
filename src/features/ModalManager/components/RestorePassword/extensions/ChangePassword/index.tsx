@@ -8,7 +8,7 @@ import { emitRestoreChangePassword } from '../../slice'
 
 import { Button } from 'components/Buttons'
 import { FormField } from 'components/InputFields'
-import { closeModal } from 'features/Modals/slice'
+import { closeModal } from 'features/ModalManager/slice'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { useStoreSelector } from 'hooks/useStoreSelector'
 import { t } from 'languages'

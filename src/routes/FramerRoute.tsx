@@ -1,6 +1,5 @@
 import { motion, Variants } from 'framer-motion'
 import { Outlet } from 'react-router-dom'
-import styled from 'styled-components'
 
 const variants: Variants = {
   initial: { opacity: 0 },
@@ -8,14 +7,10 @@ const variants: Variants = {
   exit: { opacity: 0 },
 }
 
-const Framer = styled(motion.div)`
-  height: calc(100vh - ${({ theme }) => theme.sizes.header.height}px);
-`
-
 export const FramerRoute = () => {
   return (
-    <Framer {...variants}>
+    <motion.div {...variants}>
       <Outlet />
-    </Framer>
+    </motion.div>
   )
 }

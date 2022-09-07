@@ -15,10 +15,11 @@ export const windowManagerSlice = createSlice({
   initialState,
   reducers: {
     openWindow: (state, action: PayloadAction<E_Window>) => {
+      if (state.windows.some((window) => window.content === action.payload)) return
       state.windows.push({ content: action.payload })
     },
-    closeWindow: (state) => {
-      state.windows.pop()
+    closeWindow: (state, action: PayloadAction<E_Window>) => {
+      state.windows = state.windows.filter((window) => window.content !== action.payload)
     },
   },
 })

@@ -1,10 +1,19 @@
-/* eslint-disable prefer-const */
 import { useDragControls, useMotionValue } from 'framer-motion'
 import { useRef, ReactNode, useState, useEffect, useCallback, MutableRefObject } from 'react'
 
 import * as S from './styles'
 
-import { theme } from 'styles/theme'
+import { E_Window, I_WindowHead } from '../../models'
+import { closeWindow } from '../../slice'
+
+import CloseIcon from 'assets/icons/close.svg'
+import DividerIcon from 'assets/icons/divider.svg'
+import ExpandIcon from 'assets/icons/expand.svg'
+import SettingsIcon from 'assets/icons/gear.svg'
+import MinusIcon from 'assets/icons/minus.svg'
+import { useStoreDispatch } from 'hooks/useStoreDispatch'
+import { t } from 'languages'
+import { getIcon } from 'utils/helpers/icons'
 
 export enum E_ResizerPosition {
   n = 'n',
@@ -22,10 +31,13 @@ const DEFAULT_SIZE = 420
 interface I_WindowProps {
   children: ReactNode
   dragConstraintsRef: MutableRefObject<HTMLDivElement | null>
+  head: I_WindowHead
+  value: E_Window
 }
 
-export const Window = ({ children, dragConstraintsRef }: I_WindowProps) => {
+export const Window = ({ children, dragConstraintsRef, head, value }: I_WindowProps) => {
   const wrapperRef = useRef<HTMLDivElement>(null)
+  const dispatch = useStoreDispatch()
 
   const height = useMotionValue(DEFAULT_SIZE)
   const width = useMotionValue(DEFAULT_SIZE)
@@ -156,16 +168,14 @@ export const Window = ({ children, dragConstraintsRef }: I_WindowProps) => {
     }
   }, [handleMouseMove, handleMouseUp])
 
+  const handleClose = () => {
+    dispatch(closeWindow(value))
+  }
+
   return (
     <S.Wrapper
       ref={wrapperRef}
       drag
-      dragTransition={{
-        power: 0,
-        min: 0,
-        max: 200,
-        timeConstant: 250,
-      }}
       dragConstraints={{
         top: 0,
         right: (dragConstraintsRef.current?.clientWidth ?? 0) - width.get(),
@@ -183,15 +193,34 @@ export const Window = ({ children, dragConstraintsRef }: I_WindowProps) => {
           onMouseDown={(e) => handleMouseDown(e, position)}
         />
       ))}
-      <S.Head
+      <S.Header
         onPointerDown={(e) => {
           dragControls.start(e)
         }}
       >
-        <div>Название</div>
-        <div>X</div>
-      </S.Head>
-      <S.Content>{children}</S.Content>
+        <S.HeaderLabel>
+          <span>{getIcon(head.icon)}</span>
+          <span>{t(head.title)}</span>
+        </S.HeaderLabel>
+        <S.HeaderActions>
+          <S.HeaderAction>
+            <SettingsIcon />
+          </S.HeaderAction>
+          <S.HeaderAction isDivider>
+            <DividerIcon />
+          </S.HeaderAction>
+          <S.HeaderAction>
+            <MinusIcon />
+          </S.HeaderAction>
+          <S.HeaderAction>
+            <ExpandIcon />
+          </S.HeaderAction>
+          <S.HeaderAction onClick={handleClose}>
+            <CloseIcon />
+          </S.HeaderAction>
+        </S.HeaderActions>
+      </S.Header>
+      <S.Content isResize={isResize}>{children}</S.Content>
     </S.Wrapper>
   )
 }

@@ -26,6 +26,8 @@ export const ToolbarItem = styled(motion.div).attrs<I_ToolbarItemProps>(({ theme
 
   border-radius: 10%;
 
+  fill: ${({ theme }) => theme.colors.white};
+
   ${({ $isDivider }) =>
     $isDivider
       ? css`
@@ -38,8 +40,4 @@ export const ToolbarItem = styled(motion.div).attrs<I_ToolbarItemProps>(({ theme
           padding: 6px;
           cursor: pointer;
         `}
-
-  svg {
-    fill: ${({ theme }) => theme.colors.white};
-  }
 `

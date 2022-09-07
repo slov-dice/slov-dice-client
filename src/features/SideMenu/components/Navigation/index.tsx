@@ -11,8 +11,8 @@ import {
   E_TaskItemVisibility,
   I_TaskItem,
 } from 'features/Header/models'
-import { E_Modals } from 'features/Modals/models'
-import { openModal } from 'features/Modals/slice'
+import { E_Modals } from 'features/ModalManager/models'
+import { openModal } from 'features/ModalManager/slice'
 import { E_Panels } from 'features/SidePanel/models'
 import { openSidePanel } from 'features/SidePanel/slice'
 import { E_Window } from 'features/WindowManager/models'

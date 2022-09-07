@@ -9,9 +9,9 @@ import { useEventListener } from 'hooks/useEventListener'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { useStoreSelector } from 'hooks/useStoreSelector'
 
-export const Modal = () => {
+export const ModalManager = () => {
   const dispatch = useStoreDispatch()
-  const modals = useStoreSelector((state) => state.modalsManager.modals)
+  const modals = useStoreSelector((state) => state.modalManager.modals)
 
   const handleClose = useCallback(() => {
     dispatch(closeModal())

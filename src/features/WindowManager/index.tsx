@@ -1,6 +1,7 @@
+import { AnimatePresence } from 'framer-motion'
 import { MutableRefObject } from 'react'
 
-import { WindowContentComponents } from './components'
+import { windowContentComponents, windowHead } from './components'
 import { Window } from './extensions/Window'
 
 import { useStoreSelector } from 'hooks/useStoreSelector'
@@ -12,19 +13,24 @@ interface I_WindowManagerProps {
 export const WindowManager = ({ dragConstraintsRef }: I_WindowManagerProps) => {
   const windows = useStoreSelector((state) => state.windowManager.windows)
 
-  if (!windows.length) return null
-
   return (
     <>
-      {windows.map((window) => {
-        const WindowContent = WindowContentComponents[window.content]
+      {Boolean(windows.length) &&
+        windows.map((window) => {
+          const windowHeadProps = windowHead[window.content]
+          const WindowContentComponent = windowContentComponents[window.content]
 
-        return (
-          <Window key={window.content} dragConstraintsRef={dragConstraintsRef}>
-            <WindowContent />
-          </Window>
-        )
-      })}
+          return (
+            <Window
+              key={window.content}
+              head={windowHeadProps}
+              value={window.content}
+              dragConstraintsRef={dragConstraintsRef}
+            >
+              <WindowContentComponent />
+            </Window>
+          )
+        })}
     </>
   )
 }

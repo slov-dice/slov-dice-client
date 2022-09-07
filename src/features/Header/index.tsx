@@ -21,13 +21,11 @@ export const Header = () => {
     sidePanel: state.sidePanel.panel,
     isAuthFormOpen: state.authForm.isOpen,
   }))
+  const dispatch = useStoreDispatch()
 
   const { pathname } = useLocation()
 
-  const isGameRoutes = pathname.includes('/lobby') || pathname.includes('/room')
-
-  const dispatch = useStoreDispatch()
-
+  const isGameRoutes = pathname === '/lobby' || pathname.includes('/room')
   const [isTransparent, setTransparent] = useState(true)
 
   const isVisible =
@@ -44,7 +42,8 @@ export const Header = () => {
   }
 
   const handleScroll = () => {
-    if (!isGameRoutes) {
+    console.log('handleScroll')
+    if (isGameRoutes) {
       setTransparent(window.scrollY <= 0)
     }
   }
@@ -56,12 +55,12 @@ export const Header = () => {
     } else {
       setTransparent(true)
     }
-  }, [pathname])
+  }, [isGameRoutes, pathname])
 
   return (
     <AnimatePresence exitBeforeEnter>
       {isVisible && (
-        <S.Header isTransparent={isTransparent} key='header'>
+        <S.Header isTransparent={isTransparent}>
           <S.WrapperControl sideMenuVisible={sideMenuVisible}>
             <Control onClick={handleToggleSideMenu} />
             <SideMenu />

@@ -5,7 +5,7 @@ export const Page = styled.div`
 
   overflow: hidden;
 
-  height: 100%;
+  height: 100vh;
 `
 
 export const Container = styled.div`

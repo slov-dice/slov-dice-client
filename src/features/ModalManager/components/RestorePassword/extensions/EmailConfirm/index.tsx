@@ -9,7 +9,7 @@ import { emitRestoreCheckCode, emitRestoreCheckEmail, setCooldown } from '../../
 
 import { Button } from 'components/Buttons'
 import { FormField } from 'components/InputFields'
-import { closeModal } from 'features/Modals/slice'
+import { closeModal } from 'features/ModalManager/slice'
 import { useCooldown } from 'hooks/useCooldown'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { useStoreSelector } from 'hooks/useStoreSelector'

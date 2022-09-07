@@ -3,7 +3,7 @@ import * as S from './styles'
 
 import CloseIcon from 'assets/icons/close.svg'
 import { Switch, T_SwitchOption } from 'components/Switch'
-import { closeModal } from 'features/Modals/slice'
+import { closeModal } from 'features/ModalManager/slice'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { useStoreSelector } from 'hooks/useStoreSelector'
 import { t } from 'languages'

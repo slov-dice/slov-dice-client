@@ -8,7 +8,6 @@ export enum E_MediaQuery {
 export const theme = {
   colors: {
     // Pallette
-    purple: '#5122BB',
     cobaltBlue: '#211b29',
     primary: '#ff3d6f',
     primary_50: '#ff3d6f' + '80',
@@ -27,8 +26,6 @@ export const theme = {
     black_50: '#212121' + '80',
     black_80: '#212121' + 'CC',
     black_90: '#212121' + 'E6',
-
-    authForm: '#32343d' + 'CC',
 
     // Statuses
     online: '#53BF3B',
@@ -64,14 +61,16 @@ export const theme = {
   order: {
     hero: 10,
     content: 20,
-    header: 50,
-    sideMenuOverlay: 100,
-    sideMenuContent: 110,
-    sideMenuControl: 120,
-    sidePanel: 200,
+    window: 100,
+    sidePanelContent: 400,
+    sidePanelOverlay: 299,
+    header: 300,
     modalsWrap: 500,
-    modalOverlay: 501,
-    modalWindow: 502,
+    modalOverlay: 510,
+    modalWindow: 520,
+    sideMenuOverlay: 1000,
+    sideMenuContent: 1010,
+    sideMenuControl: 1020,
   },
 }
 

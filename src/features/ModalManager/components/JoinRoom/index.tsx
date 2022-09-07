@@ -1,7 +1,7 @@
 import * as S from './styles'
 
 import CloseIcon from 'assets/icons/close.svg'
-import { closeModal } from 'features/Modals/slice'
+import { closeModal } from 'features/ModalManager/slice'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { t } from 'languages'
 import * as C from 'styles/components'
