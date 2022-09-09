@@ -15,13 +15,46 @@ export const windowManagerSlice = createSlice({
   initialState,
   reducers: {
     openWindow: (state, action: PayloadAction<E_Window>) => {
-      if (state.windows.some((window) => window.content === action.payload)) return
-      state.windows.push({ content: action.payload })
+      // Фокусим окно, если его пытаются открыть повторно
+      if (state.windows.some((window) => window.content === action.payload)) {
+        const focusedWindow = state.windows.find((window) => window.content === action.payload)
+        const focusedWindowIndex = state.windows.findIndex(
+          (window) => window.content === action.payload,
+        )
+        state.windows.splice(focusedWindowIndex, 1)
+        if (focusedWindow) state.windows.push({ ...focusedWindow })
+        state.windows = state.windows.map((window) => ({
+          ...window,
+          focused: action.payload === window.content,
+        }))
+        return
+      }
+      state.windows = state.windows.map((window) => ({
+        ...window,
+        focused: action.payload === window.content,
+      }))
+      state.windows.push({ content: action.payload, focused: true })
+    },
+    setFocus: (state, action: PayloadAction<E_Window>) => {
+      const focusedWindow = state.windows.find((window) => window.content === action.payload)
+      const focusedWindowIndex = state.windows.findIndex(
+        (window) => window.content === action.payload,
+      )
+      state.windows.splice(focusedWindowIndex, 1)
+      if (focusedWindow) state.windows.push({ ...focusedWindow })
+      state.windows = state.windows.map((window) => ({
+        ...window,
+        focused: action.payload === window.content,
+      }))
     },
     closeWindow: (state, action: PayloadAction<E_Window>) => {
       state.windows = state.windows.filter((window) => window.content !== action.payload)
+
+      if (state.windows.length > 1) {
+        state.windows[state.windows.length - 1].focused = true
+      }
     },
   },
 })
 
-export const { openWindow, closeWindow } = windowManagerSlice.actions
+export const { openWindow, setFocus, closeWindow } = windowManagerSlice.actions

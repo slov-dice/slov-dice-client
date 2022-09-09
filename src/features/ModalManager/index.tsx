@@ -1,7 +1,7 @@
 import { AnimatePresence } from 'framer-motion'
 import { useCallback } from 'react'
 
-import { ModalComponents } from './components'
+import { modalComponents } from './components'
 import { closeModal } from './slice'
 import * as S from './styles'
 
@@ -33,11 +33,11 @@ export const ModalManager = () => {
         <S.Wrapper>
           <AnimatePresence>
             {modals.map((modal, index) => {
-              const ModalWindow = ModalComponents[modal.window]
+              const Modal = modalComponents[modal.content]
               return (
-                <S.Container key={modal.window} order={index}>
+                <S.Container key={modal.content} order={index}>
                   <S.Overlay onClick={handleClose} />
-                  <ModalWindow />
+                  <Modal />
                 </S.Container>
               )
             })}

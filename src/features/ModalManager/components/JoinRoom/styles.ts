@@ -1,9 +1,9 @@
 import styled from 'styled-components'
 
-import { BaseWindow, BaseWindowClose, BaseWindowContent } from '../styles'
+import { BaseModal, BaseModalClose, BaseModalContent } from '../styles'
 
-export const Window = styled(BaseWindow)``
+export const Modal = styled(BaseModal)``
 
-export const WindowClose = styled(BaseWindowClose)``
+export const ModalClose = styled(BaseModalClose)``
 
-export const WindowContent = styled(BaseWindowContent)``
+export const ModalContent = styled(BaseModalContent)``

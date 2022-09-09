@@ -106,8 +106,8 @@ export const data: I_TaskItem[] = [
     name: 'sideMenu.returnRoom',
     icon: E_Icon.enterRoom,
     visibility: [E_TaskItemVisibility.authenticated, E_TaskItemVisibility.inLobby],
-    actionType: E_TaskItemActionType.modal,
-    actionPayload: E_Modals.joinRoom,
+    actionType: E_TaskItemActionType.none,
+    actionPayload: null,
   },
   {
     name: 'sideMenu.createRoom',

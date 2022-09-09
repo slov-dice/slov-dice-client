@@ -24,21 +24,21 @@ export const TranslatorModal = () => {
   }
 
   return (
-    <S.Window>
-      <S.WindowClose onClick={handleClose}>
+    <S.Modal>
+      <S.ModalClose onClick={handleClose}>
         <CloseIcon />
-      </S.WindowClose>
+      </S.ModalClose>
       <C.Title>{t('modals.translator.title')}</C.Title>
       <C.Divider />
 
-      <S.WindowContent>
+      <S.ModalContent>
         {t('modals.translator.paragraph1')} <br /> {t('modals.translator.paragraph2')}
-      </S.WindowContent>
+      </S.ModalContent>
       <C.Divider decorated />
 
       <Switch value={language} options={switchOptions} onChange={handleSwitchLanguage} />
 
       <C.Divider />
-    </S.Window>
+    </S.Modal>
   )
 }

@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const BaseWindow = styled.div`
+export const BaseModal = styled.div`
   position: relative;
 
   overflow: hidden;
@@ -28,7 +28,7 @@ export const BaseWindow = styled.div`
   }
 `
 
-export const BaseWindowClose = styled.span`
+export const BaseModalClose = styled.span`
   cursor: pointer;
   user-select: none;
 
@@ -47,11 +47,11 @@ export const BaseWindowClose = styled.span`
   }
 `
 
-export const BaseWindowContent = styled.div`
+export const BaseModalContent = styled.div`
   color: ${({ theme }) => theme.colors.white_50};
 `
 
-export const BaseWindowActions = styled.div`
+export const BaseModalActions = styled.div`
   display: flex;
   justify-self: flex-end;
 `

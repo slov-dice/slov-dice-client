@@ -1,13 +1,13 @@
 import { Reorder } from 'framer-motion'
 import styled from 'styled-components'
 
-import { BaseWindow, BaseWindowClose } from '../styles'
+import { BaseModal, BaseModalClose, BaseModalActions } from '../styles'
 
-export const Window = styled(BaseWindow)`
+export const Modal = styled(BaseModal)`
   height: 400px;
 `
 
-export const WindowClose = styled(BaseWindowClose)``
+export const ModalClose = styled(BaseModalClose)``
 
 export const TaskBarConstructor = styled(Reorder.Group)`
   overflow: hidden;
@@ -37,8 +37,6 @@ export const TaskBarConstructorItem = styled(Reorder.Item).attrs(({ theme }) => 
   }
 `
 
-export const WindowActions = styled.div`
-  display: flex;
+export const ModalActions = styled(BaseModalActions)`
   gap: 16px;
-  justify-content: flex-end;
 `

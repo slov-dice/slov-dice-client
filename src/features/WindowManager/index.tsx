@@ -14,7 +14,7 @@ export const WindowManager = ({ dragConstraintsRef }: I_WindowManagerProps) => {
   const windows = useStoreSelector((state) => state.windowManager.windows)
 
   return (
-    <>
+    <AnimatePresence>
       {Boolean(windows.length) &&
         windows.map((window) => {
           const windowHeadProps = windowHead[window.content]
@@ -25,12 +25,13 @@ export const WindowManager = ({ dragConstraintsRef }: I_WindowManagerProps) => {
               key={window.content}
               head={windowHeadProps}
               value={window.content}
+              focused={window.focused}
               dragConstraintsRef={dragConstraintsRef}
             >
               <WindowContentComponent />
             </Window>
           )
         })}
-    </>
+    </AnimatePresence>
   )
 }

@@ -1,9 +1,9 @@
 import styled from 'styled-components'
 
-import { BaseWindow, BaseWindowClose } from '../styles'
+import { BaseModal, BaseModalClose } from '../styles'
 
-export const Window = styled(BaseWindow)`
+export const Modal = styled(BaseModal)`
   min-height: 530px;
 `
 
-export const WindowClose = styled(BaseWindowClose)``
+export const ModalClose = styled(BaseModalClose)``

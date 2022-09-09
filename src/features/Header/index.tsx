@@ -42,7 +42,6 @@ export const Header = () => {
   }
 
   const handleScroll = () => {
-    console.log('handleScroll')
     if (isGameRoutes) {
       setTransparent(window.scrollY <= 0)
     }

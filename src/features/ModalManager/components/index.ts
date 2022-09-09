@@ -9,7 +9,7 @@ import { TranslatorModal } from './Translator'
 
 import { E_Modals } from '../models'
 
-export const ModalComponents: Record<E_Modals, FC> = {
+export const modalComponents: Record<E_Modals, FC> = {
   [E_Modals.translator]: TranslatorModal,
   [E_Modals.settings]: SettingsModal,
   [E_Modals.createRoom]: CreateRoomModal,

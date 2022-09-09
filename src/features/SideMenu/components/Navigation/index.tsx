@@ -75,6 +75,10 @@ export const Navigation = ({ toggleMenu }: NavigationProps) => {
       dispatch(leaveRoom())
       navigate('/lobby')
     }
+
+    if (item.icon === E_Icon.enterRoom) {
+      navigate(`/room/${roomId}`)
+    }
   }
 
   return (

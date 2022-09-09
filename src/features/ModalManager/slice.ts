@@ -15,7 +15,7 @@ export const modalManagerSlice = createSlice({
   initialState,
   reducers: {
     openModal: (state, action: PayloadAction<E_Modals>) => {
-      state.modals.push({ window: action.payload })
+      state.modals.push({ content: action.payload })
     },
     closeModal: (state) => {
       state.modals.pop()

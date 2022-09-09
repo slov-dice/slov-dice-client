@@ -1,14 +1,14 @@
 import styled from 'styled-components'
 
-import { BaseWindow, BaseWindowClose, BaseWindowActions } from '../styles'
+import { BaseModal, BaseModalClose, BaseModalActions } from '../styles'
 
-export const Window = styled(BaseWindow)`
+export const Modal = styled(BaseModal)`
   height: 700px;
 `
 
-export const WindowClose = styled(BaseWindowClose)``
+export const ModalClose = styled(BaseModalClose)``
 
-export const WindowActions = styled(BaseWindowActions)`
+export const ModalActions = styled(BaseModalActions)`
   display: grid;
   grid: 1fr / 1fr 2fr;
   gap: 16px;

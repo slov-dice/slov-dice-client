@@ -1,5 +1,5 @@
 import { AnimatePresence } from 'framer-motion'
-import { Route, Routes, useLocation } from 'react-router-dom'
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom'
 
 import { FramerRoute } from './FramerRoute'
 import { ProtectedRoute } from './ProtectedRoute'
@@ -14,7 +14,7 @@ export const AppRoutes = () => {
   return (
     <>
       <Header />
-      <AnimatePresence exitBeforeEnter>
+      <AnimatePresence mode='wait'>
         <Routes key={location.key} location={location}>
           <Route element={<FramerRoute />}>
             <Route element={<ProtectedRoute />}>
@@ -24,7 +24,7 @@ export const AppRoutes = () => {
             <Route path={E_Routes.room} element={<Pages.Room />} />
             <Route path={E_Routes.verification} element={<Pages.Verification />} />
             <Route path={E_Routes.authCallback} element={<Pages.AuthCallback />} />
-            <Route path='*' element={<Pages.NotFound />} />
+            <Route path='*' element={<Navigate to='/' />} />
           </Route>
         </Routes>
       </AnimatePresence>

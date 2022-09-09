@@ -12,8 +12,6 @@ export const Wrapper = styled(motion.div).attrs(wrapperAttrs)`
   z-index: ${({ theme }) => theme.order.window};
 
   overflow: hidden;
-
-  border: 2px solid ${({ theme }) => theme.colors.white_10};
 `
 
 export const Header = styled.div`
@@ -79,15 +77,28 @@ export const HeaderAction = styled.div<{ isDivider?: boolean }>`
   }
 `
 
-export const Resizer = styled.div<{ position: E_ResizerPosition }>`
+interface I_ResizerProps {
+  position: E_ResizerPosition
+  isFullSize: boolean
+  isMinSize: boolean
+}
+
+export const Resizer = styled.button<I_ResizerProps>`
   position: absolute;
 
   width: 14px;
   height: 14px;
 
+  background-color: ${({ theme }) => theme.colors.white_10};
+  border-color: transparent;
   border-radius: 50%;
 
   ${({ position }) => controllerPosition[position]}
+  ${({ isFullSize, isMinSize }) =>
+    (isFullSize || isMinSize) &&
+    css`
+      cursor: default;
+    `}
 `
 
 const controllerPosition: T_StyledVariants<E_ResizerPosition> = {
@@ -110,6 +121,8 @@ const controllerPosition: T_StyledVariants<E_ResizerPosition> = {
     z-index: 1;
     top: -4px;
     right: -4px;
+
+    background-color: transparent;
   `,
   e: css`
     cursor: e-resize;
@@ -129,6 +142,8 @@ const controllerPosition: T_StyledVariants<E_ResizerPosition> = {
     z-index: 1;
     right: -4px;
     bottom: -4px;
+
+    background-color: transparent;
   `,
   s: css`
     cursor: s-resize;
@@ -149,6 +164,8 @@ const controllerPosition: T_StyledVariants<E_ResizerPosition> = {
     z-index: 1;
     bottom: -4px;
     left: -4px;
+
+    background-color: transparent;
   `,
 
   w: css`
@@ -170,11 +187,13 @@ const controllerPosition: T_StyledVariants<E_ResizerPosition> = {
     z-index: 1;
     top: -4px;
     left: -4px;
+
+    background-color: transparent;
   `,
 }
 
-export const Content = styled.div<{ isResize: boolean }>`
-  user-select: ${({ isResize }) => (isResize ? 'none' : 'auto')};
+export const Content = styled.div<{ isResize: boolean; focused: boolean }>`
+  user-select: ${({ isResize, focused }) => (isResize || !focused ? 'none' : 'auto')};
 
   height: calc(100% - 32px);
   padding: 24px;

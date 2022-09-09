@@ -16,4 +16,5 @@ export interface I_WindowHead {
 
 export interface I_Window {
   content: E_Window
+  focused: boolean
 }

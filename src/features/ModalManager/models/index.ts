@@ -7,5 +7,5 @@ export enum E_Modals {
   restorePassword = 'restorePassword',
 }
 export interface I_Modal {
-  window: E_Modals
+  content: E_Modals
 }
