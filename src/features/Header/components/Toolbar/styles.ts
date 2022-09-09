@@ -11,11 +11,11 @@ export const Toolbar = styled.div`
 `
 
 interface I_ToolbarItemProps {
-  $isDivider: boolean
+  isDivider: boolean
 }
 
-export const ToolbarItem = styled(motion.div).attrs<I_ToolbarItemProps>(({ theme, $isDivider }) =>
-  toolbarItemAttrs(theme, $isDivider),
+export const ToolbarItem = styled(motion.div).attrs<I_ToolbarItemProps>(({ theme, isDivider }) =>
+  toolbarItemAttrs(theme, isDivider),
 )<I_ToolbarItemProps>`
   user-select: none;
 
@@ -28,16 +28,20 @@ export const ToolbarItem = styled(motion.div).attrs<I_ToolbarItemProps>(({ theme
 
   fill: ${({ theme }) => theme.colors.white};
 
-  ${({ $isDivider }) =>
-    $isDivider
+  ${({ isDivider }) =>
+    isDivider
       ? css`
-          width: 12px;
-          padding: 4px;
           cursor: default;
+
+          width: 12px;
+
+          padding: 4px;
         `
       : css`
-          width: 40px;
-          padding: 6px;
           cursor: pointer;
+
+          width: 40px;
+
+          padding: 6px;
         `}
 `

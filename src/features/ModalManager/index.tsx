@@ -28,7 +28,7 @@ export const ModalManager = () => {
   useEventListener('keydown', handleEsc)
 
   return (
-    <AnimatePresence exitBeforeEnter>
+    <AnimatePresence mode='wait'>
       {Boolean(modals.length) && (
         <S.Wrapper>
           <AnimatePresence>

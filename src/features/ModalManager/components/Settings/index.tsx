@@ -29,10 +29,10 @@ export const SettingsModal = () => {
   }
 
   return (
-    <S.Window>
-      <S.WindowClose onClick={handleClose}>
+    <S.Modal>
+      <S.ModalClose onClick={handleClose}>
         <CloseIcon />
-      </S.WindowClose>
+      </S.ModalClose>
       <C.Title>{t('modals.settings.title')}</C.Title>
       <C.Divider />
       Options
@@ -46,7 +46,7 @@ export const SettingsModal = () => {
       </S.TaskBarConstructor>
       <C.Divider />
       <Button onClick={handleSaveItems}>Save</Button>
-    </S.Window>
+    </S.Modal>
   )
 }
 

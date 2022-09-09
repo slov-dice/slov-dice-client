@@ -57,7 +57,7 @@ export const Header = () => {
   }, [isGameRoutes, pathname])
 
   return (
-    <AnimatePresence exitBeforeEnter>
+    <AnimatePresence mode='wait'>
       {isVisible && (
         <S.Header isTransparent={isTransparent}>
           <S.WrapperControl sideMenuVisible={sideMenuVisible}>

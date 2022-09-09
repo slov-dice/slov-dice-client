@@ -54,6 +54,8 @@ export const theme = {
 
   // in ms
   durations: {
+    ms50: 50,
+    ms100: 100,
     ms300: 300,
   },
 

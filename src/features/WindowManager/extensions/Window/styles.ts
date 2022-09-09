@@ -3,15 +3,26 @@ import styled, { css } from 'styled-components'
 
 import { E_ResizerPosition } from '.'
 
-import { wrapperAttrs } from './motion'
+import { headerActionAttrs, wrapperAttrs } from './motion'
 
 import { T_StyledVariants } from 'models/styled'
 
-export const Wrapper = styled(motion.div).attrs(wrapperAttrs)`
+interface I_WrapperProps {
+  isResize: boolean
+  transitionChanger: boolean
+}
+
+export const Wrapper = styled(motion.div).attrs(wrapperAttrs)<I_WrapperProps>`
   position: absolute;
   z-index: ${({ theme }) => theme.order.window};
 
   overflow: hidden;
+
+  transition: ${({ isResize, theme, transitionChanger }) => css`
+    ${isResize ? 0 : theme.durations.ms300}ms width ease,
+    ${isResize ? 0 : theme.durations.ms300}ms height ease
+    ${transitionChanger && `, ${theme.durations.ms300}ms transform ease`}
+  `};
 `
 
 export const Header = styled.div`
@@ -44,13 +55,22 @@ export const HeaderLabel = styled.div`
 
 export const HeaderActions = styled.div`
   display: flex;
+  gap: 4px;
+  padding: 4px;
 `
 
-export const HeaderAction = styled.div<{ isDivider?: boolean }>`
+interface I_HeaderActionProps {
+  isDivider?: boolean
+}
+
+export const HeaderAction = styled(motion.div).attrs<I_HeaderActionProps>(({ theme, isDivider }) =>
+  headerActionAttrs(theme, Boolean(isDivider)),
+)<I_HeaderActionProps>`
   display: flex;
   justify-content: center;
+  border-radius: 15%;
 
-  height: 100%;
+  height: 28px;
 
   fill: ${({ theme }) => theme.colors.white};
 
@@ -66,9 +86,9 @@ export const HeaderAction = styled.div<{ isDivider?: boolean }>`
       : css`
           cursor: pointer;
 
-          padding: 6px 4px;
+          padding: 0 4px;
 
-          width: 32px;
+          width: 28px;
         `}
 
   & > svg {

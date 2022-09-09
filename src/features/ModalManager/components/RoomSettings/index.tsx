@@ -16,19 +16,19 @@ export const RoomSettingsModal = () => {
   }
 
   return (
-    <S.Window>
-      <S.WindowClose onClick={handleClose}>
+    <S.Modal>
+      <S.ModalClose onClick={handleClose}>
         <CloseIcon />
-      </S.WindowClose>
+      </S.ModalClose>
       <C.Title>{t('modals.roomSettings.title')}</C.Title>
       <C.Divider />
 
-      <S.WindowContent>
+      <S.ModalContent>
         <pre>{JSON.stringify(room, null, 2)}</pre>
-      </S.WindowContent>
+      </S.ModalContent>
       <C.Divider decorated />
 
       <C.Divider />
-    </S.Window>
+    </S.Modal>
   )
 }

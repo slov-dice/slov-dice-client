@@ -68,10 +68,10 @@ export const CreateRoomModal = () => {
   }
 
   return (
-    <S.Window>
-      <S.WindowClose onClick={handleClose}>
+    <S.Modal>
+      <S.ModalClose onClick={handleClose}>
         <CloseIcon />
-      </S.WindowClose>
+      </S.ModalClose>
       <C.Title>{t('modals.createRoom.title')}</C.Title>
       <C.Divider />
 
@@ -92,7 +92,7 @@ export const CreateRoomModal = () => {
       <C.Divider />
       <Switch value={selectedTypeOption.value} onChange={handleSwitchType} options={typeOptions} />
       <C.Divider />
-      <AnimatePresence exitBeforeEnter>
+      <AnimatePresence mode='wait'>
         {selectedTypeOption === typeOptions[1] && (
           <motion.div
             initial={{ x: '-100%' }}
@@ -109,12 +109,12 @@ export const CreateRoomModal = () => {
           </motion.div>
         )}
       </AnimatePresence>
-      <S.WindowActions>
+      <S.ModalActions>
         <Button onClick={handleClose} mod={Button.mod.primary}>
           CANCEL
         </Button>
         <Button onClick={handleCreateRoom}>CREATE</Button>
-      </S.WindowActions>
-    </S.Window>
+      </S.ModalActions>
+    </S.Modal>
   )
 }

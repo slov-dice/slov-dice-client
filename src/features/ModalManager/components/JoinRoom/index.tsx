@@ -14,17 +14,17 @@ export const JoinRoomModal = () => {
   }
 
   return (
-    <S.Window>
-      <S.WindowClose onClick={handleClose}>
+    <S.Modal>
+      <S.ModalClose onClick={handleClose}>
         <CloseIcon />
-      </S.WindowClose>
+      </S.ModalClose>
       <C.Title>{t('modals.joinRoom.title')}</C.Title>
       <C.Divider />
 
-      <S.WindowContent>test</S.WindowContent>
+      <S.ModalContent>test</S.ModalContent>
       <C.Divider decorated />
 
       <C.Divider />
-    </S.Window>
+    </S.Modal>
   )
 }

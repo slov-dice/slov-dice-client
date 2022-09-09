@@ -1,4 +1,4 @@
-import { motion, AnimatePresence } from 'framer-motion'
+import { AnimatePresence } from 'framer-motion'
 
 import * as S from './styles'
 
@@ -17,7 +17,7 @@ export const LanguageSwitcher = () => {
   }
 
   return (
-    <AnimatePresence exitBeforeEnter initial={false}>
+    <AnimatePresence mode='wait' initial={false}>
       <S.Wrapper onClick={handleSwitchLanguage}>
         <S.Label key={language}>{language}</S.Label>
       </S.Wrapper>

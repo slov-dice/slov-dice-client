@@ -70,7 +70,7 @@ interface I_ToolbarItemProps {
 }
 
 const ToolbarItem = ({ icon, onClick }: I_ToolbarItemProps) => (
-  <S.ToolbarItem $isDivider={icon === E_Icon.divider} onClick={onClick}>
+  <S.ToolbarItem isDivider={icon === E_Icon.divider} onClick={onClick}>
     {getIcon(icon)}
   </S.ToolbarItem>
 )

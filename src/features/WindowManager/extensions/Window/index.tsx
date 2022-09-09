@@ -54,6 +54,7 @@ export const Window = ({ children, dragConstraintsRef, head, value, focused }: I
   const width = useMotionValue(DEFAULT_SIZE)
   const y = useMotionValue(0)
   const x = useMotionValue(0)
+
   const prevWindowStateFullSize = useMotionValue({
     width: width.get(),
     height: height.get(),
@@ -75,12 +76,15 @@ export const Window = ({ children, dragConstraintsRef, head, value, focused }: I
   const [startMouseX, setStartMouseX] = useState(0)
   const [startY, setStartY] = useState(y.get())
   const [startX, setStartX] = useState(x.get())
-  const [isResize, setIsResize] = useState(false)
   const [startHeight, setStartHeight] = useState(height.get())
   const [startWidth, setStartWidth] = useState(width.get())
   const [activeResizer, setActiveResizer] = useState<string | null>(null)
+
+  const [isResize, setIsResize] = useState(false)
   const [isFullSize, setFullSize] = useState(false)
   const [isMinSize, setMinSize] = useState(false)
+
+  const [transitionChanger, setTransitionChanger] = useState(false)
 
   // Изменение размера окна
   const handleMouseDown = (e: MouseEvent<HTMLElement>, direction: E_ResizerPosition) => {
@@ -220,7 +224,6 @@ export const Window = ({ children, dragConstraintsRef, head, value, focused }: I
       x.set(0)
       dispatch(setFocus(value))
       setFullSize(true)
-      setMinSize(false)
     }
   }
 
@@ -229,14 +232,17 @@ export const Window = ({ children, dragConstraintsRef, head, value, focused }: I
       height.set(prevWindowStateMinSize.get().height)
       width.set(prevWindowStateMinSize.get().width)
       setMinSize(false)
+      setFullSize(false)
     } else {
-      prevWindowStateMinSize.set({
-        width: width.get(),
-        height: height.get(),
-        y: y.get(),
-        x: x.get(),
-      })
-      height.set(32)
+      if (!isFullSize) {
+        prevWindowStateMinSize.set({
+          width: width.get(),
+          height: height.get(),
+          y: y.get(),
+          x: x.get(),
+        })
+      }
+      height.set(36)
       width.set(420)
       setMinSize(true)
       setFullSize(false)
@@ -245,6 +251,14 @@ export const Window = ({ children, dragConstraintsRef, head, value, focused }: I
 
   const handleStopPropagation = (e: MouseEvent<HTMLDivElement>) => {
     e.stopPropagation()
+  }
+
+  const handleTransitionChanger = (e: MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation()
+    setTransitionChanger(true)
+    setTimeout(() => {
+      setTransitionChanger(false)
+    }, 300)
   }
 
   return (
@@ -259,6 +273,8 @@ export const Window = ({ children, dragConstraintsRef, head, value, focused }: I
       }}
       dragListener={false}
       dragControls={dragControls}
+      isResize={isResize}
+      transitionChanger={transitionChanger}
       style={{ width, height, x, y }}
       onMouseDown={handleFocus}
     >
@@ -288,10 +304,10 @@ export const Window = ({ children, dragConstraintsRef, head, value, focused }: I
           <S.HeaderAction isDivider>
             <DividerIcon />
           </S.HeaderAction>
-          <S.HeaderAction onClick={toggleMinSize} onMouseDown={handleStopPropagation}>
+          <S.HeaderAction onClick={toggleMinSize} onMouseDown={handleTransitionChanger}>
             {isMinSize ? <PlusIcon /> : <MinusIcon />}
           </S.HeaderAction>
-          <S.HeaderAction onClick={toggleFullSize} onMouseDown={handleStopPropagation}>
+          <S.HeaderAction onClick={toggleFullSize} onMouseDown={handleTransitionChanger}>
             {isFullSize ? <CompressIcon /> : <ExpandIcon />}
           </S.HeaderAction>
           <S.HeaderAction onClick={handleClose} onMouseDown={handleStopPropagation}>

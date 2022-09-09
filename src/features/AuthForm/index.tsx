@@ -48,14 +48,14 @@ export const AuthForm = () => {
       <S.TopSection>
         <div>
           <div>
-            <AnimatePresence exitBeforeEnter>
+            <AnimatePresence mode='wait'>
               {AuthArrow[authFormContent] && (
                 <BackButton onClick={handleBackButton}>
                   <BackIcon />
                 </BackButton>
               )}
             </AnimatePresence>
-            <AnimatePresence exitBeforeEnter>
+            <AnimatePresence mode='wait'>
               <C.Title>{t(AuthTitle[authFormContent])}</C.Title>
             </AnimatePresence>
             <C.Divider h={48} />

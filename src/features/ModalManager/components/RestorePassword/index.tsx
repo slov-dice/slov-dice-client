@@ -39,22 +39,22 @@ export const ResetPasswordModal = () => {
   }, [dispatch])
 
   return (
-    <S.Window>
-      <AnimatePresence exitBeforeEnter>
+    <S.Modal>
+      <AnimatePresence mode='wait'>
         {content === E_ModalContent.changePassword && (
           <BackButton onClick={handleBackButton}>
             <BackIcon />
           </BackButton>
         )}
       </AnimatePresence>
-      <S.WindowClose onClick={handleClose}>
+      <S.ModalClose onClick={handleClose}>
         <CloseIcon />
-      </S.WindowClose>
+      </S.ModalClose>
       <C.Title onClick={() => dispatch(setRestoreModalContent(E_ModalContent.changePassword))}>
         {t('modals.restorePassword.title')}
       </C.Title>
       <C.Divider />
       {content === E_ModalContent.emailConfirm ? <EmailConfirm /> : <ChangePassword />}
-    </S.Window>
+    </S.Modal>
   )
 }
