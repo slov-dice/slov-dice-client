@@ -23,7 +23,7 @@ export const WindowManager = ({ dragConstraintsRef }: I_WindowManagerProps) => {
           return (
             <Window
               key={window.content}
-              head={windowHeadProps}
+              header={windowHeadProps}
               value={window.content}
               focused={window.focused}
               dragConstraintsRef={dragConstraintsRef}

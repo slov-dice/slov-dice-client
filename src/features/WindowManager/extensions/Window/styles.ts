@@ -1,15 +1,16 @@
 import { motion } from 'framer-motion'
 import styled, { css } from 'styled-components'
 
-import { E_ResizerPosition } from '.'
+import { controlAttrs, wrapperAttrs } from './motion'
 
-import { headerActionAttrs, wrapperAttrs } from './motion'
+import { E_ResizerPosition } from '../../models/window'
 
 import { T_StyledVariants } from 'models/styled'
 
 interface I_WrapperProps {
   isResize: boolean
-  transitionChanger: boolean
+  transformTransitionChanger: boolean
+  sizeTransitionChanger: boolean
 }
 
 export const Wrapper = styled(motion.div).attrs(wrapperAttrs)<I_WrapperProps>`
@@ -18,10 +19,10 @@ export const Wrapper = styled(motion.div).attrs(wrapperAttrs)<I_WrapperProps>`
 
   overflow: hidden;
 
-  transition: ${({ isResize, theme, transitionChanger }) => css`
-    ${isResize ? 0 : theme.durations.ms300}ms width ease,
-    ${isResize ? 0 : theme.durations.ms300}ms height ease
-    ${transitionChanger && `, ${theme.durations.ms300}ms transform ease`}
+  transition: ${({ isResize, theme, transformTransitionChanger, sizeTransitionChanger }) => css`
+    ${isResize || sizeTransitionChanger ? 0 : theme.durations.ms300}ms width ease,
+    ${isResize || sizeTransitionChanger ? 0 : theme.durations.ms300}ms height ease
+    ${transformTransitionChanger && `, ${theme.durations.ms300}ms transform ease`}
   `};
 `
 
@@ -31,7 +32,7 @@ export const Header = styled.div`
   display: flex;
   justify-content: space-between;
 
-  height: 34px;
+  height: ${({ theme }) => theme.sizes.windowHeader.height}px;
 
   background: ${({ theme }) => theme.colors.black_50};
 `
@@ -53,19 +54,19 @@ export const HeaderLabel = styled.div`
   }
 `
 
-export const HeaderActions = styled.div`
+export const HeaderControls = styled.div`
   display: flex;
   gap: 4px;
   padding: 4px;
 `
 
-interface I_HeaderActionProps {
+interface I_ControlProps {
   isDivider?: boolean
 }
 
-export const HeaderAction = styled(motion.div).attrs<I_HeaderActionProps>(({ theme, isDivider }) =>
-  headerActionAttrs(theme, Boolean(isDivider)),
-)<I_HeaderActionProps>`
+export const Control = styled(motion.div).attrs<I_ControlProps>(({ theme, isDivider }) =>
+  controlAttrs(theme, Boolean(isDivider)),
+)<I_ControlProps>`
   display: flex;
   justify-content: center;
   border-radius: 15%;
@@ -129,7 +130,7 @@ const controllerPosition: T_StyledVariants<E_ResizerPosition> = {
     left: -2px;
 
     width: 100%;
-    height: 5px;
+    height: 6px;
 
     opacity: 0.5;
     border-radius: 0;
@@ -150,7 +151,7 @@ const controllerPosition: T_StyledVariants<E_ResizerPosition> = {
     top: -2px;
     right: -2px;
 
-    width: 5px;
+    width: 6px;
     height: 100%;
 
     opacity: 0.5;
@@ -172,7 +173,7 @@ const controllerPosition: T_StyledVariants<E_ResizerPosition> = {
     left: -2px;
 
     width: 100%;
-    height: 5px;
+    height: 6px;
 
     opacity: 0.5;
     border-radius: 0;
@@ -194,7 +195,7 @@ const controllerPosition: T_StyledVariants<E_ResizerPosition> = {
     top: -2px;
     left: -2px;
 
-    width: 5px;
+    width: 6px;
     height: 100%;
 
     opacity: 0.5;

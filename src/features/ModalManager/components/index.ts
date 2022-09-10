@@ -1,6 +1,8 @@
 import { FC } from 'react'
 
 import { CreateRoomModal } from './CreateRoom'
+import { GameCharactersModal } from './GameCharacters'
+import { GameInventoryModal } from './GameInventory'
 import { JoinRoomModal } from './JoinRoom'
 import { ResetPasswordModal } from './RestorePassword'
 import { RoomSettingsModal } from './RoomSettings'
@@ -16,4 +18,6 @@ export const modalComponents: Record<E_Modals, FC> = {
   [E_Modals.joinRoom]: JoinRoomModal,
   [E_Modals.roomSettings]: RoomSettingsModal,
   [E_Modals.restorePassword]: ResetPasswordModal,
+  [E_Modals.gameInventory]: GameInventoryModal,
+  [E_Modals.gameCharacters]: GameCharactersModal,
 }

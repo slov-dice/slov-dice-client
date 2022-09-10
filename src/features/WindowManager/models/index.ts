@@ -1,3 +1,4 @@
+import { E_Modals } from 'features/ModalManager/models'
 import { E_Icon } from 'utils/helpers/icons'
 
 export enum E_Window {
@@ -9,9 +10,10 @@ export enum E_Window {
   textEditor = 'textEditor',
 }
 
-export interface I_WindowHead {
+export interface I_WindowHeader {
   title: string
   icon: E_Icon
+  settings: E_Modals | null
 }
 
 export interface I_Window {

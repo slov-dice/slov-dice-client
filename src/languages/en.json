@@ -64,6 +64,12 @@
         "next": "Next",
         "set": "Update"
       }
+    },
+    "gameInventory": {
+      "title": "Inventory settings"
+    },
+    "gameCharacters": {
+      "title": "Characters settings"
     }
   },
   "auth": {

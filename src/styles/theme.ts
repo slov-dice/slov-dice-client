@@ -7,7 +7,6 @@ export enum E_MediaQuery {
 
 export const theme = {
   colors: {
-    // Pallette
     cobaltBlue: '#211b29',
     primary: '#ff3d6f',
     primary_50: '#ff3d6f' + '80',
@@ -26,11 +25,6 @@ export const theme = {
     black_50: '#212121' + '80',
     black_80: '#212121' + 'CC',
     black_90: '#212121' + 'E6',
-
-    // Statuses
-    online: '#53BF3B',
-    inRoom: '#573BBF',
-    offline: '#7F7676',
   },
 
   // Source: https://getbootstrap.com/docs/4.0/layout/grid/
@@ -49,7 +43,8 @@ export const theme = {
     verificationForm: { width: 520, height: 460 },
     authCallbackForm: { width: 520, height: 460 },
     sidePanel: { width: 320 },
-    window: { width: 420, height: 420 },
+    window: 420,
+    windowHeader: { height: 36 },
   },
 
   // in ms

@@ -13,7 +13,7 @@ export const wrapperAttrs = (): HTMLMotionProps<'div'> => ({
   },
 })
 
-export const headerActionAttrs = (theme: DefaultTheme, isDivider: boolean) => ({
+export const controlAttrs = (theme: DefaultTheme, isDivider: boolean) => ({
   whileHover: isDivider ? {} : { backgroundColor: theme.colors.white_30 },
   whileTap: isDivider ? {} : { scale: 0.95 },
 })
