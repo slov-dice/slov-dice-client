@@ -1,5 +1,5 @@
 import { MotionValue, useMotionValue } from 'framer-motion'
-import { useState, MouseEvent, useCallback, Dispatch, SetStateAction } from 'react'
+import { useState, MouseEvent, Dispatch, SetStateAction } from 'react'
 
 import { E_Modal } from 'features/ModalManager/models'
 import { openModal } from 'features/ModalManager/slice'
