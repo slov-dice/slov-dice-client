@@ -1,4 +1,4 @@
-export enum E_Modals {
+export enum E_Modal {
   translator = 'translator',
   settings = 'settings',
   createRoom = 'createRoom',
@@ -9,5 +9,5 @@ export enum E_Modals {
   gameCharacters = 'gameCharacters',
 }
 export interface I_Modal {
-  content: E_Modals
+  content: E_Modal
 }

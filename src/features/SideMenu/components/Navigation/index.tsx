@@ -11,7 +11,7 @@ import {
   E_TaskItemVisibility,
   I_TaskItem,
 } from 'features/Header/models'
-import { E_Modals } from 'features/ModalManager/models'
+import { E_Modal } from 'features/ModalManager/models'
 import { openModal } from 'features/ModalManager/slice'
 import { E_Panels } from 'features/SidePanel/models'
 import { openSidePanel } from 'features/SidePanel/slice'
@@ -59,7 +59,7 @@ export const Navigation = ({ toggleMenu }: NavigationProps) => {
     }
 
     if (item.actionType === E_TaskItemActionType.modal) {
-      dispatch(openModal(item.actionPayload as E_Modals))
+      dispatch(openModal(item.actionPayload as E_Modal))
     }
 
     if (item.actionType === E_TaskItemActionType.window) {

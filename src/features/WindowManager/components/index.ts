@@ -9,7 +9,7 @@ import { TextEditorContent } from './TextEditor'
 
 import { E_Window, I_WindowHeader } from '../models'
 
-import { E_Modals } from 'features/ModalManager/models'
+import { E_Modal } from 'features/ModalManager/models'
 import { E_Icon } from 'utils/helpers/icons'
 
 export const windowHead: Record<E_Window, I_WindowHeader> = {
@@ -21,12 +21,12 @@ export const windowHead: Record<E_Window, I_WindowHeader> = {
   [E_Window.characters]: {
     title: 'sideMenu.window.characters',
     icon: E_Icon.fileUser,
-    settings: E_Modals.gameCharacters,
+    settings: E_Modal.gameCharacters,
   },
   [E_Window.inventory]: {
     title: 'sideMenu.window.inventory',
     icon: E_Icon.backpack,
-    settings: E_Modals.gameInventory,
+    settings: E_Modal.gameInventory,
   },
   [E_Window.market]: { title: 'sideMenu.window.market', icon: E_Icon.store, settings: null },
   [E_Window.player]: { title: 'sideMenu.window.player', icon: E_Icon.circlePlay, settings: null },

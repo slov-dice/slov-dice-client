@@ -20,8 +20,12 @@ export const Wrapper = styled(motion.div).attrs(wrapperAttrs)<I_WrapperProps>`
   overflow: hidden;
 
   transition: ${({ isResize, theme, transformTransitionChanger, sizeTransitionChanger }) => css`
-    ${isResize || sizeTransitionChanger ? 0 : theme.durations.ms300}ms width ease,
-    ${isResize || sizeTransitionChanger ? 0 : theme.durations.ms300}ms height ease
+    ${isResize || (sizeTransitionChanger && !transformTransitionChanger)
+      ? 0
+      : theme.durations.ms300}ms width ease,
+    ${isResize || (sizeTransitionChanger && !transformTransitionChanger)
+      ? 0
+      : theme.durations.ms300}ms height ease
     ${transformTransitionChanger && `, ${theme.durations.ms300}ms transform ease`}
   `};
 `

@@ -2,12 +2,13 @@ import { useDragControls, useMotionValue } from 'framer-motion'
 import { useRef, ReactNode, useState, MutableRefObject, MouseEvent } from 'react'
 import { useTheme } from 'styled-components'
 
+import { useControls } from './hooks/useControls'
 import { useResize } from './hooks/useResize'
 import * as S from './styles'
 
 import { E_Window, I_WindowHeader } from '../../models'
 import { E_ResizerPosition } from '../../models/window'
-import { closeWindow, setFocus } from '../../slice'
+import { setFocus } from '../../slice'
 
 import CloseIcon from 'assets/icons/close.svg'
 import CompressIcon from 'assets/icons/compress.svg'
@@ -16,7 +17,6 @@ import ExpandIcon from 'assets/icons/expand.svg'
 import SettingsIcon from 'assets/icons/gear.svg'
 import MinusIcon from 'assets/icons/minus.svg'
 import PlusIcon from 'assets/icons/plus.svg'
-import { openModal } from 'features/ModalManager/slice'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { t } from 'languages'
 import { getIcon } from 'utils/helpers/icons'
@@ -25,11 +25,17 @@ interface I_WindowProps {
   children: ReactNode
   dragConstraintsRef: MutableRefObject<HTMLDivElement | null>
   header: I_WindowHeader
-  value: E_Window
+  content: E_Window
   focused: boolean
 }
 
-export const Window = ({ children, dragConstraintsRef, header, value, focused }: I_WindowProps) => {
+export const Window = ({
+  children,
+  dragConstraintsRef,
+  header,
+  content,
+  focused,
+}: I_WindowProps) => {
   const wrapperRef = useRef<HTMLDivElement>(null)
   const dispatch = useStoreDispatch()
   const theme = useTheme()
@@ -47,25 +53,6 @@ export const Window = ({ children, dragConstraintsRef, header, value, focused }:
   const y = useMotionValue(0)
   const x = useMotionValue(0)
 
-  // Предыдущее состояние окна до изменения на полноэкранный режим
-  const prevWindowFullSize = useMotionValue({
-    height: height.get(),
-    width: width.get(),
-    y: y.get(),
-    x: x.get(),
-  })
-
-  // Предыдущее состояние окна до изменения на компактный режим
-  const prevWindowMinSize = useMotionValue({
-    height: height.get(),
-    width: width.get(),
-    y: y.get(),
-    x: x.get(),
-  })
-
-  const [isFullSize, setFullSize] = useState(false)
-  const [isMinSize, setMinSize] = useState(false)
-
   // Флаги для активации css transitions
   const [transformTransitionChanger, setTransformTransitionChanger] = useState(false)
   const [sizeTransitionChanger, setSizeTransitionChanger] = useState(false)
@@ -82,76 +69,32 @@ export const Window = ({ children, dragConstraintsRef, header, value, focused }:
     setSizeTransitionChanger,
   })
 
-  console.log({ isResize, sizeTransitionChanger })
-
-  const handleClose = () => {
-    dispatch(closeWindow(value))
-  }
+  const {
+    isFullSize,
+    isMinSize,
+    handleClose,
+    toggleFullSize,
+    toggleMinSize,
+    handleStopPropagation,
+    handleOpenSettings,
+    handleTransformTransitionChanger,
+  } = useControls({
+    height,
+    width,
+    y,
+    x,
+    containerHeight,
+    containerWidth,
+    defaultWindowSize,
+    defaultWindowHeaderHeight,
+    content,
+    transitionDuration: theme.durations.ms300,
+    modal: header.settings,
+    setTransformTransitionChanger,
+  })
 
   const handleFocus = () => {
-    dispatch(setFocus(value))
-  }
-
-  const toggleFullSize = () => {
-    if (isFullSize) {
-      height.set(prevWindowFullSize.get().height)
-      width.set(prevWindowFullSize.get().width)
-      y.set(prevWindowFullSize.get().y)
-      x.set(prevWindowFullSize.get().x)
-      setFullSize(false)
-    } else {
-      prevWindowFullSize.set({
-        width: width.get(),
-        height: height.get(),
-        y: y.get(),
-        x: x.get(),
-      })
-      height.set(containerHeight)
-      width.set(containerWidth)
-      y.set(0)
-      x.set(0)
-      dispatch(setFocus(value))
-      setFullSize(true)
-    }
-  }
-
-  const toggleMinSize = () => {
-    if (isMinSize) {
-      height.set(prevWindowMinSize.get().height)
-      width.set(prevWindowMinSize.get().width)
-      setMinSize(false)
-      setFullSize(false)
-    } else {
-      if (!isFullSize) {
-        prevWindowMinSize.set({
-          width: width.get(),
-          height: height.get(),
-          y: y.get(),
-          x: x.get(),
-        })
-      }
-      height.set(defaultWindowHeaderHeight)
-      width.set(defaultWindowSize)
-      setMinSize(true)
-      setFullSize(false)
-    }
-  }
-
-  const handleStopPropagation = (e: MouseEvent<HTMLDivElement>) => {
-    e.stopPropagation()
-  }
-
-  const handleTransformTransitionChanger = (e: MouseEvent<HTMLDivElement>) => {
-    e.stopPropagation()
-    setTransformTransitionChanger(true)
-    setTimeout(() => {
-      setTransformTransitionChanger(false)
-    }, theme.durations.ms300)
-  }
-
-  const handleOpenSettings = (e: MouseEvent<HTMLDivElement>) => {
-    e.stopPropagation()
-    if (header.settings) dispatch(openModal(header.settings))
+    dispatch(setFocus(content))
   }
 
   return (

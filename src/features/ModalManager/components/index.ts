@@ -9,15 +9,15 @@ import { RoomSettingsModal } from './RoomSettings'
 import { SettingsModal } from './Settings'
 import { TranslatorModal } from './Translator'
 
-import { E_Modals } from '../models'
+import { E_Modal } from '../models'
 
-export const modalComponents: Record<E_Modals, FC> = {
-  [E_Modals.translator]: TranslatorModal,
-  [E_Modals.settings]: SettingsModal,
-  [E_Modals.createRoom]: CreateRoomModal,
-  [E_Modals.joinRoom]: JoinRoomModal,
-  [E_Modals.roomSettings]: RoomSettingsModal,
-  [E_Modals.restorePassword]: ResetPasswordModal,
-  [E_Modals.gameInventory]: GameInventoryModal,
-  [E_Modals.gameCharacters]: GameCharactersModal,
+export const modalComponents: Record<E_Modal, FC> = {
+  [E_Modal.translator]: TranslatorModal,
+  [E_Modal.settings]: SettingsModal,
+  [E_Modal.createRoom]: CreateRoomModal,
+  [E_Modal.joinRoom]: JoinRoomModal,
+  [E_Modal.roomSettings]: RoomSettingsModal,
+  [E_Modal.restorePassword]: ResetPasswordModal,
+  [E_Modal.gameInventory]: GameInventoryModal,
+  [E_Modal.gameCharacters]: GameCharactersModal,
 }

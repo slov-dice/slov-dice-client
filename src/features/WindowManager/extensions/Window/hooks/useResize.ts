@@ -60,9 +60,10 @@ export const useResize = ({
 
   const handleMouseMove = useCallback(
     (e: globalThis.MouseEvent) => {
-      if (!isResize) return
+      if (!isResize || !activeResizer) return
       const diffY = e.clientY - startMouseResize.get().y
       const diffX = e.clientX - startMouseResize.get().x
+      const directions = activeResizer.split('')
 
       const getStart = (startSize: number, start: number, diff: number) => {
         return {
@@ -77,11 +78,7 @@ export const useResize = ({
         }
       }
 
-      if (
-        activeResizer === E_ResizerPosition.n ||
-        activeResizer === E_ResizerPosition.ne ||
-        activeResizer === E_ResizerPosition.nw
-      ) {
+      if (directions.includes(E_ResizerPosition.n)) {
         const dimensions = getStart(
           startWindowResize.get().height,
           startWindowResize.get().y,
@@ -91,21 +88,13 @@ export const useResize = ({
         y.set(dimensions.position)
       }
 
-      if (
-        activeResizer === E_ResizerPosition.w ||
-        activeResizer === E_ResizerPosition.nw ||
-        activeResizer === E_ResizerPosition.sw
-      ) {
+      if (directions.includes(E_ResizerPosition.w)) {
         const dimensions = getStart(startWindowResize.get().width, startWindowResize.get().x, diffX)
         width.set(dimensions.size)
         x.set(dimensions.position)
       }
 
-      if (
-        activeResizer === E_ResizerPosition.e ||
-        activeResizer === E_ResizerPosition.ne ||
-        activeResizer === E_ResizerPosition.se
-      ) {
+      if (directions.includes(E_ResizerPosition.e)) {
         const dimensions = getEnd(
           startWindowResize.get().width,
           startWindowResize.get().x,
@@ -115,11 +104,7 @@ export const useResize = ({
         width.set(dimensions.size)
       }
 
-      if (
-        activeResizer === E_ResizerPosition.s ||
-        activeResizer === E_ResizerPosition.sw ||
-        activeResizer === E_ResizerPosition.se
-      ) {
+      if (directions.includes(E_ResizerPosition.s)) {
         const dimensions = getEnd(
           startWindowResize.get().height,
           startWindowResize.get().y,
@@ -156,6 +141,7 @@ export const useResize = ({
   }, [handleMouseMove, setSizeTransitionChanger, transitionDuration])
 
   useEffect(() => {
+    console.count()
     window.addEventListener('mousemove', handleMouseMove)
     window.addEventListener('mouseup', handleMouseUp)
 

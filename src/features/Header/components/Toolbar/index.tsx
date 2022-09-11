@@ -6,7 +6,7 @@ import {
   T_TaskItemActionPayload,
 } from 'features/Header/models'
 import { changeToolbarItemIcon } from 'features/Header/slice'
-import { E_Modals } from 'features/ModalManager/models'
+import { E_Modal } from 'features/ModalManager/models'
 import { openModal } from 'features/ModalManager/slice'
 import { E_Panels } from 'features/SidePanel/models'
 import { closeSidePanel, openSidePanel } from 'features/SidePanel/slice'
@@ -25,7 +25,7 @@ export const Toolbar = () => {
 
   const handleAction = (type: E_TaskItemActionType, payload: T_TaskItemActionPayload) => () => {
     if (type === E_TaskItemActionType.modal) {
-      dispatch(openModal(payload as E_Modals))
+      dispatch(openModal(payload as E_Modal))
     } else if (type === E_TaskItemActionType.panel) {
       if (sidePanel === payload) {
         dispatch(closeSidePanel())

@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-import { E_Modals, I_Modal } from './models'
+import { E_Modal, I_Modal } from './models'
 
 interface I_InitialState {
   modals: I_Modal[]
@@ -14,7 +14,7 @@ export const modalManagerSlice = createSlice({
   name: 'modalManager',
   initialState,
   reducers: {
-    openModal: (state, action: PayloadAction<E_Modals>) => {
+    openModal: (state, action: PayloadAction<E_Modal>) => {
       state.modals.push({ content: action.payload })
     },
     closeModal: (state) => {

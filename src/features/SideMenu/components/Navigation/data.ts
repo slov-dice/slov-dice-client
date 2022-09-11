@@ -4,7 +4,7 @@ import {
   E_TaskItemActionType,
   E_CustomAction,
 } from 'features/Header/models'
-import { E_Modals } from 'features/ModalManager/models'
+import { E_Modal } from 'features/ModalManager/models'
 import { E_Panels } from 'features/SidePanel/models'
 import { E_Window } from 'features/WindowManager/models'
 import { E_Routes } from 'models/routes'
@@ -65,21 +65,21 @@ export const data: I_TaskItem[] = [
     icon: E_Icon.fort,
     visibility: [E_TaskItemVisibility.authenticated, E_TaskItemVisibility.inRoom],
     actionType: E_TaskItemActionType.modal,
-    actionPayload: E_Modals.roomSettings,
+    actionPayload: E_Modal.roomSettings,
   },
   {
     name: 'sideMenu.saveGame',
     icon: E_Icon.save,
     visibility: [E_TaskItemVisibility.authenticated, E_TaskItemVisibility.inRoom],
     actionType: E_TaskItemActionType.modal,
-    actionPayload: E_Modals.createRoom,
+    actionPayload: E_Modal.createRoom,
   },
   {
     name: 'sideMenu.loadGames',
     icon: E_Icon.upload,
     visibility: [E_TaskItemVisibility.authenticated, E_TaskItemVisibility.inRoom],
     actionType: E_TaskItemActionType.modal,
-    actionPayload: E_Modals.createRoom,
+    actionPayload: E_Modal.createRoom,
   },
   {
     name: 'sideMenu.leaveRoom',
@@ -114,14 +114,14 @@ export const data: I_TaskItem[] = [
     icon: E_Icon.create,
     visibility: [E_TaskItemVisibility.authenticated, E_TaskItemVisibility.inLobby],
     actionType: E_TaskItemActionType.modal,
-    actionPayload: E_Modals.createRoom,
+    actionPayload: E_Modal.createRoom,
   },
   {
     name: 'sideMenu.joinRoom',
     icon: E_Icon.join,
     visibility: [E_TaskItemVisibility.authenticated, E_TaskItemVisibility.inLobby],
     actionType: E_TaskItemActionType.modal,
-    actionPayload: E_Modals.joinRoom,
+    actionPayload: E_Modal.joinRoom,
   },
   {
     name: 'room-lobby-0',
@@ -161,7 +161,7 @@ export const data: I_TaskItem[] = [
       E_TaskItemVisibility.inRoom,
     ],
     actionType: E_TaskItemActionType.modal,
-    actionPayload: E_Modals.settings,
+    actionPayload: E_Modal.settings,
   },
   {
     name: 'authenticated-divider-0',
@@ -179,7 +179,7 @@ export const data: I_TaskItem[] = [
     icon: E_Icon.language,
     visibility: [E_TaskItemVisibility.all],
     actionType: E_TaskItemActionType.modal,
-    actionPayload: E_Modals.translator,
+    actionPayload: E_Modal.translator,
   },
   {
     name: 'sideMenu.logout',

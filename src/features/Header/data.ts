@@ -1,6 +1,6 @@
 import { I_TaskItem, E_TaskItemVisibility, E_TaskItemActionType } from './models'
 
-import { E_Modals } from 'features/ModalManager/models'
+import { E_Modal } from 'features/ModalManager/models'
 import { E_Panels } from 'features/SidePanel/models'
 import { E_Locale } from 'models/app'
 import { FullScreen } from 'utils/helpers/fullScreen'
@@ -50,14 +50,14 @@ export const initialState: UI = {
       icon: E_Icon.language,
       visibility: [E_TaskItemVisibility.all],
       actionType: E_TaskItemActionType.modal,
-      actionPayload: E_Modals.translator,
+      actionPayload: E_Modal.translator,
     },
     {
       name: 'sideMenu.settings',
       icon: E_Icon.settings,
       visibility: [E_TaskItemVisibility.authenticated],
       actionType: E_TaskItemActionType.modal,
-      actionPayload: E_Modals.settings,
+      actionPayload: E_Modal.settings,
     },
   ],
 }

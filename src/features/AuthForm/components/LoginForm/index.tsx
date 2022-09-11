@@ -9,7 +9,7 @@ import { I_FormSignIn } from '../../models/form'
 import { Button } from 'components/Buttons'
 import { FormField } from 'components/InputFields'
 import { LinkButton } from 'components/LinkButton'
-import { E_Modals } from 'features/ModalManager/models'
+import { E_Modal } from 'features/ModalManager/models'
 import { openModal } from 'features/ModalManager/slice'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { t } from 'languages'
@@ -34,7 +34,7 @@ export const LoginForm = () => {
   }
 
   const handleOpenModal = () => {
-    dispatch(openModal(E_Modals.restorePassword))
+    dispatch(openModal(E_Modal.restorePassword))
   }
 
   return (

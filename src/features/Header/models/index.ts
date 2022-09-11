@@ -1,4 +1,4 @@
-import { E_Modals } from 'features/ModalManager/models'
+import { E_Modal } from 'features/ModalManager/models'
 import { E_Panels } from 'features/SidePanel/models'
 import { E_Window } from 'features/WindowManager/models'
 import { E_Routes } from 'models/routes'
@@ -28,7 +28,7 @@ export enum E_TaskItemActionType {
 
 export type T_TaskItemActionPayload =
   | E_Routes
-  | E_Modals
+  | E_Modal
   | E_Panels
   | E_Window
   | E_CustomAction
