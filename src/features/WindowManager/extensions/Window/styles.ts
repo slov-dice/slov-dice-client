@@ -222,6 +222,19 @@ export const Content = styled.div<{ isResize: boolean; focused: boolean }>`
 
   height: calc(100% - 32px);
   padding: 24px;
+  overflow: auto;
 
   background: ${({ theme }) => theme.colors.black};
+
+  ::-webkit-scrollbar {
+    width: 2px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: #1e1939;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #fff;
+  }
 `

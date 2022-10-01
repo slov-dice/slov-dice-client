@@ -11,7 +11,7 @@ const initialState: I_Profile = {
   nickname: '',
   statuses: {
     inRoom: false,
-    isAuth: true,
+    isAuth: false,
   },
 }
 
