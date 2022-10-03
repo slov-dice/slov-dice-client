@@ -1,6 +1,6 @@
 import * as S from './styles'
 
-import { CharacterCard } from 'components/Character/CharacterCard'
+import { AddCharacterCard, CharacterCard } from 'components/Character'
 import { useStoreSelector } from 'hooks/useStoreSelector'
 
 export const CharactersContent = () => {
@@ -11,6 +11,7 @@ export const CharactersContent = () => {
       {characters.map((character) => (
         <CharacterCard key={character.id} character={character} />
       ))}
+      <AddCharacterCard />
     </S.Wrapper>
   )
 }

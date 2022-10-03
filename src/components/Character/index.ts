@@ -1,3 +1,4 @@
+export { AddCharacterCard } from './AddCharacterCard'
 export { CharacterBar } from './CharacterBar'
 export { CharacterCard } from './CharacterCard'
 export { CharacterSpecial } from './CharacterSpecial'

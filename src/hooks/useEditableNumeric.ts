@@ -1,12 +1,16 @@
 import { RefObject, useEffect, useState, KeyboardEvent, ChangeEvent } from 'react'
 
-interface I_HookProps {
+interface I_UseEditableNumeric {
   inputRef: RefObject<HTMLInputElement> | null
   initialInputValue: string
   onEnterPress: () => void
 }
 
-export const useEditableNumeric = ({ inputRef, initialInputValue, onEnterPress }: I_HookProps) => {
+export const useEditableNumeric = ({
+  inputRef,
+  initialInputValue,
+  onEnterPress,
+}: I_UseEditableNumeric) => {
   const [isEdit, setEdit] = useState(false)
   const [inputValue, setInputValue] = useState(initialInputValue)
 

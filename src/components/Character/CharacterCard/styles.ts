@@ -7,6 +7,7 @@ export const Card = styled.div`
   gap: 12px;
 
   width: 360px;
+  min-height: 305px;
   padding: 8px;
 
   text-transform: uppercase;

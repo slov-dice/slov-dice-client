@@ -1,4 +1,7 @@
+import { motion } from 'framer-motion'
 import styled from 'styled-components'
+
+import { effectRemoveAttrs } from './motion'
 
 import { E_EffectType } from 'models/game/character'
 
@@ -31,7 +34,7 @@ export const EffectIcon = styled.span<{ type: E_EffectType }>`
   }
 `
 
-export const EffectRemove = styled.span`
+export const EffectRemove = styled(motion.span).attrs(effectRemoveAttrs)`
   cursor: pointer;
 
   position: absolute;
