@@ -35,6 +35,7 @@
     "no-empty-source": null,
     "value-keyword-case": null,
     "keyframes-name-pattern": null,
-    "color-function-notation": null
+    "color-function-notation": null,
+    "selector-pseudo-element-colon-notation": null
   }
 }

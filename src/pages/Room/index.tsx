@@ -7,11 +7,9 @@ import * as S from './styles'
 import { HeroBackground } from 'features/HeroBackground'
 import { WindowManager } from 'features/WindowManager'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
-import { useStoreSelector } from 'hooks/useStoreSelector'
 
 export const Room = () => {
   const dispatch = useStoreDispatch()
-  useStoreSelector((state) => state.windowManager.windows)
 
   const pageRef = useRef<HTMLDivElement>(null)
 

@@ -23,7 +23,7 @@ import { E_Routes } from 'models/routes'
 import { authAPI } from 'services/auth'
 import { leaveRoom, logout } from 'store/profile'
 import { emitLeaveRoom } from 'store/room'
-import { E_Icon } from 'utils/helpers/icons'
+import { E_AppIcon } from 'utils/helpers/icons/app'
 import { LocalStorage } from 'utils/helpers/localStorage'
 
 interface NavigationProps {
@@ -70,13 +70,13 @@ export const Navigation = ({ toggleMenu }: NavigationProps) => {
       dispatch(openSidePanel(item.actionPayload as E_Panels))
     }
 
-    if (item.icon === E_Icon.leaveRoom) {
+    if (item.icon === E_AppIcon.leaveRoom) {
       dispatch(emitLeaveRoom())
       dispatch(leaveRoom())
       navigate('/lobby')
     }
 
-    if (item.icon === E_Icon.enterRoom) {
+    if (item.icon === E_AppIcon.enterRoom) {
       navigate(`/room/${roomId}`)
     }
   }
@@ -86,7 +86,7 @@ export const Navigation = ({ toggleMenu }: NavigationProps) => {
       {data.map((item) => {
         if (statuses.isAuth && item.visibility.includes(E_TaskItemVisibility.authenticated)) {
           if (isRoomPageOpen && item.visibility.includes(E_TaskItemVisibility.inRoom)) {
-            if (item.icon === E_Icon.divider) return <NavigationDivider key={item.name} />
+            if (item.icon === E_AppIcon.divider) return <NavigationDivider key={item.name} />
             return (
               <NavigationItem
                 key={item.name}
@@ -96,9 +96,9 @@ export const Navigation = ({ toggleMenu }: NavigationProps) => {
               />
             )
           } else if (!isRoomPageOpen && item.visibility.includes(E_TaskItemVisibility.inLobby)) {
-            if (item.icon === E_Icon.divider) return <NavigationDivider key={item.name} />
-            if (item.icon === E_Icon.enterRoom && !statuses.inRoom) return
-            if ((item.icon === E_Icon.create || item.icon === E_Icon.join) && statuses.inRoom)
+            if (item.icon === E_AppIcon.divider) return <NavigationDivider key={item.name} />
+            if (item.icon === E_AppIcon.enterRoom && !statuses.inRoom) return
+            if ((item.icon === E_AppIcon.create || item.icon === E_AppIcon.join) && statuses.inRoom)
               return
             return (
               <NavigationItem

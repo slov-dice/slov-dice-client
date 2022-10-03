@@ -2,7 +2,7 @@ import { E_Modal } from 'features/ModalManager/models'
 import { E_Panels } from 'features/SidePanel/models'
 import { E_Window } from 'features/WindowManager/models'
 import { E_Routes } from 'models/routes'
-import { E_Icon } from 'utils/helpers/icons'
+import { E_AppIcon } from 'utils/helpers/icons/app'
 
 export enum E_CustomAction {
   logout = 'logout',
@@ -36,7 +36,7 @@ export type T_TaskItemActionPayload =
 
 export interface I_TaskItem {
   name: string
-  icon: E_Icon
+  icon: E_AppIcon
   visibility: E_TaskItemVisibility[]
   actionType: E_TaskItemActionType
   actionPayload: T_TaskItemActionPayload

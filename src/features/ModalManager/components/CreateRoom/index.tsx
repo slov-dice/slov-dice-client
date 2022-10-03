@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { typeOptions, sizeOptions } from './data'
 import * as S from './styles'
 
-import CloseIcon from 'assets/icons/close.svg'
+import CloseIcon from 'assets/icons/app/close.svg'
 import { Button } from 'components/Buttons'
 import { TextField, SelectField } from 'components/InputFields'
 import { Switch, T_SwitchOption } from 'components/Switch'

@@ -8,131 +8,131 @@ import { E_Modal } from 'features/ModalManager/models'
 import { E_Panels } from 'features/SidePanel/models'
 import { E_Window } from 'features/WindowManager/models'
 import { E_Routes } from 'models/routes'
-import { E_Icon } from 'utils/helpers/icons'
+import { E_AppIcon } from 'utils/helpers/icons/app'
 
 export const data: I_TaskItem[] = [
   {
     name: 'sideMenu.window.characters',
-    icon: E_Icon.fileUser,
+    icon: E_AppIcon.fileUser,
     visibility: [E_TaskItemVisibility.authenticated, E_TaskItemVisibility.inRoom],
     actionType: E_TaskItemActionType.window,
     actionPayload: E_Window.characters,
   },
   {
     name: 'sideMenu.window.inventory',
-    icon: E_Icon.backpack,
+    icon: E_AppIcon.backpack,
     visibility: [E_TaskItemVisibility.authenticated, E_TaskItemVisibility.inRoom],
     actionType: E_TaskItemActionType.window,
     actionPayload: E_Window.inventory,
   },
   {
     name: 'sideMenu.window.market',
-    icon: E_Icon.store,
+    icon: E_AppIcon.store,
     visibility: [E_TaskItemVisibility.authenticated, E_TaskItemVisibility.inRoom],
     actionType: E_TaskItemActionType.window,
     actionPayload: E_Window.market,
   },
   {
     name: 'sideMenu.window.battlefield',
-    icon: E_Icon.swords,
+    icon: E_AppIcon.swords,
     visibility: [E_TaskItemVisibility.authenticated, E_TaskItemVisibility.inRoom],
     actionType: E_TaskItemActionType.window,
     actionPayload: E_Window.battlefield,
   },
   {
     name: 'sideMenu.window.player',
-    icon: E_Icon.circlePlay,
+    icon: E_AppIcon.circlePlay,
     visibility: [E_TaskItemVisibility.authenticated, E_TaskItemVisibility.inRoom],
     actionType: E_TaskItemActionType.window,
     actionPayload: E_Window.player,
   },
   {
     name: 'sideMenu.window.textEditor',
-    icon: E_Icon.fileLines,
+    icon: E_AppIcon.fileLines,
     visibility: [E_TaskItemVisibility.authenticated, E_TaskItemVisibility.inRoom],
     actionType: E_TaskItemActionType.window,
     actionPayload: E_Window.textEditor,
   },
   {
     name: 'room-divider-0',
-    icon: E_Icon.divider,
+    icon: E_AppIcon.divider,
     visibility: [E_TaskItemVisibility.authenticated, E_TaskItemVisibility.inRoom],
     actionType: E_TaskItemActionType.none,
     actionPayload: null,
   },
   {
     name: 'sideMenu.roomSettings',
-    icon: E_Icon.fort,
+    icon: E_AppIcon.fort,
     visibility: [E_TaskItemVisibility.authenticated, E_TaskItemVisibility.inRoom],
     actionType: E_TaskItemActionType.modal,
     actionPayload: E_Modal.roomSettings,
   },
   {
     name: 'sideMenu.saveGame',
-    icon: E_Icon.save,
+    icon: E_AppIcon.save,
     visibility: [E_TaskItemVisibility.authenticated, E_TaskItemVisibility.inRoom],
     actionType: E_TaskItemActionType.modal,
     actionPayload: E_Modal.createRoom,
   },
   {
     name: 'sideMenu.loadGames',
-    icon: E_Icon.upload,
+    icon: E_AppIcon.upload,
     visibility: [E_TaskItemVisibility.authenticated, E_TaskItemVisibility.inRoom],
     actionType: E_TaskItemActionType.modal,
     actionPayload: E_Modal.createRoom,
   },
   {
     name: 'sideMenu.leaveRoom',
-    icon: E_Icon.leaveRoom,
+    icon: E_AppIcon.leaveRoom,
     visibility: [E_TaskItemVisibility.authenticated, E_TaskItemVisibility.inRoom],
     actionType: E_TaskItemActionType.none,
     actionPayload: null,
   },
   {
     name: 'room-divider-1',
-    icon: E_Icon.divider,
+    icon: E_AppIcon.divider,
     visibility: [E_TaskItemVisibility.authenticated, E_TaskItemVisibility.inRoom],
     actionType: E_TaskItemActionType.none,
     actionPayload: null,
   },
   {
     name: 'sideMenu.auth',
-    icon: E_Icon.login,
+    icon: E_AppIcon.login,
     visibility: [E_TaskItemVisibility.unAuthenticated],
     actionType: E_TaskItemActionType.push,
     actionPayload: E_Routes.lobby,
   },
   {
     name: 'sideMenu.returnRoom',
-    icon: E_Icon.enterRoom,
+    icon: E_AppIcon.enterRoom,
     visibility: [E_TaskItemVisibility.authenticated, E_TaskItemVisibility.inLobby],
     actionType: E_TaskItemActionType.none,
     actionPayload: null,
   },
   {
     name: 'sideMenu.createRoom',
-    icon: E_Icon.create,
+    icon: E_AppIcon.create,
     visibility: [E_TaskItemVisibility.authenticated, E_TaskItemVisibility.inLobby],
     actionType: E_TaskItemActionType.modal,
     actionPayload: E_Modal.createRoom,
   },
   {
     name: 'sideMenu.joinRoom',
-    icon: E_Icon.join,
+    icon: E_AppIcon.join,
     visibility: [E_TaskItemVisibility.authenticated, E_TaskItemVisibility.inLobby],
     actionType: E_TaskItemActionType.modal,
     actionPayload: E_Modal.joinRoom,
   },
   {
     name: 'room-lobby-0',
-    icon: E_Icon.divider,
+    icon: E_AppIcon.divider,
     visibility: [E_TaskItemVisibility.authenticated, E_TaskItemVisibility.inLobby],
     actionType: E_TaskItemActionType.none,
     actionPayload: null,
   },
   {
     name: 'sideMenu.users',
-    icon: E_Icon.users,
+    icon: E_AppIcon.users,
     visibility: [
       E_TaskItemVisibility.authenticated,
       E_TaskItemVisibility.inLobby,
@@ -143,7 +143,7 @@ export const data: I_TaskItem[] = [
   },
   {
     name: 'sideMenu.chat',
-    icon: E_Icon.chat,
+    icon: E_AppIcon.chat,
     visibility: [
       E_TaskItemVisibility.authenticated,
       E_TaskItemVisibility.inLobby,
@@ -154,7 +154,7 @@ export const data: I_TaskItem[] = [
   },
   {
     name: 'sideMenu.settings',
-    icon: E_Icon.settings,
+    icon: E_AppIcon.settings,
     visibility: [
       E_TaskItemVisibility.authenticated,
       E_TaskItemVisibility.inLobby,
@@ -165,7 +165,7 @@ export const data: I_TaskItem[] = [
   },
   {
     name: 'authenticated-divider-0',
-    icon: E_Icon.divider,
+    icon: E_AppIcon.divider,
     visibility: [
       E_TaskItemVisibility.authenticated,
       E_TaskItemVisibility.inLobby,
@@ -176,14 +176,14 @@ export const data: I_TaskItem[] = [
   },
   {
     name: 'sideMenu.translator',
-    icon: E_Icon.language,
+    icon: E_AppIcon.language,
     visibility: [E_TaskItemVisibility.all],
     actionType: E_TaskItemActionType.modal,
     actionPayload: E_Modal.translator,
   },
   {
     name: 'sideMenu.logout',
-    icon: E_Icon.logout,
+    icon: E_AppIcon.logout,
     visibility: [
       E_TaskItemVisibility.authenticated,
       E_TaskItemVisibility.inLobby,

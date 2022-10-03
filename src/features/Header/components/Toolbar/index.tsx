@@ -13,7 +13,7 @@ import { closeSidePanel, openSidePanel } from 'features/SidePanel/slice'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { useStoreSelector } from 'hooks/useStoreSelector'
 import { FullScreen } from 'utils/helpers/fullScreen'
-import { E_Icon, getIcon } from 'utils/helpers/icons'
+import { E_AppIcon, getAppIcon } from 'utils/helpers/icons/app'
 
 export const Toolbar = () => {
   const { toolbar, sidePanel, isAuth } = useStoreSelector((state) => ({
@@ -34,7 +34,7 @@ export const Toolbar = () => {
       dispatch(openSidePanel(payload as E_Panels))
     } else if (type === E_TaskItemActionType.fullScreen) {
       FullScreen.toggle()
-      const icon = FullScreen.getValue() ? E_Icon.expand : E_Icon.compress
+      const icon = FullScreen.getValue() ? E_AppIcon.expand : E_AppIcon.compress
       dispatch(changeToolbarItemIcon({ name: 'full-screen', icon }))
     }
   }
@@ -65,12 +65,12 @@ export const Toolbar = () => {
 }
 
 interface I_ToolbarItemProps {
-  icon: E_Icon
+  icon: E_AppIcon
   onClick: () => void
 }
 
 const ToolbarItem = ({ icon, onClick }: I_ToolbarItemProps) => (
-  <S.ToolbarItem isDivider={icon === E_Icon.divider} onClick={onClick}>
-    {getIcon(icon)}
+  <S.ToolbarItem isDivider={icon === E_AppIcon.divider} onClick={onClick}>
+    {getAppIcon(icon)}
   </S.ToolbarItem>
 )

@@ -141,7 +141,6 @@ export const useResize = ({
   }, [handleMouseMove, setSizeTransitionChanger, transitionDuration])
 
   useEffect(() => {
-    console.count()
     window.addEventListener('mousemove', handleMouseMove)
     window.addEventListener('mouseup', handleMouseUp)
 

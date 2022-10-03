@@ -3,7 +3,7 @@ import { useState } from 'react'
 
 import * as S from './styles'
 
-import CloseIcon from 'assets/icons/close.svg'
+import CloseIcon from 'assets/icons/app/close.svg'
 import { Button } from 'components/Buttons'
 import { I_TaskItem } from 'features/Header/models'
 import { updateToolbar } from 'features/Header/slice'
@@ -12,7 +12,7 @@ import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { useStoreSelector } from 'hooks/useStoreSelector'
 import { t } from 'languages'
 import * as C from 'styles/components'
-import { getIcon } from 'utils/helpers/icons'
+import { getAppIcon } from 'utils/helpers/icons/app'
 
 export const SettingsModal = () => {
   const toolbar = useStoreSelector((state) => state.header.toolbar)
@@ -59,7 +59,7 @@ export const TaskBarConstructorItem = ({ item }: TaskBarConstructorItemProps) =>
 
   return (
     <S.TaskBarConstructorItem value={item} id={item.name} style={{ x }}>
-      {getIcon(item.icon)}
+      {getAppIcon(item.icon)}
     </S.TaskBarConstructorItem>
   )
 }

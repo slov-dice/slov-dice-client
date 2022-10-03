@@ -6,9 +6,8 @@ import { useSignIn } from './useSignIn'
 
 import { I_FormSignIn } from '../../models/form'
 
-import { Button } from 'components/Buttons'
+import { Button, LinkButton } from 'components/Buttons'
 import { FormField } from 'components/InputFields'
-import { LinkButton } from 'components/LinkButton'
 import { E_Modal } from 'features/ModalManager/models'
 import { openModal } from 'features/ModalManager/slice'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'

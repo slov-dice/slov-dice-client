@@ -24,7 +24,7 @@ export const getRandomIconValues = () => {
     .slice(0, 5)
 }
 
-export const getIcon = (icon: E_HeroIcon): ReactNode => {
+export const getHeroIcon = (icon: E_HeroIcon): ReactNode => {
   switch (icon) {
     case E_HeroIcon.caesar:
       return <CaesarIcon />

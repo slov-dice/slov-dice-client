@@ -1,5 +1,5 @@
 import { E_Modal } from 'features/ModalManager/models'
-import { E_Icon } from 'utils/helpers/icons'
+import { E_AppIcon } from 'utils/helpers/icons/app'
 
 export enum E_Window {
   characters = 'characters',
@@ -12,7 +12,7 @@ export enum E_Window {
 
 export interface I_WindowHeader {
   title: string
-  icon: E_Icon
+  icon: E_AppIcon
   settings: E_Modal | null
 }
 

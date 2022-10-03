@@ -10,16 +10,16 @@ import { E_Window, I_WindowHeader } from '../../models'
 import { E_ResizerPosition } from '../../models/window'
 import { setFocus } from '../../slice'
 
-import CloseIcon from 'assets/icons/close.svg'
-import CompressIcon from 'assets/icons/compress.svg'
-import DividerIcon from 'assets/icons/divider.svg'
-import ExpandIcon from 'assets/icons/expand.svg'
-import SettingsIcon from 'assets/icons/gear.svg'
-import MinusIcon from 'assets/icons/minus.svg'
-import PlusIcon from 'assets/icons/plus.svg'
+import CloseIcon from 'assets/icons/app/close.svg'
+import CompressIcon from 'assets/icons/app/compress.svg'
+import DividerIcon from 'assets/icons/app/divider.svg'
+import ExpandIcon from 'assets/icons/app/expand.svg'
+import SettingsIcon from 'assets/icons/app/gear.svg'
+import MinusIcon from 'assets/icons/app/minus.svg'
+import PlusIcon from 'assets/icons/app/plus.svg'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { t } from 'languages'
-import { getIcon } from 'utils/helpers/icons'
+import { getAppIcon } from 'utils/helpers/icons/app'
 
 interface I_WindowProps {
   children: ReactNode
@@ -131,7 +131,7 @@ export const Window = ({
         }}
       >
         <S.HeaderLabel>
-          <span>{getIcon(header.icon)}</span>
+          <span>{getAppIcon(header.icon)}</span>
           <span>{t(header.title)}</span>
         </S.HeaderLabel>
         <S.HeaderControls>

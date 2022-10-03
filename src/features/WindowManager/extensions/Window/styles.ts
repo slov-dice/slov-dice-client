@@ -73,9 +73,10 @@ export const Control = styled(motion.div).attrs<I_ControlProps>(({ theme, isDivi
 )<I_ControlProps>`
   display: flex;
   justify-content: center;
-  border-radius: 15%;
 
   height: 28px;
+
+  border-radius: 15%;
 
   fill: ${({ theme }) => theme.colors.white};
 

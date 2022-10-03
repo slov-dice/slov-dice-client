@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 import styled, { css } from 'styled-components'
 
-import { titleAttrs } from './motion'
+import { titleAttrs, controlAttrs } from './motion'
 
 export const Title = styled(motion.span).attrs(titleAttrs)`
   font-size: 32px;
@@ -40,4 +40,46 @@ export const Divider = styled.div<I_DividerProps>`
   @media ${({ theme }) => theme.media.md} {
     height: ${({ md = 16 }) => md}px;
   }
+`
+
+export const Control = styled(motion.div).attrs(({ theme }) => controlAttrs(theme))`
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+
+  width: 28px;
+  height: 28px;
+  padding: 0 4px;
+
+  border-radius: 15%;
+
+  fill: ${({ theme }) => theme.colors.white};
+
+  & > svg {
+    width: 100%;
+    height: 100%;
+  }
+`
+
+export const EditableInput = styled.input`
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 100%;
+
+  color: ${({ theme }) => theme.colors.white};
+
+  background: ${({ theme }) => theme.colors.white_10};
+  border: none;
+  outline: none;
+`
+
+export const BaseTooltip = styled.div`
+  width: 150px;
+  height: auto;
 `

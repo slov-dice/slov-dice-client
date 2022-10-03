@@ -1,7 +1,7 @@
 import { switchOptions } from './data'
 import * as S from './styles'
 
-import CloseIcon from 'assets/icons/close.svg'
+import CloseIcon from 'assets/icons/app/close.svg'
 import { Switch, T_SwitchOption } from 'components/Switch'
 import { closeModal } from 'features/ModalManager/slice'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'

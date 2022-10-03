@@ -20,8 +20,8 @@ export const profileSlice = createSlice({
   initialState,
   reducers: {
     setProfile: (_, action: PayloadAction<I_Profile>) => action.payload,
-    logout: (_, actions: PayloadAction<I_EmitPayload[E_Emit.logoutLobbyUser]>) => {
-      socket.emit(E_Emit.logoutLobbyUser, actions.payload)
+    logout: (_, action: PayloadAction<I_EmitPayload[E_Emit.logoutLobbyUser]>) => {
+      socket.emit(E_Emit.logoutLobbyUser, action.payload)
       return initialState
     },
     joinRoom: (state) => {

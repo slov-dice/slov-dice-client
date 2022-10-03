@@ -9,17 +9,16 @@ import { AppRoutes } from 'routes'
 import { authAPI } from 'services/auth'
 import { subscribe, unsubscribe } from 'store/room/socket'
 import { GlobalStyles } from 'styles/global'
+import { TippyStyles } from 'styles/tippy'
 import { CustomToast } from 'styles/toastify'
 
 import 'assets/fonts/rubik/rubik.css'
 import 'react-toastify/dist/ReactToastify.css'
+import 'tippy.js/dist/tippy.css'
 
 export const App = () => {
   const dispatch = useStoreDispatch()
-  const { isAuth } = useStoreSelector((state) => ({
-    language: state.app.language,
-    isAuth: state.profile.statuses.isAuth,
-  }))
+  const isAuth = useStoreSelector((state) => state.profile.statuses.isAuth)
 
   const [fetchCheck, { isSuccess, data }] = authAPI.useCheckMutation()
   authAPI.useCheckTokenQuery(null, {
@@ -48,9 +47,10 @@ export const App = () => {
   return (
     <>
       <AppRoutes />
-      <GlobalStyles />
       <ModalManager />
       <SidePanel />
+      <GlobalStyles />
+      <TippyStyles />
       <CustomToast />
     </>
   )

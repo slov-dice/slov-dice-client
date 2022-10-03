@@ -55,4 +55,5 @@ export const GlobalStyles = createGlobalStyle`
     display: flex;
     flex-direction: column;
   }
+
 `

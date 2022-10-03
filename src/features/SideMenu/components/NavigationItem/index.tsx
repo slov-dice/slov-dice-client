@@ -1,17 +1,17 @@
 import * as S from './styles'
 
 import { t } from 'languages'
-import { E_Icon, getIcon } from 'utils/helpers/icons'
+import { E_AppIcon, getAppIcon } from 'utils/helpers/icons/app'
 
 interface NavigationItemProps {
   onClick: () => void
-  icon: E_Icon
+  icon: E_AppIcon
   name: string
 }
 
 export const NavigationItem = ({ onClick, icon, name }: NavigationItemProps) => (
   <S.NavigationItem onClick={onClick}>
-    <S.NavigationItemIcon>{getIcon(icon)}</S.NavigationItemIcon>
+    <S.NavigationItemIcon>{getAppIcon(icon)}</S.NavigationItemIcon>
     <S.NavigationItemText>{t(name)}</S.NavigationItemText>
   </S.NavigationItem>
 )

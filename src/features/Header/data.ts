@@ -4,7 +4,7 @@ import { E_Modal } from 'features/ModalManager/models'
 import { E_Panels } from 'features/SidePanel/models'
 import { E_Locale } from 'models/app'
 import { FullScreen } from 'utils/helpers/fullScreen'
-import { E_Icon } from 'utils/helpers/icons'
+import { E_AppIcon } from 'utils/helpers/icons/app'
 import { LocalStorage } from 'utils/helpers/localStorage'
 
 interface UI {
@@ -19,42 +19,42 @@ export const initialState: UI = {
   toolbar: [
     {
       name: 'sideMenu.users',
-      icon: E_Icon.users,
+      icon: E_AppIcon.users,
       visibility: [E_TaskItemVisibility.authenticated],
       actionType: E_TaskItemActionType.panel,
       actionPayload: E_Panels.users,
     },
     {
       name: 'sideMenu.chat',
-      icon: E_Icon.chat,
+      icon: E_AppIcon.chat,
       visibility: [E_TaskItemVisibility.authenticated],
       actionType: E_TaskItemActionType.panel,
       actionPayload: E_Panels.chat,
     },
     {
       name: '',
-      icon: E_Icon.divider,
+      icon: E_AppIcon.divider,
       visibility: [E_TaskItemVisibility.authenticated],
       actionType: E_TaskItemActionType.none,
       actionPayload: null,
     },
     {
       name: 'full-screen',
-      icon: FullScreen.getValue() ? E_Icon.compress : E_Icon.expand,
+      icon: FullScreen.getValue() ? E_AppIcon.compress : E_AppIcon.expand,
       visibility: [E_TaskItemVisibility.all],
       actionType: E_TaskItemActionType.fullScreen,
       actionPayload: null,
     },
     {
       name: 'sideMenu.translator',
-      icon: E_Icon.language,
+      icon: E_AppIcon.language,
       visibility: [E_TaskItemVisibility.all],
       actionType: E_TaskItemActionType.modal,
       actionPayload: E_Modal.translator,
     },
     {
       name: 'sideMenu.settings',
-      icon: E_Icon.settings,
+      icon: E_AppIcon.settings,
       visibility: [E_TaskItemVisibility.authenticated],
       actionType: E_TaskItemActionType.modal,
       actionPayload: E_Modal.settings,

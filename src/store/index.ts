@@ -23,6 +23,7 @@ import { sideMenuSlice } from 'features/SideMenu/slice'
 import { chatPanelSlice } from 'features/SidePanel/components/ChatPanel/slice'
 import { usersPanelSlice } from 'features/SidePanel/components/UsersPanel/slice'
 import { sidePanelSlice } from 'features/SidePanel/slice'
+import { gameCharactersSlice } from 'features/WindowManager/components/Characters/slice'
 import { windowManagerSlice } from 'features/WindowManager/slice'
 import { rtkQueryErrorLogger } from 'middlewares/rtkQueryErrorLogger'
 import { rtkQueryFulfilledLogger } from 'middlewares/rtkQueryFulfilledLogger'
@@ -56,6 +57,9 @@ const rootReducer = combineReducers({
   [chatPanelSlice.name]: chatPanelSlice.reducer,
   [lobbyPageSlice.name]: lobbyPageSlice.reducer,
   [roomPageSlice.name]: roomPageSlice.reducer,
+
+  // Game slices
+  [gameCharactersSlice.name]: gameCharactersSlice.reducer,
 
   // Services
   [authAPI.reducerPath]: authAPI.reducer,
