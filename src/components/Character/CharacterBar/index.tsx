@@ -2,9 +2,8 @@ import { useRef } from 'react'
 
 import * as S from './styles'
 
-import { setBarValue } from 'features/WindowManager/components/Characters/slice'
+import { useActions } from 'hooks/useActions'
 import { useEditableNumeric } from 'hooks/useEditableNumeric'
-import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { T_CharacterBar } from 'models/game/character'
 import { numberWithSpaces } from 'utils/helpers/text'
 
@@ -14,19 +13,19 @@ interface I_BarProps {
 }
 
 export const CharacterBar = ({ values, characterId }: I_BarProps) => {
-  const dispatch = useStoreDispatch()
+  const { setCharacterBar } = useActions()
   const inputRef = useRef<HTMLInputElement>(null)
 
   const calculateValue = () => {
     if (/^[+-][0-9]+$/.test(inputValue)) {
       let result = values.current + +inputValue
       if (result < 0) result = 0
-      dispatch(setBarValue({ characterId, barName: values.name, barValue: result }))
+      setCharacterBar({ characterId, barName: values.name, barValue: result })
       return
     }
 
     if (/^[0-9]+$/.test(inputValue)) {
-      dispatch(setBarValue({ characterId, barName: values.name, barValue: +inputValue }))
+      setCharacterBar({ characterId, barName: values.name, barValue: +inputValue })
     }
   }
 

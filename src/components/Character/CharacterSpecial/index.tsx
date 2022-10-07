@@ -2,9 +2,8 @@ import { useRef } from 'react'
 
 import * as S from './styles'
 
-import { setSpecialValue } from 'features/WindowManager/components/Characters/slice'
+import { useActions } from 'hooks/useActions'
 import { useEditableNumeric } from 'hooks/useEditableNumeric'
-import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { T_CharacterSpecial } from 'models/game/character'
 
 interface I_CharacterSpecial {
@@ -13,21 +12,19 @@ interface I_CharacterSpecial {
 }
 
 export const CharacterSpecial = ({ values, characterId }: I_CharacterSpecial) => {
-  const dispatch = useStoreDispatch()
   const inputRef = useRef<HTMLInputElement>(null)
+  const { setCharacterSpecial } = useActions()
 
   const calculateValue = () => {
     if (/^[+-][0-9]+$/.test(inputValue)) {
       let result = values.current + +inputValue
       if (result < 0) result = 0
-      dispatch(setSpecialValue({ characterId, specialName: values.name, specialValue: result }))
+      setCharacterSpecial({ characterId, specialName: values.name, specialValue: result })
       return
     }
 
     if (/^[0-9]+$/.test(inputValue)) {
-      dispatch(
-        setSpecialValue({ characterId, specialName: values.name, specialValue: +inputValue }),
-      )
+      setCharacterSpecial({ characterId, specialName: values.name, specialValue: +inputValue })
     }
   }
 

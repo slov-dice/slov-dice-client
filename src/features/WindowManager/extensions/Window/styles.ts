@@ -119,6 +119,8 @@ export const Resizer = styled.button<I_ResizerProps>`
   border-color: transparent;
   border-radius: 50%;
 
+  z-index: ${({ theme }) => theme.order.window};
+
   ${({ position }) => controllerPosition[position]}
   ${({ isFullSize, isMinSize }) =>
     (isFullSize || isMinSize) &&
@@ -134,7 +136,7 @@ const controllerPosition: T_StyledVariants<E_ResizerPosition> = {
     top: -2px;
     left: -2px;
 
-    width: 100%;
+    width: calc(100% + 2px);
     height: 6px;
 
     opacity: 0.5;
@@ -144,7 +146,6 @@ const controllerPosition: T_StyledVariants<E_ResizerPosition> = {
   ne: css`
     cursor: ne-resize;
 
-    z-index: 1;
     top: -4px;
     right: -4px;
 
@@ -157,7 +158,7 @@ const controllerPosition: T_StyledVariants<E_ResizerPosition> = {
     right: -2px;
 
     width: 6px;
-    height: 100%;
+    height: calc(100% + 2px);
 
     opacity: 0.5;
     border-radius: 0;
@@ -165,7 +166,6 @@ const controllerPosition: T_StyledVariants<E_ResizerPosition> = {
   se: css`
     cursor: se-resize;
 
-    z-index: 1;
     right: -4px;
     bottom: -4px;
 
@@ -177,7 +177,7 @@ const controllerPosition: T_StyledVariants<E_ResizerPosition> = {
     bottom: -2px;
     left: -2px;
 
-    width: 100%;
+    width: calc(100% + 2px);
     height: 6px;
 
     opacity: 0.5;
@@ -187,7 +187,6 @@ const controllerPosition: T_StyledVariants<E_ResizerPosition> = {
   sw: css`
     cursor: sw-resize;
 
-    z-index: 1;
     bottom: -4px;
     left: -4px;
 
@@ -201,7 +200,7 @@ const controllerPosition: T_StyledVariants<E_ResizerPosition> = {
     left: -2px;
 
     width: 6px;
-    height: 100%;
+    height: calc(100% + 2px);
 
     opacity: 0.5;
     border-radius: 0;
@@ -210,7 +209,6 @@ const controllerPosition: T_StyledVariants<E_ResizerPosition> = {
   nw: css`
     cursor: nw-resize;
 
-    z-index: 1;
     top: -4px;
     left: -4px;
 
@@ -220,22 +218,10 @@ const controllerPosition: T_StyledVariants<E_ResizerPosition> = {
 
 export const Content = styled.div<{ isResize: boolean; focused: boolean }>`
   user-select: ${({ isResize, focused }) => (isResize || !focused ? 'none' : 'auto')};
+  position: relative;
 
-  height: calc(100% - 32px);
-  padding: 24px;
-  overflow: auto;
+  height: calc(100% - 40px);
+  margin: 0 4px;
 
   background: ${({ theme }) => theme.colors.black};
-
-  ::-webkit-scrollbar {
-    width: 2px;
-  }
-
-  ::-webkit-scrollbar-track {
-    background-color: #1e1939;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background-color: #fff;
-  }
 `

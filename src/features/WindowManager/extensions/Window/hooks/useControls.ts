@@ -4,7 +4,7 @@ import { useState, MouseEvent, Dispatch, SetStateAction } from 'react'
 import { E_Modal } from 'features/ModalManager/models'
 import { openModal } from 'features/ModalManager/slice'
 import { E_Window } from 'features/WindowManager/models'
-import { closeWindow, setFocus } from 'features/WindowManager/slice'
+import { useActions } from 'hooks/useActions'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
 
 interface I_UseControlProps {
@@ -36,6 +36,7 @@ export const useControls = ({
   modal,
   setTransformTransitionChanger,
 }: I_UseControlProps) => {
+  const { closeWindow, setWindowFocus } = useActions()
   const dispatch = useStoreDispatch()
 
   // Предыдущее состояние окна до изменения на полноэкранный режим
@@ -58,7 +59,7 @@ export const useControls = ({
   const [isMinSize, setMinSize] = useState(false)
 
   const handleClose = () => {
-    dispatch(closeWindow(content))
+    closeWindow(content)
   }
 
   const toggleFullSize = () => {
@@ -79,7 +80,7 @@ export const useControls = ({
       width.set(containerWidth)
       y.set(0)
       x.set(0)
-      dispatch(setFocus(content))
+      setWindowFocus(content)
       setFullSize(true)
     }
   }

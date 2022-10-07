@@ -35,7 +35,7 @@ export const windowManagerSlice = createSlice({
       }))
       state.windows.push({ content: action.payload, focused: true })
     },
-    setFocus: (state, action: PayloadAction<E_Window>) => {
+    setWindowFocus: (state, action: PayloadAction<E_Window>) => {
       const focusedWindow = state.windows.find((window) => window.content === action.payload)
       const focusedWindowIndex = state.windows.findIndex(
         (window) => window.content === action.payload,
@@ -57,4 +57,4 @@ export const windowManagerSlice = createSlice({
   },
 })
 
-export const { openWindow, setFocus, closeWindow } = windowManagerSlice.actions
+export const windowManagerActions = windowManagerSlice.actions

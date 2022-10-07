@@ -1,5 +1,5 @@
 import { useDragControls, useMotionValue } from 'framer-motion'
-import { useRef, ReactNode, useState, MutableRefObject, MouseEvent } from 'react'
+import { useRef, ReactNode, useState, MutableRefObject } from 'react'
 import { useTheme } from 'styled-components'
 
 import { useControls } from './hooks/useControls'
@@ -8,7 +8,6 @@ import * as S from './styles'
 
 import { E_Window, I_WindowHeader } from '../../models'
 import { E_ResizerPosition } from '../../models/window'
-import { setFocus } from '../../slice'
 
 import CloseIcon from 'assets/icons/app/close.svg'
 import CompressIcon from 'assets/icons/app/compress.svg'
@@ -17,7 +16,7 @@ import ExpandIcon from 'assets/icons/app/expand.svg'
 import SettingsIcon from 'assets/icons/app/gear.svg'
 import MinusIcon from 'assets/icons/app/minus.svg'
 import PlusIcon from 'assets/icons/app/plus.svg'
-import { useStoreDispatch } from 'hooks/useStoreDispatch'
+import { useActions } from 'hooks/useActions'
 import { t } from 'languages'
 import { getAppIcon } from 'utils/helpers/icons/app'
 
@@ -37,7 +36,7 @@ export const Window = ({
   focused,
 }: I_WindowProps) => {
   const wrapperRef = useRef<HTMLDivElement>(null)
-  const dispatch = useStoreDispatch()
+  const { setWindowFocus } = useActions()
   const theme = useTheme()
   const dragControls = useDragControls()
 
@@ -94,7 +93,7 @@ export const Window = ({
   })
 
   const handleFocus = () => {
-    dispatch(setFocus(content))
+    setWindowFocus(content)
   }
 
   return (

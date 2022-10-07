@@ -2,9 +2,8 @@ import { useRef } from 'react'
 
 import * as S from './styles'
 
-import { setLevelValue } from 'features/WindowManager/components/Characters/slice'
+import { useActions } from 'hooks/useActions'
 import { useEditableNumeric } from 'hooks/useEditableNumeric'
-import { useStoreDispatch } from 'hooks/useStoreDispatch'
 
 interface I_CharacterSpecial {
   level: number
@@ -12,19 +11,19 @@ interface I_CharacterSpecial {
 }
 
 export const CharacterLevel = ({ level, characterId }: I_CharacterSpecial) => {
-  const dispatch = useStoreDispatch()
+  const { setCharacterLevel } = useActions()
   const inputRef = useRef<HTMLInputElement>(null)
 
   const calculateValue = () => {
     if (/^[+-][0-9]+$/.test(inputValue)) {
       let result = level + +inputValue
       if (result < 0) result = 0
-      dispatch(setLevelValue({ characterId, levelValue: result }))
+      setCharacterLevel({ characterId, levelValue: result })
       return
     }
 
     if (/^[0-9]+$/.test(inputValue)) {
-      dispatch(setLevelValue({ characterId, levelValue: +inputValue }))
+      setCharacterLevel({ characterId, levelValue: +inputValue })
     }
   }
 

@@ -2,21 +2,24 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 import { characters } from './data'
 
+import { E_WindowOverlay } from 'features/WindowOverlayManager/models'
 import { I_Character } from 'models/game/character'
 
 interface I_InitialState {
   characters: I_Character[]
+  overlays: E_WindowOverlay[]
 }
 
 const initialState: I_InitialState = {
   characters: characters,
+  overlays: [],
 }
 
 export const gameCharactersSlice = createSlice({
   name: 'gameCharacters',
   initialState,
   reducers: {
-    setBarValue: (
+    setCharacterBar: (
       state,
       action: PayloadAction<{ characterId: string; barName: string; barValue: number }>,
     ) => {
@@ -26,7 +29,7 @@ export const gameCharactersSlice = createSlice({
         bar.current = action.payload.barValue
       }
     },
-    setSpecialValue: (
+    setCharacterSpecial: (
       state,
       action: PayloadAction<{ characterId: string; specialName: string; specialValue: number }>,
     ) => {
@@ -36,13 +39,19 @@ export const gameCharactersSlice = createSlice({
         special.current = action.payload.specialValue
       }
     },
-    setLevelValue: (state, action: PayloadAction<{ characterId: string; levelValue: number }>) => {
+    setCharacterLevel: (
+      state,
+      action: PayloadAction<{ characterId: string; levelValue: number }>,
+    ) => {
       const character = state.characters.find((item) => item.id === action.payload.characterId)
       if (character) {
         character.level = action.payload.levelValue
       }
     },
-    removeEffect: (state, action: PayloadAction<{ characterId: string; effectName: string }>) => {
+    removeCharacterEffect: (
+      state,
+      action: PayloadAction<{ characterId: string; effectName: string }>,
+    ) => {
       const character = state.characters.find((item) => item.id === action.payload.characterId)
       if (character) {
         character.effects = character.effects.filter(
@@ -50,8 +59,13 @@ export const gameCharactersSlice = createSlice({
         )
       }
     },
+    openCharacterWindowOverlay: (state, action: PayloadAction<E_WindowOverlay>) => {
+      state.overlays.push(action.payload)
+    },
+    closeCharacterWindowOverlay: (state, action: PayloadAction<E_WindowOverlay>) => {
+      state.overlays = state.overlays.filter((overlay) => overlay !== action.payload)
+    },
   },
 })
 
-export const { setBarValue, setSpecialValue, setLevelValue, removeEffect } =
-  gameCharactersSlice.actions
+export const gameCharactersActions = gameCharactersSlice.actions

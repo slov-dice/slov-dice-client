@@ -1,10 +1,10 @@
 export enum E_ResizerPosition {
   n = 'n',
-  ne = 'ne',
   e = 'e',
-  se = 'se',
   s = 's',
-  sw = 'sw',
   w = 'w',
+  ne = 'ne',
+  se = 'se',
+  sw = 'sw',
   nw = 'nw',
 }

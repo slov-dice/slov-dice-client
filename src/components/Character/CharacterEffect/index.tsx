@@ -3,8 +3,7 @@ import Tippy from '@tippyjs/react'
 import * as S from './styles'
 
 import CloseIcon from 'assets/icons/app/close.svg'
-import { removeEffect } from 'features/WindowManager/components/Characters/slice'
-import { useStoreDispatch } from 'hooks/useStoreDispatch'
+import { useActions } from 'hooks/useActions'
 import { T_CharacterEffect } from 'models/game/character'
 import { getGameIcon } from 'utils/helpers/icons/game'
 
@@ -14,10 +13,10 @@ interface I_CharacterEffectProps {
 }
 
 export const CharacterEffect = ({ effect, characterId }: I_CharacterEffectProps) => {
-  const dispatch = useStoreDispatch()
+  const { removeCharacterEffect } = useActions()
 
   const handleRemoveEffect = () => {
-    dispatch(removeEffect({ characterId, effectName: effect.name }))
+    removeCharacterEffect({ characterId, effectName: effect.name })
   }
 
   return (
