@@ -14,6 +14,7 @@ export const Level = styled(motion.div).attrs(levelAttrs)`
   justify-content: space-between;
 
   width: 80%;
+  max-width: 124px;
   height: 23px;
   margin: 0 auto;
   padding: 2px;

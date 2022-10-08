@@ -1,11 +1,17 @@
 import * as S from './styles'
 
-import { CharacterBar } from '../CharacterBar'
-import { CharacterEffect } from '../CharacterEffect'
-import { CharacterLevel } from '../CharacterLevel'
-import { CharacterSpecial } from '../CharacterSpecial'
+import {
+  AddCharacterEffect,
+  CharacterAvatar,
+  CharacterBar,
+  CharacterEffect,
+  CharacterLevel,
+  CharacterSpecial,
+} from '../'
 
 import EditIcon from 'assets/icons/app/edit.svg'
+import { E_WindowOverlay } from 'features/WindowOverlayManager/models'
+import { useActions } from 'hooks/useActions'
 import { I_Character } from 'models/game/character'
 import * as C from 'styles/components'
 
@@ -14,11 +20,21 @@ interface I_CharacterCardProps {
 }
 
 export const CharacterCard = ({ character }: I_CharacterCardProps) => {
+  const { openCharacterWindowOverlay, setCharacterLevel } = useActions()
+
+  const handleOpenUpdateCharacterOverlay = () => {
+    openCharacterWindowOverlay(E_WindowOverlay.updateCharacter)
+  }
+
+  const handleChangeCharacterLevel = (value: number) => {
+    setCharacterLevel({ characterId: character.id, levelValue: value })
+  }
+
   return (
     <S.Card>
       <S.LeftSection>
-        <CharacterLevel characterId={character.id} level={character.level} />
-        <S.Avatar alt='avatar' src={character.avatar} />
+        <CharacterLevel onChange={handleChangeCharacterLevel} value={character.level} />
+        <CharacterAvatar image={character.avatar} />
         <S.WrapperBars>
           {character.bars.map((bar) => (
             <CharacterBar key={bar.name} characterId={character.id} values={bar} />
@@ -37,9 +53,10 @@ export const CharacterCard = ({ character }: I_CharacterCardProps) => {
             {character.effects.map((effect) => (
               <CharacterEffect key={effect.name} effect={effect} characterId={character.id} />
             ))}
+            <AddCharacterEffect />
           </S.WrapperEffects>
           <S.Actions>
-            <C.Control>
+            <C.Control onClick={handleOpenUpdateCharacterOverlay}>
               <EditIcon />
             </C.Control>
           </S.Actions>

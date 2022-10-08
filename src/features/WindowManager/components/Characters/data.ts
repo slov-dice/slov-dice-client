@@ -9,6 +9,7 @@ export const characters: I_Character[] = [
   {
     id: '123',
     avatar: imageChar1,
+    description: 'Описание1',
     name: 'Анабель',
     level: 3,
     bars: [
@@ -46,6 +47,7 @@ export const characters: I_Character[] = [
   {
     id: '124',
     avatar: imageChar2,
+    description: 'Описание1',
     name: 'Элиза',
     level: 9,
     bars: [
@@ -69,32 +71,8 @@ export const characters: I_Character[] = [
     ],
   },
   {
-    id: '125',
-    avatar: imageChar3,
-    name: 'Фара',
-    level: 12,
-    bars: [
-      { name: 'Здоровье', current: 120, max: 240, color: '#50C878' },
-      { name: 'Выносливость', current: 2, max: 4, color: '#EB7641' },
-      { name: 'Мана', current: 10, max: 100, color: '#318CE7' },
-    ],
-    specials: [
-      { name: 'Интеллект', current: 3, max: 20, color: '#CC397B' },
-      { name: 'Сила', current: 10, max: 20, color: '#CC397B' },
-      { name: 'Ловкость', current: 1, max: 20, color: '#CC397B' },
-      { name: 'Харизма', current: 18, max: 20, color: '#CC397B' },
-    ],
-    effects: [
-      {
-        name: 'Рвота',
-        description: '-2 к максимальной выносливости',
-        icon: E_GameIcon.vomiting,
-        type: E_EffectType.negative,
-      },
-    ],
-  },
-  {
     id: '126',
+    description: 'Описание1',
     avatar: imageChar4,
     name: 'Картен',
     level: 2,

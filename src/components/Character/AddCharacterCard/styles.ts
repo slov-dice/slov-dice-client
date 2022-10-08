@@ -14,7 +14,8 @@ export const Card = styled(motion.div).attrs(({ theme }) => cardAttrs(theme))`
   justify-content: center;
 
   width: 360px;
-  min-height: 305px;
+  height: fit-content;
+  min-height: 309px;
   padding: 8px;
 
   font-size: 24px;

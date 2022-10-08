@@ -65,6 +65,9 @@ export const gameCharactersSlice = createSlice({
     closeCharacterWindowOverlay: (state, action: PayloadAction<E_WindowOverlay>) => {
       state.overlays = state.overlays.filter((overlay) => overlay !== action.payload)
     },
+    closeLastCharacterWindowOverlay: (state) => {
+      state.overlays.pop()
+    },
   },
 })
 

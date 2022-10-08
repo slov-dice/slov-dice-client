@@ -1,3 +1,5 @@
+import { AnimatePresence } from 'framer-motion'
+
 import { windowOverlayComponents } from './components'
 import { E_WindowOverlay } from './models'
 import * as S from './styles'
@@ -8,7 +10,7 @@ interface I_WindowOverlayManagerProps {
 
 export const WindowOverlayManager = ({ overlays }: I_WindowOverlayManagerProps) => {
   return (
-    <>
+    <AnimatePresence>
       {overlays.map((overlay) => {
         const WindowOverlayComponent = windowOverlayComponents[overlay]
 
@@ -18,6 +20,6 @@ export const WindowOverlayManager = ({ overlays }: I_WindowOverlayManagerProps) 
           </S.WindowOverlay>
         )
       })}
-    </>
+    </AnimatePresence>
   )
 }

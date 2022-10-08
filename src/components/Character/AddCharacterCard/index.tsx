@@ -9,7 +9,7 @@ interface I_AddCharacterCardProps {
 export const AddCharacterCard = ({ onClick }: I_AddCharacterCardProps) => {
   return (
     <S.Card onClick={onClick}>
-      <div>Добавить персонажа</div>
+      <div>Создать персонажа</div>
       <S.CardIcon>
         <PlusIcon />
       </S.CardIcon>

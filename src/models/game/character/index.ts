@@ -3,6 +3,7 @@ import { E_GameIcon } from 'utils/helpers/icons/game'
 export interface I_Character {
   id: string
   name: string
+  description: string
   avatar: string
   level: number
   bars: T_CharacterBar[]

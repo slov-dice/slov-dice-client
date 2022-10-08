@@ -7,7 +7,8 @@ export const Card = styled.div`
   gap: 12px;
 
   width: 360px;
-  min-height: 305px;
+  height: fit-content;
+  min-height: 309px;
   padding: 8px;
 
   text-transform: uppercase;
@@ -23,14 +24,6 @@ export const LeftSection = styled.div`
   gap: 12px;
 
   padding-right: 12px;
-`
-
-export const Avatar = styled.img`
-  width: 100%;
-
-  object-fit: contain;
-  border: 2px solid ${({ theme }) => theme.colors.white_50};
-  border-radius: 50%;
 `
 
 export const WrapperBars = styled.div`

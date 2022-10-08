@@ -20,7 +20,7 @@ export const CharacterEffect = ({ effect, characterId }: I_CharacterEffectProps)
   }
 
   return (
-    <Tippy content={<TooltipOverlay name={effect.name} description={effect.description} />}>
+    <Tippy content={<TooltipContent name={effect.name} description={effect.description} />}>
       <S.Effect>
         <S.EffectIcon type={effect.type}>{getGameIcon(effect.icon)}</S.EffectIcon>
         <S.EffectRemove onClick={handleRemoveEffect}>
@@ -36,7 +36,7 @@ interface I_TooltipOverlayProps {
   description: string
 }
 
-const TooltipOverlay = ({ name, description }: I_TooltipOverlayProps) => (
+const TooltipContent = ({ name, description }: I_TooltipOverlayProps) => (
   <div>
     <div>{name}</div>
     <hr />
