@@ -16,7 +16,7 @@ export const CharacterEffect = ({ effect, characterId }: I_CharacterEffectProps)
   const { removeCharacterEffect } = useActions()
 
   const handleRemoveEffect = () => {
-    removeCharacterEffect({ characterId, effectName: effect.name })
+    removeCharacterEffect({ characterId, effectId: effect.id })
   }
 
   return (

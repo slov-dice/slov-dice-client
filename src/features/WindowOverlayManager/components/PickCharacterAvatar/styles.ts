@@ -8,14 +8,18 @@ export const OverlayContent = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 24px;
-  justify-content: center;
 
-  padding: 8px;
+  padding: 16px;
 `
 
-export const AvatarItem = styled.div`
+export const AvatarWrapper = styled.div`
+  overflow: hidden;
+
   width: 156px;
   height: 156px;
+
+  border: 2px solid ${({ theme }) => theme.colors.white_50};
+  border-radius: 50%;
 
   img {
     width: 100%;

@@ -2,12 +2,12 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 import { characters } from './data'
 
-import { E_WindowOverlay } from 'features/WindowOverlayManager/models'
-import { I_Character } from 'models/game/character'
+import { E_WindowOverlay, I_WindowOverlay } from 'features/WindowOverlayManager/models'
+import { I_Character, T_EffectId } from 'models/game/character'
 
 interface I_InitialState {
   characters: I_Character[]
-  overlays: E_WindowOverlay[]
+  overlays: I_WindowOverlay[]
 }
 
 const initialState: I_InitialState = {
@@ -29,6 +29,7 @@ export const gameCharactersSlice = createSlice({
         bar.current = action.payload.barValue
       }
     },
+
     setCharacterSpecial: (
       state,
       action: PayloadAction<{ characterId: string; specialName: string; specialValue: number }>,
@@ -39,6 +40,7 @@ export const gameCharactersSlice = createSlice({
         special.current = action.payload.specialValue
       }
     },
+
     setCharacterLevel: (
       state,
       action: PayloadAction<{ characterId: string; levelValue: number }>,
@@ -48,23 +50,37 @@ export const gameCharactersSlice = createSlice({
         character.level = action.payload.levelValue
       }
     },
-    removeCharacterEffect: (
+
+    addCharacterEffect: (
       state,
-      action: PayloadAction<{ characterId: string; effectName: string }>,
+      action: PayloadAction<{ characterId: string; effectId: T_EffectId }>,
     ) => {
       const character = state.characters.find((item) => item.id === action.payload.characterId)
       if (character) {
-        character.effects = character.effects.filter(
-          (effect) => effect.name !== action.payload.effectName,
-        )
+        character.effects.push(action.payload.effectId)
       }
     },
-    openCharacterWindowOverlay: (state, action: PayloadAction<E_WindowOverlay>) => {
+
+    removeCharacterEffect: (
+      state,
+      action: PayloadAction<{ characterId: string; effectId: T_EffectId }>,
+    ) => {
+      const character = state.characters.find((item) => item.id === action.payload.characterId)
+      if (character) {
+        character.effects = character.effects.filter((effect) => effect !== action.payload.effectId)
+      }
+    },
+
+    openCharacterWindowOverlay: (state, action: PayloadAction<I_WindowOverlay>) => {
       state.overlays.push(action.payload)
     },
+
     closeCharacterWindowOverlay: (state, action: PayloadAction<E_WindowOverlay>) => {
-      state.overlays = state.overlays.filter((overlay) => overlay !== action.payload)
+      state.overlays = state.overlays.map((overlay) =>
+        overlay.name === action.payload ? { ...overlay, isOpen: false } : overlay,
+      )
     },
+
     closeLastCharacterWindowOverlay: (state) => {
       state.overlays.pop()
     },

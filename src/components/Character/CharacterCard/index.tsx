@@ -10,6 +10,7 @@ import {
 } from '../'
 
 import EditIcon from 'assets/icons/app/edit.svg'
+import { getEffect } from 'features/WindowOverlayManager/components/AddCharacterEffect/data'
 import { E_WindowOverlay } from 'features/WindowOverlayManager/models'
 import { useActions } from 'hooks/useActions'
 import { I_Character } from 'models/game/character'
@@ -23,7 +24,7 @@ export const CharacterCard = ({ character }: I_CharacterCardProps) => {
   const { openCharacterWindowOverlay, setCharacterLevel } = useActions()
 
   const handleOpenUpdateCharacterOverlay = () => {
-    openCharacterWindowOverlay(E_WindowOverlay.updateCharacter)
+    openCharacterWindowOverlay({ name: E_WindowOverlay.updateCharacter, isOpen: true })
   }
 
   const handleChangeCharacterLevel = (value: number) => {
@@ -50,10 +51,13 @@ export const CharacterCard = ({ character }: I_CharacterCardProps) => {
             ))}
           </div>
           <S.WrapperEffects>
-            {character.effects.map((effect) => (
-              <CharacterEffect key={effect.name} effect={effect} characterId={character.id} />
-            ))}
-            <AddCharacterEffect />
+            {character.effects.map((effectId) => {
+              const effect = getEffect(effectId)
+              return (
+                <CharacterEffect key={effect.name} effect={effect} characterId={character.id} />
+              )
+            })}
+            <AddCharacterEffect characterId={character.id} />
           </S.WrapperEffects>
           <S.Actions>
             <C.Control onClick={handleOpenUpdateCharacterOverlay}>

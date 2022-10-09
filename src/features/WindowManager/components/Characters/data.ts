@@ -1,9 +1,7 @@
 import imageChar1 from 'assets/images/char1.png'
 import imageChar2 from 'assets/images/char2.png'
-import imageChar3 from 'assets/images/char3.png'
 import imageChar4 from 'assets/images/char4.png'
-import { I_Character, E_EffectType } from 'models/game/character'
-import { E_GameIcon } from 'utils/helpers/icons/game'
+import { I_Character } from 'models/game/character'
 
 export const characters: I_Character[] = [
   {
@@ -23,26 +21,7 @@ export const characters: I_Character[] = [
       { name: 'Ловкость', current: 1, max: 20, color: '#CC397B' },
       { name: 'Харизма', current: 18, max: 20, color: '#CC397B' },
     ],
-    effects: [
-      {
-        name: 'Сходил в качалку',
-        description: '+2 к максимальной выносливости, +2 к силе',
-        icon: E_GameIcon.muscleUp,
-        type: E_EffectType.positive,
-      },
-      {
-        name: 'Рвота',
-        description: '-2 к максимальной выносливости',
-        icon: E_GameIcon.vomiting,
-        type: E_EffectType.negative,
-      },
-      {
-        name: 'Перелом',
-        description: '-10 хп, -2 к максимальной выносливости',
-        icon: E_GameIcon.brokenBone,
-        type: E_EffectType.negative,
-      },
-    ],
+    effects: ['1', '2', '3'],
   },
   {
     id: '124',
@@ -61,14 +40,7 @@ export const characters: I_Character[] = [
       { name: 'Ловкость', current: 1, max: 20, color: '#CC397B' },
       { name: 'Харизма', current: 18, max: 20, color: '#CC397B' },
     ],
-    effects: [
-      {
-        name: 'Перелом',
-        description: '-10 хп, -2 к максимальной выносливости',
-        icon: E_GameIcon.brokenBone,
-        type: E_EffectType.negative,
-      },
-    ],
+    effects: ['3'],
   },
   {
     id: '126',
@@ -87,31 +59,6 @@ export const characters: I_Character[] = [
       { name: 'Ловкость', current: 1, max: 20, color: '#CC397B' },
       { name: 'Харизма', current: 18, max: 20, color: '#CC397B' },
     ],
-    effects: [
-      {
-        name: 'Сходил в качалку',
-        description: '+2 к выносливости, +2 к силе',
-        icon: E_GameIcon.muscleUp,
-        type: E_EffectType.positive,
-      },
-      {
-        name: 'Переел',
-        description: '+20 к максимальному хп, -1 к максимальной выносливости',
-        icon: E_GameIcon.muscleFat,
-        type: E_EffectType.neutral,
-      },
-      {
-        name: 'Рвота',
-        description: '-2 к максимальной выносливости',
-        icon: E_GameIcon.vomiting,
-        type: E_EffectType.negative,
-      },
-      {
-        name: 'Перелом',
-        description: '-10 хп, -2 к максимальной выносливости',
-        icon: E_GameIcon.brokenBone,
-        type: E_EffectType.negative,
-      },
-    ],
+    effects: ['1', '2', '3', '4'],
   },
 ]

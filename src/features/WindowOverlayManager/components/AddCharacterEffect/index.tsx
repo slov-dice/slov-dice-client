@@ -1,18 +1,43 @@
-import { useCallback } from 'react'
-
+import { dataCharacterEffects } from './data'
 import * as S from './styles'
 
 import CloseIcon from 'assets/icons/app/close.svg'
+import PlusIcon from 'assets/icons/app/plus.svg'
 import { E_WindowOverlay } from 'features/WindowOverlayManager/models'
 import { useActions } from 'hooks/useActions'
+import { useStoreSelector } from 'hooks/useStoreSelector'
+import { T_EffectId } from 'models/game/character'
 import * as C from 'styles/components'
+import { getGameIcon } from 'utils/helpers/icons/game'
 
 export const AddCharacterEffectOverlay = () => {
-  const { closeCharacterWindowOverlay } = useActions()
+  const { closeCharacterWindowOverlay, removeCharacterEffect, addCharacterEffect } = useActions()
 
-  const handleClose = useCallback(() => {
+  const payload = useStoreSelector(
+    (state) =>
+      state.gameCharacters.overlays.find(
+        (overlay) => overlay.name === E_WindowOverlay.addCharacterEffect,
+      )?.payload,
+  )
+
+  const characterEffects = useStoreSelector(
+    (state) =>
+      state.gameCharacters.characters.find((character) => character.id === payload)?.effects,
+  )
+
+  const handleClose = () => {
     closeCharacterWindowOverlay(E_WindowOverlay.addCharacterEffect)
-  }, [closeCharacterWindowOverlay])
+  }
+
+  const handleToggleEffect = (effectId: T_EffectId) => () => {
+    if (payload) {
+      if (characterEffects?.includes(effectId)) {
+        removeCharacterEffect({ characterId: payload, effectId })
+        return
+      }
+      addCharacterEffect({ characterId: payload, effectId })
+    }
+  }
 
   return (
     <div>
@@ -22,10 +47,28 @@ export const AddCharacterEffectOverlay = () => {
           <CloseIcon />
         </C.Control>
       </S.OverlayHeader>
-      <div>1 | text</div>
-      <div>2 | text</div>
-      <div>3 | text</div>
-      <div>4 | text</div>
+      <S.OverlayContent>
+        <S.EffectsContainer>
+          {dataCharacterEffects.map((effect) => (
+            <S.EffectWrapper key={effect.id}>
+              <S.IconWrapper>
+                <S.IconInner>{getGameIcon(effect.icon)}</S.IconInner>
+              </S.IconWrapper>
+              <S.DescriptionWrapper>
+                <div>{effect.name}</div>
+                <hr />
+                <div>{effect.description}</div>
+              </S.DescriptionWrapper>
+              <S.ActionWrapper onClick={handleToggleEffect(effect.id)}>
+                <S.ActionInner isSelected={characterEffects?.includes(effect.id) || false}>
+                  <PlusIcon />
+                </S.ActionInner>
+              </S.ActionWrapper>
+            </S.EffectWrapper>
+          ))}
+        </S.EffectsContainer>
+        <C.Divider decorated />
+      </S.OverlayContent>
     </div>
   )
 }

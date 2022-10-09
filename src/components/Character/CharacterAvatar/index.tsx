@@ -13,7 +13,7 @@ export const CharacterAvatar = ({ image }: I_CharacterAvatarProps) => {
   const { openCharacterWindowOverlay } = useActions()
 
   const handleOpenPickCharacterAvatarOverlay = () => {
-    openCharacterWindowOverlay(E_WindowOverlay.pickCharacterAvatar)
+    openCharacterWindowOverlay({ name: E_WindowOverlay.pickCharacterAvatar })
   }
 
   return (

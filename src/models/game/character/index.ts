@@ -1,14 +1,17 @@
 import { E_GameIcon } from 'utils/helpers/icons/game'
 
+export type T_CharacterId = string
+export type T_EffectId = string
+
 export interface I_Character {
-  id: string
+  id: T_CharacterId
   name: string
   description: string
   avatar: string
   level: number
   bars: T_CharacterBar[]
   specials: T_CharacterSpecial[]
-  effects: T_CharacterEffect[]
+  effects: T_EffectId[]
 }
 
 export type T_CharacterBar = {
@@ -32,6 +35,7 @@ export enum E_EffectType {
 }
 
 export type T_CharacterEffect = {
+  id: T_EffectId
   name: string
   description: string
   icon: E_GameIcon

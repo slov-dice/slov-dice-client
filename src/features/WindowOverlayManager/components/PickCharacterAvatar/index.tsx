@@ -25,9 +25,9 @@ export const PickCharacterAvatarOverlay = () => {
       </S.OverlayHeader>
       <S.OverlayContent>
         {characterAvatars.map((avatar, index) => (
-          <S.AvatarItem key={index}>
+          <S.AvatarWrapper key={index}>
             <img alt='avatar' src={avatar} />
-          </S.AvatarItem>
+          </S.AvatarWrapper>
         ))}
       </S.OverlayContent>
     </div>

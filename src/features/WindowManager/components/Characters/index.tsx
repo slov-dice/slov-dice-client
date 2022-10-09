@@ -15,7 +15,7 @@ export const CharactersContent = () => {
   const { openCharacterWindowOverlay, closeLastCharacterWindowOverlay } = useActions()
 
   const handleOpenCreateCharacterOverlay = () => {
-    openCharacterWindowOverlay(E_WindowOverlay.createCharacter)
+    openCharacterWindowOverlay({ name: E_WindowOverlay.createCharacter, isOpen: true })
   }
 
   const handleEsc = useCallback(
