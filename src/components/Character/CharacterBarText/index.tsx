@@ -3,50 +3,42 @@ import { useRef } from 'react'
 import * as S from './styles'
 
 import { useEditable } from 'hooks/useEditable'
-import { T_CharacterBar } from 'models/game/character'
 import { numberWithSpaces } from 'utils/helpers/text'
 
-interface I_BarProps {
-  values: T_CharacterBar
+interface I_CharacterBarTextProps {
+  value: number
+  name: string
   onChange: (name: string, value: number) => void
 }
 
-export const CharacterBar = ({ values, onChange }: I_BarProps) => {
+export const CharacterBarText = ({ value, onChange, name }: I_CharacterBarTextProps) => {
   const inputRef = useRef<HTMLInputElement>(null)
 
   const calculateValue = () => {
     if (/^[+-][0-9]+$/.test(inputValue)) {
-      let result = values.current + +inputValue
+      let result = value + +inputValue
       if (result < 0) result = 0
-      onChange(values.name, result)
+      onChange(name, result)
       return
     }
 
     if (/^[0-9]+$/.test(inputValue)) {
-      onChange(values.name, +inputValue)
+      onChange(name, +inputValue)
     }
   }
 
   const { handleEdit, handleKeyDown, handleBlur, isEdit, inputValue, handleChangeInput } =
     useEditable({
       inputRef,
-      initialInputValue: String(values.current),
+      initialInputValue: String(value),
       onEnterPress: calculateValue,
       pattern: 'numeric',
     })
 
-  const calculateBarProgressWidth = (current: number, max: number) => {
-    const result = (current * 100) / max
-    if (result > 100) {
-      return 100
-    }
-    return result
-  }
-
   return (
-    <S.BarWrapper>
+    <S.BarTextWrapper onClick={!isEdit ? handleEdit : undefined}>
       {isEdit ? (
-        <S.BarInput
+        <S.BarTextInput
           ref={inputRef}
           value={inputValue}
           onChange={handleChangeInput}
@@ -55,15 +47,8 @@ export const CharacterBar = ({ values, onChange }: I_BarProps) => {
           maxLength={16}
         />
       ) : (
-        <S.BarLabel onClick={handleEdit}>
-          {numberWithSpaces(values.current)}/{numberWithSpaces(values.max)}
-        </S.BarLabel>
+        <span>{numberWithSpaces(value)}</span>
       )}
-
-      <S.BarProgress
-        color={values.color}
-        width={calculateBarProgressWidth(values.current, values.max)}
-      />
-    </S.BarWrapper>
+    </S.BarTextWrapper>
   )
 }

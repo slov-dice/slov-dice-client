@@ -5,7 +5,7 @@ import { barAttrs } from './motion'
 
 import { EditableInput } from 'styles/components'
 
-export const Bar = styled(motion.div).attrs(barAttrs)`
+export const BarWrapper = styled(motion.div).attrs(barAttrs)`
   cursor: pointer;
 
   position: relative;

@@ -5,7 +5,7 @@ import { specialAttrs } from './motion'
 
 import { EditableInput } from 'styles/components'
 
-export const Special = styled(motion.div).attrs(({ theme }) => specialAttrs(theme))`
+export const SpecialWrapper = styled(motion.div).attrs(({ theme }) => specialAttrs(theme))`
   cursor: pointer;
 
   display: flex;

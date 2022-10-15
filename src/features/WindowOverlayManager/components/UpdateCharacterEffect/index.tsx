@@ -10,13 +10,13 @@ import { T_EffectId } from 'models/game/character'
 import * as C from 'styles/components'
 import { getGameIcon } from 'utils/helpers/icons/game'
 
-export const AddCharacterEffectOverlay = () => {
+export const UpdateCharacterEffectOverlay = () => {
   const { closeCharacterWindowOverlay, removeCharacterEffect, addCharacterEffect } = useActions()
 
   const payload = useStoreSelector(
     (state) =>
       state.gameCharacters.overlays.find(
-        (overlay) => overlay.name === E_WindowOverlay.addCharacterEffect,
+        (overlay) => overlay.name === E_WindowOverlay.updateCharacterEffect,
       )?.payload,
   )
 
@@ -26,7 +26,7 @@ export const AddCharacterEffectOverlay = () => {
   )
 
   const handleClose = () => {
-    closeCharacterWindowOverlay(E_WindowOverlay.addCharacterEffect)
+    closeCharacterWindowOverlay(E_WindowOverlay.updateCharacterEffect)
   }
 
   const handleToggleEffect = (effectId: T_EffectId) => () => {

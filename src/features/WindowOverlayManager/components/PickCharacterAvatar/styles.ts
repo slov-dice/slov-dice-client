@@ -1,4 +1,7 @@
+import { motion } from 'framer-motion'
 import styled from 'styled-components'
+
+import * as m from './motion'
 
 import { OverlayHeaderBase } from '../styles'
 
@@ -12,13 +15,18 @@ export const OverlayContent = styled.div`
   padding: 16px;
 `
 
-export const AvatarWrapper = styled.div`
+export const AvatarWrapper = styled(motion.div).attrs<{ isSelected: boolean }>(
+  ({ theme, isSelected }) => m.avatarWrapperAttrs(theme, isSelected),
+)<{ isSelected: boolean }>`
+  cursor: ${({ isSelected }) => (isSelected ? 'default' : 'pointer')};
+
   overflow: hidden;
 
   width: 156px;
   height: 156px;
 
-  border: 2px solid ${({ theme }) => theme.colors.white_50};
+  border-style: solid;
+  border-width: 2px;
   border-radius: 50%;
 
   img {

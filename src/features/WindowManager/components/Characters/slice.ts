@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-import { characters } from './data'
+import { characters, initialStateSlice } from './data'
 
 import { E_WindowOverlay, I_WindowOverlay } from 'features/WindowOverlayManager/models'
 import { I_Character, T_EffectId } from 'models/game/character'
@@ -8,11 +8,15 @@ import { I_Character, T_EffectId } from 'models/game/character'
 interface I_InitialState {
   characters: I_Character[]
   overlays: I_WindowOverlay[]
+  characterCreator: {
+    avatar: string
+  }
 }
 
 const initialState: I_InitialState = {
   characters: characters,
-  overlays: [],
+  overlays: initialStateSlice,
+  characterCreator: { avatar: '' },
 }
 
 export const gameCharactersSlice = createSlice({
@@ -71,8 +75,32 @@ export const gameCharactersSlice = createSlice({
       }
     },
 
+    setCharacterAvatar: (state, action: PayloadAction<{ characterId: string; avatar: string }>) => {
+      // Если создаётся персонаж
+      if (action.payload.characterId === 'characterCreator') {
+        state.characterCreator.avatar = action.payload.avatar
+        return
+      }
+      const character = state.characters.find((item) => item.id === action.payload.characterId)
+      if (character) {
+        character.avatar = action.payload.avatar
+      }
+    },
+
+    setCharacterName: (
+      state,
+      action: PayloadAction<{ characterId: string; nameValue: string }>,
+    ) => {
+      const character = state.characters.find((item) => item.id === action.payload.characterId)
+      if (character) {
+        character.name = action.payload.nameValue
+      }
+    },
+
     openCharacterWindowOverlay: (state, action: PayloadAction<I_WindowOverlay>) => {
-      state.overlays.push(action.payload)
+      state.overlays = state.overlays.map((overlay) =>
+        overlay.name === action.payload.name ? action.payload : overlay,
+      )
     },
 
     closeCharacterWindowOverlay: (state, action: PayloadAction<E_WindowOverlay>) => {
@@ -82,7 +110,7 @@ export const gameCharactersSlice = createSlice({
     },
 
     closeLastCharacterWindowOverlay: (state) => {
-      state.overlays.pop()
+      state.overlays = state.overlays.map((overlay) => ({ ...overlay, isOpen: false }))
     },
   },
 })

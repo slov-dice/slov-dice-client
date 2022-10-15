@@ -3,7 +3,7 @@ import { useRef } from 'react'
 import * as S from './styles'
 
 import { useActions } from 'hooks/useActions'
-import { useEditableNumeric } from 'hooks/useEditableNumeric'
+import { useEditable } from 'hooks/useEditable'
 import { T_CharacterSpecial } from 'models/game/character'
 
 interface I_CharacterSpecial {
@@ -15,7 +15,7 @@ export const CharacterSpecial = ({ values, characterId }: I_CharacterSpecial) =>
   const inputRef = useRef<HTMLInputElement>(null)
   const { setCharacterSpecial } = useActions()
 
-  const calculateValue = () => {
+  const handleCalculateValue = () => {
     if (/^[+-][0-9]+$/.test(inputValue)) {
       let result = values.current + +inputValue
       if (result < 0) result = 0
@@ -29,14 +29,15 @@ export const CharacterSpecial = ({ values, characterId }: I_CharacterSpecial) =>
   }
 
   const { handleEdit, handleKeyDown, handleBlur, isEdit, inputValue, handleChangeInput } =
-    useEditableNumeric({
+    useEditable({
       inputRef,
       initialInputValue: String(values.current),
-      onEnterPress: calculateValue,
+      onEnterPress: handleCalculateValue,
+      pattern: 'numeric',
     })
 
   return (
-    <S.Special onClick={!isEdit ? handleEdit : undefined}>
+    <S.SpecialWrapper onClick={!isEdit ? handleEdit : undefined}>
       <span>{values.name}</span>{' '}
       {isEdit ? (
         <S.SpecialInput
@@ -50,6 +51,6 @@ export const CharacterSpecial = ({ values, characterId }: I_CharacterSpecial) =>
       ) : (
         <S.SpecialValue>{values.current}</S.SpecialValue>
       )}
-    </S.Special>
+    </S.SpecialWrapper>
   )
 }

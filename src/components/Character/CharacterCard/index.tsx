@@ -6,11 +6,12 @@ import {
   CharacterBar,
   CharacterEffect,
   CharacterLevel,
+  CharacterName,
   CharacterSpecial,
 } from '../'
 
 import EditIcon from 'assets/icons/app/edit.svg'
-import { getEffect } from 'features/WindowOverlayManager/components/AddCharacterEffect/data'
+import { getEffect } from 'features/WindowOverlayManager/components/UpdateCharacterEffect/data'
 import { E_WindowOverlay } from 'features/WindowOverlayManager/models'
 import { useActions } from 'hooks/useActions'
 import { I_Character } from 'models/game/character'
@@ -21,36 +22,51 @@ interface I_CharacterCardProps {
 }
 
 export const CharacterCard = ({ character }: I_CharacterCardProps) => {
-  const { openCharacterWindowOverlay, setCharacterLevel } = useActions()
+  const { openCharacterWindowOverlay, setCharacterLevel, setCharacterBar, setCharacterName } =
+    useActions()
 
   const handleOpenUpdateCharacterOverlay = () => {
-    openCharacterWindowOverlay({ name: E_WindowOverlay.updateCharacter, isOpen: true })
+    openCharacterWindowOverlay({
+      name: E_WindowOverlay.updateCharacter,
+      isOpen: true,
+      payload: character.id,
+    })
   }
 
   const handleChangeCharacterLevel = (value: number) => {
     setCharacterLevel({ characterId: character.id, levelValue: value })
   }
 
+  const handleChangeCharacterBar = (name: string, value: number) => {
+    setCharacterBar({ characterId: character.id, barName: name, barValue: value })
+  }
+
+  const handleChangeCharacterName = (value: string) => {
+    setCharacterName({ characterId: character.id, nameValue: value })
+  }
+
   return (
-    <S.Card>
+    <S.CardWrapper>
       <S.LeftSection>
         <CharacterLevel onChange={handleChangeCharacterLevel} value={character.level} />
-        <CharacterAvatar image={character.avatar} />
-        <S.WrapperBars>
+        <CharacterAvatar image={character.avatar} characterId={character.id} />
+        <S.BarsWrapper>
           {character.bars.map((bar) => (
-            <CharacterBar key={bar.name} characterId={character.id} values={bar} />
+            <CharacterBar key={bar.name} onChange={handleChangeCharacterBar} values={bar} />
           ))}
-        </S.WrapperBars>
+        </S.BarsWrapper>
       </S.LeftSection>
       <S.RightSection>
-        <S.LabelName>{character.name}</S.LabelName>
-        <S.WrapperInfo>
+        <S.NameWrapper>
+          <CharacterName value={character.name} onChange={handleChangeCharacterName} />
+        </S.NameWrapper>
+        <S.InfoWrapper>
           <div>
             {character.specials.map((special) => (
               <CharacterSpecial key={special.name} characterId={character.id} values={special} />
             ))}
           </div>
-          <S.WrapperEffects>
+          <S.EffectsWrapper>
             {character.effects.map((effectId) => {
               const effect = getEffect(effectId)
               return (
@@ -58,14 +74,14 @@ export const CharacterCard = ({ character }: I_CharacterCardProps) => {
               )
             })}
             <AddCharacterEffect characterId={character.id} />
-          </S.WrapperEffects>
+          </S.EffectsWrapper>
           <S.Actions>
             <C.Control onClick={handleOpenUpdateCharacterOverlay}>
               <EditIcon />
             </C.Control>
           </S.Actions>
-        </S.WrapperInfo>
+        </S.InfoWrapper>
       </S.RightSection>
-    </S.Card>
+    </S.CardWrapper>
   )
 }

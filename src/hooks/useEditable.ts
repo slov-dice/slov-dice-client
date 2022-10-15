@@ -1,20 +1,22 @@
 import { RefObject, useEffect, useState, KeyboardEvent, ChangeEvent } from 'react'
 
-interface I_UseEditableNumeric {
-  inputRef: RefObject<HTMLInputElement> | null
+interface I_UseEditable {
+  inputRef: RefObject<HTMLInputElement | HTMLTextAreaElement> | null
   initialInputValue: string
   onEnterPress: () => void
+  pattern: 'numeric' | 'text'
 }
 
-export const useEditableNumeric = ({
+export const useEditable = ({
   inputRef,
   initialInputValue,
   onEnterPress,
-}: I_UseEditableNumeric) => {
+  pattern,
+}: I_UseEditable) => {
   const [isEdit, setEdit] = useState(false)
   const [inputValue, setInputValue] = useState(initialInputValue)
 
-  const handleChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChangeInput = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setInputValue(e.target.value)
   }
 
@@ -29,7 +31,7 @@ export const useEditableNumeric = ({
     }
   }
 
-  const handleKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = (event: KeyboardEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     if (event.code === 'Enter') {
       onEnterPress()
       handleBlur()
@@ -39,16 +41,18 @@ export const useEditableNumeric = ({
       handleBlur()
     }
 
-    if (
-      !/[0-9]/.test(event.key) &&
-      event.key !== '+' &&
-      event.key !== '-' &&
-      event.code !== 'Backspace' &&
-      event.code !== 'Delete' &&
-      event.code !== 'ArrowLeft' &&
-      event.code !== 'ArrowRight'
-    ) {
-      event.preventDefault()
+    if (pattern === 'numeric') {
+      if (
+        !/[0-9]/.test(event.key) &&
+        event.key !== '+' &&
+        event.key !== '-' &&
+        event.code !== 'Backspace' &&
+        event.code !== 'Delete' &&
+        event.code !== 'ArrowLeft' &&
+        event.code !== 'ArrowRight'
+      ) {
+        event.preventDefault()
+      }
     }
   }
 

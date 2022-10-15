@@ -5,11 +5,10 @@ import { levelAttrs } from './motion'
 
 import { EditableInput } from 'styles/components'
 
-export const Level = styled(motion.div).attrs(levelAttrs)`
+export const LevelWrapper = styled(motion.div).attrs(levelAttrs)`
   cursor: pointer;
 
   display: flex;
-  gap: 4px;
   align-items: center;
   justify-content: space-between;
 

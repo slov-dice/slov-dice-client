@@ -16,7 +16,7 @@ export const AddCharacterEffect = ({ characterId }: I_AddCharacterEffectProps) =
 
   const handleOpenAddCharacterOverlay = () => {
     openCharacterWindowOverlay({
-      name: E_WindowOverlay.addCharacterEffect,
+      name: E_WindowOverlay.updateCharacterEffect,
       payload: characterId,
       isOpen: true,
     })

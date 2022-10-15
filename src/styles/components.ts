@@ -79,6 +79,25 @@ export const EditableInput = styled.input`
   outline: none;
 `
 
+export const EditableTextarea = styled.textarea`
+  resize: none;
+
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 100%;
+
+  color: ${({ theme }) => theme.colors.white};
+
+  background: ${({ theme }) => theme.colors.white_10};
+  border: none;
+  outline: none;
+`
+
 export const BaseTooltip = styled.div`
   width: 150px;
   height: auto;

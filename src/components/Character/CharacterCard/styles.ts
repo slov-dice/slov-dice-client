@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const Card = styled.div`
+export const CardWrapper = styled.div`
   overflow: hidden;
   display: grid;
   grid: 1fr / 2fr 2fr;
@@ -26,7 +26,7 @@ export const LeftSection = styled.div`
   padding-right: 12px;
 `
 
-export const WrapperBars = styled.div`
+export const BarsWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -40,17 +40,14 @@ export const RightSection = styled.div`
   border-left: 1px dashed ${({ theme }) => theme.colors.white_50};
 `
 
-export const LabelName = styled.span`
+export const NameWrapper = styled.span`
   padding-bottom: 4px;
-
-  font-size: 18px;
-  font-weight: 500;
-  text-align: center;
+  padding-left: 4px;
 
   border-bottom: 1px dashed ${({ theme }) => theme.colors.white_50};
 `
 
-export const WrapperInfo = styled.div`
+export const InfoWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -60,7 +57,7 @@ export const WrapperInfo = styled.div`
   padding-left: 4px;
 `
 
-export const WrapperEffects = styled.div`
+export const EffectsWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 8px;

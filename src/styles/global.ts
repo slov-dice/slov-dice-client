@@ -29,6 +29,10 @@ export const GlobalStyles = createGlobalStyle`
     }
   }
 
+  input {
+    font-family: Rubik, sans-serif;
+  }
+
   * {
     box-sizing: border-box;
     margin: 0;

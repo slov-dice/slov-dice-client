@@ -7,13 +7,18 @@ import { useActions } from 'hooks/useActions'
 
 interface I_CharacterAvatarProps {
   image?: string
+  characterId?: string
 }
 
-export const CharacterAvatar = ({ image }: I_CharacterAvatarProps) => {
+export const CharacterAvatar = ({ image, characterId }: I_CharacterAvatarProps) => {
   const { openCharacterWindowOverlay } = useActions()
 
   const handleOpenPickCharacterAvatarOverlay = () => {
-    openCharacterWindowOverlay({ name: E_WindowOverlay.pickCharacterAvatar })
+    openCharacterWindowOverlay({
+      name: E_WindowOverlay.pickCharacterAvatar,
+      isOpen: true,
+      payload: characterId,
+    })
   }
 
   return (

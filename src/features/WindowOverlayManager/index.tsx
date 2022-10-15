@@ -12,9 +12,8 @@ export const WindowOverlayManager = ({ overlays }: I_WindowOverlayManagerProps) 
   return (
     <AnimatePresence>
       {overlays.map((overlay) => {
-        const WindowOverlayComponent = windowOverlayComponents[overlay.name]
-
         if (overlay.isOpen) {
+          const WindowOverlayComponent = windowOverlayComponents[overlay.name]
           return (
             <S.WindowOverlay key={overlay.name}>
               <WindowOverlayComponent />

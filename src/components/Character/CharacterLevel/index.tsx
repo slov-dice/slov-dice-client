@@ -2,7 +2,7 @@ import { useRef } from 'react'
 
 import * as S from './styles'
 
-import { useEditableNumeric } from 'hooks/useEditableNumeric'
+import { useEditable } from 'hooks/useEditable'
 
 interface I_CharacterSpecial {
   value: number
@@ -26,14 +26,15 @@ export const CharacterLevel = ({ value, onChange }: I_CharacterSpecial) => {
   }
 
   const { handleEdit, handleKeyDown, handleBlur, isEdit, inputValue, handleChangeInput } =
-    useEditableNumeric({
+    useEditable({
       inputRef,
       initialInputValue: String(value),
       onEnterPress: calculateValue,
+      pattern: 'numeric',
     })
 
   return (
-    <S.Level onClick={!isEdit ? handleEdit : undefined}>
+    <S.LevelWrapper onClick={!isEdit ? handleEdit : undefined}>
       {isEdit ? (
         <S.LevelInput
           ref={inputRef}
@@ -46,6 +47,6 @@ export const CharacterLevel = ({ value, onChange }: I_CharacterSpecial) => {
       ) : (
         <S.LevelLabel>Уровень {value}</S.LevelLabel>
       )}
-    </S.Level>
+    </S.LevelWrapper>
   )
 }

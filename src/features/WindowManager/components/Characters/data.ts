@@ -1,6 +1,7 @@
 import imageChar1 from 'assets/images/char1.png'
 import imageChar2 from 'assets/images/char2.png'
 import imageChar4 from 'assets/images/char4.png'
+import { E_WindowOverlay, I_WindowOverlay } from 'features/WindowOverlayManager/models'
 import { I_Character } from 'models/game/character'
 
 export const characters: I_Character[] = [
@@ -60,5 +61,24 @@ export const characters: I_Character[] = [
       { name: 'Харизма', current: 18, max: 20, color: '#CC397B' },
     ],
     effects: ['1', '2', '3', '4'],
+  },
+]
+
+export const initialStateSlice: I_WindowOverlay[] = [
+  {
+    isOpen: false,
+    name: E_WindowOverlay.createCharacter,
+  },
+  {
+    isOpen: false,
+    name: E_WindowOverlay.updateCharacter,
+  },
+  {
+    isOpen: false,
+    name: E_WindowOverlay.pickCharacterAvatar,
+  },
+  {
+    isOpen: false,
+    name: E_WindowOverlay.updateCharacterEffect,
   },
 ]

@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 
-export const useMediaQuery = (query: string): boolean => {
+import { E_MediaQuery } from 'styles/theme'
+
+export const useMediaQuery = (query: E_MediaQuery): boolean => {
   const getMatches = (query: string): boolean => {
     return window.matchMedia(query).matches
   }
