@@ -5,7 +5,7 @@ import { effectRemoveAttrs } from './motion'
 
 import { E_EffectType } from 'models/game/character'
 
-export const Effect = styled.span`
+export const EffectWrapper = styled.span`
   position: relative;
 `
 

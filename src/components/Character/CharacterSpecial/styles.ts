@@ -13,12 +13,14 @@ export const SpecialWrapper = styled(motion.div).attrs(({ theme }) => specialAtt
   align-items: center;
   justify-content: space-between;
 
-  padding: 2px;
+  padding: 6px;
 
   border-radius: 4px;
 `
 
 export const SpecialInput = styled(EditableInput)`
+  font-size: 16px;
+  font-weight: 600;
   text-align: end;
 `
 

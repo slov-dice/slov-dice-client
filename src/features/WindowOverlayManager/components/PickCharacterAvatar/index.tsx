@@ -23,6 +23,9 @@ export const PickCharacterAvatarOverlay = () => {
     if (payload === 'characterCreator') {
       return state.gameCharacters.characterCreator.avatar
     }
+    if (payload === 'characterEditor') {
+      return state.gameCharacters.characterEditor.avatar
+    }
     return state.gameCharacters.characters.find((character) => character.id === payload)?.avatar
   })
 

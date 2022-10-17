@@ -3,30 +3,27 @@ import Tippy from '@tippyjs/react'
 import * as S from './styles'
 
 import CloseIcon from 'assets/icons/app/close.svg'
-import { useActions } from 'hooks/useActions'
-import { T_CharacterEffect } from 'models/game/character'
+import { T_CharacterEffect, T_EffectId } from 'models/game/character'
 import { getGameIcon } from 'utils/helpers/icons/game'
 
 interface I_CharacterEffectProps {
-  effect: T_CharacterEffect
-  characterId: string
+  values: T_CharacterEffect
+  onRemove: (effectId: T_EffectId) => void
 }
 
-export const CharacterEffect = ({ effect, characterId }: I_CharacterEffectProps) => {
-  const { removeCharacterEffect } = useActions()
-
+export const CharacterEffect = ({ values, onRemove }: I_CharacterEffectProps) => {
   const handleRemoveEffect = () => {
-    removeCharacterEffect({ characterId, effectId: effect.id })
+    onRemove(values.id)
   }
 
   return (
-    <Tippy content={<TooltipContent name={effect.name} description={effect.description} />}>
-      <S.Effect>
-        <S.EffectIcon type={effect.type}>{getGameIcon(effect.icon)}</S.EffectIcon>
+    <Tippy content={<TooltipContent name={values.name} description={values.description} />}>
+      <S.EffectWrapper>
+        <S.EffectIcon type={values.type}>{getGameIcon(values.icon)}</S.EffectIcon>
         <S.EffectRemove onClick={handleRemoveEffect}>
           <CloseIcon />
         </S.EffectRemove>
-      </S.Effect>
+      </S.EffectWrapper>
     </Tippy>
   )
 }

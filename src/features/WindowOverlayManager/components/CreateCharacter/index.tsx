@@ -1,7 +1,9 @@
 import { useCallback, useState } from 'react'
 
-import { formCreateCharacter, T_FormCreateCharacter, mockBars } from './data'
+import { formCreateCharacter, T_FormCreateCharacter } from './data'
 import * as S from './styles'
+
+import { getEffect } from '../UpdateCharacterEffect/data'
 
 import CloseIcon from 'assets/icons/app/close.svg'
 import { Button } from 'components/Buttons'
@@ -11,15 +13,18 @@ import {
   CharacterName,
   CharacterDescription,
   CharacterBarText,
+  CharacterSpecial,
+  CharacterEffect,
+  AddCharacterEffect,
 } from 'components/Character'
 import { E_WindowOverlay } from 'features/WindowOverlayManager/models'
 import { useActions } from 'hooks/useActions'
 import { useStoreSelector } from 'hooks/useStoreSelector'
-import { I_Character } from 'models/game/character'
 import * as C from 'styles/components'
+import { calculateBarDimension } from 'utils/helpers/calculates'
 
 export const CreateCharacterOverlay = () => {
-  const { closeCharacterWindowOverlay } = useActions()
+  const { closeCharacterWindowOverlay, removeCharacterEffect, createCharacter } = useActions()
   const characterCreator = useStoreSelector((state) => state.gameCharacters.characterCreator)
   const [character, setCharacter] = useState<T_FormCreateCharacter>(formCreateCharacter)
 
@@ -54,21 +59,23 @@ export const CreateCharacterOverlay = () => {
     }))
   }
 
+  const handleChangeCharacterSpecial = (name: string, value: number) => {
+    setCharacter((prev) => ({
+      ...prev,
+      specials: prev.specials.map((special) =>
+        special.name === name ? { ...special, current: value } : special,
+      ),
+    }))
+  }
+
+  const handleRemoveCharacterEffect = (effectId: string) => {
+    removeCharacterEffect({ characterId: 'characterCreator', effectId })
+  }
+
   const handleCreateCharacter = () => {
-    console.table(character)
-    console.table(characterCreator)
-    // const character: I_Character
+    createCharacter({ ...character, ...characterCreator })
+    closeCharacterWindowOverlay(E_WindowOverlay.createCharacter)
   }
-
-  const calculateBarHeight = (current: number, max: number) => {
-    const result = (current * 100) / max
-    if (result > 100) {
-      return 100
-    }
-    return result
-  }
-
-  console.log('character', character)
 
   return (
     <div>
@@ -96,7 +103,7 @@ export const CreateCharacterOverlay = () => {
               <S.BarWrapper
                 key={bar.name}
                 color={bar.color}
-                barHeight={calculateBarHeight(bar.current, bar.max)}
+                barHeight={calculateBarDimension(bar.current, bar.max)}
               >
                 <S.BarName>{bar.name}</S.BarName>
                 <S.BarText>
@@ -116,18 +123,29 @@ export const CreateCharacterOverlay = () => {
             ))}
           </S.ContentBlock>
           <S.ContentBlock>
-            <div>Интеллект</div>
-            <div>Сила</div>
-            <div>Ловкость</div>
-            <div>Харизма</div>
+            {character.specials.map((special) => (
+              <CharacterSpecial
+                key={special.name}
+                values={special}
+                onChange={handleChangeCharacterSpecial}
+              />
+            ))}
           </S.ContentBlock>
-          <S.ContentBlock>
-            <div>Эффекты:</div>
-            <div>Эффект1</div>
-            <div>Эффект2</div>
-            <div>Эффект+</div>
+          <S.ContentBlock direction='row'>
+            {characterCreator.effects.map((effectId) => {
+              const effect = getEffect(effectId)
+              return (
+                <CharacterEffect
+                  key={effect.name}
+                  values={effect}
+                  onRemove={handleRemoveCharacterEffect}
+                />
+              )
+            })}
+            <AddCharacterEffect characterId='characterCreator' />
           </S.ContentBlock>
         </S.ContentWrapper>
+        <C.Divider decorated />
         <S.ContentBottom>
           <Button onClick={handleClose} mod={Button.mod.secondary}>
             Отмена

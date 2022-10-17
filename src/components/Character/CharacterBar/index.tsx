@@ -4,6 +4,7 @@ import * as S from './styles'
 
 import { useEditable } from 'hooks/useEditable'
 import { T_CharacterBar } from 'models/game/character'
+import { calculateBarDimension } from 'utils/helpers/calculates'
 import { numberWithSpaces } from 'utils/helpers/text'
 
 interface I_BarProps {
@@ -35,14 +36,6 @@ export const CharacterBar = ({ values, onChange }: I_BarProps) => {
       pattern: 'numeric',
     })
 
-  const calculateBarProgressWidth = (current: number, max: number) => {
-    const result = (current * 100) / max
-    if (result > 100) {
-      return 100
-    }
-    return result
-  }
-
   return (
     <S.BarWrapper>
       {isEdit ? (
@@ -62,7 +55,7 @@ export const CharacterBar = ({ values, onChange }: I_BarProps) => {
 
       <S.BarProgress
         color={values.color}
-        width={calculateBarProgressWidth(values.current, values.max)}
+        width={calculateBarDimension(values.current, values.max)}
       />
     </S.BarWrapper>
   )

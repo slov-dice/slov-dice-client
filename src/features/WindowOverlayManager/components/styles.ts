@@ -19,3 +19,16 @@ export const OverlayHeaderBase = styled.div`
   background: ${({ theme }) => theme.colors.black};
   border-bottom: 1px dashed ${({ theme }) => theme.colors.primary};
 `
+
+export const ContentBlockBase = styled.div<{ direction?: 'column' | 'row' }>`
+  display: flex;
+  flex-direction: ${({ direction = 'column' }) => (direction === 'column' ? 'column' : 'row')};
+  gap: 16px;
+
+  width: 100%;
+  padding: 12px;
+
+  background-color: #2b2b2b;
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 16%) 0 3px 6px, rgba(0, 0, 0, 23%) 0 3px 6px;
+`

@@ -2,29 +2,27 @@ import { useRef } from 'react'
 
 import * as S from './styles'
 
-import { useActions } from 'hooks/useActions'
 import { useEditable } from 'hooks/useEditable'
 import { T_CharacterSpecial } from 'models/game/character'
 
 interface I_CharacterSpecial {
   values: T_CharacterSpecial
-  characterId: string
+  onChange: (name: string, value: number) => void
 }
 
-export const CharacterSpecial = ({ values, characterId }: I_CharacterSpecial) => {
+export const CharacterSpecial = ({ values, onChange }: I_CharacterSpecial) => {
   const inputRef = useRef<HTMLInputElement>(null)
-  const { setCharacterSpecial } = useActions()
 
   const handleCalculateValue = () => {
     if (/^[+-][0-9]+$/.test(inputValue)) {
       let result = values.current + +inputValue
       if (result < 0) result = 0
-      setCharacterSpecial({ characterId, specialName: values.name, specialValue: result })
+      onChange(values.name, result)
       return
     }
 
     if (/^[0-9]+$/.test(inputValue)) {
-      setCharacterSpecial({ characterId, specialName: values.name, specialValue: +inputValue })
+      onChange(values.name, +inputValue)
     }
   }
 
@@ -46,7 +44,7 @@ export const CharacterSpecial = ({ values, characterId }: I_CharacterSpecial) =>
           onChange={handleChangeInput}
           onBlur={handleBlur}
           onKeyDown={handleKeyDown}
-          maxLength={16}
+          maxLength={4}
         />
       ) : (
         <S.SpecialValue>{values.current}</S.SpecialValue>

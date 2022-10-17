@@ -1,14 +1,10 @@
 import styled from 'styled-components'
 
-import { OverlayHeaderBase } from '../styles'
+import { OverlayHeaderBase, ContentBlockBase } from '../styles'
 
 export const OverlayHeader = styled(OverlayHeaderBase)``
 
 export const OverlayContent = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-
   padding: 16px;
 `
 
@@ -17,6 +13,8 @@ export const ContentTop = styled.div`
   flex-direction: column;
   gap: 16px;
   align-items: center;
+
+  padding-bottom: 8px;
 `
 
 export const ContentWrapper = styled.div`
@@ -25,18 +23,7 @@ export const ContentWrapper = styled.div`
   gap: 24px;
 `
 
-export const ContentBlock = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-
-  width: 100%;
-  padding: 12px;
-
-  background-color: #2b2b2b;
-  border-radius: 8px;
-  box-shadow: rgba(0, 0, 0, 16%) 0 3px 6px, rgba(0, 0, 0, 23%) 0 3px 6px;
-`
+export const ContentBlock = styled(ContentBlockBase)``
 
 export const BarWrapper = styled.div<{ color: string; barHeight: number }>`
   position: relative;
@@ -92,6 +79,6 @@ export const ContentBottom = styled.div`
   grid: 1fr / 1fr 2fr;
   gap: 16px;
 
-  min-width: min(600px, 100%);
+  max-width: min(600px, 100%);
   margin-left: auto;
 `

@@ -24,7 +24,6 @@ export type T_CharacterBar = {
 export type T_CharacterSpecial = {
   name: string
   current: number
-  max: number
   color: string
 }
 

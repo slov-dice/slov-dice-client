@@ -22,10 +22,18 @@ interface I_CharacterCardProps {
 }
 
 export const CharacterCard = ({ character }: I_CharacterCardProps) => {
-  const { openCharacterWindowOverlay, setCharacterLevel, setCharacterBar, setCharacterName } =
-    useActions()
+  const {
+    openCharacterWindowOverlay,
+    setCharacterLevel,
+    setCharacterBar,
+    setCharacterName,
+    setCharacterSpecial,
+    removeCharacterEffect,
+    setCharacterEditor,
+  } = useActions()
 
   const handleOpenUpdateCharacterOverlay = () => {
+    setCharacterEditor(character)
     openCharacterWindowOverlay({
       name: E_WindowOverlay.updateCharacter,
       isOpen: true,
@@ -43,6 +51,14 @@ export const CharacterCard = ({ character }: I_CharacterCardProps) => {
 
   const handleChangeCharacterName = (value: string) => {
     setCharacterName({ characterId: character.id, nameValue: value })
+  }
+
+  const handleChangeCharacterSpecial = (name: string, value: number) => {
+    setCharacterSpecial({ characterId: character.id, specialName: name, specialValue: value })
+  }
+
+  const handleRemoveCharacterEffect = (effectId: string) => {
+    removeCharacterEffect({ characterId: character.id, effectId })
   }
 
   return (
@@ -63,14 +79,22 @@ export const CharacterCard = ({ character }: I_CharacterCardProps) => {
         <S.InfoWrapper>
           <div>
             {character.specials.map((special) => (
-              <CharacterSpecial key={special.name} characterId={character.id} values={special} />
+              <CharacterSpecial
+                key={special.name}
+                values={special}
+                onChange={handleChangeCharacterSpecial}
+              />
             ))}
           </div>
           <S.EffectsWrapper>
             {character.effects.map((effectId) => {
               const effect = getEffect(effectId)
               return (
-                <CharacterEffect key={effect.name} effect={effect} characterId={character.id} />
+                <CharacterEffect
+                  key={effect.name}
+                  values={effect}
+                  onRemove={handleRemoveCharacterEffect}
+                />
               )
             })}
             <AddCharacterEffect characterId={character.id} />

@@ -20,10 +20,12 @@ export const UpdateCharacterEffectOverlay = () => {
       )?.payload,
   )
 
-  const characterEffects = useStoreSelector(
-    (state) =>
-      state.gameCharacters.characters.find((character) => character.id === payload)?.effects,
-  )
+  const characterEffects = useStoreSelector((state) => {
+    if (payload === 'characterCreator') {
+      return state.gameCharacters.characterCreator.effects
+    }
+    return state.gameCharacters.characters.find((character) => character.id === payload)?.effects
+  })
 
   const handleClose = () => {
     closeCharacterWindowOverlay(E_WindowOverlay.updateCharacterEffect)

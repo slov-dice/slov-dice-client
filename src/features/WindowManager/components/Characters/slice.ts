@@ -4,19 +4,26 @@ import { characters, initialStateSlice } from './data'
 
 import { E_WindowOverlay, I_WindowOverlay } from 'features/WindowOverlayManager/models'
 import { I_Character, T_EffectId } from 'models/game/character'
+import { getRandomThousand } from 'utils/helpers/generators'
 
 interface I_InitialState {
   characters: I_Character[]
   overlays: I_WindowOverlay[]
   characterCreator: {
     avatar: string
+    effects: T_EffectId[]
+  }
+  characterEditor: {
+    avatar: string
+    effects: T_EffectId[]
   }
 }
 
 const initialState: I_InitialState = {
   characters: characters,
   overlays: initialStateSlice,
-  characterCreator: { avatar: '' },
+  characterCreator: { avatar: '', effects: [] },
+  characterEditor: { avatar: '', effects: [] },
 }
 
 export const gameCharactersSlice = createSlice({
@@ -59,6 +66,11 @@ export const gameCharactersSlice = createSlice({
       state,
       action: PayloadAction<{ characterId: string; effectId: T_EffectId }>,
     ) => {
+      // Если создаётся персонаж
+      if (action.payload.characterId === 'characterCreator') {
+        state.characterCreator.effects.push(action.payload.effectId)
+        return
+      }
       const character = state.characters.find((item) => item.id === action.payload.characterId)
       if (character) {
         character.effects.push(action.payload.effectId)
@@ -69,6 +81,13 @@ export const gameCharactersSlice = createSlice({
       state,
       action: PayloadAction<{ characterId: string; effectId: T_EffectId }>,
     ) => {
+      // Если создаётся персонаж
+      if (action.payload.characterId === 'characterCreator') {
+        state.characterCreator.effects = state.characterCreator.effects.filter(
+          (effect) => effect !== action.payload.effectId,
+        )
+        return
+      }
       const character = state.characters.find((item) => item.id === action.payload.characterId)
       if (character) {
         character.effects = character.effects.filter((effect) => effect !== action.payload.effectId)
@@ -81,6 +100,13 @@ export const gameCharactersSlice = createSlice({
         state.characterCreator.avatar = action.payload.avatar
         return
       }
+
+      // Если персонаж редактируется
+      if (action.payload.characterId === 'characterEditor') {
+        state.characterEditor.avatar = action.payload.avatar
+        return
+      }
+
       const character = state.characters.find((item) => item.id === action.payload.characterId)
       if (character) {
         character.avatar = action.payload.avatar
@@ -94,6 +120,13 @@ export const gameCharactersSlice = createSlice({
       const character = state.characters.find((item) => item.id === action.payload.characterId)
       if (character) {
         character.name = action.payload.nameValue
+      }
+    },
+
+    setCharacterEditor: (state, action: PayloadAction<I_Character>) => {
+      state.characterEditor = {
+        avatar: action.payload.avatar,
+        effects: action.payload.effects,
       }
     },
 
@@ -111,6 +144,12 @@ export const gameCharactersSlice = createSlice({
 
     closeLastCharacterWindowOverlay: (state) => {
       state.overlays = state.overlays.map((overlay) => ({ ...overlay, isOpen: false }))
+    },
+
+    createCharacter: (state, action: PayloadAction<Omit<I_Character, 'id'>>) => {
+      const user = { ...action.payload, id: getRandomThousand() }
+      state.characterCreator = { avatar: '', effects: [] }
+      state.characters.push(user)
     },
   },
 })
