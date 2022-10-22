@@ -1,6 +1,12 @@
 import styled from 'styled-components'
 
-import { OverlayHeaderBase, ContentBlockBase } from '../styles'
+import {
+  OverlayHeaderBase,
+  ContentBlockBase,
+  BarNameBase,
+  BarTextBase,
+  BarWrapperBase,
+} from '../styles'
 
 export const OverlayHeader = styled(OverlayHeaderBase)``
 
@@ -25,54 +31,11 @@ export const ContentWrapper = styled.div`
 
 export const ContentBlock = styled(ContentBlockBase)``
 
-export const BarWrapper = styled.div<{ color: string; barHeight: number }>`
-  position: relative;
+export const BarWrapper = styled(BarWrapperBase)``
 
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
+export const BarName = styled(BarNameBase)``
 
-  padding-left: 12px;
-
-  :before {
-    content: '';
-
-    position: absolute;
-    bottom: 0;
-    left: 0;
-
-    width: 3px;
-    height: ${({ barHeight }) => barHeight}%;
-
-    background-color: ${({ color }) => color};
-
-    transition: height 500ms ease;
-  }
-
-  :after {
-    content: '';
-
-    position: absolute;
-    left: 0;
-
-    width: 3px;
-    height: 100%;
-
-    opacity: 0.5;
-    background-color: ${({ color }) => color};
-  }
-`
-
-export const BarName = styled.span`
-  font-weight: 300;
-  text-transform: uppercase;
-`
-
-export const BarText = styled.div`
-  display: flex;
-  gap: 8px;
-  justify-content: space-evenly;
-`
+export const BarText = styled(BarTextBase)``
 
 export const ContentBottom = styled.div`
   display: grid;

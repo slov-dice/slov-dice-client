@@ -74,7 +74,7 @@ export const CreateCharacterOverlay = () => {
 
   const handleCreateCharacter = () => {
     createCharacter({ ...character, ...characterCreator })
-    closeCharacterWindowOverlay(E_WindowOverlay.createCharacter)
+    handleClose()
   }
 
   return (

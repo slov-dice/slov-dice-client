@@ -32,3 +32,52 @@ export const ContentBlockBase = styled.div<{ direction?: 'column' | 'row' }>`
   border-radius: 8px;
   box-shadow: rgba(0, 0, 0, 16%) 0 3px 6px, rgba(0, 0, 0, 23%) 0 3px 6px;
 `
+
+export const BarWrapperBase = styled.div<{ color: string; barHeight: number }>`
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  padding-left: 12px;
+
+  :before {
+    content: '';
+
+    position: absolute;
+    bottom: 0;
+    left: 0;
+
+    width: 3px;
+    height: ${({ barHeight }) => barHeight}%;
+
+    background-color: ${({ color }) => color};
+
+    transition: height 500ms ease;
+  }
+
+  :after {
+    content: '';
+
+    position: absolute;
+    left: 0;
+
+    width: 3px;
+    height: 100%;
+
+    opacity: 0.5;
+    background-color: ${({ color }) => color};
+  }
+`
+
+export const BarNameBase = styled.span`
+  font-weight: 300;
+  text-transform: uppercase;
+`
+
+export const BarTextBase = styled.div`
+  display: flex;
+  gap: 8px;
+  justify-content: space-evenly;
+`

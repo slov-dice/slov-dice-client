@@ -151,6 +151,11 @@ export const gameCharactersSlice = createSlice({
       state.characterCreator = { avatar: '', effects: [] }
       state.characters.push(user)
     },
+    updateCharacter: (state, action: PayloadAction<I_Character>) => {
+      state.characters = state.characters.map((character) =>
+        character.id === action.payload.id ? action.payload : character,
+      )
+    },
   },
 })
 

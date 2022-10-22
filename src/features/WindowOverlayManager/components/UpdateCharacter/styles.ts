@@ -1,6 +1,12 @@
 import styled from 'styled-components'
 
-import { OverlayHeaderBase, ContentBlockBase } from '../styles'
+import {
+  OverlayHeaderBase,
+  ContentBlockBase,
+  BarWrapperBase,
+  BarNameBase,
+  BarTextBase,
+} from '../styles'
 
 export const OverlayHeader = styled(OverlayHeaderBase)``
 
@@ -24,6 +30,12 @@ export const ContentWrapper = styled.div`
 `
 
 export const ContentBlock = styled(ContentBlockBase)``
+
+export const BarWrapper = styled(BarWrapperBase)``
+
+export const BarName = styled(BarNameBase)``
+
+export const BarText = styled(BarTextBase)``
 
 export const ContentBottom = styled.div`
   display: grid;
