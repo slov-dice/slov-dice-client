@@ -1,15 +1,33 @@
 import { motion } from 'framer-motion'
 import styled from 'styled-components'
 
-export const Switch = styled.ul`
+export const TabBar = styled.ul`
+  overflow-x: auto;
+  overflow-y: hidden;
   display: flex;
-  flex-direction: column;
-  gap: 16px;
+  flex-direction: row;
+  gap: 4px;
 
   width: 100%;
+  max-width: fit-content;
+  max-height: 48px;
+  padding-bottom: 8px;
 
   font-size: 18px;
   font-weight: 300;
+
+  ::-webkit-scrollbar {
+    width: 2px;
+    height: 2px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: #1e1939;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #fff;
+  }
 `
 
 export const Option = styled.li<{ isSelected: boolean }>`
@@ -23,7 +41,8 @@ export const Option = styled.li<{ isSelected: boolean }>`
   align-items: center;
 
   width: 100%;
-  padding: 16px;
+  height: 38px;
+  padding: 8px;
 
   background: ${({ theme, isSelected }) =>
     isSelected ? theme.colors.primary_50 : theme.colors.white_05};
@@ -33,11 +52,10 @@ export const Option = styled.li<{ isSelected: boolean }>`
 export const Underline = styled(motion.div)`
   position: absolute;
   right: 0;
-  bottom: 0;
-  left: -5px;
+  bottom: -5px;
 
-  width: 2px;
-  height: 100%;
+  width: 100%;
+  height: 2px;
 
   background: ${({ theme }) => theme.colors.primary_50};
   border-radius: 4px;

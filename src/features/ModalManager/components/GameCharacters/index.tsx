@@ -1,6 +1,8 @@
+import { BarsTab, EffectsTab, PermissionsTab, SpecialsTab } from './extensions'
 import * as S from './styles'
 
 import CloseIcon from 'assets/icons/app/close.svg'
+import { Tab, Tabs } from 'components/Tabs'
 import { closeModal } from 'features/ModalManager/slice'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { t } from 'languages'
@@ -19,12 +21,23 @@ export const GameCharactersModal = () => {
         <CloseIcon />
       </S.ModalClose>
       <C.Title>{t('modals.gameCharacters.title')}</C.Title>
-      <C.Divider />
-
-      <S.ModalContent>GameCharactersModal</S.ModalContent>
       <C.Divider decorated />
-
-      <C.Divider />
+      <S.ModalContent>
+        <Tabs>
+          <Tab id='Права' tabTitle='Права'>
+            <PermissionsTab />
+          </Tab>
+          <Tab id='Бары' tabTitle='Бары'>
+            <BarsTab />
+          </Tab>
+          <Tab id='Характеристики' tabTitle='Характеристики'>
+            <SpecialsTab />
+          </Tab>
+          <Tab id='Эффекты' tabTitle='Эффекты'>
+            <EffectsTab />
+          </Tab>
+        </Tabs>
+      </S.ModalContent>
     </S.Modal>
   )
 }
