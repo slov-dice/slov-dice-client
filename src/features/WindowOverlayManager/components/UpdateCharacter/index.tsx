@@ -2,8 +2,6 @@ import { useCallback, useState } from 'react'
 
 import * as S from './styles'
 
-import { getEffect } from '../UpdateCharacterEffect/data'
-
 import CloseIcon from 'assets/icons/app/close.svg'
 import { Button } from 'components/Buttons'
 import {
@@ -20,6 +18,7 @@ import { E_WindowOverlay } from 'features/WindowOverlayManager/models'
 import { useActions } from 'hooks/useActions'
 import { useStoreSelector } from 'hooks/useStoreSelector'
 import * as C from 'styles/components'
+import { getEffect } from 'utils/game/effects'
 import { calculateBarDimension } from 'utils/helpers/calculates'
 
 export const UpdateCharacterOverlay = () => {
@@ -32,9 +31,10 @@ export const UpdateCharacterOverlay = () => {
       )?.payload,
   )
 
-  const { characterStore, characterEditor } = useStoreSelector((state) => ({
+  const { characterStore, characterEditor, settingsEffects } = useStoreSelector((state) => ({
     characterStore: state.gameCharacters.characters.find((character) => character.id === payload),
     characterEditor: state.gameCharacters.characterEditor,
+    settingsEffects: state.gameCharacters.settings.effects,
   }))
 
   const [character, setCharacter] = useState(characterStore!)
@@ -147,7 +147,7 @@ export const UpdateCharacterOverlay = () => {
 
             <S.ContentBlock direction='row'>
               {characterEditor.effects.map((effectId) => {
-                const effect = getEffect(effectId)
+                const effect = getEffect(effectId, settingsEffects)
                 return (
                   <CharacterEffect
                     key={effect.name}

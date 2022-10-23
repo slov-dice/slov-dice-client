@@ -3,8 +3,6 @@ import { useCallback, useState } from 'react'
 import { formCreateCharacter, T_FormCreateCharacter } from './data'
 import * as S from './styles'
 
-import { getEffect } from '../UpdateCharacterEffect/data'
-
 import CloseIcon from 'assets/icons/app/close.svg'
 import { Button } from 'components/Buttons'
 import {
@@ -21,11 +19,21 @@ import { E_WindowOverlay } from 'features/WindowOverlayManager/models'
 import { useActions } from 'hooks/useActions'
 import { useStoreSelector } from 'hooks/useStoreSelector'
 import * as C from 'styles/components'
+import { getEffect } from 'utils/game/effects'
 import { calculateBarDimension } from 'utils/helpers/calculates'
 
 export const CreateCharacterOverlay = () => {
-  const { closeCharacterWindowOverlay, removeCharacterEffect, createCharacter } = useActions()
-  const characterCreator = useStoreSelector((state) => state.gameCharacters.characterCreator)
+  const {
+    closeCharacterWindowOverlay,
+    removeCharacterEffect,
+    createCharacter,
+    setCharacterCreatorBar,
+    setCharacterCreatorSpecial,
+  } = useActions()
+  const { characterCreator, settingsEffects } = useStoreSelector((state) => ({
+    characterCreator: state.gameCharacters.characterCreator,
+    settingsEffects: state.gameCharacters.settings.effects,
+  }))
   const [character, setCharacter] = useState<T_FormCreateCharacter>(formCreateCharacter)
 
   const handleClose = useCallback(() => {
@@ -46,26 +54,15 @@ export const CreateCharacterOverlay = () => {
   }
 
   const handleChangeCharacterBarCurrentValue = (name: string, value: number) => {
-    setCharacter((prev) => ({
-      ...prev,
-      bars: prev.bars.map((bar) => (bar.name === name ? { ...bar, current: value } : bar)),
-    }))
+    setCharacterCreatorBar({ name, value, property: 'current' })
   }
 
   const handleChangeCharacterBarMaxValue = (name: string, value: number) => {
-    setCharacter((prev) => ({
-      ...prev,
-      bars: prev.bars.map((bar) => (bar.name === name ? { ...bar, max: value } : bar)),
-    }))
+    setCharacterCreatorBar({ name, value, property: 'max' })
   }
 
   const handleChangeCharacterSpecial = (name: string, value: number) => {
-    setCharacter((prev) => ({
-      ...prev,
-      specials: prev.specials.map((special) =>
-        special.name === name ? { ...special, current: value } : special,
-      ),
-    }))
+    setCharacterCreatorSpecial({ name, value })
   }
 
   const handleRemoveCharacterEffect = (effectId: string) => {
@@ -99,7 +96,7 @@ export const CreateCharacterOverlay = () => {
             />
           </S.ContentBlock>
           <S.ContentBlock>
-            {character.bars.map((bar) => (
+            {characterCreator.bars.map((bar) => (
               <S.BarWrapper
                 key={bar.name}
                 color={bar.color}
@@ -123,7 +120,7 @@ export const CreateCharacterOverlay = () => {
             ))}
           </S.ContentBlock>
           <S.ContentBlock>
-            {character.specials.map((special) => (
+            {characterCreator.specials.map((special) => (
               <CharacterSpecial
                 key={special.name}
                 values={special}
@@ -133,7 +130,7 @@ export const CreateCharacterOverlay = () => {
           </S.ContentBlock>
           <S.ContentBlock direction='row'>
             {characterCreator.effects.map((effectId) => {
-              const effect = getEffect(effectId)
+              const effect = getEffect(effectId, settingsEffects)
               return (
                 <CharacterEffect
                   key={effect.name}

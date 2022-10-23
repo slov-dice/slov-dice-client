@@ -40,3 +40,13 @@ export type T_CharacterEffect = {
   icon: E_GameIcon
   type: E_EffectType
 }
+
+export interface I_CharactersSettings {
+  permissions: {
+    'player-update-characters': boolean
+    'master-update-characters': boolean
+  }
+  bars: T_CharacterBar[]
+  specials: T_CharacterSpecial[]
+  effects: T_CharacterEffect[]
+}

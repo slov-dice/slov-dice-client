@@ -1,4 +1,3 @@
-import { dataCharacterEffects } from './data'
 import * as S from './styles'
 
 import CloseIcon from 'assets/icons/app/close.svg'
@@ -13,18 +12,19 @@ import { getGameIcon } from 'utils/helpers/icons/game'
 export const UpdateCharacterEffectOverlay = () => {
   const { closeCharacterWindowOverlay, removeCharacterEffect, addCharacterEffect } = useActions()
 
-  const payload = useStoreSelector(
-    (state) =>
-      state.gameCharacters.overlays.find(
-        (overlay) => overlay.name === E_WindowOverlay.updateCharacterEffect,
-      )?.payload,
-  )
+  const { overlayPayload, settingsEffects } = useStoreSelector((state) => ({
+    overlayPayload: state.gameCharacters.overlays.find(
+      (overlay) => overlay.name === E_WindowOverlay.updateCharacterEffect,
+    )?.payload,
+    settingsEffects: state.gameCharacters.settings.effects,
+  }))
 
   const characterEffects = useStoreSelector((state) => {
-    if (payload === 'characterCreator') {
+    if (overlayPayload === 'characterCreator') {
       return state.gameCharacters.characterCreator.effects
     }
-    return state.gameCharacters.characters.find((character) => character.id === payload)?.effects
+    return state.gameCharacters.characters.find((character) => character.id === overlayPayload)
+      ?.effects
   })
 
   const handleClose = () => {
@@ -32,12 +32,12 @@ export const UpdateCharacterEffectOverlay = () => {
   }
 
   const handleToggleEffect = (effectId: T_EffectId) => () => {
-    if (payload) {
+    if (overlayPayload) {
       if (characterEffects?.includes(effectId)) {
-        removeCharacterEffect({ characterId: payload, effectId })
+        removeCharacterEffect({ characterId: overlayPayload, effectId })
         return
       }
-      addCharacterEffect({ characterId: payload, effectId })
+      addCharacterEffect({ characterId: overlayPayload, effectId })
     }
   }
 
@@ -51,7 +51,7 @@ export const UpdateCharacterEffectOverlay = () => {
       </S.OverlayHeader>
       <S.OverlayContent>
         <S.EffectsContainer>
-          {dataCharacterEffects.map((effect) => (
+          {settingsEffects.map((effect) => (
             <S.EffectWrapper key={effect.id}>
               <S.IconWrapper>
                 <S.IconInner>{getGameIcon(effect.icon)}</S.IconInner>

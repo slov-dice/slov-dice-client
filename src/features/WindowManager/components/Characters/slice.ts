@@ -1,9 +1,21 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-import { characters, initialStateSlice } from './data'
+import {
+  characterBars,
+  characterEffects,
+  characters,
+  characterSpecials,
+  initialStateSlice,
+} from './data'
 
 import { E_WindowOverlay, I_WindowOverlay } from 'features/WindowOverlayManager/models'
-import { I_Character, T_EffectId } from 'models/game/character'
+import {
+  I_Character,
+  I_CharactersSettings,
+  T_CharacterBar,
+  T_CharacterSpecial,
+  T_EffectId,
+} from 'models/game/character'
 import { getRandomThousand } from 'utils/helpers/generators'
 
 interface I_InitialState {
@@ -11,19 +23,31 @@ interface I_InitialState {
   overlays: I_WindowOverlay[]
   characterCreator: {
     avatar: string
+    bars: T_CharacterBar[]
+    specials: T_CharacterSpecial[]
     effects: T_EffectId[]
   }
   characterEditor: {
     avatar: string
     effects: T_EffectId[]
   }
+  settings: I_CharactersSettings
 }
 
 const initialState: I_InitialState = {
   characters: characters,
   overlays: initialStateSlice,
-  characterCreator: { avatar: '', effects: [] },
+  characterCreator: { avatar: '', effects: [], bars: [], specials: [] },
   characterEditor: { avatar: '', effects: [] },
+  settings: {
+    permissions: {
+      'player-update-characters': true,
+      'master-update-characters': true,
+    },
+    bars: characterBars,
+    specials: characterSpecials,
+    effects: characterEffects,
+  },
 }
 
 export const gameCharactersSlice = createSlice({
@@ -41,6 +65,16 @@ export const gameCharactersSlice = createSlice({
       }
     },
 
+    setCharacterCreatorBar: (
+      state,
+      action: PayloadAction<{ name: string; value: number; property: 'current' | 'max' }>,
+    ) => {
+      const bar = state.characterCreator.bars.find((item) => item.name === action.payload.name)
+      if (bar) {
+        bar[action.payload.property] = action.payload.value
+      }
+    },
+
     setCharacterSpecial: (
       state,
       action: PayloadAction<{ characterId: string; specialName: string; specialValue: number }>,
@@ -49,6 +83,15 @@ export const gameCharactersSlice = createSlice({
       const special = character?.specials.find((item) => item.name === action.payload.specialName)
       if (special) {
         special.current = action.payload.specialValue
+      }
+    },
+
+    setCharacterCreatorSpecial: (state, action: PayloadAction<{ name: string; value: number }>) => {
+      const special = state.characterCreator.specials.find(
+        (item) => item.name === action.payload.name,
+      )
+      if (special) {
+        special.current = action.payload.value
       }
     },
 
@@ -123,6 +166,15 @@ export const gameCharactersSlice = createSlice({
       }
     },
 
+    setCharacterCreator: (state) => {
+      state.characterCreator = {
+        avatar: '',
+        bars: state.settings.bars,
+        specials: state.settings.specials,
+        effects: [],
+      }
+    },
+
     setCharacterEditor: (state, action: PayloadAction<I_Character>) => {
       state.characterEditor = {
         avatar: action.payload.avatar,
@@ -148,9 +200,10 @@ export const gameCharactersSlice = createSlice({
 
     createCharacter: (state, action: PayloadAction<Omit<I_Character, 'id'>>) => {
       const user = { ...action.payload, id: getRandomThousand() }
-      state.characterCreator = { avatar: '', effects: [] }
+      state.characterCreator = { avatar: '', effects: [], bars: [], specials: [] }
       state.characters.push(user)
     },
+
     updateCharacter: (state, action: PayloadAction<I_Character>) => {
       state.characters = state.characters.map((character) =>
         character.id === action.payload.id ? action.payload : character,

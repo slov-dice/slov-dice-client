@@ -12,9 +12,11 @@ import { useStoreSelector } from 'hooks/useStoreSelector'
 export const CharactersContent = () => {
   const { characters, overlays } = useStoreSelector((state) => state.gameCharacters)
 
-  const { openCharacterWindowOverlay, closeLastCharacterWindowOverlay } = useActions()
+  const { openCharacterWindowOverlay, closeLastCharacterWindowOverlay, setCharacterCreator } =
+    useActions()
 
   const handleOpenCreateCharacterOverlay = () => {
+    setCharacterCreator()
     openCharacterWindowOverlay({ name: E_WindowOverlay.createCharacter, isOpen: true })
   }
 

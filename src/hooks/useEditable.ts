@@ -28,6 +28,7 @@ export const useEditable = ({
   const handleBlur = () => {
     if (isEdit) {
       setEdit(false)
+      onEnterPress()
     }
   }
 

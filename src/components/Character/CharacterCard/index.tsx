@@ -11,11 +11,12 @@ import {
 } from '../'
 
 import EditIcon from 'assets/icons/app/edit.svg'
-import { getEffect } from 'features/WindowOverlayManager/components/UpdateCharacterEffect/data'
 import { E_WindowOverlay } from 'features/WindowOverlayManager/models'
 import { useActions } from 'hooks/useActions'
+import { useStoreSelector } from 'hooks/useStoreSelector'
 import { I_Character } from 'models/game/character'
 import * as C from 'styles/components'
+import { getEffect } from 'utils/game/effects'
 
 interface I_CharacterCardProps {
   character: I_Character
@@ -31,6 +32,8 @@ export const CharacterCard = ({ character }: I_CharacterCardProps) => {
     removeCharacterEffect,
     setCharacterEditor,
   } = useActions()
+
+  const settingsEffects = useStoreSelector((state) => state.gameCharacters.settings.effects)
 
   const handleOpenUpdateCharacterOverlay = () => {
     setCharacterEditor(character)
@@ -88,7 +91,7 @@ export const CharacterCard = ({ character }: I_CharacterCardProps) => {
           </div>
           <S.EffectsWrapper>
             {character.effects.map((effectId) => {
-              const effect = getEffect(effectId)
+              const effect = getEffect(effectId, settingsEffects)
               return (
                 <CharacterEffect
                   key={effect.name}

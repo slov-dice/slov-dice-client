@@ -2,7 +2,14 @@ import imageChar1 from 'assets/images/char1.png'
 import imageChar2 from 'assets/images/char2.png'
 import imageChar4 from 'assets/images/char4.png'
 import { E_WindowOverlay, I_WindowOverlay } from 'features/WindowOverlayManager/models'
-import { I_Character } from 'models/game/character'
+import {
+  E_EffectType,
+  I_Character,
+  T_CharacterBar,
+  T_CharacterEffect,
+  T_CharacterSpecial,
+} from 'models/game/character'
+import { E_GameIcon } from 'utils/helpers/icons/game'
 
 export const characters: I_Character[] = [
   {
@@ -80,5 +87,49 @@ export const initialStateSlice: I_WindowOverlay[] = [
   {
     isOpen: false,
     name: E_WindowOverlay.updateCharacterEffect,
+  },
+]
+
+export const characterBars: T_CharacterBar[] = [
+  { name: 'Здоровье', current: 100, max: 100, color: '#50C878' },
+  { name: 'Выносливость', current: 5, max: 5, color: '#EB7641' },
+  { name: 'Мана', current: 50, max: 50, color: '#318CE7' },
+]
+
+export const characterSpecials: T_CharacterSpecial[] = [
+  { name: 'Интеллект', current: 1, color: '#CC397B' },
+  { name: 'Сила', current: 1, color: '#CC397B' },
+  { name: 'Ловкость', current: 1, color: '#CC397B' },
+  { name: 'Харизма', current: 1, color: '#CC397B' },
+]
+
+export const characterEffects: T_CharacterEffect[] = [
+  {
+    id: '1',
+    name: 'Сходил в качалку',
+    description: '+2 к вын., +2 к силе',
+    icon: E_GameIcon.muscleUp,
+    type: E_EffectType.positive,
+  },
+  {
+    id: '2',
+    name: 'Рвота',
+    description: '-2 к макс. вын.',
+    icon: E_GameIcon.vomiting,
+    type: E_EffectType.negative,
+  },
+  {
+    id: '3',
+    name: 'Перелом',
+    description: '-10 хп, -2 к макс. вын.',
+    icon: E_GameIcon.brokenBone,
+    type: E_EffectType.negative,
+  },
+  {
+    id: '4',
+    name: 'Переел',
+    description: '+20 к макс. хп, -1 к макс. вын.',
+    icon: E_GameIcon.muscleFat,
+    type: E_EffectType.neutral,
   },
 ]

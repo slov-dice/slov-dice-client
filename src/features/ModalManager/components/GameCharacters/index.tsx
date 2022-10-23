@@ -21,7 +21,6 @@ export const GameCharactersModal = () => {
         <CloseIcon />
       </S.ModalClose>
       <C.Title>{t('modals.gameCharacters.title')}</C.Title>
-      <C.Divider decorated />
       <S.ModalContent>
         <Tabs>
           <Tab id='Права' tabTitle='Права'>
