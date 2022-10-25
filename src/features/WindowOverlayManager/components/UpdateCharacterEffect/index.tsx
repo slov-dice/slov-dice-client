@@ -23,6 +23,9 @@ export const UpdateCharacterEffectOverlay = () => {
     if (overlayPayload === 'characterCreator') {
       return state.gameCharacters.characterCreator.effects
     }
+    if (overlayPayload === 'characterEditor') {
+      return state.gameCharacters.characterEditor.effects
+    }
     return state.gameCharacters.characters.find((character) => character.id === overlayPayload)
       ?.effects
   })

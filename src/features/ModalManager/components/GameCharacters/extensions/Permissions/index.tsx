@@ -6,14 +6,24 @@ import * as C from 'styles/components'
 export const PermissionsTab = () => {
   return (
     <TabPanelBase>
+      <div>Игроки</div>
       <div>
         <input type='checkbox' />
-        Игроки могут изменять других персонажей
+        Могут изменять других персонажей
+      </div>
+      <div>
+        <input type='checkbox' />
+        Могут настраивать окно
       </div>
       <C.Divider />
+      <div>Ведущие</div>
       <div>
         <input type='checkbox' />
-        Ведущие могут изменять других персонажей
+        Могут изменять других персонажей
+      </div>
+      <div>
+        <input type='checkbox' />
+        Могут настраивать окно
       </div>
       <C.Divider decorated />
 

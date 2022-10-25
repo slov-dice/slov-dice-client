@@ -114,6 +114,10 @@ export const gameCharactersSlice = createSlice({
         state.characterCreator.effects.push(action.payload.effectId)
         return
       }
+      if (action.payload.characterId === 'characterEditor') {
+        state.characterEditor.effects.push(action.payload.effectId)
+        return
+      }
       const character = state.characters.find((item) => item.id === action.payload.characterId)
       if (character) {
         character.effects.push(action.payload.effectId)
@@ -127,6 +131,13 @@ export const gameCharactersSlice = createSlice({
       // Если создаётся персонаж
       if (action.payload.characterId === 'characterCreator') {
         state.characterCreator.effects = state.characterCreator.effects.filter(
+          (effect) => effect !== action.payload.effectId,
+        )
+        return
+      }
+      // Если персонаж редактируется
+      if (action.payload.characterId === 'characterEditor') {
+        state.characterEditor.effects = state.characterEditor.effects.filter(
           (effect) => effect !== action.payload.effectId,
         )
         return
@@ -208,6 +219,14 @@ export const gameCharactersSlice = createSlice({
       state.characters = state.characters.map((character) =>
         character.id === action.payload.id ? action.payload : character,
       )
+    },
+
+    setCharacterWindowSettingsBars: (state, action: PayloadAction<T_CharacterBar[]>) => {
+      state.settings.bars = action.payload
+      state.characters = state.characters.map((character) => {
+        character.bars = action.payload
+        return character
+      })
     },
   },
 })

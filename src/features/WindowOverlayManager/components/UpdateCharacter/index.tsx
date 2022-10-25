@@ -156,7 +156,7 @@ export const UpdateCharacterOverlay = () => {
                   />
                 )
               })}
-              <AddCharacterEffect characterId='characterCreator' />
+              <AddCharacterEffect characterId='characterEditor' />
             </S.ContentBlock>
           </S.ContentWrapper>
           <C.Divider decorated />

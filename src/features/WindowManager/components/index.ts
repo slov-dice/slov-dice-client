@@ -1,4 +1,4 @@
-import { FC, memo } from 'react'
+import { FC } from 'react'
 
 import { BattlefieldContent } from './Battlefield'
 import { CharactersContent } from './Characters'
@@ -43,7 +43,7 @@ export const windowHead: Record<E_Window, I_WindowHeader> = {
 
 export const windowContentComponents: Record<E_Window, FC> = {
   [E_Window.battlefield]: BattlefieldContent,
-  [E_Window.characters]: memo(CharactersContent),
+  [E_Window.characters]: CharactersContent,
   [E_Window.inventory]: InventoryContent,
   [E_Window.market]: MarketContent,
   [E_Window.player]: PlayerContent,

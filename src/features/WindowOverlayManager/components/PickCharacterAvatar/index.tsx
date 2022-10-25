@@ -12,7 +12,7 @@ import * as C from 'styles/components'
 export const PickCharacterAvatarOverlay = () => {
   const { closeCharacterWindowOverlay, setCharacterAvatar } = useActions()
 
-  const payload = useStoreSelector(
+  const overlayPayload = useStoreSelector(
     (state) =>
       state.gameCharacters.overlays.find(
         (overlay) => overlay.name === E_WindowOverlay.pickCharacterAvatar,
@@ -20,13 +20,14 @@ export const PickCharacterAvatarOverlay = () => {
   )
 
   const characterAvatar = useStoreSelector((state) => {
-    if (payload === 'characterCreator') {
+    if (overlayPayload === 'characterCreator') {
       return state.gameCharacters.characterCreator.avatar
     }
-    if (payload === 'characterEditor') {
+    if (overlayPayload === 'characterEditor') {
       return state.gameCharacters.characterEditor.avatar
     }
-    return state.gameCharacters.characters.find((character) => character.id === payload)?.avatar
+    return state.gameCharacters.characters.find((character) => character.id === overlayPayload)
+      ?.avatar
   })
 
   const handleClose = useCallback(() => {
@@ -34,8 +35,8 @@ export const PickCharacterAvatarOverlay = () => {
   }, [closeCharacterWindowOverlay])
 
   const handlePickAvatar = (avatar: string) => () => {
-    if (payload) {
-      setCharacterAvatar({ characterId: payload, avatar })
+    if (overlayPayload) {
+      setCharacterAvatar({ characterId: overlayPayload, avatar })
     }
   }
 
