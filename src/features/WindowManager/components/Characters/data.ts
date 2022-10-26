@@ -24,10 +24,10 @@ export const characters: I_Character[] = [
       { name: 'Мана', current: 1200, max: 1200, color: '#318CE7' },
     ],
     specials: [
-      { name: 'Интеллект', current: 3, color: '#CC397B' },
-      { name: 'Сила', current: 10, color: '#CC397B' },
-      { name: 'Ловкость', current: 1, color: '#CC397B' },
-      { name: 'Харизма', current: 18, color: '#CC397B' },
+      { name: 'Интеллект', current: 3 },
+      { name: 'Сила', current: 10 },
+      { name: 'Ловкость', current: 1 },
+      { name: 'Харизма', current: 18 },
     ],
     effects: ['1', '2', '3'],
   },
@@ -43,10 +43,10 @@ export const characters: I_Character[] = [
       { name: 'Мана', current: 10, max: 100, color: '#318CE7' },
     ],
     specials: [
-      { name: 'Интеллект', current: 3, color: '#CC397B' },
-      { name: 'Сила', current: 10, color: '#CC397B' },
-      { name: 'Ловкость', current: 1, color: '#CC397B' },
-      { name: 'Харизма', current: 18, color: '#CC397B' },
+      { name: 'Интеллект', current: 3 },
+      { name: 'Сила', current: 10 },
+      { name: 'Ловкость', current: 1 },
+      { name: 'Харизма', current: 18 },
     ],
     effects: ['3'],
   },
@@ -62,10 +62,10 @@ export const characters: I_Character[] = [
       { name: 'Мана', current: 10, max: 100, color: '#318CE7' },
     ],
     specials: [
-      { name: 'Интеллект', current: 3, color: '#CC397B' },
-      { name: 'Сила', current: 10, color: '#CC397B' },
-      { name: 'Ловкость', current: 1, color: '#CC397B' },
-      { name: 'Харизма', current: 18, color: '#CC397B' },
+      { name: 'Интеллект', current: 3 },
+      { name: 'Сила', current: 10 },
+      { name: 'Ловкость', current: 1 },
+      { name: 'Харизма', current: 18 },
     ],
     effects: ['1', '2', '3', '4'],
   },
@@ -97,10 +97,10 @@ export const characterBars: T_CharacterBar[] = [
 ]
 
 export const characterSpecials: T_CharacterSpecial[] = [
-  { name: 'Интеллект', current: 1, color: '#CC397B' },
-  { name: 'Сила', current: 1, color: '#CC397B' },
-  { name: 'Ловкость', current: 1, color: '#CC397B' },
-  { name: 'Харизма', current: 1, color: '#CC397B' },
+  { name: 'Интеллект', current: 1 },
+  { name: 'Сила', current: 1 },
+  { name: 'Ловкость', current: 1 },
+  { name: 'Харизма', current: 1 },
 ]
 
 export const characterEffects: T_CharacterEffect[] = [

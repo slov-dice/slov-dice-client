@@ -1,9 +1,5 @@
+import { T_SwitchOption } from './model'
 import * as S from './styles'
-
-export type T_SwitchOption = {
-  value: string
-  label: string
-}
 
 interface SwitchProps {
   value: string

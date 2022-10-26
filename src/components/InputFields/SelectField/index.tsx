@@ -26,7 +26,7 @@ export const SelectField = ({ value, onChange, options, fullWidth = false }: Sel
   useClickOutside(wrapperRef, handleClose)
 
   return (
-    <S.WrapperSelect
+    <S.SelectWrapper
       ref={wrapperRef}
       onClick={() => setOpened((prev) => !prev)}
       isOpened={isOpened}
@@ -38,6 +38,6 @@ export const SelectField = ({ value, onChange, options, fullWidth = false }: Sel
           </S.Option>
         ))}
       </S.Select>
-    </S.WrapperSelect>
+    </S.SelectWrapper>
   )
 }

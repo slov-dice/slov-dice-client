@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const WrapperSelect = styled.div<{ isOpened: boolean }>`
+export const SelectWrapper = styled.div<{ isOpened: boolean }>`
   position: relative;
 
   ::after {

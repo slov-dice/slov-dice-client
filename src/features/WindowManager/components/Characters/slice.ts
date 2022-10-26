@@ -228,6 +228,14 @@ export const gameCharactersSlice = createSlice({
         return character
       })
     },
+
+    setCharacterWindowSettingsSpecials: (state, action: PayloadAction<T_CharacterSpecial[]>) => {
+      state.settings.specials = action.payload
+      state.characters = state.characters.map((character) => {
+        character.specials = action.payload
+        return character
+      })
+    },
   },
 })
 

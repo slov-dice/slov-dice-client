@@ -1,4 +1,5 @@
 export { FormField } from './FormField'
 export { ChatField } from './ChatField'
 export { TextField } from './TextField'
+export { TextareaField } from './TextareaField'
 export { SelectField } from './SelectField'

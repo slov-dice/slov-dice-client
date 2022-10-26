@@ -44,6 +44,7 @@ export const BarsTab = () => {
         ))}
       </S.BarsWrapper>
       <C.Divider />
+
       <S.BarsActions>
         <Button mod={Button.mod.secondary} onClick={handleAddBar}>
           Добавить

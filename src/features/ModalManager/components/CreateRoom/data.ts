@@ -1,4 +1,4 @@
-import { T_SwitchOption } from 'components/Switch'
+import { T_SwitchOption } from 'components/Switch/model'
 import { E_RoomType } from 'models/app'
 
 export const typeOptions: T_SwitchOption[] = [
