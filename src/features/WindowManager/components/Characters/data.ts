@@ -9,7 +9,7 @@ import {
   T_CharacterEffect,
   T_CharacterSpecial,
 } from 'models/game/character'
-import { E_GameIcon } from 'utils/helpers/icons/game'
+import { E_GameIcon } from 'utils/game/effects/icons'
 
 export const characters: I_Character[] = [
   {

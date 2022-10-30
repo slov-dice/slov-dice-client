@@ -7,7 +7,7 @@ import { useActions } from 'hooks/useActions'
 import { useStoreSelector } from 'hooks/useStoreSelector'
 import { T_EffectId } from 'models/game/character'
 import * as C from 'styles/components'
-import { getGameIcon } from 'utils/helpers/icons/game'
+import { getGameIcon } from 'utils/game/effects/icons'
 
 export const UpdateCharacterEffectOverlay = () => {
   const { closeCharacterWindowOverlay, removeCharacterEffect, addCharacterEffect } = useActions()

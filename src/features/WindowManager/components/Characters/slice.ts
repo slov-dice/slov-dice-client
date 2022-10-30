@@ -13,6 +13,7 @@ import {
   I_Character,
   I_CharactersSettings,
   T_CharacterBar,
+  T_CharacterEffect,
   T_CharacterSpecial,
   T_EffectId,
 } from 'models/game/character'
@@ -233,6 +234,14 @@ export const gameCharactersSlice = createSlice({
       state.settings.specials = action.payload
       state.characters = state.characters.map((character) => {
         character.specials = action.payload
+        return character
+      })
+    },
+
+    setCharacterWindowSettingsEffects: (state, action: PayloadAction<T_CharacterEffect[]>) => {
+      state.settings.effects = action.payload
+      state.characters = state.characters.map((character) => {
+        character.effects = []
         return character
       })
     },

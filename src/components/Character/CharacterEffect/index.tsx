@@ -4,7 +4,7 @@ import * as S from './styles'
 
 import CloseIcon from 'assets/icons/app/close.svg'
 import { T_CharacterEffect, T_EffectId } from 'models/game/character'
-import { getGameIcon } from 'utils/helpers/icons/game'
+import { getGameIcon } from 'utils/game/effects/icons'
 
 interface I_CharacterEffectProps {
   values: T_CharacterEffect

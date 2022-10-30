@@ -1,4 +1,4 @@
-import { E_GameIcon } from 'utils/helpers/icons/game'
+import { E_GameIcon } from 'utils/game/effects/icons'
 
 export type T_CharacterId = string
 export type T_EffectId = string
