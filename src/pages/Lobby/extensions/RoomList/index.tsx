@@ -5,17 +5,17 @@ import { Button } from 'components/Buttons'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { useStoreSelector } from 'hooks/useStoreSelector'
 import { t } from 'languages'
-import { E_RoomType, I_PreviewRoom } from 'models/app'
+import { E_RoomType, I_PreviewRoom } from 'models/shared/app'
 import { emitJoinRoom } from 'store/room'
 import * as C from 'styles/components'
 
 export const RoomList = () => {
   const dispatch = useStoreDispatch()
   const navigate = useNavigate()
-  const { rooms, currentRoomId, isUserInRoom } = useStoreSelector((state) => ({
-    rooms: state.lobbyPage.rooms,
-    currentRoomId: state.room.id,
-    isUserInRoom: state.profile.statuses.inRoom,
+  const { rooms, currentRoomId, isUserInRoom } = useStoreSelector((store) => ({
+    rooms: store.lobbyPage.rooms,
+    currentRoomId: store.room.id,
+    isUserInRoom: store.profile.statuses.inRoom,
   }))
 
   const handleJoin = (room: I_PreviewRoom) => () => {

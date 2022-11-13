@@ -2,11 +2,11 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 
 import { setLobbyMessage, setLobbyMessages } from './slice'
 
-import { E_Subscribe, I_SubscriptionData } from 'models/socket/lobbyChat'
+import { E_Subscribe, I_SubscriptionData } from 'models/shared/socket/lobbyChat'
 import {
   E_Subscribe as E_LRSubscribe,
   I_SubscriptionData as I_LRSubscriptionData,
-} from 'models/socket/lobbyRooms'
+} from 'models/shared/socket/lobbyRooms'
 import { socket } from 'services/socket'
 import { setRoomMessage } from 'store/room'
 

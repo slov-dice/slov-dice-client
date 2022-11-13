@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 import { E_ModalContent, E_StatusName, I_InitialState } from './models'
 
-import { E_Emit, I_EmitPayload } from 'models/socket/restore'
+import { E_Emit, I_EmitPayload } from 'models/shared/socket/restore'
 import { socket } from 'services/socket'
 
 const initialState: I_InitialState = {

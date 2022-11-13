@@ -1,5 +1,5 @@
 import { T_SwitchOption } from 'components/Switch'
-import { E_Locale } from 'models/app'
+import { E_Locale } from 'models/shared/app'
 
 export const switchOptions: T_SwitchOption[] = [
   { value: E_Locale.ru, label: `RU — Русский` },

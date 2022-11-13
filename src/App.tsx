@@ -18,7 +18,8 @@ import 'tippy.js/dist/tippy.css'
 
 export const App = () => {
   const dispatch = useStoreDispatch()
-  const isAuth = useStoreSelector((state) => state.profile.statuses.isAuth)
+  const isAuth = useStoreSelector((store) => store.profile.statuses.isAuth)
+  useStoreSelector((store) => store.app.language)
 
   const [fetchCheck, { isSuccess, data }] = authAPI.useCheckMutation()
   authAPI.useCheckTokenQuery(null, {

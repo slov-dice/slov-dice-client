@@ -13,14 +13,14 @@ import { Button } from 'components/Buttons'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { useStoreSelector } from 'hooks/useStoreSelector'
 import { t } from 'languages'
-import { E_AuthType } from 'models/app'
+import { E_AuthType } from 'models/shared/app'
 import * as C from 'styles/components'
 import { LocalStorage } from 'utils/helpers/localStorage'
 
 export const Entry = () => {
   const dispatch = useStoreDispatch()
   const { fetchGuestAuth, guestAuthProgress } = useGuestAuth(dispatch)
-  const authFormContent = useStoreSelector((state) => state.authForm.content)
+  const authFormContent = useStoreSelector((store) => store.authForm.content)
 
   const handleReplaceToEmail = () => {
     const toEmail =

@@ -2,17 +2,18 @@ import { switchOptions } from './data'
 import * as S from './styles'
 
 import CloseIcon from 'assets/icons/app/close.svg'
-import { Switch, T_SwitchOption } from 'components/Switch'
+import { Switch } from 'components/Switch'
+import { T_SwitchOption } from 'components/Switch/model'
 import { closeModal } from 'features/ModalManager/slice'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { useStoreSelector } from 'hooks/useStoreSelector'
 import { t } from 'languages'
-import { E_Locale } from 'models/app'
+import { E_Locale } from 'models/shared/app'
 import { switchLanguage } from 'store/app'
 import * as C from 'styles/components'
 
 export const TranslatorModal = () => {
-  const language = useStoreSelector((state) => state.app.language)
+  const language = useStoreSelector((store) => store.app.language)
   const dispatch = useStoreDispatch()
 
   const handleClose = () => {

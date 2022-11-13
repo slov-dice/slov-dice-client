@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-import { I_PreviewRoom } from 'models/app'
-import { E_Emit, I_SubscriptionData, E_Subscribe } from 'models/socket/lobbyRooms'
+import { I_PreviewRoom } from 'models/shared/app'
+import { E_Emit, I_SubscriptionData, E_Subscribe } from 'models/shared/socket/lobbyRooms'
 import { socket } from 'services/socket'
 
 interface I_InitialState {

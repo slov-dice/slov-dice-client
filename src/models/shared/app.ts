@@ -1,3 +1,5 @@
+import { I_Character, I_CharactersSettings } from './game/character'
+
 export type T_SocketId = string
 export type T_UserId = number
 export type T_RoomId = string
@@ -37,12 +39,12 @@ export enum E_Locale {
   en = 'EN',
 }
 
+export type T_LocaleText = Record<E_Locale, string>
+
 export type T_SocketDataStatus = {
-  message: T_LocaleServerMessage
+  message: T_LocaleText
   status: E_StatusServerMessage
 }
-
-export type T_LocaleServerMessage = Record<E_Locale, string>
 
 export enum E_StatusServerMessage {
   success = 'success',
@@ -98,7 +100,17 @@ export interface I_PreviewRoom {
   users: I_RoomUser[]
 }
 
+export type I_FullRoomGame = {
+  characters: {
+    window: {
+      characters: I_Character[]
+    }
+    settings: I_CharactersSettings
+  }
+}
+
 export interface I_FullRoom extends I_PreviewRoom {
   password: string
   messages: I_RoomMessage[]
+  game: I_FullRoomGame
 }

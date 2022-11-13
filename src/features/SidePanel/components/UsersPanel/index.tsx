@@ -13,7 +13,7 @@ export const UsersPanel = () => {
 
   const [isLobbyUsers, setIsLobbyUsers] = useState(true)
 
-  const { lobbyUsers, roomUsers } = useStoreSelector((state) => ({
+  const { lobbyUsers, roomUsers } = useStoreSelector((store) => ({
     lobbyUsers: state.usersPanel.lobbyUsers,
     roomUsers: state.room.users,
   }))

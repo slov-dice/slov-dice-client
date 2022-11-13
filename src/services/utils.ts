@@ -5,7 +5,7 @@ import {
   FetchBaseQueryError,
 } from '@reduxjs/toolkit/dist/query'
 
-import { T_Tokens } from 'models/app'
+import { T_Tokens } from 'models/shared/app'
 import { RootState } from 'store'
 import { logout } from 'store/profile'
 import { LocalStorage } from 'utils/helpers/localStorage'

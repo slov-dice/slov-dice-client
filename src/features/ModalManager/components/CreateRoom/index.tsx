@@ -12,7 +12,7 @@ import { T_SwitchOption } from 'components/Switch/model'
 import { closeModal } from 'features/ModalManager/slice'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { t } from 'languages'
-import { E_RoomType } from 'models/app'
+import { E_RoomType } from 'models/shared/app'
 import { emitCreateRoom } from 'store/room'
 import * as C from 'styles/components'
 

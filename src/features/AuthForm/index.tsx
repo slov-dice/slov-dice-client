@@ -17,7 +17,7 @@ import * as C from 'styles/components'
 
 export const AuthForm = () => {
   const dispatch = useStoreDispatch()
-  const authFormContent = useStoreSelector((state) => state.authForm.content)
+  const authFormContent = useStoreSelector((store) => store.authForm.content)
 
   useLayoutEffect(() => {
     dispatch(openAuthForm())

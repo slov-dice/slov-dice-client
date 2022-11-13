@@ -1,5 +1,5 @@
 import { T_SwitchOption } from 'components/Switch/model'
-import { E_RoomType } from 'models/app'
+import { E_RoomType } from 'models/shared/app'
 
 export const typeOptions: T_SwitchOption[] = [
   { value: E_RoomType.public, label: 'Public' },

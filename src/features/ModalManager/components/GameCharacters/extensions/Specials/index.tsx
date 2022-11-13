@@ -6,7 +6,7 @@ import { Button } from 'components/Buttons'
 import { TextField } from 'components/InputFields'
 import { useActions } from 'hooks/useActions'
 import { useStoreSelector } from 'hooks/useStoreSelector'
-import { T_CharacterSpecial } from 'models/game/character'
+import { T_CharacterSpecial } from 'models/shared/game/character'
 import * as C from 'styles/components'
 
 export const SpecialsTab = () => {

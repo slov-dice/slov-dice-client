@@ -28,7 +28,7 @@ export const Tabs = ({ children }: I_TabsProps) => {
           </S.Option>
         ))}
       </S.TabBar>
-      <AnimatePresence exitBeforeEnter>
+      <AnimatePresence mode='wait'>
         <motion.div
           key={selectedTab.props.id}
           initial={{ y: 10, opacity: 0 }}

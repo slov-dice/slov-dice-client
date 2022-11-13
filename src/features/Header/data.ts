@@ -2,7 +2,7 @@ import { I_TaskItem, E_TaskItemVisibility, E_TaskItemActionType } from './models
 
 import { E_Modal } from 'features/ModalManager/models'
 import { E_Panels } from 'features/SidePanel/models'
-import { E_Locale } from 'models/app'
+import { E_Locale } from 'models/shared/app'
 import { FullScreen } from 'utils/helpers/fullScreen'
 import { E_AppIcon } from 'utils/helpers/icons/app'
 import { LocalStorage } from 'utils/helpers/localStorage'

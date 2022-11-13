@@ -8,42 +8,32 @@ import VileFluidIcon from 'assets/icons/game/vile-fluid.svg'
 import VomitingIcon from 'assets/icons/game/vomiting.svg'
 import WingFootIcon from 'assets/icons/game/wing-foot.svg'
 import WingedSwordIcon from 'assets/icons/game/winged-sword.svg'
+import { E_EffectIcon } from 'models/shared/game/extra/effects'
 
-export enum E_GameIcon {
-  brokenBone = 'brokenBone',
-  vomiting = 'vomiting',
-  muscleFat = 'muscleFat',
-  muscleUp = 'muscleUp',
-  sonicShout = 'sonicShout',
-  vileFluid = 'vileFluid',
-  wingFoot = 'wingFoot',
-  wingedSword = 'wingedSword',
-}
-
-export const getGameIcon = (icon: E_GameIcon): ReactNode => {
+export const getGameIcon = (icon: E_EffectIcon): ReactNode => {
   switch (icon) {
-    case E_GameIcon.brokenBone:
+    case E_EffectIcon.brokenBone:
       return <BrokenBoneIcon />
 
-    case E_GameIcon.vomiting:
+    case E_EffectIcon.vomiting:
       return <VomitingIcon />
 
-    case E_GameIcon.muscleFat:
+    case E_EffectIcon.muscleFat:
       return <MuscleFatIcon />
 
-    case E_GameIcon.muscleUp:
+    case E_EffectIcon.muscleUp:
       return <MuscleUpIcon />
 
-    case E_GameIcon.sonicShout:
+    case E_EffectIcon.sonicShout:
       return <SonicShoutIcon />
 
-    case E_GameIcon.vileFluid:
+    case E_EffectIcon.vileFluid:
       return <VileFluidIcon />
 
-    case E_GameIcon.wingFoot:
+    case E_EffectIcon.wingFoot:
       return <WingFootIcon />
 
-    case E_GameIcon.wingedSword:
+    case E_EffectIcon.wingedSword:
       return <WingedSwordIcon />
   }
 }

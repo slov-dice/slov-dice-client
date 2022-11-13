@@ -16,10 +16,10 @@ import { FullScreen } from 'utils/helpers/fullScreen'
 import { E_AppIcon, getAppIcon } from 'utils/helpers/icons/app'
 
 export const Toolbar = () => {
-  const { toolbar, sidePanel, isAuth } = useStoreSelector((state) => ({
-    toolbar: state.header.toolbar,
-    sidePanel: state.sidePanel.panel,
-    isAuth: state.profile.statuses.isAuth,
+  const { toolbar, sidePanel, isAuth } = useStoreSelector((store) => ({
+    toolbar: store.header.toolbar,
+    sidePanel: store.sidePanel.panel,
+    isAuth: store.profile.statuses.isAuth,
   }))
   const dispatch = useStoreDispatch()
 

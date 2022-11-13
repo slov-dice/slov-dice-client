@@ -8,7 +8,7 @@ import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { useStoreSelector } from 'hooks/useStoreSelector'
 
 export const SidePanel = () => {
-  const sidePanel = useStoreSelector((state) => state.sidePanel.panel)
+  const sidePanel = useStoreSelector((store) => store.sidePanel.panel)
   const dispatch = useStoreDispatch()
 
   const handleClose = () => {

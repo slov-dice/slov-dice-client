@@ -15,7 +15,7 @@ import * as C from 'styles/components'
 import { getAppIcon } from 'utils/helpers/icons/app'
 
 export const SettingsModal = () => {
-  const toolbar = useStoreSelector((state) => state.header.toolbar)
+  const toolbar = useStoreSelector((store) => store.header.toolbar)
   const dispatch = useStoreDispatch()
 
   const [items, setItems] = useState(toolbar)

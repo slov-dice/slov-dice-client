@@ -1,4 +1,4 @@
-import { E_AuthType, T_LocaleServerMessage } from 'models/app'
+import { E_AuthType, T_LocaleServerMessage } from 'models/shared/app'
 
 export interface I_AuthResponse {
   accessToken: string

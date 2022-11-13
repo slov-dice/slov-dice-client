@@ -34,10 +34,10 @@ export const Navigation = ({ toggleMenu }: NavigationProps) => {
   const navigate = useNavigate()
   const dispatch = useStoreDispatch()
   const { openWindow } = useActions()
-  const { statuses, roomId, isRoomPageOpen } = useStoreSelector((state) => ({
-    statuses: state.profile.statuses,
-    roomId: state.room.id,
-    isRoomPageOpen: state.roomPage.isOpen,
+  const { statuses, roomId, isRoomPageOpen } = useStoreSelector((store) => ({
+    statuses: store.profile.statuses,
+    roomId: store.room.id,
+    isRoomPageOpen: store.roomPage.isOpen,
   }))
 
   const [fetchLogout] = authAPI.useLogoutMutation()

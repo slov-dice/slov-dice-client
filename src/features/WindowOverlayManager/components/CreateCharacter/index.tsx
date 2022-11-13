@@ -30,9 +30,9 @@ export const CreateCharacterOverlay = () => {
     setCharacterCreatorBar,
     setCharacterCreatorSpecial,
   } = useActions()
-  const { characterCreator, settingsEffects } = useStoreSelector((state) => ({
-    characterCreator: state.gameCharacters.characterCreator,
-    settingsEffects: state.gameCharacters.settings.effects,
+  const { characterCreator, settingsEffects } = useStoreSelector((store) => ({
+    characterCreator: store.gameCharacters.characterCreator,
+    settingsEffects: store.gameCharacters.settings.effects,
   }))
   const [character, setCharacter] = useState<T_FormCreateCharacter>(formCreateCharacter)
 

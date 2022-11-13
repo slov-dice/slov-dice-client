@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 import { effectRemoveAttrs } from './motion'
 
-import { E_EffectType } from 'models/game/character'
+import { E_EffectType } from 'models/shared/game/character'
 
 export const EffectWrapper = styled.span`
   position: relative;

@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-import { I_LobbyUser } from 'models/app'
-import { E_Subscribe, I_SubscriptionData, E_Emit } from 'models/socket/lobbyUsers'
+import { I_LobbyUser } from 'models/shared/app'
+import { E_Subscribe, I_SubscriptionData, E_Emit } from 'models/shared/socket/lobbyUsers'
 import { socket } from 'services/socket'
 
 interface I_InitialState {

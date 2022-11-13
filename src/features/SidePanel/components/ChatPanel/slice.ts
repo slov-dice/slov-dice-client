@@ -1,8 +1,16 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-import { I_LobbyMessage } from 'models/app'
-import { E_Subscribe, I_SubscriptionData, E_Emit, I_EmitPayload } from 'models/socket/lobbyChat'
-import { E_Emit as E_LREmit, I_EmitPayload as E_LREmitPayload } from 'models/socket/lobbyRooms'
+import { I_LobbyMessage } from 'models/shared/app'
+import {
+  E_Subscribe,
+  I_SubscriptionData,
+  E_Emit,
+  I_EmitPayload,
+} from 'models/shared/socket/lobbyChat'
+import {
+  E_Emit as E_LREmit,
+  I_EmitPayload as E_LREmitPayload,
+} from 'models/shared/socket/lobbyRooms'
 import { socket } from 'services/socket'
 
 interface I_InitialState {

@@ -16,10 +16,10 @@ import { useStoreSelector } from 'hooks/useStoreSelector'
 import { E_Routes } from 'models/routes'
 
 export const Header = () => {
-  const { isAuthFormOpen, sideMenuVisible, sidePanel } = useStoreSelector((state) => ({
-    sideMenuVisible: state.sideMenu.isOpen,
-    sidePanel: state.sidePanel.panel,
-    isAuthFormOpen: state.authForm.isOpen,
+  const { isAuthFormOpen, sideMenuVisible, sidePanel } = useStoreSelector((store) => ({
+    sideMenuVisible: store.sideMenu.isOpen,
+    sidePanel: store.sidePanel.panel,
+    isAuthFormOpen: store.authForm.isOpen,
   }))
   const dispatch = useStoreDispatch()
 

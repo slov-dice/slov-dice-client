@@ -12,10 +12,10 @@ import { useStoreSelector } from 'hooks/useStoreSelector'
 export const ChatPanel = () => {
   const dispatch = useStoreDispatch()
 
-  const { lobbyMessages, roomMessages, roomId } = useStoreSelector((state) => ({
-    lobbyMessages: state.chatPanel.lobbyMessages,
-    roomMessages: state.room.messages,
-    roomId: state.room.id,
+  const { lobbyMessages, roomMessages, roomId } = useStoreSelector((store) => ({
+    lobbyMessages: store.chatPanel.lobbyMessages,
+    roomMessages: store.room.messages,
+    roomId: store.room.id,
   }))
 
   useLayoutEffect(() => {

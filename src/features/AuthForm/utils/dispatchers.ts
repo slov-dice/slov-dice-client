@@ -1,13 +1,13 @@
 import { AnyAction, ThunkDispatch } from '@reduxjs/toolkit'
 
-import { E_Emit } from 'models/socket/lobbyUsers'
+import { E_Emit } from 'models/shared/socket/lobbyUsers'
 import { I_AuthResponse } from 'services/auth/models'
 import { socket } from 'services/socket'
 import { RootState } from 'store'
 import { setProfile } from 'store/profile'
 import { LocalStorage } from 'utils/helpers/localStorage'
 
-import type { I_Profile } from 'models/app'
+import type { I_Profile } from 'models/shared/app'
 
 export const connectAuthenticatedUser = (
   data: I_AuthResponse,

@@ -7,9 +7,9 @@ import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { useStoreSelector } from 'hooks/useStoreSelector'
 
 export const SideMenu = () => {
-  const { sideMenuVisible, sidePanel } = useStoreSelector((state) => ({
-    sideMenuVisible: state.sideMenu.isOpen,
-    sidePanel: state.sidePanel.panel,
+  const { sideMenuVisible, sidePanel } = useStoreSelector((store) => ({
+    sideMenuVisible: store.sideMenu.isOpen,
+    sidePanel: store.sidePanel.panel,
   }))
   const dispatch = useStoreDispatch()
 

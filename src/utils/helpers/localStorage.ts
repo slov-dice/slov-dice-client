@@ -1,4 +1,4 @@
-import { E_AuthType, E_Locale } from 'models/app'
+import { E_AuthType, E_Locale } from 'models/shared/app'
 
 export const LocalStorage = {
   setAuthType: (type: E_AuthType) => localStorage.setItem('authType', type),

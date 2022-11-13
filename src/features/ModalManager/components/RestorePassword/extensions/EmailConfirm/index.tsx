@@ -23,7 +23,7 @@ export const EmailConfirm = () => {
     (state) => state.restore.statuses.checkEmail,
   )
 
-  const isCheckCodeLoading = useStoreSelector((state) => state.restore.statuses.checkCode.isLoading)
+  const isCheckCodeLoading = useStoreSelector((store) => store.restore.statuses.checkCode.isLoading)
 
   const { cooldown, isCooldown } = useCooldown(isCheckEmailCooldown)
 

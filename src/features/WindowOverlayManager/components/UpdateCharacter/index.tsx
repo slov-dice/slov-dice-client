@@ -31,10 +31,10 @@ export const UpdateCharacterOverlay = () => {
       )?.payload,
   )
 
-  const { characterStore, characterEditor, settingsEffects } = useStoreSelector((state) => ({
-    characterStore: state.gameCharacters.characters.find((character) => character.id === payload),
-    characterEditor: state.gameCharacters.characterEditor,
-    settingsEffects: state.gameCharacters.settings.effects,
+  const { characterStore, characterEditor, settingsEffects } = useStoreSelector((store) => ({
+    characterStore: store.gameCharacters.characters.find((character) => character.id === payload),
+    characterEditor: store.gameCharacters.characterEditor,
+    settingsEffects: store.gameCharacters.settings.effects,
   }))
 
   const [character, setCharacter] = useState(characterStore!)

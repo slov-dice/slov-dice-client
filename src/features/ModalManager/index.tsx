@@ -11,7 +11,7 @@ import { useStoreSelector } from 'hooks/useStoreSelector'
 
 export const ModalManager = () => {
   const dispatch = useStoreDispatch()
-  const modals = useStoreSelector((state) => state.modalManager.modals)
+  const modals = useStoreSelector((store) => store.modalManager.modals)
 
   const handleClose = useCallback(() => {
     dispatch(closeModal())

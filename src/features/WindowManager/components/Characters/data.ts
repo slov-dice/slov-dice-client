@@ -8,8 +8,8 @@ import {
   T_CharacterBar,
   T_CharacterEffect,
   T_CharacterSpecial,
-} from 'models/game/character'
-import { E_GameIcon } from 'utils/game/effects/icons'
+} from 'models/shared/game/character'
+import { E_EffectIcon } from 'models/shared/game/extra/effects'
 
 export const characters: I_Character[] = [
   {
@@ -108,28 +108,28 @@ export const characterEffects: T_CharacterEffect[] = [
     id: '1',
     name: 'Сходил в качалку',
     description: '+2 к вын., +2 к силе',
-    icon: E_GameIcon.muscleUp,
+    icon: E_EffectIcon.muscleUp,
     type: E_EffectType.positive,
   },
   {
     id: '2',
     name: 'Рвота',
     description: '-2 к макс. вын.',
-    icon: E_GameIcon.vomiting,
+    icon: E_EffectIcon.vomiting,
     type: E_EffectType.negative,
   },
   {
     id: '3',
     name: 'Перелом',
     description: '-10 хп, -2 к макс. вын.',
-    icon: E_GameIcon.brokenBone,
+    icon: E_EffectIcon.brokenBone,
     type: E_EffectType.negative,
   },
   {
     id: '4',
     name: 'Переел',
     description: '+20 к макс. хп, -1 к макс. вын.',
-    icon: E_GameIcon.muscleFat,
+    icon: E_EffectIcon.muscleFat,
     type: E_EffectType.neutral,
   },
 ]

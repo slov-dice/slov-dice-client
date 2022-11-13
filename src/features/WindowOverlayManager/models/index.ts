@@ -1,4 +1,4 @@
-import { T_CharacterId } from 'models/game/character'
+import { T_CharacterId } from 'models/shared/game/character'
 
 export interface I_WindowOverlay {
   name: E_WindowOverlay

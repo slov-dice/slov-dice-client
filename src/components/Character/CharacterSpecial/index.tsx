@@ -3,7 +3,7 @@ import { useRef } from 'react'
 import * as S from './styles'
 
 import { useEditable } from 'hooks/useEditable'
-import { T_CharacterSpecial } from 'models/game/character'
+import { T_CharacterSpecial } from 'models/shared/game/character'
 
 interface I_CharacterSpecial {
   values: T_CharacterSpecial

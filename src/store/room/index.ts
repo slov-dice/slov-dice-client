@@ -1,7 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-import { E_RoomType, I_FullRoom } from 'models/app'
-import { E_Emit, I_EmitPayload, E_Subscribe, I_SubscriptionData } from 'models/socket/lobbyRooms'
+import { E_RoomType, I_FullRoom } from 'models/shared/app'
+import {
+  E_Emit,
+  I_EmitPayload,
+  E_Subscribe,
+  I_SubscriptionData,
+} from 'models/shared/socket/lobbyRooms'
 import { socket } from 'services/socket'
 
 const initialState: I_FullRoom = {
@@ -14,6 +19,18 @@ const initialState: I_FullRoom = {
   type: E_RoomType.public,
   users: [],
   messages: [],
+  game: {
+    characters: {
+      window: {
+        characters: [],
+      },
+      settings: {
+        bars: [],
+        effects: [],
+        specials: [],
+      },
+    },
+  },
 }
 
 export const roomSlice = createSlice({

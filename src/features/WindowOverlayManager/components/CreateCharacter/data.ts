@@ -1,4 +1,4 @@
-import { I_Character } from 'models/game/character'
+import { I_Character } from 'models/shared/game/character'
 
 export type T_FormCreateCharacter = Omit<
   I_Character,

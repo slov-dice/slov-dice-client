@@ -3,7 +3,7 @@ import { useRef } from 'react'
 import * as S from './styles'
 
 import { useEditable } from 'hooks/useEditable'
-import { T_CharacterBar } from 'models/game/character'
+import { T_CharacterBar } from 'models/shared/game/character'
 import { calculateBarDimension } from 'utils/helpers/calculates'
 import { numberWithSpaces } from 'utils/helpers/text'
 

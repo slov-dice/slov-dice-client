@@ -4,7 +4,7 @@ import { useStoreSelector } from 'hooks/useStoreSelector'
 import { AuthLayout } from 'layouts/Auth'
 
 export const ProtectedRoute = () => {
-  const isAuth = useStoreSelector((state) => state.profile.statuses.isAuth)
+  const isAuth = useStoreSelector((store) => store.profile.statuses.isAuth)
 
   if (isAuth) {
     return <Outlet />

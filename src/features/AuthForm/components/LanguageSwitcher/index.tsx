@@ -4,11 +4,11 @@ import * as S from './styles'
 
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { useStoreSelector } from 'hooks/useStoreSelector'
-import { E_Locale } from 'models/app'
+import { E_Locale } from 'models/shared/app'
 import { switchLanguage } from 'store/app'
 
 export const LanguageSwitcher = () => {
-  const language = useStoreSelector((state) => state.app.language)
+  const language = useStoreSelector((store) => store.app.language)
   const dispatch = useStoreDispatch()
 
   const handleSwitchLanguage = () => {

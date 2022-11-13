@@ -5,21 +5,21 @@ import PlusIcon from 'assets/icons/app/plus.svg'
 import { E_WindowOverlay } from 'features/WindowOverlayManager/models'
 import { useActions } from 'hooks/useActions'
 import { useStoreSelector } from 'hooks/useStoreSelector'
-import { T_EffectId } from 'models/game/character'
+import { T_EffectId } from 'models/shared/game/character'
 import * as C from 'styles/components'
 import { getGameIcon } from 'utils/game/effects/icons'
 
 export const UpdateCharacterEffectOverlay = () => {
   const { closeCharacterWindowOverlay, removeCharacterEffect, addCharacterEffect } = useActions()
 
-  const { overlayPayload, settingsEffects } = useStoreSelector((state) => ({
+  const { overlayPayload, settingsEffects } = useStoreSelector((store) => ({
     overlayPayload: state.gameCharacters.overlays.find(
       (overlay) => overlay.name === E_WindowOverlay.updateCharacterEffect,
     )?.payload,
     settingsEffects: state.gameCharacters.settings.effects,
   }))
 
-  const characterEffects = useStoreSelector((state) => {
+  const characterEffects = useStoreSelector((store) => {
     if (overlayPayload === 'characterCreator') {
       return state.gameCharacters.characterCreator.effects
     }

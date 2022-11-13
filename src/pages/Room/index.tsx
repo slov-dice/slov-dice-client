@@ -7,11 +7,13 @@ import * as S from './styles'
 import { HeroBackground } from 'features/HeroBackground'
 import { WindowManager } from 'features/WindowManager'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
+import { useStoreSelector } from 'hooks/useStoreSelector'
 
 export const Room = () => {
   const dispatch = useStoreDispatch()
 
   const pageRef = useRef<HTMLDivElement>(null)
+  const room = useStoreSelector((store) => store.room)
 
   useLayoutEffect(() => {
     dispatch(subscribe())
@@ -29,6 +31,9 @@ export const Room = () => {
   return (
     <>
       <S.Page ref={pageRef}>
+        <div style={{ position: 'absolute', fontSize: 10 }}>
+          <pre>{JSON.stringify(room.game, null, 2)}</pre>
+        </div>
         <WindowManager dragConstraintsRef={pageRef} />
         <HeroBackground />
       </S.Page>

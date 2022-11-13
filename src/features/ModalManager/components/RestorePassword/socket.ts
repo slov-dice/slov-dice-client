@@ -5,8 +5,8 @@ import { E_ModalContent, E_StatusName } from './models'
 import { setStatus, setCooldown, setRestoreModalContent } from './slice'
 
 import { closeModal } from 'features/ModalManager/slice'
-import { E_StatusServerMessage } from 'models/app'
-import { E_Subscribe, I_SubscriptionData } from 'models/socket/restore'
+import { E_StatusServerMessage } from 'models/shared/app'
+import { E_Subscribe, I_SubscriptionData } from 'models/shared/socket/restore'
 import { socket } from 'services/socket'
 import { LocalStorage } from 'utils/helpers/localStorage'
 

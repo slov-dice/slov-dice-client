@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 
-import { E_Subscribe, I_SubscriptionData } from 'models/socket/lobbyRooms'
+import { E_Subscribe, I_SubscriptionData } from 'models/shared/socket/lobbyRooms'
 import { socket } from 'services/socket'
 import { joinRoom } from 'store/profile'
 import { setRoom } from 'store/room'

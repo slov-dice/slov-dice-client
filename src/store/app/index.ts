@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-import { E_Locale } from 'models/app'
+import { E_Locale } from 'models/shared/app'
 import { E_Theme } from 'models/styled'
 import { LocalStorage } from 'utils/helpers/localStorage'
 

@@ -2,7 +2,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 
 import { setUsers, updateUser } from './slice'
 
-import { E_Subscribe, I_SubscriptionData } from 'models/socket/lobbyUsers'
+import { E_Subscribe, I_SubscriptionData } from 'models/shared/socket/lobbyUsers'
 import { socket } from 'services/socket'
 
 export const subscribe = createAsyncThunk('usersPanel', async (_, { dispatch }) => {

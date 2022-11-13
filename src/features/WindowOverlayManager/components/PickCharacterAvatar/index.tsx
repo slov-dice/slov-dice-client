@@ -19,14 +19,14 @@ export const PickCharacterAvatarOverlay = () => {
       )?.payload,
   )
 
-  const characterAvatar = useStoreSelector((state) => {
+  const characterAvatar = useStoreSelector((store) => {
     if (overlayPayload === 'characterCreator') {
-      return state.gameCharacters.characterCreator.avatar
+      return store.gameCharacters.characterCreator.avatar
     }
     if (overlayPayload === 'characterEditor') {
-      return state.gameCharacters.characterEditor.avatar
+      return store.gameCharacters.characterEditor.avatar
     }
-    return state.gameCharacters.characters.find((character) => character.id === overlayPayload)
+    return store.gameCharacters.characters.find((character) => character.id === overlayPayload)
       ?.avatar
   })
 

@@ -7,15 +7,18 @@ import { TextField, TextareaField, CustomSelectField } from 'components/InputFie
 import { T_CustomSelectOption } from 'components/InputFields/CustomSelectField/models'
 import { useActions } from 'hooks/useActions'
 import { useStoreSelector } from 'hooks/useStoreSelector'
-import { E_EffectType, T_CharacterEffect } from 'models/game/character'
+import { E_EffectType, T_BaseCharacterEffect } from 'models/shared/game/character'
+import { E_EffectIcon } from 'models/shared/game/extra/effects'
 import * as C from 'styles/components'
-import { E_GameIcon, getGameIcon } from 'utils/game/effects/icons'
+import { getGameIcon } from 'utils/game/effects/icons'
 import { getRandomThousand } from 'utils/helpers/generators'
 
-const optionsIcons: T_CustomSelectOption[] = Object.values(E_GameIcon).map((icon: E_GameIcon) => ({
-  value: icon,
-  label: getGameIcon(icon),
-}))
+const optionsIcons: T_CustomSelectOption[] = Object.values(E_EffectIcon).map(
+  (icon: E_EffectIcon) => ({
+    value: icon,
+    label: getGameIcon(icon),
+  }),
+)
 
 const optionsTypes: T_CustomSelectOption[] = [
   {
@@ -47,7 +50,7 @@ export const EffectsTab = () => {
 
   const handleChangeSelectIcon = (option: T_CustomSelectOption, fieldIndex?: number) => {
     if (fieldIndex !== undefined && fieldIndex >= 0) {
-      update(fieldIndex, { ...fields[fieldIndex], icon: option.value as E_GameIcon })
+      update(fieldIndex, { ...fields[fieldIndex], icon: option.value as E_EffectIcon })
     }
   }
 
@@ -60,7 +63,7 @@ export const EffectsTab = () => {
   const handleAddEffect = () => {
     append({
       id: getRandomThousand(),
-      icon: E_GameIcon.brokenBone,
+      icon: E_EffectIcon.brokenBone,
       type: E_EffectType.neutral,
       name: '',
       description: '',
@@ -71,7 +74,7 @@ export const EffectsTab = () => {
     remove(index)
   }
 
-  const handleUpdateEffects = (data: { effect: T_CharacterEffect[] }) => {
+  const handleUpdateEffects = (data: { effect: T_BaseCharacterEffect[] }) => {
     setCharacterWindowSettingsEffects(data.effect)
   }
 

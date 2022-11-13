@@ -3,7 +3,7 @@ import Tippy from '@tippyjs/react'
 import * as S from './styles'
 
 import CloseIcon from 'assets/icons/app/close.svg'
-import { T_CharacterEffect, T_EffectId } from 'models/game/character'
+import { T_CharacterEffect, T_EffectId } from 'models/shared/game/character'
 import { getGameIcon } from 'utils/game/effects/icons'
 
 interface I_CharacterEffectProps {

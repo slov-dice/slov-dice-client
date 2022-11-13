@@ -15,36 +15,30 @@ import {
   T_CharacterBar,
   T_CharacterEffect,
   T_CharacterSpecial,
-  T_EffectId,
-} from 'models/game/character'
+  T_CharacterEffectId,
+} from 'models/shared/game/character'
 import { getRandomThousand } from 'utils/helpers/generators'
 
 interface I_InitialState {
-  characters: I_Character[]
   overlays: I_WindowOverlay[]
   characterCreator: {
     avatar: string
     bars: T_CharacterBar[]
     specials: T_CharacterSpecial[]
-    effects: T_EffectId[]
+    effects: T_CharacterEffectId[]
   }
   characterEditor: {
     avatar: string
-    effects: T_EffectId[]
+    effects: T_CharacterEffectId[]
   }
   settings: I_CharactersSettings
 }
 
 const initialState: I_InitialState = {
-  characters: characters,
   overlays: initialStateSlice,
   characterCreator: { avatar: '', effects: [], bars: [], specials: [] },
   characterEditor: { avatar: '', effects: [] },
   settings: {
-    permissions: {
-      'player-update-characters': true,
-      'master-update-characters': true,
-    },
     bars: characterBars,
     specials: characterSpecials,
     effects: characterEffects,
