@@ -14,8 +14,8 @@ export const UsersPanel = () => {
   const [isLobbyUsers, setIsLobbyUsers] = useState(true)
 
   const { lobbyUsers, roomUsers } = useStoreSelector((store) => ({
-    lobbyUsers: state.usersPanel.lobbyUsers,
-    roomUsers: state.room.users,
+    lobbyUsers: store.usersPanel.lobbyUsers,
+    roomUsers: store.room.users,
   }))
 
   const roomUsersToLobbyUsers = useMemo(

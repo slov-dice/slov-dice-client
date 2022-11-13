@@ -13,20 +13,20 @@ export const UpdateCharacterEffectOverlay = () => {
   const { closeCharacterWindowOverlay, removeCharacterEffect, addCharacterEffect } = useActions()
 
   const { overlayPayload, settingsEffects } = useStoreSelector((store) => ({
-    overlayPayload: state.gameCharacters.overlays.find(
+    overlayPayload: store.gameCharacters.overlays.find(
       (overlay) => overlay.name === E_WindowOverlay.updateCharacterEffect,
     )?.payload,
-    settingsEffects: state.gameCharacters.settings.effects,
+    settingsEffects: store.gameCharacters.settings.effects,
   }))
 
   const characterEffects = useStoreSelector((store) => {
     if (overlayPayload === 'characterCreator') {
-      return state.gameCharacters.characterCreator.effects
+      return store.gameCharacters.characterCreator.effects
     }
     if (overlayPayload === 'characterEditor') {
-      return state.gameCharacters.characterEditor.effects
+      return store.gameCharacters.characterEditor.effects
     }
-    return state.gameCharacters.characters.find((character) => character.id === overlayPayload)
+    return store.gameCharacters.characters.find((character) => character.id === overlayPayload)
       ?.effects
   })
 
