@@ -3,8 +3,10 @@ import { v4 } from 'uuid'
 
 import * as S from './styles'
 
+import CloseIcon from 'assets/icons/app/close.svg'
+import PlusIcon from 'assets/icons/app/plus.svg'
 import { Button } from 'components/Buttons'
-import { TextField } from 'components/InputFields'
+import { ColorField, TextField } from 'components/InputFields'
 import { useActions } from 'hooks/useActions'
 import { useStoreSelector } from 'hooks/useStoreSelector'
 import * as C from 'styles/components'
@@ -38,20 +40,18 @@ export const BarsTab = () => {
           <S.BarBlock key={field.id}>
             <TextField {...register(`bars.${index}.name.RU`)} placeholder='Название' />
             <TextField {...register(`bars.${index}.name.EN`)} placeholder='Название' />
-            <input type='color' {...register(`bars.${index}.color`)} />
-            <Button mod={Button.mod.secondary} onClick={handleRemoveBar(index)}>
-              Удалить
-            </Button>
+            <ColorField {...register(`bars.${index}.color`)} fullWidth />
+            <S.BarRemove onClick={handleRemoveBar(index)}>
+              <CloseIcon />
+            </S.BarRemove>
           </S.BarBlock>
         ))}
+        <S.BarAdd onClick={handleAddBar}>
+          <div>Добавить бар</div>
+          <PlusIcon />
+        </S.BarAdd>
       </S.BarsWrapper>
-      <C.Divider />
 
-      <S.BarsActions>
-        <Button mod={Button.mod.secondary} onClick={handleAddBar}>
-          Добавить
-        </Button>
-      </S.BarsActions>
       <C.Divider decorated />
 
       <S.TabPanelBottom>

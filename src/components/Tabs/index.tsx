@@ -3,6 +3,8 @@ import { ReactElement, useState } from 'react'
 
 import * as S from './styles'
 
+import { t } from 'languages'
+
 interface I_TabsProps {
   children: ReactElement[]
 }
@@ -15,7 +17,7 @@ export const Tabs = ({ children }: I_TabsProps) => {
   }
 
   return (
-    <div>
+    <>
       <S.TabBar>
         {children.map((item) => (
           <S.Option
@@ -23,7 +25,7 @@ export const Tabs = ({ children }: I_TabsProps) => {
             isSelected={item.props.id === selectedTab.props.id}
             onClick={handleSetActiveTab(item)}
           >
-            {item.props.tabTitle}
+            {t(item.props.tabTitle)}
             {item.props.id === selectedTab.props.id ? <S.Underline layoutId='underline' /> : null}
           </S.Option>
         ))}
@@ -39,7 +41,7 @@ export const Tabs = ({ children }: I_TabsProps) => {
           {selectedTab || ''}
         </motion.div>
       </AnimatePresence>
-    </div>
+    </>
   )
 }
 

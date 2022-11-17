@@ -1,8 +1,8 @@
-import { ChangeEventHandler, forwardRef, RefObject } from 'react'
+import { ChangeEventHandler, forwardRef } from 'react'
 
 import * as S from './styles'
 
-interface TextFieldProps {
+interface I_TextFieldProps {
   value?: string
   name?: string
   placeholder?: string
@@ -14,7 +14,7 @@ interface TextFieldProps {
   // onBlur?: FocusEventHandler<HTMLInputElement>
 }
 
-const TextFieldComponent = forwardRef((props: TextFieldProps, ref: any) => {
+const TextFieldComponent = forwardRef((props: I_TextFieldProps, ref: any) => {
   const { fullWidth = false } = props
   return <S.Input {...props} ref={ref} fullWidth={fullWidth} />
 })
