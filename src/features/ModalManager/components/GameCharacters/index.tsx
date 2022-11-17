@@ -26,13 +26,13 @@ export const GameCharactersModal = () => {
           {/* <Tab id='Права' tabTitle='Права'>
             <PermissionsTab />
           </Tab> */}
-          <Tab id='Бары' tabTitle='Бары'>
+          <Tab id='bars' tabTitle='modals.gameCharacters.tabs.bars.title'>
             <BarsTab />
           </Tab>
-          <Tab id='Характеристики' tabTitle='Характеристики'>
+          <Tab id='specials' tabTitle='modals.gameCharacters.tabs.specials.title'>
             <SpecialsTab />
           </Tab>
-          <Tab id='Эффекты' tabTitle='Эффекты'>
+          <Tab id='effects' tabTitle='modals.gameCharacters.tabs.effects.title'>
             <EffectsTab />
           </Tab>
         </Tabs>

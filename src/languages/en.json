@@ -69,7 +69,18 @@
       "title": "Inventory settings"
     },
     "gameCharacters": {
-      "title": "Characters settings"
+      "title": "Characters settings",
+      "tabs": {
+        "bars": {
+          "title": "Bars"
+        },
+        "specials": {
+          "title": "Specials"
+        },
+        "effects": {
+          "title": "Effects"
+        }
+      }
     }
   },
   "auth": {
