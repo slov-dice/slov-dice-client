@@ -3,10 +3,12 @@ import { useDispatch } from 'react-redux'
 
 import { gameCharactersActions } from 'features/WindowManager/components/Characters/slice'
 import { windowManagerActions } from 'features/WindowManager/slice'
+import { roomActions } from 'store/room'
 
 const actions = {
-  ...gameCharactersActions,
   ...windowManagerActions,
+  ...roomActions,
+  ...gameCharactersActions,
 }
 
 export const useActions = () => {

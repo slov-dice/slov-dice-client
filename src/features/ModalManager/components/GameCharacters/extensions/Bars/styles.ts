@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { TabPanelBase, TabPanelBottomBase, AddBlock, RemoveBlock } from '../styles'
+import { TabPanelBase, TabPanelBottomBase, BlockAdd, BlockRemove } from '../styles'
 
 export const TabPanel = styled(TabPanelBase)``
 export const TabPanelBottom = styled(TabPanelBottomBase)``
@@ -8,7 +8,7 @@ export const TabPanelBottom = styled(TabPanelBottomBase)``
 export const BarsWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 24px;
+  gap: 8px;
 `
 
 export const BarBlock = styled.div`
@@ -28,6 +28,6 @@ export const BarBlock = styled.div`
   box-shadow: rgba(0, 0, 0, 16%) 0 3px 6px, rgba(0, 0, 0, 23%) 0 3px 6px;
 `
 
-export const BarRemove = styled(RemoveBlock)``
+export const BarRemove = styled(BlockRemove)``
 
-export const BarAdd = styled(AddBlock)``
+export const BarAdd = styled(BlockAdd)``

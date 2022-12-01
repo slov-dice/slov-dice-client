@@ -8,7 +8,7 @@ import {
   I_SubscriptionData as I_LRSubscriptionData,
 } from 'models/shared/socket/lobbyRooms'
 import { socket } from 'services/socket'
-import { setRoomMessage } from 'store/room'
+import { roomActions } from 'store/room'
 
 export const subscribe = createAsyncThunk('chatPanel', async (_, { dispatch }) => {
   socket.on(
@@ -28,7 +28,7 @@ export const subscribe = createAsyncThunk('chatPanel', async (_, { dispatch }) =
   socket.on(
     E_LRSubscribe.getRoomMessage,
     (data: I_LRSubscriptionData[E_LRSubscribe.getRoomMessage]) => {
-      dispatch(setRoomMessage(data))
+      dispatch(roomActions.setRoomMessage(data))
     },
   )
 })

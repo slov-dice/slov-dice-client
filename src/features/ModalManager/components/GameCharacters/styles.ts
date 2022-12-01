@@ -4,6 +4,7 @@ import { BaseModal, BaseModalClose, BaseModalContent } from '../styles'
 
 export const Modal = styled(BaseModal)`
   width: 900px;
+  height: 720px;
 `
 
 export const ModalClose = styled(BaseModalClose)``
@@ -11,8 +12,8 @@ export const ModalClose = styled(BaseModalClose)``
 export const ModalContent = styled(BaseModalContent)`
   overflow: auto;
 
-  height: 400px;
-  max-height: 400px;
+  height: 700px;
+  max-height: 700px;
   padding: 16px 8px;
 
   color: ${({ theme }) => theme.colors.white};

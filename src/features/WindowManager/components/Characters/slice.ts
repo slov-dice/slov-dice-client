@@ -216,13 +216,13 @@ export const gameCharactersSlice = createSlice({
       )
     },
 
-    setCharacterWindowSettingsBars: (state, action: PayloadAction<T_CharacterBar[]>) => {
-      state.settings.bars = action.payload
-      state.characters = state.characters.map((character) => {
-        character.bars = action.payload
-        return character
-      })
-    },
+    // setCharacterWindowSettingsBars: (state, action: PayloadAction<T_CharacterBar[]>) => {
+    //   state.settings.bars = action.payload
+    //   state.characters = state.characters.map((character) => {
+    //     character.bars = action.payload
+    //     return character
+    //   })
+    // },
 
     setCharacterWindowSettingsSpecials: (state, action: PayloadAction<T_CharacterSpecial[]>) => {
       state.settings.specials = action.payload

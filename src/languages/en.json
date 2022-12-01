@@ -72,13 +72,52 @@
       "title": "Characters settings",
       "tabs": {
         "bars": {
-          "title": "Bars"
+          "title": "Bars",
+          "fields": {
+            "name": {
+              "ru": "Name RU",
+              "en": "Name EN"
+            }
+          },
+          "actions": {
+            "add": "Add",
+            "save": "Save"
+          }
         },
         "specials": {
-          "title": "Specials"
+          "title": "Specials",
+          "fields": {
+            "name": {
+              "ru": "Name RU",
+              "en": "Name EN"
+            }
+          },
+          "actions": {
+            "add": "Add",
+            "save": "Save"
+          }
         },
         "effects": {
-          "title": "Effects"
+          "title": "Effects",
+          "fields": {
+            "type": {
+              "negative": "Negative",
+              "neutral": "Neutral",
+              "positive": "Positive"
+            },
+            "name": {
+              "ru": "Name RU",
+              "en": "Name EN"
+            },
+            "description": {
+              "ru": "Description RU",
+              "en": "Description EN"
+            }
+          },
+          "actions": {
+            "add": "Add",
+            "save": "Save"
+          }
         }
       }
     }
