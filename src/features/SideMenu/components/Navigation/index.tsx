@@ -22,7 +22,7 @@ import { useStoreSelector } from 'hooks/useStoreSelector'
 import { E_Routes } from 'models/routes'
 import { authAPI } from 'services/auth'
 import { leaveRoom, logout } from 'store/profile'
-import { emitLeaveRoom } from 'store/room'
+import { roomActions } from 'store/room'
 import { E_AppIcon } from 'utils/helpers/icons/app'
 import { LocalStorage } from 'utils/helpers/localStorage'
 
@@ -72,7 +72,7 @@ export const Navigation = ({ toggleMenu }: NavigationProps) => {
     }
 
     if (item.icon === E_AppIcon.leaveRoom) {
-      dispatch(emitLeaveRoom())
+      dispatch(roomActions.emitLeaveRoom())
       dispatch(leaveRoom())
       navigate('/lobby')
     }

@@ -1,61 +1,72 @@
 import { useFieldArray, useForm } from 'react-hook-form'
+import { v4 } from 'uuid'
 
 import * as S from './styles'
 
+import CloseIcon from 'assets/icons/app/close.svg'
+import PlusIcon from 'assets/icons/app/plus.svg'
 import { Button } from 'components/Buttons'
 import { TextField } from 'components/InputFields'
 import { useActions } from 'hooks/useActions'
 import { useStoreSelector } from 'hooks/useStoreSelector'
-import { T_CharacterSpecial } from 'models/shared/game/character'
+import { t } from 'languages'
+import { T_BaseCharacterSpecial } from 'models/shared/game/character'
 import * as C from 'styles/components'
 
 export const SpecialsTab = () => {
-  const settingsSpecials = useStoreSelector((store) => store.gameCharacters.settings.specials)
-  const { setCharacterWindowSettingsSpecials } = useActions()
+  const settingsSpecials = useStoreSelector((store) => store.room.game.characters.settings.specials)
+  const { emitUpdateCharactersWindowSettingsSpecials } = useActions()
 
   const { control, register, handleSubmit } = useForm({
-    defaultValues: { special: settingsSpecials },
+    defaultValues: { specials: settingsSpecials },
   })
   const { fields, append, remove } = useFieldArray({
     control,
-    name: 'special',
+    name: 'specials',
   })
 
-  const handleAddBar = () => {
-    append({ name: '', current: 1 })
+  const handleAddSpecial = () => {
+    append({ id: v4(), name: { EN: '', RU: '' } })
   }
 
-  const handleRemoveBar = (index: number) => () => {
+  const handleRemoveSpecial = (index: number) => () => {
     remove(index)
   }
 
-  const handleUpdateBars = (data: { special: T_CharacterSpecial[] }) => {
-    setCharacterWindowSettingsSpecials(data.special)
+  const handleUpdateSpecials = (data: { specials: T_BaseCharacterSpecial[] }) => {
+    emitUpdateCharactersWindowSettingsSpecials(data.specials)
   }
 
   return (
     <S.TabPanel>
       <S.SpecialsWrapper>
-        {fields.map((special, index) => (
-          <S.SpecialWrapper key={special.name}>
-            <TextField {...register(`special.${index}.name`)} placeholder='Название' />
-            <Button mod={Button.mod.secondary} onClick={handleRemoveBar(index)}>
-              Удалить
-            </Button>
-          </S.SpecialWrapper>
+        {fields.map((field, index) => (
+          <S.SpecialBlock key={field.id}>
+            <TextField
+              {...register(`specials.${index}.name.RU`)}
+              placeholder={t('modals.gameCharacters.tabs.specials.fields.name.ru')}
+            />
+            <TextField
+              {...register(`specials.${index}.name.EN`)}
+              placeholder={t('modals.gameCharacters.tabs.specials.fields.name.en')}
+            />
+            <S.SpecialRemove onClick={handleRemoveSpecial(index)}>
+              <CloseIcon />
+            </S.SpecialRemove>
+          </S.SpecialBlock>
         ))}
+        <S.SpecialAdd onClick={handleAddSpecial}>
+          <div>{t('modals.gameCharacters.tabs.specials.actions.add')}</div>
+          <PlusIcon />
+        </S.SpecialAdd>
       </S.SpecialsWrapper>
-      <C.Divider />
 
-      <S.SpecialsActions>
-        <Button mod={Button.mod.secondary} onClick={handleAddBar}>
-          Добавить
-        </Button>
-      </S.SpecialsActions>
       <C.Divider decorated />
 
       <S.TabPanelBottom>
-        <Button onClick={handleSubmit(handleUpdateBars)}>Сохранить</Button>
+        <Button onClick={handleSubmit(handleUpdateSpecials)}>
+          {t('modals.gameCharacters.tabs.specials.actions.save')}
+        </Button>
       </S.TabPanelBottom>
     </S.TabPanel>
   )

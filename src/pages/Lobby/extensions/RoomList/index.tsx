@@ -6,7 +6,7 @@ import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { useStoreSelector } from 'hooks/useStoreSelector'
 import { t } from 'languages'
 import { E_RoomType, I_PreviewRoom } from 'models/shared/app'
-import { emitJoinRoom } from 'store/room'
+import { roomActions } from 'store/room'
 import * as C from 'styles/components'
 
 export const RoomList = () => {
@@ -37,12 +37,12 @@ export const RoomList = () => {
     // Вход в комнату, если есть пароль
     if (room.type === E_RoomType.private) {
       const password = prompt('Enter the password') || ''
-      dispatch(emitJoinRoom({ roomId: room.id, password }))
+      dispatch(roomActions.emitJoinRoom({ roomId: room.id, password }))
       return
     }
 
     // Вход в комнату если она публичная
-    dispatch(emitJoinRoom({ roomId: room.id }))
+    dispatch(roomActions.emitJoinRoom({ roomId: room.id }))
   }
 
   const handleBackToTheRoom = () => {

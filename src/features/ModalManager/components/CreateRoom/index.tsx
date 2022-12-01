@@ -13,7 +13,7 @@ import { closeModal } from 'features/ModalManager/slice'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { t } from 'languages'
 import { E_RoomType } from 'models/shared/app'
-import { emitCreateRoom } from 'store/room'
+import { roomActions } from 'store/room'
 import * as C from 'styles/components'
 
 export const CreateRoomModal = () => {
@@ -64,7 +64,7 @@ export const CreateRoomModal = () => {
       roomPassword: roomPassword,
       roomType,
     }
-    dispatch(emitCreateRoom(createRoomPayload))
+    dispatch(roomActions.emitCreateRoom(createRoomPayload))
     handleClose()
   }
 

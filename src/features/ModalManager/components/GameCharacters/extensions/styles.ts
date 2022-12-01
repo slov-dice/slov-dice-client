@@ -15,7 +15,7 @@ export const TabPanelBottomBase = styled.div`
   margin-left: auto;
 `
 
-export const AddBlock = styled(motion.div).attrs(({ theme }) => addBlockAttrs(theme))`
+export const BlockAdd = styled(motion.div).attrs(({ theme }) => addBlockAttrs(theme))`
   cursor: pointer;
 
   position: relative;
@@ -44,7 +44,7 @@ export const AddBlock = styled(motion.div).attrs(({ theme }) => addBlockAttrs(th
   }
 `
 
-export const RemoveBlock = styled(motion.div).attrs(removeBlockAttrs)`
+export const BlockRemove = styled(motion.div).attrs(removeBlockAttrs)`
   cursor: pointer;
 
   position: absolute;

@@ -1,17 +1,20 @@
 import { useFieldArray, useForm } from 'react-hook-form'
+import { v4 } from 'uuid'
 
 import * as S from './styles'
 
+import CloseIcon from 'assets/icons/app/close.svg'
+import PlusIcon from 'assets/icons/app/plus.svg'
 import { Button } from 'components/Buttons'
 import { TextField, TextareaField, CustomSelectField } from 'components/InputFields'
 import { T_CustomSelectOption } from 'components/InputFields/CustomSelectField/models'
 import { useActions } from 'hooks/useActions'
 import { useStoreSelector } from 'hooks/useStoreSelector'
+import { t } from 'languages'
 import { E_EffectType, T_BaseCharacterEffect } from 'models/shared/game/character'
 import { E_EffectIcon } from 'models/shared/game/extra/effects'
 import * as C from 'styles/components'
 import { getGameIcon } from 'utils/game/effects/icons'
-import { getRandomThousand } from 'utils/helpers/generators'
 
 const optionsIcons: T_CustomSelectOption[] = Object.values(E_EffectIcon).map(
   (icon: E_EffectIcon) => ({
@@ -23,29 +26,29 @@ const optionsIcons: T_CustomSelectOption[] = Object.values(E_EffectIcon).map(
 const optionsTypes: T_CustomSelectOption[] = [
   {
     value: E_EffectType.negative,
-    label: 'Негативный',
+    label: t('modals.gameCharacters.tabs.effects.fields.type.negative'),
   },
   {
     value: E_EffectType.neutral,
-    label: 'Нейтральный',
+    label: t('modals.gameCharacters.tabs.effects.fields.type.neutral'),
   },
   {
     value: E_EffectType.positive,
-    label: 'Позитивный',
+    label: t('modals.gameCharacters.tabs.effects.fields.type.positive'),
   },
 ]
 
 export const EffectsTab = () => {
-  const settingsEffects = useStoreSelector((store) => store.gameCharacters.settings.effects)
-  const { setCharacterWindowSettingsEffects } = useActions()
+  const settingsEffects = useStoreSelector((store) => store.room.game.characters.settings.effects)
+  const { emitUpdateCharactersWindowSettingsEffects } = useActions()
 
   const { control, register, handleSubmit } = useForm({
-    defaultValues: { effect: settingsEffects },
+    defaultValues: { effects: settingsEffects },
   })
 
   const { fields, append, remove, update } = useFieldArray({
     control,
-    name: 'effect',
+    name: 'effects',
   })
 
   const handleChangeSelectIcon = (option: T_CustomSelectOption, fieldIndex?: number) => {
@@ -62,11 +65,11 @@ export const EffectsTab = () => {
 
   const handleAddEffect = () => {
     append({
-      id: getRandomThousand(),
+      id: v4(),
       icon: E_EffectIcon.brokenBone,
       type: E_EffectType.neutral,
-      name: '',
-      description: '',
+      name: { RU: '', EN: '' },
+      description: { RU: '', EN: '' },
     })
   }
 
@@ -74,8 +77,8 @@ export const EffectsTab = () => {
     remove(index)
   }
 
-  const handleUpdateEffects = (data: { effect: T_BaseCharacterEffect[] }) => {
-    setCharacterWindowSettingsEffects(data.effect)
+  const handleUpdateEffects = (data: { effects: T_BaseCharacterEffect[] }) => {
+    emitUpdateCharactersWindowSettingsEffects(data.effects)
   }
 
   return (
@@ -85,35 +88,53 @@ export const EffectsTab = () => {
           <S.EffectWrapper key={field.id}>
             <CustomSelectField
               fieldIndex={index}
-              value={field.type}
-              onChange={handleChangeSelectType}
-              options={optionsTypes}
-            />
-            <CustomSelectField
-              fieldIndex={index}
               value={field.icon}
               onChange={handleChangeSelectIcon}
               options={optionsIcons}
             />
-            <TextField {...register(`effect.${index}.name`)} />
-            <TextareaField {...register(`effect.${index}.description`)} fullWidth />
-            <Button mod={Button.mod.secondary} onClick={handleRemoveEffect(index)}>
-              Удалить
-            </Button>
+            <CustomSelectField
+              fieldIndex={index}
+              value={field.type}
+              onChange={handleChangeSelectType}
+              options={optionsTypes}
+            />
+            <C.Divider />
+
+            <TextField
+              {...register(`effects.${index}.name.RU`)}
+              placeholder={t('modals.gameCharacters.tabs.effects.fields.name.ru')}
+            />
+            <TextareaField
+              {...register(`effects.${index}.description.RU`)}
+              placeholder={t('modals.gameCharacters.tabs.effects.fields.description.ru')}
+              fullWidth
+            />
+            <C.Divider />
+            <TextField
+              {...register(`effects.${index}.name.EN`)}
+              placeholder={t('modals.gameCharacters.tabs.effects.fields.name.ru')}
+            />
+            <TextareaField
+              {...register(`effects.${index}.description.EN`)}
+              placeholder={t('modals.gameCharacters.tabs.effects.fields.description.en')}
+              fullWidth
+            />
+            <S.EffectRemove onClick={handleRemoveEffect(index)}>
+              <CloseIcon />
+            </S.EffectRemove>
           </S.EffectWrapper>
         ))}
+        <S.EffectAdd onClick={handleAddEffect}>
+          <div>{t('modals.gameCharacters.tabs.effects.actions.add')}</div>
+          <PlusIcon />
+        </S.EffectAdd>
       </S.EffectsWrapper>
-      <C.Divider />
-
-      <S.EffectsActions>
-        <Button mod={Button.mod.secondary} onClick={handleAddEffect}>
-          Добавить
-        </Button>
-      </S.EffectsActions>
       <C.Divider decorated />
 
       <S.TabPanelBottom>
-        <Button onClick={handleSubmit(handleUpdateEffects)}>Сохранить</Button>
+        <Button onClick={handleSubmit(handleUpdateEffects)}>
+          {t('modals.gameCharacters.tabs.effects.actions.save')}
+        </Button>
       </S.TabPanelBottom>
     </S.TabPanel>
   )

@@ -25,7 +25,6 @@ export const SelectHeader = styled.div`
     height: 100%;
   }
 `
-export const SelectListWrapper = styled.div``
 export const SelectList = styled.ul`
   position: absolute;
   z-index: 100;
@@ -43,6 +42,7 @@ export const SelectList = styled.ul`
   background: #373737;
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 10%) 0 6px 12px -2px, rgba(0, 0, 0, 40%) 0 3px 7px -3px;
 
   &:first-child {
     padding-top: 8px;

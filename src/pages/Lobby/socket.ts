@@ -7,7 +7,7 @@ import { setRooms, updateRoom } from './slice'
 import { E_Subscribe, I_SubscriptionData } from 'models/shared/socket/lobbyRooms'
 import { socket } from 'services/socket'
 import { joinRoom } from 'store/profile'
-import { setRoom } from 'store/room'
+import { roomActions } from 'store/room'
 import { LocalStorage } from 'utils/helpers/localStorage'
 
 export const subscribe = createAsyncThunk(
@@ -35,7 +35,7 @@ export const subscribe = createAsyncThunk(
       }
 
       if (!data.fullRoom) return
-      dispatch(setRoom(data.fullRoom))
+      dispatch(roomActions.setRoom(data.fullRoom))
       dispatch(joinRoom())
       navigate(`/room/${data.fullRoom.id}`)
     })

@@ -9,11 +9,13 @@ import { Button } from 'components/Buttons'
 import { ColorField, TextField } from 'components/InputFields'
 import { useActions } from 'hooks/useActions'
 import { useStoreSelector } from 'hooks/useStoreSelector'
+import { t } from 'languages'
+import { T_BaseCharacterBar } from 'models/shared/game/character'
 import * as C from 'styles/components'
 
 export const BarsTab = () => {
   const settingsBars = useStoreSelector((store) => store.room.game.characters.settings.bars)
-  const { setCharacterWindowSettingsBars } = useActions()
+  const { emitUpdateCharactersWindowSettingsBars } = useActions()
 
   const { control, register, handleSubmit } = useForm({ defaultValues: { bars: settingsBars } })
   const { fields, append, remove } = useFieldArray({
@@ -22,15 +24,15 @@ export const BarsTab = () => {
   })
 
   const handleAddBar = () => {
-    append({ id: v4(), color: '#71c6ce', name: { EN: '', RU: '' } })
+    append({ id: v4(), color: '#CD375D', name: { EN: '', RU: '' } })
   }
 
   const handleRemoveBar = (index: number) => () => {
     remove(index)
   }
 
-  const handleUpdateBars = (data: any) => {
-    setCharacterWindowSettingsBars(data.bar)
+  const handleUpdateBars = (data: { bars: T_BaseCharacterBar[] }) => {
+    emitUpdateCharactersWindowSettingsBars(data.bars)
   }
 
   return (
@@ -38,8 +40,14 @@ export const BarsTab = () => {
       <S.BarsWrapper>
         {fields.map((field, index) => (
           <S.BarBlock key={field.id}>
-            <TextField {...register(`bars.${index}.name.RU`)} placeholder='Название' />
-            <TextField {...register(`bars.${index}.name.EN`)} placeholder='Название' />
+            <TextField
+              {...register(`bars.${index}.name.RU`)}
+              placeholder={t('modals.gameCharacters.tabs.bars.fields.name.ru')}
+            />
+            <TextField
+              {...register(`bars.${index}.name.EN`)}
+              placeholder={t('modals.gameCharacters.tabs.bars.fields.name.en')}
+            />
             <ColorField {...register(`bars.${index}.color`)} fullWidth />
             <S.BarRemove onClick={handleRemoveBar(index)}>
               <CloseIcon />
@@ -47,7 +55,7 @@ export const BarsTab = () => {
           </S.BarBlock>
         ))}
         <S.BarAdd onClick={handleAddBar}>
-          <div>Добавить бар</div>
+          <div>{t('modals.gameCharacters.tabs.bars.actions.add')}</div>
           <PlusIcon />
         </S.BarAdd>
       </S.BarsWrapper>
@@ -55,7 +63,9 @@ export const BarsTab = () => {
       <C.Divider decorated />
 
       <S.TabPanelBottom>
-        <Button onClick={handleSubmit(handleUpdateBars)}>Сохранить</Button>
+        <Button onClick={handleSubmit(handleUpdateBars)}>
+          {t('modals.gameCharacters.tabs.bars.actions.save')}
+        </Button>
       </S.TabPanelBottom>
     </S.TabPanel>
   )

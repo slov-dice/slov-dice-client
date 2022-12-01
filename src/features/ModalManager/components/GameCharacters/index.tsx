@@ -23,9 +23,6 @@ export const GameCharactersModal = () => {
       <C.Title>{t('modals.gameCharacters.title')}</C.Title>
       <S.ModalContent>
         <Tabs>
-          {/* <Tab id='Права' tabTitle='Права'>
-            <PermissionsTab />
-          </Tab> */}
           <Tab id='bars' tabTitle='modals.gameCharacters.tabs.bars.title'>
             <BarsTab />
           </Tab>

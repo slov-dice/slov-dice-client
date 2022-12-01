@@ -1,6 +1,6 @@
 import { E_EffectIcon } from '../extra/effects'
 
-import { T_LocaleServerText } from 'models/shared/app'
+import { T_LocaleText } from 'models/shared/app'
 
 export type T_CharacterId = string
 export type T_CharacterEffectId = string
@@ -37,13 +37,13 @@ export type T_CharacterSpecial = {
 
 export type T_BaseCharacterBar = {
   id: T_CharacterBarId
-  name: T_LocaleServerText
+  name: T_LocaleText
   color: string
 }
 
 export type T_BaseCharacterSpecial = {
   id: T_CharacterSpecialId
-  name: T_LocaleServerText
+  name: T_LocaleText
 }
 
 export enum E_EffectType {
@@ -54,8 +54,8 @@ export enum E_EffectType {
 
 export type T_BaseCharacterEffect = {
   id: T_CharacterEffectId
-  name: T_LocaleServerText
-  description: T_LocaleServerText
+  name: T_LocaleText
+  description: T_LocaleText
   icon: E_EffectIcon
   type: E_EffectType
 }

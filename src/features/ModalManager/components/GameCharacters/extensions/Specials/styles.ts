@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { TabPanelBase, TabPanelBottomBase } from '../styles'
+import { TabPanelBase, TabPanelBottomBase, BlockAdd, BlockRemove } from '../styles'
 
 export const TabPanel = styled(TabPanelBase)``
 export const TabPanelBottom = styled(TabPanelBottomBase)``
@@ -8,15 +8,28 @@ export const TabPanelBottom = styled(TabPanelBottomBase)``
 export const SpecialsWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 32px;
+  gap: 8px;
 `
 
-export const SpecialWrapper = styled.div`
+export const SpecialBlock = styled.div`
+  position: relative;
+
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 8px;
+  align-items: center;
+
+  width: 200px;
+  height: 118px;
+  padding: 12px;
+
+  background-color: #2b2b2b;
+  border-radius: 8px;
+  box-shadow: rgba(0, 0, 0, 16%) 0 3px 6px, rgba(0, 0, 0, 23%) 0 3px 6px;
 `
 
-export const SpecialsActions = styled.div`
-  width: 256px;
+export const SpecialRemove = styled(BlockRemove)``
+
+export const SpecialAdd = styled(BlockAdd)`
+  height: 118px;
 `
