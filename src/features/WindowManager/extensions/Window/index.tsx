@@ -18,7 +18,7 @@ import MinusIcon from 'assets/icons/app/minus.svg'
 import PlusIcon from 'assets/icons/app/plus.svg'
 import { useActions } from 'hooks/useActions'
 import { t } from 'languages'
-import { getAppIcon } from 'utils/helpers/icons/app'
+import { getAppIcon } from 'utils/icons/app'
 
 interface I_WindowProps {
   children: ReactNode

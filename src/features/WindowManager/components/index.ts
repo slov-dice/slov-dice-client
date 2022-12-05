@@ -10,7 +10,7 @@ import { TextEditorContent } from './TextEditor'
 import { E_Window, I_WindowHeader } from '../models'
 
 import { E_Modal } from 'features/ModalManager/models'
-import { E_AppIcon } from 'utils/helpers/icons/app'
+import { E_AppIcon } from 'utils/icons/app'
 
 export const windowHead: Record<E_Window, I_WindowHeader> = {
   [E_Window.battlefield]: {

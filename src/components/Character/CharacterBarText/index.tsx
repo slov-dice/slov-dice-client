@@ -3,27 +3,29 @@ import { useRef } from 'react'
 import * as S from './styles'
 
 import { useEditable } from 'hooks/useEditable'
+import { T_CharacterBarId } from 'models/shared/game/character'
+import { regExp } from 'utils/helpers/regExp'
 import { numberWithSpaces } from 'utils/helpers/text'
 
 interface I_CharacterBarTextProps {
   value: number
-  name: string
+  id: T_CharacterBarId
   onChange: (name: string, value: number) => void
 }
 
-export const CharacterBarText = ({ value, onChange, name }: I_CharacterBarTextProps) => {
+export const CharacterBarText = ({ value, onChange, id }: I_CharacterBarTextProps) => {
   const inputRef = useRef<HTMLInputElement>(null)
 
   const calculateValue = () => {
-    if (/^[+-][0-9]+$/.test(inputValue)) {
+    if (regExp.onlyNumberWithCalc.test(inputValue)) {
       let result = value + +inputValue
       if (result < 0) result = 0
-      onChange(name, result)
+      onChange(id, result)
       return
     }
 
-    if (/^[0-9]+$/.test(inputValue)) {
-      onChange(name, +inputValue)
+    if (regExp.onlyNumber.test(inputValue)) {
+      onChange(id, +inputValue)
     }
   }
 

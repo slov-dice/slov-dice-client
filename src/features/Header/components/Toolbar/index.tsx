@@ -13,7 +13,7 @@ import { closeSidePanel, openSidePanel } from 'features/SidePanel/slice'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { useStoreSelector } from 'hooks/useStoreSelector'
 import { FullScreen } from 'utils/helpers/fullScreen'
-import { E_AppIcon, getAppIcon } from 'utils/helpers/icons/app'
+import { E_AppIcon, getAppIcon } from 'utils/icons/app'
 
 export const Toolbar = () => {
   const { toolbar, sidePanel, isAuth } = useStoreSelector((store) => ({

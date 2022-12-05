@@ -17,12 +17,18 @@ import {
 import { E_WindowOverlay } from 'features/WindowOverlayManager/models'
 import { useActions } from 'hooks/useActions'
 import { useStoreSelector } from 'hooks/useStoreSelector'
+import { t } from 'languages'
+import { T_CharacterBarId, T_CharacterSpecialId } from 'models/shared/game/character'
 import * as C from 'styles/components'
-import { getEffect } from 'utils/game/effects'
+import { getBar, getEffect, getSpecial } from 'utils/game/effects'
 import { calculateBarDimension } from 'utils/helpers/calculates'
 
 export const UpdateCharacterOverlay = () => {
-  const { closeCharacterWindowOverlay, removeCharacterEffect, updateCharacter } = useActions()
+  const {
+    closeCharacterWindowOverlay,
+    removeCharacterEffect,
+    emitUpdateCharacterInCharactersWindow,
+  } = useActions()
 
   const payload = useStoreSelector(
     (state) =>
@@ -31,10 +37,13 @@ export const UpdateCharacterOverlay = () => {
       )?.payload,
   )
 
-  const { characterStore, characterEditor, settingsEffects } = useStoreSelector((store) => ({
-    characterStore: store.gameCharacters.characters.find((character) => character.id === payload),
+  const { characterStore, characterEditor, settings, language } = useStoreSelector((store) => ({
+    characterStore: store.room.game.characters.window.characters.find(
+      (character) => character.id === payload,
+    ),
+    settings: store.room.game.characters.settings,
     characterEditor: store.gameCharacters.characterEditor,
-    settingsEffects: store.gameCharacters.settings.effects,
+    language: store.app.language,
   }))
 
   const [character, setCharacter] = useState(characterStore!)
@@ -51,25 +60,25 @@ export const UpdateCharacterOverlay = () => {
     setCharacter((prev) => ({ ...prev, description: value }))
   }
 
-  const handleChangeCharacterBarCurrentValue = (name: string, value: number) => {
+  const handleChangeCharacterBarCurrentValue = (id: T_CharacterBarId, value: number) => {
     setCharacter((prev) => ({
       ...prev,
-      bars: prev.bars.map((bar) => (bar.name === name ? { ...bar, current: value } : bar)),
+      bars: prev.bars.map((bar) => (bar.id === id ? { ...bar, current: value } : bar)),
     }))
   }
 
-  const handleChangeCharacterBarMaxValue = (name: string, value: number) => {
+  const handleChangeCharacterBarMaxValue = (id: T_CharacterBarId, value: number) => {
     setCharacter((prev) => ({
       ...prev,
-      bars: prev.bars.map((bar) => (bar.name === name ? { ...bar, max: value } : bar)),
+      bars: prev.bars.map((bar) => (bar.id === id ? { ...bar, max: value } : bar)),
     }))
   }
 
-  const handleChangeCharacterSpecial = (name: string, value: number) => {
+  const handleChangeCharacterSpecial = (id: T_CharacterSpecialId, value: number) => {
     setCharacter((prev) => ({
       ...prev,
       specials: prev.specials.map((special) =>
-        special.name === name ? { ...special, current: value } : special,
+        special.id === id ? { ...special, current: value } : special,
       ),
     }))
   }
@@ -83,7 +92,7 @@ export const UpdateCharacterOverlay = () => {
   }, [closeCharacterWindowOverlay])
 
   const handleUpdateCharacter = () => {
-    updateCharacter({ ...character, ...characterEditor })
+    emitUpdateCharacterInCharactersWindow({ ...character, ...characterEditor })
     handleClose()
   }
 
@@ -91,7 +100,7 @@ export const UpdateCharacterOverlay = () => {
     return (
       <div>
         <S.OverlayHeader>
-          <span>Редактирование персонажа</span>
+          <span>{t('updateCharacterOverlay.title')}</span>
           <C.Control onClick={handleClose}>
             <CloseIcon />
           </C.Control>
@@ -111,47 +120,53 @@ export const UpdateCharacterOverlay = () => {
             </S.ContentBlock>
 
             <S.ContentBlock>
-              {character.bars.map((bar) => (
-                <S.BarWrapper
-                  key={bar.name}
-                  color={bar.color}
-                  barHeight={calculateBarDimension(bar.current, bar.max)}
-                >
-                  <S.BarName>{bar.name}</S.BarName>
-                  <S.BarText>
-                    <CharacterBarText
-                      name={bar.name}
-                      value={bar.current}
-                      onChange={handleChangeCharacterBarCurrentValue}
-                    />
-                    <span>/</span>
-                    <CharacterBarText
-                      name={bar.name}
-                      value={bar.max}
-                      onChange={handleChangeCharacterBarMaxValue}
-                    />
-                  </S.BarText>
-                </S.BarWrapper>
-              ))}
+              {character.bars.map((bar) => {
+                const baseBar = getBar(bar.id, settings.bars)
+                return (
+                  <S.BarWrapper
+                    key={bar.id}
+                    color={baseBar.color}
+                    barHeight={calculateBarDimension(bar.current, bar.max)}
+                  >
+                    <S.BarName>{baseBar.name[language]}</S.BarName>
+                    <S.BarText>
+                      <CharacterBarText
+                        id={baseBar.id}
+                        value={bar.current}
+                        onChange={handleChangeCharacterBarCurrentValue}
+                      />
+                      <span>/</span>
+                      <CharacterBarText
+                        id={baseBar.id}
+                        value={bar.max}
+                        onChange={handleChangeCharacterBarMaxValue}
+                      />
+                    </S.BarText>
+                  </S.BarWrapper>
+                )
+              })}
             </S.ContentBlock>
 
             <S.ContentBlock>
-              {character.specials.map((special) => (
-                <CharacterSpecial
-                  key={special.name}
-                  values={special}
-                  onChange={handleChangeCharacterSpecial}
-                />
-              ))}
+              {character.specials.map((special) => {
+                const baseSpecial = getSpecial(special.id, settings.specials)
+                return (
+                  <CharacterSpecial
+                    key={special.id}
+                    special={{ ...special, ...baseSpecial }}
+                    onChange={handleChangeCharacterSpecial}
+                  />
+                )
+              })}
             </S.ContentBlock>
 
             <S.ContentBlock direction='row'>
               {characterEditor.effects.map((effectId) => {
-                const effect = getEffect(effectId, settingsEffects)
+                const effect = getEffect(effectId, settings.effects)
                 return (
                   <CharacterEffect
-                    key={effect.name}
-                    values={effect}
+                    key={effect.id}
+                    effect={effect}
                     onRemove={handleRemoveCharacterEffect}
                   />
                 )
@@ -162,9 +177,11 @@ export const UpdateCharacterOverlay = () => {
           <C.Divider decorated />
           <S.ContentBottom>
             <Button onClick={handleClose} mod={Button.mod.secondary}>
-              Отмена
+              {t('updateCharacterOverlay.actions.cancel')}
             </Button>
-            <Button onClick={handleUpdateCharacter}>Изменить</Button>
+            <Button onClick={handleUpdateCharacter}>
+              {t('updateCharacterOverlay.actions.save')}
+            </Button>
           </S.ContentBottom>
         </S.OverlayContent>
       </div>

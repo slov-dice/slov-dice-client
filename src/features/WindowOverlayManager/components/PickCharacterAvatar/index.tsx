@@ -7,10 +7,15 @@ import CloseIcon from 'assets/icons/app/close.svg'
 import { E_WindowOverlay } from 'features/WindowOverlayManager/models'
 import { useActions } from 'hooks/useActions'
 import { useStoreSelector } from 'hooks/useStoreSelector'
+import { t } from 'languages'
 import * as C from 'styles/components'
 
 export const PickCharacterAvatarOverlay = () => {
-  const { closeCharacterWindowOverlay, setCharacterAvatar } = useActions()
+  const {
+    closeCharacterWindowOverlay,
+    setCharacterAvatar,
+    emitUpdateCharacterFieldInCharactersWindow,
+  } = useActions()
 
   const overlayPayload = useStoreSelector(
     (state) =>
@@ -26,8 +31,9 @@ export const PickCharacterAvatarOverlay = () => {
     if (overlayPayload === 'characterEditor') {
       return store.gameCharacters.characterEditor.avatar
     }
-    return store.gameCharacters.characters.find((character) => character.id === overlayPayload)
-      ?.avatar
+    return store.room.game.characters.window.characters.find(
+      (character) => character.id === overlayPayload,
+    )?.avatar
   })
 
   const handleClose = useCallback(() => {
@@ -36,14 +42,22 @@ export const PickCharacterAvatarOverlay = () => {
 
   const handlePickAvatar = (avatar: string) => () => {
     if (overlayPayload) {
-      setCharacterAvatar({ characterId: overlayPayload, avatar })
+      if (overlayPayload === 'characterCreator' || overlayPayload === 'characterEditor') {
+        setCharacterAvatar({ characterId: overlayPayload, avatar })
+        return
+      }
+      emitUpdateCharacterFieldInCharactersWindow({
+        characterId: overlayPayload,
+        field: 'avatar',
+        value: avatar,
+      })
     }
   }
 
   return (
     <div>
       <S.OverlayHeader>
-        <span>Аватар персонажа</span>
+        <span>{t('pickCharacterAvatarOverlay.title')}</span>
         <C.Control onClick={handleClose}>
           <CloseIcon />
         </C.Control>

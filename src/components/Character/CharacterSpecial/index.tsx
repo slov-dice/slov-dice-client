@@ -3,40 +3,43 @@ import { useRef } from 'react'
 import * as S from './styles'
 
 import { useEditable } from 'hooks/useEditable'
-import { T_CharacterSpecial } from 'models/shared/game/character'
+import { useStoreSelector } from 'hooks/useStoreSelector'
+import { T_BaseCharacterSpecial, T_CharacterSpecial } from 'models/shared/game/character'
+import { regExp } from 'utils/helpers/regExp'
 
 interface I_CharacterSpecial {
-  values: T_CharacterSpecial
+  special: T_BaseCharacterSpecial & T_CharacterSpecial
   onChange: (name: string, value: number) => void
 }
 
-export const CharacterSpecial = ({ values, onChange }: I_CharacterSpecial) => {
+export const CharacterSpecial = ({ special, onChange }: I_CharacterSpecial) => {
+  const language = useStoreSelector((store) => store.app.language)
   const inputRef = useRef<HTMLInputElement>(null)
 
   const handleCalculateValue = () => {
-    if (/^[+-][0-9]+$/.test(inputValue)) {
-      let result = values.current + +inputValue
+    if (regExp.onlyNumberWithCalc.test(inputValue)) {
+      let result = special.current + +inputValue
       if (result < 0) result = 0
-      onChange(values.name, result)
+      onChange(special.id, result)
       return
     }
 
-    if (/^[0-9]+$/.test(inputValue)) {
-      onChange(values.name, +inputValue)
+    if (regExp.onlyNumber.test(inputValue)) {
+      onChange(special.id, +inputValue)
     }
   }
 
   const { handleEdit, handleKeyDown, handleBlur, isEdit, inputValue, handleChangeInput } =
     useEditable({
       inputRef,
-      initialInputValue: String(values.current),
+      initialInputValue: String(special.current),
       onEnterPress: handleCalculateValue,
       pattern: 'numeric',
     })
 
   return (
     <S.SpecialWrapper onClick={!isEdit ? handleEdit : undefined}>
-      <span>{values.name}</span>{' '}
+      <span>{special.name[language]}</span>{' '}
       {isEdit ? (
         <S.SpecialInput
           ref={inputRef}
@@ -47,7 +50,7 @@ export const CharacterSpecial = ({ values, onChange }: I_CharacterSpecial) => {
           maxLength={4}
         />
       ) : (
-        <S.SpecialValue>{values.current}</S.SpecialValue>
+        <S.SpecialValue>{special.current}</S.SpecialValue>
       )}
     </S.SpecialWrapper>
   )

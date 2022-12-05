@@ -12,7 +12,7 @@ import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { useStoreSelector } from 'hooks/useStoreSelector'
 import { t } from 'languages'
 import * as C from 'styles/components'
-import { getAppIcon } from 'utils/helpers/icons/app'
+import { getAppIcon } from 'utils/icons/app'
 
 export const SettingsModal = () => {
   const toolbar = useStoreSelector((store) => store.header.toolbar)

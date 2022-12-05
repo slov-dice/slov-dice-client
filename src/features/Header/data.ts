@@ -4,7 +4,7 @@ import { E_Modal } from 'features/ModalManager/models'
 import { E_Panels } from 'features/SidePanel/models'
 import { E_Locale } from 'models/shared/app'
 import { FullScreen } from 'utils/helpers/fullScreen'
-import { E_AppIcon } from 'utils/helpers/icons/app'
+import { E_AppIcon } from 'utils/icons/app'
 import { LocalStorage } from 'utils/helpers/localStorage'
 
 interface UI {

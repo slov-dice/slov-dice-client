@@ -6,7 +6,7 @@ export type T_FormCreateCharacter = Omit<
 >
 
 export const formCreateCharacter: T_FormCreateCharacter = {
-  name: 'Имя',
-  description: 'Описание',
+  name: 'Имя/Name',
+  description: 'Описание/Description',
   level: 1,
 }

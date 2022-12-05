@@ -122,6 +122,29 @@
       }
     }
   },
+  "windowCharacters": {
+    "level": "Level"
+  },
+  "createCharacterOverlay": {
+    "title": "Character Creator",
+    "actions": {
+      "create": "Create",
+      "cancel": "Cancel"
+    }
+  },
+  "updateCharacterEffectOverlay": {
+    "title": "Character Effects"
+  },
+  "pickCharacterAvatarOverlay": {
+    "title": "Character avatar"
+  },
+  "updateCharacterOverlay": {
+    "title": "Character Editor",
+    "actions": {
+      "save": "Save",
+      "cancel": "Cancel"
+    }
+  },
   "auth": {
     "registration": "Create an Account",
     "login": "Login to Account",

@@ -1,23 +1,17 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-import {
-  characterBars,
-  characterEffects,
-  characters,
-  characterSpecials,
-  initialStateSlice,
-} from './data'
+import { initialStateSlice } from './data'
 
 import { E_WindowOverlay, I_WindowOverlay } from 'features/WindowOverlayManager/models'
 import {
   I_Character,
-  I_CharactersSettings,
   T_CharacterBar,
-  T_CharacterEffect,
   T_CharacterSpecial,
   T_CharacterEffectId,
+  T_BaseCharacterBar,
+  T_BaseCharacterSpecial,
+  T_CharacterBarId,
 } from 'models/shared/game/character'
-import { getRandomThousand } from 'utils/helpers/generators'
 
 interface I_InitialState {
   overlays: I_WindowOverlay[]
@@ -31,78 +25,59 @@ interface I_InitialState {
     avatar: string
     effects: T_CharacterEffectId[]
   }
-  settings: I_CharactersSettings
 }
 
 const initialState: I_InitialState = {
   overlays: initialStateSlice,
   characterCreator: { avatar: '', effects: [], bars: [], specials: [] },
   characterEditor: { avatar: '', effects: [] },
-  settings: {
-    bars: characterBars,
-    specials: characterSpecials,
-    effects: characterEffects,
-  },
 }
 
 export const gameCharactersSlice = createSlice({
   name: 'gameCharacters',
   initialState,
   reducers: {
-    setCharacterBar: (
+    setCharacterCreator: (
       state,
-      action: PayloadAction<{ characterId: string; barName: string; barValue: number }>,
+      action: PayloadAction<{
+        settingsBars: T_BaseCharacterBar[]
+        settingsSpecials: T_BaseCharacterSpecial[]
+      }>,
     ) => {
-      const character = state.characters.find((item) => item.id === action.payload.characterId)
-      const bar = character?.bars.find((item) => item.name === action.payload.barName)
-      if (bar) {
-        bar.current = action.payload.barValue
+      state.characterCreator = {
+        avatar: '',
+        bars: action.payload.settingsBars.map((bar) => ({ id: bar.id, current: 50, max: 100 })),
+        specials: action.payload.settingsSpecials.map((special) => ({
+          id: special.id,
+          current: 5,
+        })),
+        effects: [],
       }
     },
 
     setCharacterCreatorBar: (
       state,
-      action: PayloadAction<{ name: string; value: number; property: 'current' | 'max' }>,
+      action: PayloadAction<{ id: T_CharacterBarId; value: number; property: 'current' | 'max' }>,
     ) => {
-      const bar = state.characterCreator.bars.find((item) => item.name === action.payload.name)
+      const bar = state.characterCreator.bars.find((item) => item.id === action.payload.id)
       if (bar) {
         bar[action.payload.property] = action.payload.value
       }
     },
 
-    setCharacterSpecial: (
+    setCharacterCreatorSpecial: (
       state,
-      action: PayloadAction<{ characterId: string; specialName: string; specialValue: number }>,
+      action: PayloadAction<{ id: T_CharacterBarId; value: number }>,
     ) => {
-      const character = state.characters.find((item) => item.id === action.payload.characterId)
-      const special = character?.specials.find((item) => item.name === action.payload.specialName)
-      if (special) {
-        special.current = action.payload.specialValue
-      }
-    },
-
-    setCharacterCreatorSpecial: (state, action: PayloadAction<{ name: string; value: number }>) => {
-      const special = state.characterCreator.specials.find(
-        (item) => item.name === action.payload.name,
-      )
+      const special = state.characterCreator.specials.find((item) => item.id === action.payload.id)
       if (special) {
         special.current = action.payload.value
       }
     },
 
-    setCharacterLevel: (
-      state,
-      action: PayloadAction<{ characterId: string; levelValue: number }>,
-    ) => {
-      const character = state.characters.find((item) => item.id === action.payload.characterId)
-      if (character) {
-        character.level = action.payload.levelValue
-      }
-    },
-
     addCharacterEffect: (
       state,
-      action: PayloadAction<{ characterId: string; effectId: T_EffectId }>,
+      action: PayloadAction<{ characterId: string; effectId: T_CharacterEffectId }>,
     ) => {
       // Если создаётся персонаж
       if (action.payload.characterId === 'characterCreator') {
@@ -113,15 +88,11 @@ export const gameCharactersSlice = createSlice({
         state.characterEditor.effects.push(action.payload.effectId)
         return
       }
-      const character = state.characters.find((item) => item.id === action.payload.characterId)
-      if (character) {
-        character.effects.push(action.payload.effectId)
-      }
     },
 
     removeCharacterEffect: (
       state,
-      action: PayloadAction<{ characterId: string; effectId: T_EffectId }>,
+      action: PayloadAction<{ characterId: string; effectId: T_CharacterEffectId }>,
     ) => {
       // Если создаётся персонаж
       if (action.payload.characterId === 'characterCreator') {
@@ -137,10 +108,6 @@ export const gameCharactersSlice = createSlice({
         )
         return
       }
-      const character = state.characters.find((item) => item.id === action.payload.characterId)
-      if (character) {
-        character.effects = character.effects.filter((effect) => effect !== action.payload.effectId)
-      }
     },
 
     setCharacterAvatar: (state, action: PayloadAction<{ characterId: string; avatar: string }>) => {
@@ -154,30 +121,6 @@ export const gameCharactersSlice = createSlice({
       if (action.payload.characterId === 'characterEditor') {
         state.characterEditor.avatar = action.payload.avatar
         return
-      }
-
-      const character = state.characters.find((item) => item.id === action.payload.characterId)
-      if (character) {
-        character.avatar = action.payload.avatar
-      }
-    },
-
-    setCharacterName: (
-      state,
-      action: PayloadAction<{ characterId: string; nameValue: string }>,
-    ) => {
-      const character = state.characters.find((item) => item.id === action.payload.characterId)
-      if (character) {
-        character.name = action.payload.nameValue
-      }
-    },
-
-    setCharacterCreator: (state) => {
-      state.characterCreator = {
-        avatar: '',
-        bars: state.settings.bars,
-        specials: state.settings.specials,
-        effects: [],
       }
     },
 
@@ -204,18 +147,6 @@ export const gameCharactersSlice = createSlice({
       state.overlays = state.overlays.map((overlay) => ({ ...overlay, isOpen: false }))
     },
 
-    createCharacter: (state, action: PayloadAction<Omit<I_Character, 'id'>>) => {
-      const user = { ...action.payload, id: getRandomThousand() }
-      state.characterCreator = { avatar: '', effects: [], bars: [], specials: [] }
-      state.characters.push(user)
-    },
-
-    updateCharacter: (state, action: PayloadAction<I_Character>) => {
-      state.characters = state.characters.map((character) =>
-        character.id === action.payload.id ? action.payload : character,
-      )
-    },
-
     // setCharacterWindowSettingsBars: (state, action: PayloadAction<T_CharacterBar[]>) => {
     //   state.settings.bars = action.payload
     //   state.characters = state.characters.map((character) => {
@@ -224,21 +155,21 @@ export const gameCharactersSlice = createSlice({
     //   })
     // },
 
-    setCharacterWindowSettingsSpecials: (state, action: PayloadAction<T_CharacterSpecial[]>) => {
-      state.settings.specials = action.payload
-      state.characters = state.characters.map((character) => {
-        character.specials = action.payload
-        return character
-      })
-    },
+    // setCharacterWindowSettingsSpecials: (state, action: PayloadAction<T_CharacterSpecial[]>) => {
+    //   state.settings.specials = action.payload
+    //   state.characters = state.characters.map((character) => {
+    //     character.specials = action.payload
+    //     return character
+    //   })
+    // },
 
-    setCharacterWindowSettingsEffects: (state, action: PayloadAction<T_CharacterEffect[]>) => {
-      state.settings.effects = action.payload
-      state.characters = state.characters.map((character) => {
-        character.effects = []
-        return character
-      })
-    },
+    // setCharacterWindowSettingsEffects: (state, action: PayloadAction<T_CharacterEffect[]>) => {
+    //   state.settings.effects = action.payload
+    //   state.characters = state.characters.map((character) => {
+    //     character.effects = []
+    //     return character
+    //   })
+    // },
   },
 })
 

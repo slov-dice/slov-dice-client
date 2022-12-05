@@ -1,4 +1,5 @@
 import { useCallback, useState } from 'react'
+import { v4 } from 'uuid'
 
 import { formCreateCharacter, T_FormCreateCharacter } from './data'
 import * as S from './styles'
@@ -18,21 +19,29 @@ import {
 import { E_WindowOverlay } from 'features/WindowOverlayManager/models'
 import { useActions } from 'hooks/useActions'
 import { useStoreSelector } from 'hooks/useStoreSelector'
+import { t } from 'languages'
+import {
+  T_BaseCharacterBar,
+  T_BaseCharacterSpecial,
+  T_CharacterBarId,
+  T_CharacterSpecialId,
+} from 'models/shared/game/character'
 import * as C from 'styles/components'
-import { getEffect } from 'utils/game/effects'
+import { getBar, getEffect, getSpecial } from 'utils/game/effects'
 import { calculateBarDimension } from 'utils/helpers/calculates'
 
 export const CreateCharacterOverlay = () => {
   const {
     closeCharacterWindowOverlay,
     removeCharacterEffect,
-    createCharacter,
     setCharacterCreatorBar,
     setCharacterCreatorSpecial,
+    emitCreateCharacterInCharactersWindow,
   } = useActions()
-  const { characterCreator, settingsEffects } = useStoreSelector((store) => ({
+  const { characterCreator, settings, language } = useStoreSelector((store) => ({
     characterCreator: store.gameCharacters.characterCreator,
-    settingsEffects: store.gameCharacters.settings.effects,
+    settings: store.room.game.characters.settings,
+    language: store.app.language,
   }))
   const [character, setCharacter] = useState<T_FormCreateCharacter>(formCreateCharacter)
 
@@ -53,16 +62,16 @@ export const CreateCharacterOverlay = () => {
     setCharacter((prev) => ({ ...prev, description: value }))
   }
 
-  const handleChangeCharacterBarCurrentValue = (name: string, value: number) => {
-    setCharacterCreatorBar({ name, value, property: 'current' })
+  const handleChangeCharacterBarCurrentValue = (id: T_CharacterBarId, value: number) => {
+    setCharacterCreatorBar({ id, value, property: 'current' })
   }
 
-  const handleChangeCharacterBarMaxValue = (name: string, value: number) => {
-    setCharacterCreatorBar({ name, value, property: 'max' })
+  const handleChangeCharacterBarMaxValue = (id: T_CharacterBarId, value: number) => {
+    setCharacterCreatorBar({ id, value, property: 'max' })
   }
 
-  const handleChangeCharacterSpecial = (name: string, value: number) => {
-    setCharacterCreatorSpecial({ name, value })
+  const handleChangeCharacterSpecial = (id: T_CharacterSpecialId, value: number) => {
+    setCharacterCreatorSpecial({ id, value })
   }
 
   const handleRemoveCharacterEffect = (effectId: string) => {
@@ -70,14 +79,14 @@ export const CreateCharacterOverlay = () => {
   }
 
   const handleCreateCharacter = () => {
-    createCharacter({ ...character, ...characterCreator })
+    emitCreateCharacterInCharactersWindow({ id: v4(), ...character, ...characterCreator })
     handleClose()
   }
 
   return (
     <div>
       <S.OverlayHeader>
-        <span>Создание персонажа</span>
+        <span>{t('createCharacterOverlay.title')}</span>
         <C.Control onClick={handleClose}>
           <CloseIcon />
         </C.Control>
@@ -96,45 +105,51 @@ export const CreateCharacterOverlay = () => {
             />
           </S.ContentBlock>
           <S.ContentBlock>
-            {characterCreator.bars.map((bar) => (
-              <S.BarWrapper
-                key={bar.name}
-                color={bar.color}
-                barHeight={calculateBarDimension(bar.current, bar.max)}
-              >
-                <S.BarName>{bar.name}</S.BarName>
-                <S.BarText>
-                  <CharacterBarText
-                    name={bar.name}
-                    value={bar.current}
-                    onChange={handleChangeCharacterBarCurrentValue}
-                  />
-                  <span>/</span>
-                  <CharacterBarText
-                    name={bar.name}
-                    value={bar.max}
-                    onChange={handleChangeCharacterBarMaxValue}
-                  />
-                </S.BarText>
-              </S.BarWrapper>
-            ))}
+            {characterCreator.bars.map((bar) => {
+              const baseBar: T_BaseCharacterBar = getBar(bar.id, settings.bars)
+              return (
+                <S.BarWrapper
+                  key={bar.id}
+                  color={baseBar.color}
+                  barHeight={calculateBarDimension(bar.current, bar.max)}
+                >
+                  <S.BarName>{baseBar.name[language]}</S.BarName>
+                  <S.BarText>
+                    <CharacterBarText
+                      id={bar.id}
+                      value={bar.current}
+                      onChange={handleChangeCharacterBarCurrentValue}
+                    />
+                    <span>/</span>
+                    <CharacterBarText
+                      id={bar.id}
+                      value={bar.max}
+                      onChange={handleChangeCharacterBarMaxValue}
+                    />
+                  </S.BarText>
+                </S.BarWrapper>
+              )
+            })}
           </S.ContentBlock>
           <S.ContentBlock>
-            {characterCreator.specials.map((special) => (
-              <CharacterSpecial
-                key={special.name}
-                values={special}
-                onChange={handleChangeCharacterSpecial}
-              />
-            ))}
+            {characterCreator.specials.map((special) => {
+              const baseSpecial: T_BaseCharacterSpecial = getSpecial(special.id, settings.specials)
+              return (
+                <CharacterSpecial
+                  key={special.id}
+                  special={{ ...special, ...baseSpecial }}
+                  onChange={handleChangeCharacterSpecial}
+                />
+              )
+            })}
           </S.ContentBlock>
           <S.ContentBlock direction='row'>
             {characterCreator.effects.map((effectId) => {
-              const effect = getEffect(effectId, settingsEffects)
+              const effect = getEffect(effectId, settings.effects)
               return (
                 <CharacterEffect
-                  key={effect.name}
-                  values={effect}
+                  key={effect.id}
+                  effect={effect}
                   onRemove={handleRemoveCharacterEffect}
                 />
               )
@@ -145,9 +160,11 @@ export const CreateCharacterOverlay = () => {
         <C.Divider decorated />
         <S.ContentBottom>
           <Button onClick={handleClose} mod={Button.mod.secondary}>
-            Отмена
+            {t('createCharacterOverlay.actions.cancel')}
           </Button>
-          <Button onClick={handleCreateCharacter}>Создать</Button>
+          <Button onClick={handleCreateCharacter}>
+            {t('createCharacterOverlay.actions.create')}
+          </Button>
         </S.ContentBottom>
       </S.OverlayContent>
     </div>

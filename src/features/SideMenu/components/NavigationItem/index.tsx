@@ -1,7 +1,7 @@
 import * as S from './styles'
 
 import { t } from 'languages'
-import { E_AppIcon, getAppIcon } from 'utils/helpers/icons/app'
+import { E_AppIcon, getAppIcon } from 'utils/icons/app'
 
 interface NavigationItemProps {
   onClick: () => void

@@ -2,7 +2,7 @@ import { E_Modal } from 'features/ModalManager/models'
 import { E_Panels } from 'features/SidePanel/models'
 import { E_Window } from 'features/WindowManager/models'
 import { E_Routes } from 'models/routes'
-import { E_AppIcon } from 'utils/helpers/icons/app'
+import { E_AppIcon } from 'utils/icons/app'
 
 export enum E_CustomAction {
   logout = 'logout',

@@ -122,6 +122,29 @@
       }
     }
   },
+  "windowCharacters": {
+    "level": "Уровень"
+  },
+  "createCharacterOverlay": {
+    "title": "Создание персонажа",
+    "actions": {
+      "create": "Создать",
+      "cancel": "Отмена"
+    }
+  },
+  "updateCharacterEffectOverlay": {
+    "title": "Эффекты персонажа"
+  },
+  "pickCharacterAvatarOverlay": {
+    "title": "Аватар персонажа"
+  },
+  "updateCharacterOverlay": {
+    "title": "Редактирование персонажа",
+    "actions": {
+      "save": "Сохранить",
+      "cancel": "Отмена"
+    }
+  },
   "auth": {
     "registration": "Создать аккаунт",
     "login": "Войти в аккаунт",
