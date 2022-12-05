@@ -23,7 +23,7 @@ import { E_Routes } from 'models/routes'
 import { authAPI } from 'services/auth'
 import { leaveRoom, logout } from 'store/profile'
 import { roomActions } from 'store/room'
-import { E_AppIcon } from 'utils/helpers/icons/app'
+import { E_AppIcon } from 'utils/icons/app'
 import { LocalStorage } from 'utils/helpers/localStorage'
 
 interface NavigationProps {

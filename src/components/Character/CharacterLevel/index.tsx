@@ -3,6 +3,7 @@ import { useRef } from 'react'
 import * as S from './styles'
 
 import { useEditable } from 'hooks/useEditable'
+import { t } from 'languages'
 
 interface I_CharacterSpecial {
   value: number
@@ -45,7 +46,7 @@ export const CharacterLevel = ({ value, onChange }: I_CharacterSpecial) => {
           maxLength={3}
         />
       ) : (
-        <S.LevelLabel>Уровень {value}</S.LevelLabel>
+        <S.LevelLabel>{`${t('windowCharacters.level')} ${value}`}</S.LevelLabel>
       )}
     </S.LevelWrapper>
   )

@@ -10,14 +10,18 @@ import { useEventListener } from 'hooks/useEventListener'
 import { useStoreSelector } from 'hooks/useStoreSelector'
 
 export const CharactersContent = () => {
-  const overlays = useStoreSelector((store) => store.gameCharacters.overlays)
-  const characters = useStoreSelector((store) => store.room.game.characters.window.characters)
+  const { characters, settingsBars, settingsSpecials, overlays } = useStoreSelector((store) => ({
+    characters: store.room.game.characters.window.characters,
+    settingsBars: store.room.game.characters.settings.bars,
+    settingsSpecials: store.room.game.characters.settings.specials,
+    overlays: store.gameCharacters.overlays,
+  }))
 
   const { openCharacterWindowOverlay, closeLastCharacterWindowOverlay, setCharacterCreator } =
     useActions()
 
   const handleOpenCreateCharacterOverlay = () => {
-    setCharacterCreator()
+    setCharacterCreator({ settingsBars, settingsSpecials })
     openCharacterWindowOverlay({ name: E_WindowOverlay.createCharacter, isOpen: true })
   }
 
@@ -35,9 +39,9 @@ export const CharactersContent = () => {
     <>
       <WindowOverlayManager overlays={overlays} />
       <S.Wrapper>
-        {/* {characters.map((character) => (
+        {characters.map((character) => (
           <CharacterCard key={character.id} character={character} />
-        ))} */}
+        ))}
         <AddCharacterCard onClick={handleOpenCreateCharacterOverlay} />
       </S.Wrapper>
     </>

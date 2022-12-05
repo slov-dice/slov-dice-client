@@ -26,7 +26,12 @@ export const subscribe = createAsyncThunk('roomPage', async (_, { dispatch }) =>
       const language = LocalStorage.getLanguage()
       const message = data.message[language]
       toast[data.status](message)
-      dispatch(roomActions.setCharactersWindowSettingsBars(data.bars))
+      dispatch(
+        roomActions.setCharactersWindowSettingsBars({
+          settingsBars: data.bars,
+          characters: data.characters,
+        }),
+      )
     },
   )
 
@@ -36,7 +41,12 @@ export const subscribe = createAsyncThunk('roomPage', async (_, { dispatch }) =>
       const language = LocalStorage.getLanguage()
       const message = data.message[language]
       toast[data.status](message)
-      dispatch(roomActions.setCharactersWindowSettingsSpecials(data.specials))
+      dispatch(
+        roomActions.setCharactersWindowSettingsSpecials({
+          settingsSpecials: data.specials,
+          characters: data.characters,
+        }),
+      )
     },
   )
 
@@ -46,7 +56,29 @@ export const subscribe = createAsyncThunk('roomPage', async (_, { dispatch }) =>
       const language = LocalStorage.getLanguage()
       const message = data.message[language]
       toast[data.status](message)
-      dispatch(roomActions.setCharactersWindowSettingsEffects(data.effects))
+      dispatch(
+        roomActions.setCharactersWindowSettingsEffects({
+          settingsEffects: data.effects,
+          characters: data.characters,
+        }),
+      )
+    },
+  )
+
+  socket.on(
+    E_Subscribe.getCreatedCharacterInCharactersWindow,
+    (data: I_SubscriptionData[E_Subscribe.getCreatedCharacterInCharactersWindow]) => {
+      const language = LocalStorage.getLanguage()
+      const message = data.message[language]
+      toast[data.status](message)
+      dispatch(roomActions.setCreatedCharacterInCharactersWindow(data.character))
+    },
+  )
+
+  socket.on(
+    E_Subscribe.getUpdatedCharacterInCharactersWindow,
+    (data: I_SubscriptionData[E_Subscribe.getUpdatedCharacterInCharactersWindow]) => {
+      dispatch(roomActions.setUpdatedCharacterInCharactersWindow(data.character))
     },
   )
 })
@@ -56,4 +88,6 @@ export const unsubscribe = () => {
   socket.off(E_Subscribe.getCharactersWindowSettingsBars)
   socket.off(E_Subscribe.getCharactersWindowSettingsSpecials)
   socket.off(E_Subscribe.getCharactersWindowSettingsEffects)
+  socket.off(E_Subscribe.getCreatedCharacterInCharactersWindow)
+  socket.off(E_Subscribe.getUpdatedCharacterInCharactersWindow)
 }

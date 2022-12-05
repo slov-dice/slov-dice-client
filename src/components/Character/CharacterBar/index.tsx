@@ -3,35 +3,36 @@ import { useRef } from 'react'
 import * as S from './styles'
 
 import { useEditable } from 'hooks/useEditable'
-import { T_CharacterBar } from 'models/shared/game/character'
+import { T_CharacterBar, T_BaseCharacterBar } from 'models/shared/game/character'
 import { calculateBarDimension } from 'utils/helpers/calculates'
+import { regExp } from 'utils/helpers/regExp'
 import { numberWithSpaces } from 'utils/helpers/text'
 
 interface I_BarProps {
-  values: T_CharacterBar
+  bar: T_BaseCharacterBar & T_CharacterBar
   onChange: (name: string, value: number) => void
 }
 
-export const CharacterBar = ({ values, onChange }: I_BarProps) => {
+export const CharacterBar = ({ bar, onChange }: I_BarProps) => {
   const inputRef = useRef<HTMLInputElement>(null)
 
   const calculateValue = () => {
-    if (/^[+-][0-9]+$/.test(inputValue)) {
-      let result = values.current + +inputValue
+    if (regExp.onlyNumberWithCalc.test(inputValue)) {
+      let result = bar.current + +inputValue
       if (result < 0) result = 0
-      onChange(values.name, result)
+      onChange(bar.id, result)
       return
     }
 
-    if (/^[0-9]+$/.test(inputValue)) {
-      onChange(values.name, +inputValue)
+    if (regExp.onlyNumber.test(inputValue)) {
+      onChange(bar.id, +inputValue)
     }
   }
 
   const { handleEdit, handleKeyDown, handleBlur, isEdit, inputValue, handleChangeInput } =
     useEditable({
       inputRef,
-      initialInputValue: String(values.current),
+      initialInputValue: String(bar.current),
       onEnterPress: calculateValue,
       pattern: 'numeric',
     })
@@ -49,14 +50,11 @@ export const CharacterBar = ({ values, onChange }: I_BarProps) => {
         />
       ) : (
         <S.BarLabel onClick={handleEdit}>
-          {numberWithSpaces(values.current)}/{numberWithSpaces(values.max)}
+          {numberWithSpaces(bar.current)}/{numberWithSpaces(bar.max)}
         </S.BarLabel>
       )}
 
-      <S.BarProgress
-        color={values.color}
-        width={calculateBarDimension(values.current, values.max)}
-      />
+      <S.BarProgress color={bar.color} width={calculateBarDimension(bar.current, bar.max)} />
     </S.BarWrapper>
   )
 }

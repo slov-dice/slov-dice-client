@@ -5,6 +5,8 @@ import {
   T_BaseCharacterBar,
   T_BaseCharacterSpecial,
   T_BaseCharacterEffect,
+  I_Character,
+  T_CharacterId,
 } from 'models/shared/game/character'
 import {
   E_Emit,
@@ -71,8 +73,12 @@ export const roomSlice = createSlice({
       }
       socket.emit(E_Emit.updateCharactersWindowSettingsBars, payload)
     },
-    setCharactersWindowSettingsBars: (state, action: PayloadAction<T_BaseCharacterBar[]>) => {
-      state.game.characters.settings.bars = action.payload
+    setCharactersWindowSettingsBars: (
+      state,
+      action: PayloadAction<{ settingsBars: T_BaseCharacterBar[]; characters: I_Character[] }>,
+    ) => {
+      state.game.characters.settings.bars = action.payload.settingsBars
+      state.game.characters.window.characters = action.payload.characters
     },
 
     emitUpdateCharactersWindowSettingsSpecials: (
@@ -87,9 +93,13 @@ export const roomSlice = createSlice({
     },
     setCharactersWindowSettingsSpecials: (
       state,
-      action: PayloadAction<T_BaseCharacterSpecial[]>,
+      action: PayloadAction<{
+        settingsSpecials: T_BaseCharacterSpecial[]
+        characters: I_Character[]
+      }>,
     ) => {
-      state.game.characters.settings.specials = action.payload
+      state.game.characters.settings.specials = action.payload.settingsSpecials
+      state.game.characters.window.characters = action.payload.characters
     },
 
     emitUpdateCharactersWindowSettingsEffects: (
@@ -102,8 +112,58 @@ export const roomSlice = createSlice({
       }
       socket.emit(E_Emit.updateCharactersWindowSettingsEffects, payload)
     },
-    setCharactersWindowSettingsEffects: (state, action: PayloadAction<T_BaseCharacterEffect[]>) => {
-      state.game.characters.settings.effects = action.payload
+    setCharactersWindowSettingsEffects: (
+      state,
+      action: PayloadAction<{
+        settingsEffects: T_BaseCharacterEffect[]
+        characters: I_Character[]
+      }>,
+    ) => {
+      state.game.characters.settings.effects = action.payload.settingsEffects
+      state.game.characters.window.characters = action.payload.characters
+    },
+
+    emitCreateCharacterInCharactersWindow: (state, action: PayloadAction<I_Character>) => {
+      const payload: I_EmitPayload[E_Emit.createCharacterInCharactersWindow] = {
+        roomId: state.id,
+        character: action.payload,
+      }
+      socket.emit(E_Emit.createCharacterInCharactersWindow, payload)
+    },
+    setCreatedCharacterInCharactersWindow: (state, action: PayloadAction<I_Character>) => {
+      state.game.characters.window.characters.push(action.payload)
+    },
+
+    emitUpdateCharacterInCharactersWindow: (state, action: PayloadAction<I_Character>) => {
+      const payload: I_EmitPayload[E_Emit.updateCharacterInCharactersWindow] = {
+        roomId: state.id,
+        character: action.payload,
+      }
+      socket.emit(E_Emit.updateCharacterInCharactersWindow, payload)
+    },
+    emitUpdateCharacterFieldInCharactersWindow: (
+      state,
+      action: PayloadAction<{
+        characterId: T_CharacterId
+        field: string
+        value: string | number
+        subFieldId?: string
+      }>,
+    ) => {
+      const payload: I_EmitPayload[E_Emit.updateCharacterFieldInCharactersWindow] = {
+        roomId: state.id,
+        characterId: action.payload.characterId,
+        field: action.payload.field,
+        value: action.payload.value,
+        subFieldId: action.payload.subFieldId,
+      }
+
+      socket.emit(E_Emit.updateCharacterFieldInCharactersWindow, payload)
+    },
+    setUpdatedCharacterInCharactersWindow: (state, action: PayloadAction<I_Character>) => {
+      state.game.characters.window.characters = state.game.characters.window.characters.map(
+        (character) => (character.id === action.payload.id ? action.payload : character),
+      )
     },
   },
 })

@@ -14,9 +14,9 @@ import EditIcon from 'assets/icons/app/edit.svg'
 import { E_WindowOverlay } from 'features/WindowOverlayManager/models'
 import { useActions } from 'hooks/useActions'
 import { useStoreSelector } from 'hooks/useStoreSelector'
-import { I_Character } from 'models/shared/game/character'
+import { I_Character, T_CharacterBarId, T_CharacterSpecialId } from 'models/shared/game/character'
 import * as C from 'styles/components'
-import { getEffect } from 'utils/game/effects'
+import { getBar, getEffect, getSpecial } from 'utils/game/effects'
 
 interface I_CharacterCardProps {
   character: I_Character
@@ -25,15 +25,11 @@ interface I_CharacterCardProps {
 export const CharacterCard = ({ character }: I_CharacterCardProps) => {
   const {
     openCharacterWindowOverlay,
-    setCharacterLevel,
-    setCharacterBar,
-    setCharacterName,
-    setCharacterSpecial,
-    removeCharacterEffect,
     setCharacterEditor,
+    emitUpdateCharacterFieldInCharactersWindow,
   } = useActions()
 
-  const settingsEffects = useStoreSelector((store) => store.gameCharacters.settings.effects)
+  const settings = useStoreSelector((store) => store.room.game.characters.settings)
 
   const handleOpenUpdateCharacterOverlay = () => {
     setCharacterEditor(character)
@@ -45,23 +41,37 @@ export const CharacterCard = ({ character }: I_CharacterCardProps) => {
   }
 
   const handleChangeCharacterLevel = (value: number) => {
-    setCharacterLevel({ characterId: character.id, levelValue: value })
-  }
-
-  const handleChangeCharacterBar = (name: string, value: number) => {
-    setCharacterBar({ characterId: character.id, barName: name, barValue: value })
+    emitUpdateCharacterFieldInCharactersWindow({ characterId: character.id, field: 'level', value })
   }
 
   const handleChangeCharacterName = (value: string) => {
-    setCharacterName({ characterId: character.id, nameValue: value })
+    emitUpdateCharacterFieldInCharactersWindow({ characterId: character.id, field: 'name', value })
   }
 
-  const handleChangeCharacterSpecial = (name: string, value: number) => {
-    setCharacterSpecial({ characterId: character.id, specialName: name, specialValue: value })
+  const handleChangeCharacterBar = (id: T_CharacterBarId, value: number) => {
+    emitUpdateCharacterFieldInCharactersWindow({
+      characterId: character.id,
+      field: 'bars',
+      value,
+      subFieldId: id,
+    })
+  }
+
+  const handleChangeCharacterSpecial = (id: T_CharacterSpecialId, value: number) => {
+    emitUpdateCharacterFieldInCharactersWindow({
+      characterId: character.id,
+      field: 'specials',
+      value,
+      subFieldId: id,
+    })
   }
 
   const handleRemoveCharacterEffect = (effectId: string) => {
-    removeCharacterEffect({ characterId: character.id, effectId })
+    emitUpdateCharacterFieldInCharactersWindow({
+      characterId: character.id,
+      field: 'effects',
+      value: effectId,
+    })
   }
 
   return (
@@ -70,9 +80,16 @@ export const CharacterCard = ({ character }: I_CharacterCardProps) => {
         <CharacterLevel onChange={handleChangeCharacterLevel} value={character.level} />
         <CharacterAvatar image={character.avatar} characterId={character.id} />
         <S.BarsWrapper>
-          {character.bars.map((bar) => (
-            <CharacterBar key={bar.name} onChange={handleChangeCharacterBar} values={bar} />
-          ))}
+          {character.bars.map((bar) => {
+            const baseBar = getBar(bar.id, settings.bars)
+            return (
+              <CharacterBar
+                key={bar.id}
+                onChange={handleChangeCharacterBar}
+                bar={{ ...bar, ...baseBar }}
+              />
+            )
+          })}
         </S.BarsWrapper>
       </S.LeftSection>
       <S.RightSection>
@@ -81,21 +98,24 @@ export const CharacterCard = ({ character }: I_CharacterCardProps) => {
         </S.NameWrapper>
         <S.InfoWrapper>
           <div>
-            {character.specials.map((special) => (
-              <CharacterSpecial
-                key={special.name}
-                values={special}
-                onChange={handleChangeCharacterSpecial}
-              />
-            ))}
+            {character.specials.map((special) => {
+              const baseSpecial = getSpecial(special.id, settings.specials)
+              return (
+                <CharacterSpecial
+                  key={special.id}
+                  special={{ ...special, ...baseSpecial }}
+                  onChange={handleChangeCharacterSpecial}
+                />
+              )
+            })}
           </div>
           <S.EffectsWrapper>
             {character.effects.map((effectId) => {
-              const effect = getEffect(effectId, settingsEffects)
+              const effect = getEffect(effectId, settings.effects)
               return (
                 <CharacterEffect
-                  key={effect.name}
-                  values={effect}
+                  key={effect.id}
+                  effect={effect}
                   onRemove={handleRemoveCharacterEffect}
                 />
               )

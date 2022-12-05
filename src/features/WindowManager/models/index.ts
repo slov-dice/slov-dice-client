@@ -1,5 +1,5 @@
 import { E_Modal } from 'features/ModalManager/models'
-import { E_AppIcon } from 'utils/helpers/icons/app'
+import { E_AppIcon } from 'utils/icons/app'
 
 export enum E_Window {
   characters = 'characters',

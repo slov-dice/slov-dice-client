@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { initialState } from './data'
 
 import { I_TaskItem } from 'features/Header/models'
-import { E_AppIcon } from 'utils/helpers/icons/app'
+import { E_AppIcon } from 'utils/icons/app'
 
 export const headerSlice = createSlice({
   name: 'header',
