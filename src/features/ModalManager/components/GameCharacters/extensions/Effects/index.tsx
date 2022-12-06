@@ -66,7 +66,7 @@ export const EffectsTab = () => {
 
   const handleAddEffect = () => {
     append({
-      id: '3',
+      id: v4(),
       icon: E_EffectIcon.brokenBone,
       type: E_EffectType.neutral,
       name: '',
@@ -81,6 +81,8 @@ export const EffectsTab = () => {
   const handleUpdateEffects = (data: { effects: T_BaseCharacterEffect[] }) => {
     emitUpdateCharactersWindowSettingsEffects(data.effects)
   }
+
+  console.log('fields', fields)
 
   return (
     <S.TabPanel>
