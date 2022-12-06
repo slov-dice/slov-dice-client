@@ -49,6 +49,7 @@ export const EffectsTab = () => {
   const { fields, append, remove, update } = useFieldArray({
     control,
     name: 'effects',
+    keyName: 'fieldId',
   })
 
   const handleChangeSelectIcon = (option: T_CustomSelectOption, fieldIndex?: number) => {
@@ -65,11 +66,11 @@ export const EffectsTab = () => {
 
   const handleAddEffect = () => {
     append({
-      id: v4(),
+      id: '3',
       icon: E_EffectIcon.brokenBone,
       type: E_EffectType.neutral,
-      name: { RU: '', EN: '' },
-      description: { RU: '', EN: '' },
+      name: '',
+      description: '',
     })
   }
 
@@ -98,25 +99,13 @@ export const EffectsTab = () => {
               onChange={handleChangeSelectType}
               options={optionsTypes}
             />
-            <C.Divider />
-
             <TextField
-              {...register(`effects.${index}.name.RU`)}
-              placeholder={t('modals.gameCharacters.tabs.effects.fields.name.ru')}
+              {...register(`effects.${index}.name`)}
+              placeholder={t('modals.gameCharacters.tabs.effects.fields.name')}
             />
             <TextareaField
-              {...register(`effects.${index}.description.RU`)}
-              placeholder={t('modals.gameCharacters.tabs.effects.fields.description.ru')}
-              fullWidth
-            />
-            <C.Divider />
-            <TextField
-              {...register(`effects.${index}.name.EN`)}
-              placeholder={t('modals.gameCharacters.tabs.effects.fields.name.ru')}
-            />
-            <TextareaField
-              {...register(`effects.${index}.description.EN`)}
-              placeholder={t('modals.gameCharacters.tabs.effects.fields.description.en')}
+              {...register(`effects.${index}.description`)}
+              placeholder={t('modals.gameCharacters.tabs.effects.fields.description')}
               fullWidth
             />
             <S.EffectRemove onClick={handleRemoveEffect(index)}>

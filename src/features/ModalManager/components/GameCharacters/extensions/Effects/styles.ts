@@ -19,7 +19,6 @@ export const EffectWrapper = styled.div`
   gap: 8px;
 
   width: 340px;
-  height: 360px;
   padding: 12px;
 
   background-color: #2b2b2b;
@@ -31,5 +30,4 @@ export const EffectRemove = styled(BlockRemove)``
 
 export const EffectAdd = styled(BlockAdd)`
   width: 340px;
-  height: 360px;
 `

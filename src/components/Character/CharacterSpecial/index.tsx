@@ -3,7 +3,6 @@ import { useRef } from 'react'
 import * as S from './styles'
 
 import { useEditable } from 'hooks/useEditable'
-import { useStoreSelector } from 'hooks/useStoreSelector'
 import { T_BaseCharacterSpecial, T_CharacterSpecial } from 'models/shared/game/character'
 import { regExp } from 'utils/helpers/regExp'
 
@@ -13,7 +12,6 @@ interface I_CharacterSpecial {
 }
 
 export const CharacterSpecial = ({ special, onChange }: I_CharacterSpecial) => {
-  const language = useStoreSelector((store) => store.app.language)
   const inputRef = useRef<HTMLInputElement>(null)
 
   const handleCalculateValue = () => {
@@ -39,7 +37,7 @@ export const CharacterSpecial = ({ special, onChange }: I_CharacterSpecial) => {
 
   return (
     <S.SpecialWrapper onClick={!isEdit ? handleEdit : undefined}>
-      <span>{special.name[language]}</span>{' '}
+      <span>{special.name}</span>{' '}
       {isEdit ? (
         <S.SpecialInput
           ref={inputRef}

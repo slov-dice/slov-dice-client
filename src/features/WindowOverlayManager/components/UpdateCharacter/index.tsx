@@ -37,13 +37,12 @@ export const UpdateCharacterOverlay = () => {
       )?.payload,
   )
 
-  const { characterStore, characterEditor, settings, language } = useStoreSelector((store) => ({
+  const { characterStore, characterEditor, settings } = useStoreSelector((store) => ({
     characterStore: store.room.game.characters.window.characters.find(
       (character) => character.id === payload,
     ),
     settings: store.room.game.characters.settings,
     characterEditor: store.gameCharacters.characterEditor,
-    language: store.app.language,
   }))
 
   const [character, setCharacter] = useState(characterStore!)
@@ -128,7 +127,7 @@ export const UpdateCharacterOverlay = () => {
                     color={baseBar.color}
                     barHeight={calculateBarDimension(bar.current, bar.max)}
                   >
-                    <S.BarName>{baseBar.name[language]}</S.BarName>
+                    <S.BarName>{baseBar.name}</S.BarName>
                     <S.BarText>
                       <CharacterBarText
                         id={baseBar.id}

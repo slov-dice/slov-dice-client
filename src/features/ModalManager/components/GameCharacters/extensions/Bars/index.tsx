@@ -24,7 +24,7 @@ export const BarsTab = () => {
   })
 
   const handleAddBar = () => {
-    append({ id: v4(), color: '#CD375D', name: { EN: '', RU: '' } })
+    append({ id: v4(), color: '#CD375D', name: '' })
   }
 
   const handleRemoveBar = (index: number) => () => {
@@ -41,12 +41,8 @@ export const BarsTab = () => {
         {fields.map((field, index) => (
           <S.BarBlock key={field.id}>
             <TextField
-              {...register(`bars.${index}.name.RU`)}
-              placeholder={t('modals.gameCharacters.tabs.bars.fields.name.ru')}
-            />
-            <TextField
-              {...register(`bars.${index}.name.EN`)}
-              placeholder={t('modals.gameCharacters.tabs.bars.fields.name.en')}
+              {...register(`bars.${index}.name`)}
+              placeholder={t('modals.gameCharacters.tabs.bars.fields.name')}
             />
             <ColorField {...register(`bars.${index}.color`)} fullWidth />
             <S.BarRemove onClick={handleRemoveBar(index)}>

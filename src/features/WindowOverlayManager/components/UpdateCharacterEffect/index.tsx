@@ -18,12 +18,11 @@ export const UpdateCharacterEffectOverlay = () => {
     emitUpdateCharacterFieldInCharactersWindow,
   } = useActions()
 
-  const { overlayPayload, settingsEffects, language } = useStoreSelector((store) => ({
+  const { overlayPayload, settingsEffects } = useStoreSelector((store) => ({
     overlayPayload: store.gameCharacters.overlays.find(
       (overlay) => overlay.name === E_WindowOverlay.updateCharacterEffect,
     )?.payload,
     settingsEffects: store.room.game.characters.settings.effects,
-    language: store.app.language,
   }))
 
   const characterEffects = useStoreSelector((store) => {
@@ -76,9 +75,9 @@ export const UpdateCharacterEffectOverlay = () => {
                 <S.IconInner>{getGameIcon(effect.icon)}</S.IconInner>
               </S.IconWrapper>
               <S.DescriptionWrapper>
-                <div>{effect.name[language]}</div>
+                <div>{effect.name}</div>
                 <hr />
-                <div>{effect.description[language]}</div>
+                <div>{effect.description}</div>
               </S.DescriptionWrapper>
               <S.ActionWrapper onClick={handleToggleEffect(effect.id)}>
                 <S.ActionInner isSelected={characterEffects?.includes(effect.id) || false}>

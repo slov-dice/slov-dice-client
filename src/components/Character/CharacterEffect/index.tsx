@@ -3,7 +3,6 @@ import Tippy from '@tippyjs/react'
 import * as S from './styles'
 
 import CloseIcon from 'assets/icons/app/close.svg'
-import { useStoreSelector } from 'hooks/useStoreSelector'
 import { T_BaseCharacterEffect, T_CharacterEffectId } from 'models/shared/game/character'
 import { getGameIcon } from 'utils/game/effects/icons'
 
@@ -13,18 +12,12 @@ interface I_CharacterEffectProps {
 }
 
 export const CharacterEffect = ({ effect, onRemove }: I_CharacterEffectProps) => {
-  const language = useStoreSelector((store) => store.app.language)
-
   const handleRemoveEffect = () => {
     onRemove(effect.id)
   }
 
   return (
-    <Tippy
-      content={
-        <TooltipContent name={effect.name[language]} description={effect.description[language]} />
-      }
-    >
+    <Tippy content={<TooltipContent name={effect.name} description={effect.description} />}>
       <S.EffectWrapper>
         <S.EffectIcon type={effect.type}>{getGameIcon(effect.icon)}</S.EffectIcon>
         <S.EffectRemove onClick={handleRemoveEffect}>
