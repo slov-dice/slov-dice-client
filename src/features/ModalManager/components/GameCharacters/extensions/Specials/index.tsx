@@ -26,7 +26,7 @@ export const SpecialsTab = () => {
   })
 
   const handleAddSpecial = () => {
-    append({ id: v4(), name: { EN: '', RU: '' } })
+    append({ id: v4(), name: '' })
   }
 
   const handleRemoveSpecial = (index: number) => () => {
@@ -43,12 +43,8 @@ export const SpecialsTab = () => {
         {fields.map((field, index) => (
           <S.SpecialBlock key={field.id}>
             <TextField
-              {...register(`specials.${index}.name.RU`)}
-              placeholder={t('modals.gameCharacters.tabs.specials.fields.name.ru')}
-            />
-            <TextField
-              {...register(`specials.${index}.name.EN`)}
-              placeholder={t('modals.gameCharacters.tabs.specials.fields.name.en')}
+              {...register(`specials.${index}.name`)}
+              placeholder={t('modals.gameCharacters.tabs.specials.fields.name')}
             />
             <S.SpecialRemove onClick={handleRemoveSpecial(index)}>
               <CloseIcon />

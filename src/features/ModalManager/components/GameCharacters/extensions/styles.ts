@@ -27,7 +27,6 @@ export const BlockAdd = styled(motion.div).attrs(({ theme }) => addBlockAttrs(th
   justify-content: center;
 
   width: 200px;
-  height: 148px;
   padding: 12px;
 
   font-size: 24px;

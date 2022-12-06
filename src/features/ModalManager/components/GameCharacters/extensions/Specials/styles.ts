@@ -18,9 +18,9 @@ export const SpecialBlock = styled.div`
   flex-direction: column;
   gap: 8px;
   align-items: center;
+  justify-content: center;
 
   width: 200px;
-  height: 118px;
   padding: 12px;
 
   background-color: #2b2b2b;

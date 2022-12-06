@@ -20,7 +20,6 @@ export const BarBlock = styled.div`
   align-items: center;
 
   width: 200px;
-  height: 148px;
   padding: 12px;
 
   background-color: #2b2b2b;

@@ -74,10 +74,7 @@
         "bars": {
           "title": "Bars",
           "fields": {
-            "name": {
-              "ru": "Name RU",
-              "en": "Name EN"
-            }
+            "name": "Name"
           },
           "actions": {
             "add": "Add",
@@ -87,10 +84,7 @@
         "specials": {
           "title": "Specials",
           "fields": {
-            "name": {
-              "ru": "Name RU",
-              "en": "Name EN"
-            }
+            "name": "Name"
           },
           "actions": {
             "add": "Add",
@@ -105,14 +99,8 @@
               "neutral": "Neutral",
               "positive": "Positive"
             },
-            "name": {
-              "ru": "Name RU",
-              "en": "Name EN"
-            },
-            "description": {
-              "ru": "Description RU",
-              "en": "Description EN"
-            }
+            "name": "Name",
+            "description": "Description"
           },
           "actions": {
             "add": "Add",
@@ -123,7 +111,8 @@
     }
   },
   "windowCharacters": {
-    "level": "Level"
+    "level": "Level",
+    "createCharacter": "Create Character"
   },
   "createCharacterOverlay": {
     "title": "Character Creator",

@@ -74,10 +74,7 @@
         "bars": {
           "title": "Бары",
           "fields": {
-            "name": {
-              "ru": "Название RU",
-              "en": "Название EN"
-            }
+            "name": "Название"
           },
           "actions": {
             "add": "Добавить",
@@ -87,10 +84,7 @@
         "specials": {
           "title": "Характеристики",
           "fields": {
-            "name": {
-              "ru": "Название RU",
-              "en": "Название EN"
-            }
+            "name": "Название"
           },
           "actions": {
             "add": "Добавить",
@@ -105,14 +99,8 @@
               "neutral": "Нейтральный",
               "positive": "Позитивный"
             },
-            "name": {
-              "ru": "Название RU",
-              "en": "Название EN"
-            },
-            "description": {
-              "ru": "Описание RU",
-              "en": "Описание EN"
-            }
+            "name": "Название",
+            "description": "Описание"
           },
           "actions": {
             "add": "Добавить",
@@ -123,7 +111,8 @@
     }
   },
   "windowCharacters": {
-    "level": "Уровень"
+    "level": "Уровень",
+    "createCharacter": "Создать персонажа"
   },
   "createCharacterOverlay": {
     "title": "Создание персонажа",
