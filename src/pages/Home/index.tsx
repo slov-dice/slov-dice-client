@@ -1,6 +1,7 @@
 import { About } from './extensions/About'
-import { GameMaster } from './extensions/GameMaster'
 import { Intro } from './extensions/Intro'
+import { Outro } from './extensions/Outro'
+import { Players } from './extensions/Players'
 import * as S from './styles'
 
 export const Home = () => {
@@ -8,7 +9,8 @@ export const Home = () => {
     <S.Page>
       <Intro />
       <About />
-      <GameMaster />
+      <Players />
+      <Outro />
     </S.Page>
   )
 }

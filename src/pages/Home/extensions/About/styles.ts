@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
-export const About = styled.div`
+export const Wrapper = styled.div`
   position: relative;
   z-index: ${({ theme }) => theme.order.content};
 
@@ -10,10 +10,12 @@ export const About = styled.div`
   background-color: ${({ theme }) => theme.colors.black};
 `
 
-export const AboutInner = styled.div`
+export const Inner = styled.div`
+  position: relative;
+
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 24px;
+  gap: 64px;
 
   width: 100%;
   max-width: 1268px;
@@ -23,6 +25,9 @@ export const AboutInner = styled.div`
   @media (max-width: 968px) {
     display: flex;
     flex-direction: column;
+    gap: 24px;
+
+    padding: 90px 24px 48px;
   }
 `
 
@@ -31,7 +36,7 @@ export const Title = styled.div`
 
   position: absolute;
   top: -2.5%;
-  left: 5%;
+  left: 0;
 
   font-size: 112px;
   font-weight: 600;
@@ -61,7 +66,6 @@ export const InfoBox = styled.div`
     width: 100%;
     max-width: 525px;
     margin: 0 auto;
-    padding: 0 24px;
   }
 `
 
@@ -97,7 +101,7 @@ export const InfoTitle = styled.div`
 export const InfoContent = styled.div`
   position: relative;
 
-  max-width: 400px;
+  max-width: 600px;
 
   &::before {
     content: '';
@@ -144,8 +148,6 @@ export const FeaturesList = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 8px;
-
-  font-size: 16px;
 
   li {
     position: relative;
@@ -201,39 +203,17 @@ export const InfoMoreButton = styled(Link)`
 `
 
 export const MediaBox = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 2fr);
-  gap: 6px;
-  align-items: center;
-  justify-self: center;
-
+  aspect-ratio: 16 / 9;
   width: 100%;
-  max-width: 100%;
-
-  @media (max-width: 968px) {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-
-    width: 100%;
-    max-width: 525px;
-    margin: 0 auto;
-    padding: 0 24px;
-  }
 `
 
-export const Media = styled.div`
-  width: 172px;
-  max-width: 172px;
-  height: 172px;
-  max-height: 172px;
-
-  border: 1px solid #999;
-
-  @media (max-width: 968px) {
-    width: 172px;
-    max-width: 172px;
-    height: 172px;
-    max-height: 172px;
-  }
+export const YTPlayer = styled.iframe.attrs({
+  src: 'https://www.youtube.com/embed/ZrdLM5hTmr0',
+  title: 'YouTube video player',
+  frameBorder: '0',
+  allow: 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture',
+  allowFullScreen: true,
+})`
+  width: 100%;
+  height: 100%;
 `

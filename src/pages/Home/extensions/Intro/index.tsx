@@ -19,7 +19,7 @@ export const Intro = () => {
   const navigate = useNavigate()
 
   return (
-    <S.IntroWrapper>
+    <S.Wrapper>
       <S.Intro>
         {isMatch ? (
           <S.TopSectionMobile>
@@ -63,6 +63,6 @@ export const Intro = () => {
         </S.BottomSection>
       </S.Intro>
       <HeroBackground />
-    </S.IntroWrapper>
+    </S.Wrapper>
   )
 }
