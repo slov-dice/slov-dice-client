@@ -27,6 +27,23 @@
       "feature6": "Character editor",
       "feature7": "Save/load game",
       "start": "Start"
+    },
+    "players": {
+      "master": {
+        "title": "Master",
+        "feature1": "Imagine!",
+        "feature2": "Think over!",
+        "feature3": "Improvise!",
+        "paragraph1": "Create your own universe based on your preferences. Each world should have its own story, global plot, and characters.",
+        "paragraph2": "The local storyline will be tied to the players. And only you have the right to limit, punish and encourage them."
+      },
+      "player": {
+        "title": "Player",
+        "feature1": "Write your story!",
+        "feature2": "Follow your goal!",
+        "feature3": "Be a hero!",
+        "paragraph1": "Become whoever you want (within the universe), describe your character, act on the script or act against it."
+      }
     }
   },
   "modals": {

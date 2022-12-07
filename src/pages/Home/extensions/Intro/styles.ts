@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components'
 
 import { E_ParagraphType } from '.'
 
-export const IntroWrapper = styled.div`
+export const Wrapper = styled.div`
   position: relative;
 
   overflow: hidden;
@@ -14,6 +14,12 @@ export const IntroWrapper = styled.div`
 export const Intro = styled.div`
   position: relative;
   z-index: ${({ theme }) => theme.order.content};
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  height: 90%;
 `
 
 export const TopSection = styled.div`
@@ -130,7 +136,7 @@ export const SectionParagraph = styled.p`
     width: 30%;
     height: 1px;
 
-    background: #fff;
+    background: ${({ theme }) => theme.colors.white_80};
     box-shadow: 0 0 15px 0 rgb(0 0 0 / 32%);
   }
 `
@@ -162,7 +168,7 @@ export const SectionFeatures = styled.ul`
     width: 30%;
     height: 1px;
 
-    background: #fff;
+    background: ${({ theme }) => theme.colors.white_80};
     box-shadow: 0 0 15px 0 rgb(0 0 0 / 32%);
   }
 
@@ -221,7 +227,7 @@ export const SectionFeaturesMobile = styled.ul`
 export const BottomSection = styled.div`
   position: relative;
 
-  max-width: 320px;
+  width: 320px;
   margin: 0 auto;
   margin-top: 5%;
 

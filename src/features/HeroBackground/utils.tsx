@@ -1,10 +1,10 @@
 import { ReactNode } from 'react'
 
 import CaesarIcon from './assets/caesar.svg'
+import CrackedHelm from './assets/cracked-helm.svg'
 import DicesIcon from './assets/dices.svg'
 import DrinkIcon from './assets/drink.svg'
 import GlassIcon from './assets/glass.svg'
-import RobeIcon from './assets/robe.svg'
 import SwordIcon from './assets/sword.svg'
 import VikingIcon from './assets/viking.svg'
 
@@ -13,7 +13,7 @@ export enum E_HeroIcon {
   dices = 'dices',
   drink = 'drink',
   glass = 'glass',
-  robe = 'robe',
+  crackedHelm = 'crackedHelm',
   sword = 'sword',
   viking = 'viking',
 }
@@ -38,8 +38,8 @@ export const getHeroIcon = (icon: E_HeroIcon): ReactNode => {
     case E_HeroIcon.glass:
       return <GlassIcon />
 
-    case E_HeroIcon.robe:
-      return <RobeIcon />
+    case E_HeroIcon.crackedHelm:
+      return <CrackedHelm />
 
     case E_HeroIcon.sword:
       return <SwordIcon />

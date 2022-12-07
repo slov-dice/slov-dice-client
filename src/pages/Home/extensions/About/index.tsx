@@ -6,9 +6,9 @@ import * as C from 'styles/components'
 
 export const About = () => {
   return (
-    <S.About>
-      <S.Title>{t('landing.about.title')}</S.Title>
-      <S.AboutInner>
+    <S.Wrapper>
+      <S.Inner>
+        <S.Title>{t('landing.about.title')}</S.Title>
         <S.InfoBox>
           <S.InfoTitle>{t('landing.about.infoTitle')}</S.InfoTitle>
           <S.InfoContent>
@@ -36,14 +36,10 @@ export const About = () => {
           </div>
         </S.InfoBox>
         <S.MediaBox>
-          <S.Media />
-          <S.Media />
-          <S.Media />
-          <S.Media />
-          <S.Media />
-          <S.Media />
+          <S.YTPlayer />
         </S.MediaBox>
-      </S.AboutInner>
-    </S.About>
+        <div />
+      </S.Inner>
+    </S.Wrapper>
   )
 }
