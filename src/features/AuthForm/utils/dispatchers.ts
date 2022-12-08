@@ -13,7 +13,12 @@ export const connectAuthenticatedUser = (
   data: I_AuthResponse,
   dispatch: ThunkDispatch<RootState, null, AnyAction>,
 ) => {
-  LocalStorage.setAccessToken(data.accessToken)
+  if (data.accessToken) {
+    LocalStorage.setAccessToken(data.accessToken)
+  }
+  if (data.refreshToken) {
+    LocalStorage.setRefreshToken(data.refreshToken)
+  }
 
   socket.emit(E_Emit.setLobbyUserOnline, { userId: data.id })
 

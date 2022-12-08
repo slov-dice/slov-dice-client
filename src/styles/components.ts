@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { Link } from 'react-router-dom'
 import styled, { css } from 'styled-components'
 
 import { titleAttrs, controlAttrs } from './motion'
@@ -101,4 +102,11 @@ export const EditableTextarea = styled.textarea`
 export const BaseTooltip = styled.div`
   width: 150px;
   height: auto;
+`
+
+export const LinkBlank = styled(Link).attrs({
+  rel: 'noreferrer',
+  target: '_blank',
+})`
+  border-bottom: 1px solid ${({ theme }) => theme.colors.primary_80};
 `

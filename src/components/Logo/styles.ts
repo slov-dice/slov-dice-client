@@ -6,6 +6,7 @@ import { wrapperAttrs } from './motion'
 
 export const Wrapper = styled(motion.div).attrs(({ theme }) => wrapperAttrs(theme))<{
   relative: boolean
+  isHeader: boolean
 }>`
   display: flex;
   align-items: center;
@@ -28,12 +29,16 @@ export const Wrapper = styled(motion.div).attrs(({ theme }) => wrapperAttrs(them
           transform: translate(50%);
         `}
 
+  ${({ isHeader }) =>
+    isHeader &&
+    css`
+      @media ${({ theme }) => theme.media.sm} {
+        display: none;
+      }
+    `}
+
   -webkit-text-fill-color: transparent;
   -webkit-text-stroke: 1px ${({ theme }) => theme.colors.primary};
-
-  @media ${({ theme }) => theme.media.sm} {
-    display: none;
-  }
 `
 
 export const TextLink = styled(Link)`

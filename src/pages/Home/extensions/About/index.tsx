@@ -8,7 +8,7 @@ export const About = () => {
   return (
     <S.Wrapper>
       <S.Inner>
-        <S.Title>{t('landing.about.title')}</S.Title>
+        <S.FloatTitle>{t('landing.about.title')}</S.FloatTitle>
         <S.InfoBox>
           <S.InfoTitle>{t('landing.about.infoTitle')}</S.InfoTitle>
           <S.InfoContent>

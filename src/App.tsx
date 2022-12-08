@@ -21,7 +21,7 @@ export const App = () => {
   const isAuth = useStoreSelector((store) => store.profile.statuses.isAuth)
   useStoreSelector((store) => store.app.language)
 
-  const [fetchCheck, { isSuccess, data }] = authAPI.useCheckMutation()
+  const [fetchCheck, { isSuccess, data, isLoading }] = authAPI.useCheckMutation()
   authAPI.useCheckTokenQuery(null, {
     pollingInterval: 60_000 * 10,
     skip: !isAuth,
@@ -47,7 +47,7 @@ export const App = () => {
 
   return (
     <>
-      <AppRoutes />
+      {!isLoading && <AppRoutes />}
       <ModalManager />
       <SidePanel />
       <GlobalStyles />

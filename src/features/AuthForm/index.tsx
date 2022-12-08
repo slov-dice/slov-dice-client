@@ -43,38 +43,40 @@ export const AuthForm = () => {
   }
 
   return (
-    <S.Box>
-      <S.TopSection>
-        <div>
+    <S.Wrapper>
+      <S.Inner>
+        <S.TopSection>
           <div>
-            <AnimatePresence mode='wait'>
-              {AuthArrow[authFormContent] && (
-                <BackButton onClick={handleBackButton}>
-                  <BackIcon />
-                </BackButton>
-              )}
-            </AnimatePresence>
-            <AnimatePresence mode='wait'>
-              <C.Title>{t(AuthTitle[authFormContent])}</C.Title>
-            </AnimatePresence>
-            <C.Divider h={48} />
+            <div>
+              <AnimatePresence mode='wait'>
+                {AuthArrow[authFormContent] && (
+                  <BackButton onClick={handleBackButton}>
+                    <BackIcon />
+                  </BackButton>
+                )}
+              </AnimatePresence>
+              <AnimatePresence mode='wait'>
+                <C.Title>{t(AuthTitle[authFormContent])}</C.Title>
+              </AnimatePresence>
+              <C.Divider h={48} />
+            </div>
+            {getContent()}
           </div>
-          {getContent()}
-        </div>
-        <S.ContentBottom>
-          <S.BottomAction>
-            {t(AuthBottom[authFormContent].description)}
-            &nbsp;
-            <LinkButton onClick={handleBottomReplace}>
-              {t(AuthBottom[authFormContent].button)}
-            </LinkButton>
-          </S.BottomAction>
-          <LanguageSwitcher />
-        </S.ContentBottom>
-      </S.TopSection>
-      <S.BottomSection>
-        <Logo relative />
-      </S.BottomSection>
-    </S.Box>
+          <S.ContentBottom>
+            <S.BottomAction>
+              {t(AuthBottom[authFormContent].description)}
+              &nbsp;
+              <LinkButton onClick={handleBottomReplace}>
+                {t(AuthBottom[authFormContent].button)}
+              </LinkButton>
+            </S.BottomAction>
+            <LanguageSwitcher />
+          </S.ContentBottom>
+        </S.TopSection>
+        <S.BottomSection>
+          <Logo relative />
+        </S.BottomSection>
+      </S.Inner>
+    </S.Wrapper>
   )
 }

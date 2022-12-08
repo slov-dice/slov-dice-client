@@ -3,7 +3,6 @@ import { createApi } from '@reduxjs/toolkit/query/react'
 import {
   I_AuthResponse,
   I_EmailConfirmPayload,
-  I_LogoutPayload,
   I_SignInPayload,
   I_SignUpPayload,
   I_ThirdPartyAuthPayload,
@@ -57,14 +56,6 @@ export const authAPI = createApi({
       query: () => ({
         url: 'guest',
         method: 'GET',
-      }),
-    }),
-
-    logout: build.mutation<void, I_LogoutPayload>({
-      query: (payload) => ({
-        url: 'logout',
-        method: 'POST',
-        body: payload,
       }),
     }),
 

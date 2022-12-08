@@ -1,8 +1,9 @@
-import { E_AuthType, T_LocaleServerMessage } from 'models/shared/app'
+import { E_AuthType, T_LocaleText } from 'models/shared/app'
 
 export interface I_AuthResponse {
-  accessToken: string
-  message: T_LocaleServerMessage
+  accessToken?: string
+  refreshToken?: string
+  message: T_LocaleText
   id: number
   email: string
   nickname: string
@@ -24,12 +25,8 @@ export interface I_ThirdPartyAuthPayload {
 }
 
 export interface I_EmailConfirmResponse {
-  message: T_LocaleServerMessage
+  message: T_LocaleText
 }
 export interface I_EmailConfirmPayload {
   token: string
-}
-
-export interface I_LogoutPayload {
-  from: E_AuthType
 }

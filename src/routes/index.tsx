@@ -19,9 +19,9 @@ export const AppRoutes = () => {
           <Route element={<FramerRoute />}>
             <Route element={<ProtectedRoute />}>
               <Route path={E_Routes.lobby} element={<Pages.Lobby />} />
+              <Route path={E_Routes.room} element={<Pages.Room />} />
             </Route>
             <Route path={E_Routes.home} element={<Pages.Home />} />
-            <Route path={E_Routes.room} element={<Pages.Room />} />
             <Route path={E_Routes.verification} element={<Pages.Verification />} />
             <Route path={E_Routes.authCallback} element={<Pages.AuthCallback />} />
             <Route path='*' element={<Pages.NotFound />} />

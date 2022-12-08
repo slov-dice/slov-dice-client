@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 import { E_Emit, I_EmitPayload } from 'models/shared/socket/lobbyUsers'
 import { socket } from 'services/socket'
+import { LocalStorage } from 'utils/helpers/localStorage'
 
 import type { I_Profile } from 'models/shared/app'
 
@@ -22,6 +23,8 @@ export const profileSlice = createSlice({
     setProfile: (_, action: PayloadAction<I_Profile>) => action.payload,
     logout: (_, action: PayloadAction<I_EmitPayload[E_Emit.logoutLobbyUser]>) => {
       socket.emit(E_Emit.logoutLobbyUser, action.payload)
+      LocalStorage.removeAccessToken()
+      LocalStorage.removeRefreshToken()
       return initialState
     },
     joinRoom: (state) => {

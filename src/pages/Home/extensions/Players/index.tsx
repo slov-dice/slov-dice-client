@@ -18,9 +18,9 @@ export const Players = () => {
         <S.ParagraphSection>{t('landing.players.master.paragraph1')}</S.ParagraphSection>
         <C.Divider />
         <S.ParagraphSection>{t('landing.players.master.paragraph2')}</S.ParagraphSection>
-        <S.SectionIcon>
+        <S.IconSection>
           <RobeIcon />
-        </S.SectionIcon>
+        </S.IconSection>
       </S.GameMasterWrapper>
       <S.PlayerWrapper>
         <S.FloatTitle>{t('landing.players.player.title')}</S.FloatTitle>
@@ -30,9 +30,9 @@ export const Players = () => {
           <li>{t('landing.players.player.feature3')}</li>
         </S.FeatureSection>
         <S.ParagraphSection>{t('landing.players.player.paragraph1')}</S.ParagraphSection>
-        <S.SectionIcon>
+        <S.IconSection>
           <WingedSwordIcon />
-        </S.SectionIcon>
+        </S.IconSection>
       </S.PlayerWrapper>
     </S.Wrapper>
   )

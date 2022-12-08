@@ -31,11 +31,23 @@ export const baseQueryWithReAuth: BaseQueryFn<
   let result = await baseQuery(args, api, extraOptions)
 
   if (result.error && result.error.status === 401) {
-    const refreshResult = await baseQuery({ url: 'refresh', method: 'POST' }, api, extraOptions)
+    const refreshToken = LocalStorage.getRefreshToken()
+    const refreshResult = await fetch(`${import.meta.env.VITE_SERVER_API}/auth/refresh`, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${refreshToken}`,
+      },
+    })
 
-    LocalStorage.setAccessToken((refreshResult.data as T_Tokens).access_token)
+    const response = await refreshResult.json()
 
-    if (refreshResult.data) {
+    if (response.data) {
+      const accessToken = (response?.data as T_Tokens).accessToken
+      const refreshToken = (response?.data as T_Tokens).refreshToken
+
+      LocalStorage.setAccessToken(accessToken)
+      LocalStorage.setRefreshToken(refreshToken)
+
       result = await baseQuery(args, api, extraOptions)
     } else {
       const roomId = (api.getState() as RootState).room.id

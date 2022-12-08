@@ -31,7 +31,7 @@ export const Inner = styled.div`
   }
 `
 
-export const Title = styled.div`
+export const FloatTitle = styled.div`
   user-select: none;
 
   position: absolute;
@@ -40,7 +40,7 @@ export const Title = styled.div`
 
   font-size: 112px;
   font-weight: 600;
-  color: ${({ theme }) => theme.colors.white_30};
+  color: ${({ theme }) => theme.colors.white_80};
   text-transform: uppercase;
 
   @media (max-width: 968px) {
@@ -48,6 +48,10 @@ export const Title = styled.div`
     left: 0;
 
     font-size: 72px;
+  }
+
+  @media (max-width: 600px) {
+    font-size: 48px;
   }
 `
 
