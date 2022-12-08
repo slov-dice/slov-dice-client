@@ -8,12 +8,14 @@ export const Wrapper = styled.div`
 
   max-width: 1334px;
   margin-inline: auto;
-  padding-bottom: 81px;
+  padding-block: 81px;
+
+  @media (max-width: 1330px) {
+    padding-block: 28px;
+  }
 
   @media (max-width: 968px) {
     gap: 0;
-
-    padding-bottom: 28px;
   }
 `
 export const GameMasterWrapper = styled.div`
@@ -26,8 +28,9 @@ export const GameMasterWrapper = styled.div`
     content: '';
 
     position: absolute;
-    top: 12px;
+    top: 45px;
     right: -24px;
+    transform-origin: bottom right;
 
     width: 1px;
     height: 95%;
@@ -42,7 +45,7 @@ export const GameMasterWrapper = styled.div`
 
     &::before {
       top: auto;
-      bottom: 0;
+      bottom: 12px;
       left: 0;
 
       width: 95%;
@@ -62,10 +65,10 @@ export const PlayerWrapper = styled.div`
   }
 `
 
-export const SectionIcon = styled.div`
+export const IconSection = styled.div`
   position: absolute;
+  top: 32px;
   right: 0;
-  bottom: 24px;
 
   width: 256px;
   height: 256px;
@@ -91,12 +94,13 @@ export const FloatTitle = styled.span`
   user-select: none;
 
   position: absolute;
+  z-index: 1;
   top: -2.5%;
   left: 0;
 
   font-size: 112px;
   font-weight: 600;
-  color: ${({ theme }) => theme.colors.white_30};
+  color: ${({ theme }) => theme.colors.white_80};
   text-transform: uppercase;
 
   @media (max-width: 1330px) {
@@ -104,6 +108,10 @@ export const FloatTitle = styled.span`
     left: 0;
 
     font-size: 72px;
+  }
+
+  @media (max-width: 600px) {
+    font-size: 48px;
   }
 `
 
@@ -125,7 +133,7 @@ export const FeatureSection = styled.ul`
     width: 35%;
     height: 1px;
 
-    background: ${({ theme }) => theme.colors.primary};
+    background: ${({ theme }) => theme.colors.white_80};
     box-shadow: 0 0 15px 0 rgb(0 0 0 / 32%);
   }
 

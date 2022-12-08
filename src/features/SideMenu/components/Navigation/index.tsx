@@ -20,11 +20,9 @@ import { useActions } from 'hooks/useActions'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { useStoreSelector } from 'hooks/useStoreSelector'
 import { E_Routes } from 'models/routes'
-import { authAPI } from 'services/auth'
 import { leaveRoom, logout } from 'store/profile'
 import { roomActions } from 'store/room'
 import { E_AppIcon } from 'utils/icons/app'
-import { LocalStorage } from 'utils/helpers/localStorage'
 
 interface NavigationProps {
   toggleMenu: () => void
@@ -40,8 +38,6 @@ export const Navigation = ({ toggleMenu }: NavigationProps) => {
     isRoomPageOpen: store.roomPage.isOpen,
   }))
 
-  const [fetchLogout] = authAPI.useLogoutMutation()
-
   const handleAction = (item: I_TaskItem) => () => {
     toggleMenu()
     if (item.actionType === E_TaskItemActionType.push) {
@@ -50,10 +46,7 @@ export const Navigation = ({ toggleMenu }: NavigationProps) => {
 
     if (item.actionType === E_TaskItemActionType.replace) {
       if (item.actionPayload === E_CustomAction.logout) {
-        const authType = LocalStorage.getAuthType()
         dispatch(logout({ roomId }))
-        fetchLogout({ from: authType })
-        navigate('/')
         return
       }
       navigate(item.actionPayload as E_Routes)

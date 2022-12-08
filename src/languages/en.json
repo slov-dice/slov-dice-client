@@ -44,6 +44,11 @@
         "feature3": "Be a hero!",
         "paragraph1": "Become whoever you want (within the universe), describe your character, act on the script or act against it."
       }
+    },
+    "outro": {
+      "title": "Development",
+      "participants": "Participants",
+      "resources": "Resources"
     }
   },
   "modals": {
