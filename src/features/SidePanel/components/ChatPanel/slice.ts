@@ -35,7 +35,7 @@ export const chatPanelSlice = createSlice({
       state,
       action: PayloadAction<I_SubscriptionData[E_Subscribe.getLobbyMessage]>,
     ) => {
-      state.lobbyMessages.unshift(action.payload.message)
+      state.lobbyMessages.push(action.payload.message)
     },
     emitRequestLobbyChat: () => {
       socket.emit(E_Emit.requestLobbyMessages)
@@ -49,10 +49,4 @@ export const chatPanelSlice = createSlice({
   },
 })
 
-export const {
-  setLobbyMessages,
-  setLobbyMessage,
-  emitRequestLobbyChat,
-  emitSendLobbyMessage,
-  emitSendRoomMessage,
-} = chatPanelSlice.actions
+export const chatPanelActions = chatPanelSlice.actions

@@ -18,7 +18,7 @@ export const Input = styled.input`
   margin-bottom: 12px;
   padding: 14px 20px;
 
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 400;
   font-style: normal;
   line-height: 24px;

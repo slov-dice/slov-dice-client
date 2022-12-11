@@ -10,11 +10,9 @@ interface I_TextFieldProps {
   onChange?: ChangeEventHandler<HTMLInputElement>
   type?: 'text'
   fullWidth?: boolean
-  // onFocus?: FocusEventHandler<HTMLInputElement>
-  // onBlur?: FocusEventHandler<HTMLInputElement>
 }
 
-const TextFieldComponent = forwardRef((props: I_TextFieldProps, ref: any) => {
+const TextFieldComponent = forwardRef<HTMLInputElement, I_TextFieldProps>((props, ref) => {
   const { fullWidth = false } = props
   return <S.Input {...props} ref={ref} fullWidth={fullWidth} />
 })

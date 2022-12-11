@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-import { E_RoomType, I_FullRoom } from 'models/shared/app'
+import { E_RoomType, I_FullRoom, I_RoomMessage } from 'models/shared/app'
 import {
   T_BaseCharacterBar,
   T_BaseCharacterSpecial,
@@ -49,7 +49,7 @@ export const roomSlice = createSlice({
       state,
       action: PayloadAction<I_SubscriptionData[E_Subscribe.getRoomMessage]>,
     ) => {
-      state.messages.unshift(action.payload.message)
+      state.messages.push(action.payload.message)
     },
     emitCreateRoom: (_, action: PayloadAction<I_EmitPayload[E_Emit.createRoom]>) => {
       socket.emit(E_Emit.createRoom, action.payload)
@@ -60,6 +60,15 @@ export const roomSlice = createSlice({
     emitLeaveRoom: (state) => {
       socket.emit(E_Emit.leaveRoom, { roomId: state.id })
       return initialState
+    },
+    emitRequestRoomChat: (state) => {
+      const payload: I_EmitPayload[E_Emit.requestRoomMessages] = {
+        roomId: state.id,
+      }
+      socket.emit(E_Emit.requestRoomMessages, payload)
+    },
+    setRoomChat: (state, action: PayloadAction<{ messages: I_RoomMessage[] }>) => {
+      state.messages = action.payload.messages
     },
 
     // Characters Window

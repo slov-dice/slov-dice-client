@@ -8,6 +8,7 @@ export enum E_MediaQuery {
 export const theme = {
   colors: {
     cobaltBlue: '#211b29',
+
     primary: '#ff3d6f',
     primary_50: '#ff3d6f' + '80',
     primary_80: '#ff3d6f' + 'CC',

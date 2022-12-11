@@ -7,8 +7,7 @@ import * as S from './styles'
 import CloseIcon from 'assets/icons/app/close.svg'
 import { Button } from 'components/Buttons'
 import { TextField, SelectField } from 'components/InputFields'
-import { Switch } from 'components/Switch'
-import { T_SwitchOption } from 'components/Switch/model'
+import { Switch, T_SwitchOption } from 'components/Switch'
 import { closeModal } from 'features/ModalManager/slice'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { t } from 'languages'
@@ -80,7 +79,7 @@ export const CreateRoomModal = () => {
         value={form['room-name']}
         onChange={handleChangeForm}
         name='room-name'
-        placeholder='name...'
+        placeholder={t('modals.createRoom.fields.name')}
         fullWidth
       />
       <C.Divider />
@@ -91,7 +90,12 @@ export const CreateRoomModal = () => {
         fullWidth
       />
       <C.Divider />
-      <Switch value={selectedTypeOption.value} onChange={handleSwitchType} options={typeOptions} />
+      <Switch
+        value={selectedTypeOption.value}
+        onChange={handleSwitchType}
+        options={typeOptions}
+        name='roomType'
+      />
       <C.Divider />
       <AnimatePresence mode='wait'>
         {selectedTypeOption === typeOptions[1] && (
@@ -104,17 +108,19 @@ export const CreateRoomModal = () => {
             <TextField
               onChange={handleChangeForm}
               name='room-password'
-              placeholder='Пароль...'
+              placeholder={t('modals.createRoom.fields.password')}
               fullWidth
             />
           </motion.div>
         )}
       </AnimatePresence>
+      <C.Divider />
+
       <S.ModalActions>
         <Button onClick={handleClose} mod={Button.mod.primary}>
-          CANCEL
+          {t('modals.createRoom.actions.cancel')}
         </Button>
-        <Button onClick={handleCreateRoom}>CREATE</Button>
+        <Button onClick={handleCreateRoom}>{t('modals.createRoom.actions.create')}</Button>
       </S.ModalActions>
     </S.Modal>
   )

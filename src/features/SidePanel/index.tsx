@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from 'framer-motion'
+import { AnimatePresence } from 'framer-motion'
 
 import { Panel } from './components'
 import { closeSidePanel } from './slice'
@@ -20,9 +20,9 @@ export const SidePanel = () => {
       const Content = Panel[sidePanel]
 
       return (
-        <motion.div key={sidePanel} initial={{ x: 200 }} animate={{ x: 0 }}>
+        <S.SidePanelWrapper key={sidePanel}>
           <Content />
-        </motion.div>
+        </S.SidePanelWrapper>
       )
     }
     return null

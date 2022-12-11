@@ -1,4 +1,4 @@
-import { ChangeEventHandler, KeyboardEventHandler } from 'react'
+import { ChangeEventHandler, forwardRef, KeyboardEventHandler } from 'react'
 
 import * as S from './styles'
 
@@ -12,6 +12,10 @@ interface ChatFieldProps {
   onKeyPress?: KeyboardEventHandler<HTMLInputElement>
 }
 
-export const ChatField = (props: ChatFieldProps) => {
-  return <S.Input {...props} />
-}
+const ChatFieldComponent = forwardRef<HTMLInputElement, ChatFieldProps>((props, ref) => {
+  return <S.Input {...props} ref={ref} />
+})
+
+ChatFieldComponent.displayName = 'ChatField'
+
+export const ChatField = ChatFieldComponent

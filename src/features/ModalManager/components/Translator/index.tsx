@@ -2,8 +2,7 @@ import { switchOptions } from './data'
 import * as S from './styles'
 
 import CloseIcon from 'assets/icons/app/close.svg'
-import { Switch } from 'components/Switch'
-import { T_SwitchOption } from 'components/Switch/model'
+import { Switch, T_SwitchOption } from 'components/Switch'
 import { closeModal } from 'features/ModalManager/slice'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { useStoreSelector } from 'hooks/useStoreSelector'
@@ -37,7 +36,12 @@ export const TranslatorModal = () => {
       </S.ModalContent>
       <C.Divider decorated />
 
-      <Switch value={language} options={switchOptions} onChange={handleSwitchLanguage} />
+      <Switch
+        value={language}
+        options={switchOptions}
+        onChange={handleSwitchLanguage}
+        name='language'
+      />
 
       <C.Divider />
     </S.Modal>

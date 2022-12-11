@@ -8,7 +8,7 @@ interface I_ColorFieldProps {
   fullWidth?: boolean
 }
 
-const ColorFieldComponent = forwardRef((props: I_ColorFieldProps, ref: any) => {
+const ColorFieldComponent = forwardRef<HTMLInputElement, I_ColorFieldProps>((props, ref) => {
   const { fullWidth = false } = props
 
   return <S.Input {...props} ref={ref} type='color' fullWidth={fullWidth} />
