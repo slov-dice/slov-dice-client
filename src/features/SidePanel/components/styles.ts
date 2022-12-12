@@ -6,9 +6,9 @@ export const Panel = styled.div`
   gap: 18px;
 
   padding: 18px;
+`
 
-  span {
-    font-size: 42px;
-    text-transform: uppercase;
-  }
+export const BaseTitle = styled.span`
+  font-size: 42px;
+  text-transform: uppercase;
 `

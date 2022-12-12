@@ -58,7 +58,20 @@
       "paragraph2": "Пользовательские сообщения и названия не будут переведены!"
     },
     "createRoom": {
-      "title": "Создание комнаты"
+      "title": "Создание комнаты",
+      "fields": {
+        "name": "Название",
+        "size": "Игроков",
+        "type": {
+          "public": "Публичная",
+          "private": "Приватная"
+        },
+        "password": "Пароль"
+      },
+      "actions": {
+        "cancel": "Отмена",
+        "create": "Создать"
+      }
     },
     "joinRoom": {
       "title": "Войти в комнату"
@@ -223,6 +236,20 @@
       "battlefield": "Поле боя",
       "player": "Плеер",
       "textEditor": "Текстовой редактор"
+    }
+  },
+  "sidePanels": {
+    "chat": {
+      "title": "Чат",
+      "lobby": {
+        "title": "Лобби"
+      },
+      "room": {
+        "title": "Комната"
+      },
+      "fields": {
+        "message": "Напишите сообщение..."
+      }
     }
   },
   "notification": {

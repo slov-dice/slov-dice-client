@@ -18,11 +18,18 @@ export const SidePanel = styled(motion.div)`
   box-shadow: rgb(0 0 0 / 50%) 0 9px 10px;
 `
 
-export const Overlay = styled(motion.div).attrs(({ theme }) => ({
+export const SidePanelWrapper = styled(motion.div).attrs({
+  initial: { x: 200 },
+  animate: { x: 0 },
+})`
+  height: 100%;
+`
+
+export const Overlay = styled(motion.div).attrs({
   initial: { opacity: 0 },
   animate: { opacity: 1 },
   exit: { opacity: 0 },
-}))`
+})`
   position: fixed;
   z-index: ${({ theme }) => theme.order.sidePanelOverlay};
   top: 0;

@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 
-import { setLobbyMessage, setLobbyMessages } from './slice'
+import { chatPanelActions } from './slice'
 
 import { E_Subscribe, I_SubscriptionData } from 'models/shared/socket/lobbyChat'
 import {
@@ -14,14 +14,14 @@ export const subscribe = createAsyncThunk('chatPanel', async (_, { dispatch }) =
   socket.on(
     E_Subscribe.getLobbyMessages,
     (data: I_SubscriptionData[E_Subscribe.getLobbyMessages]) => {
-      dispatch(setLobbyMessages(data))
+      dispatch(chatPanelActions.setLobbyMessages(data))
     },
   )
 
   socket.on(
     E_Subscribe.getLobbyMessage,
     (data: I_SubscriptionData[E_Subscribe.getLobbyMessage]) => {
-      dispatch(setLobbyMessage(data))
+      dispatch(chatPanelActions.setLobbyMessage(data))
     },
   )
 
@@ -31,10 +31,15 @@ export const subscribe = createAsyncThunk('chatPanel', async (_, { dispatch }) =
       dispatch(roomActions.setRoomMessage(data))
     },
   )
+
+  socket.on(E_LRSubscribe.getRoomChat, (data: I_LRSubscriptionData[E_LRSubscribe.getRoomChat]) => {
+    dispatch(roomActions.setRoomChat(data))
+  })
 })
 
 export const unsubscribe = () => {
   socket.off(E_Subscribe.getLobbyMessages)
   socket.off(E_Subscribe.getLobbyMessage)
   socket.off(E_LRSubscribe.getRoomMessage)
+  socket.off(E_LRSubscribe.getRoomChat)
 }

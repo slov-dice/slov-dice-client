@@ -1,13 +1,20 @@
-import { T_SwitchOption } from './model'
 import * as S from './styles'
+
+import { t } from 'languages'
 
 interface SwitchProps {
   value: string
   options: T_SwitchOption[]
   onChange: (option: T_SwitchOption) => void
+  name: string
 }
 
-export const Switch = ({ value, options, onChange }: SwitchProps) => {
+export type T_SwitchOption = {
+  value: string
+  label: string
+}
+
+export const Switch = ({ value, options, onChange, name }: SwitchProps) => {
   const handleChange = (item: T_SwitchOption) => () => {
     onChange(item)
   }
@@ -16,8 +23,8 @@ export const Switch = ({ value, options, onChange }: SwitchProps) => {
     <S.Switch>
       {options.map((item, idx) => (
         <S.Option key={idx} isSelected={item.value === value} onClick={handleChange(item)}>
-          {item.label}
-          {item.value === value ? <S.Underline layoutId='underline' /> : null}
+          {t(item.label)}
+          {item.value === value ? <S.Underline layoutId={name} /> : null}
         </S.Option>
       ))}
     </S.Switch>

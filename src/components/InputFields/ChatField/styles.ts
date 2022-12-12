@@ -3,7 +3,7 @@ import styled from 'styled-components'
 export const Input = styled.input`
   width: 100%;
   max-width: 100%;
-  height: 54px;
+  height: 48px;
   max-height: 100%;
   padding: 14px 20px;
 
@@ -13,9 +13,8 @@ export const Input = styled.input`
   line-height: 24px;
   color: ${({ theme }) => theme.colors.white};
 
-  background: ${({ theme }) => theme.colors.white_05};
+  background: ${({ theme }) => theme.colors.white_10};
   border: none;
-  border-radius: 8px;
   outline: none;
   box-shadow: rgba(0, 0, 0, 10%) 0 6px 12px -2px, rgba(0, 0, 0, 40%) 0 3px 7px -3px;
 

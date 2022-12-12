@@ -41,9 +41,9 @@ export const baseQueryWithReAuth: BaseQueryFn<
 
     const response = await refreshResult.json()
 
-    if (response.data) {
-      const accessToken = (response?.data as T_Tokens).accessToken
-      const refreshToken = (response?.data as T_Tokens).refreshToken
+    if (response) {
+      const accessToken = (response as T_Tokens).accessToken
+      const refreshToken = (response as T_Tokens).refreshToken
 
       LocalStorage.setAccessToken(accessToken)
       LocalStorage.setRefreshToken(refreshToken)

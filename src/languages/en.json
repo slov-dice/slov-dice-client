@@ -58,7 +58,20 @@
       "paragraph2": "Custom messages and titles will not be translated!"
     },
     "createRoom": {
-      "title": "Create a room"
+      "title": "Create a room",
+      "fields": {
+        "name": "Name",
+        "size": "Players",
+        "type": {
+          "public": "Public",
+          "private": "Private"
+        },
+        "password": "Password"
+      },
+      "actions": {
+        "cancel": "Cancel",
+        "create": "Create"
+      }
     },
     "joinRoom": {
       "title": "Join to room"
@@ -199,6 +212,20 @@
     "stepSuccess": "Request was successful",
     "actions": {
       "continue": "Продолжить"
+    }
+  },
+  "sidePanels": {
+    "chat": {
+      "title": "Chat",
+      "lobby": {
+        "title": "Lobby"
+      },
+      "room": {
+        "title": "Room"
+      },
+      "fields": {
+        "message": "Write a message..."
+      }
     }
   },
   "sideMenu": {
