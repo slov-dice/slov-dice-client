@@ -45,6 +45,7 @@ export const Divider = styled.div<I_DividerProps>`
 
 export const Control = styled(motion.div).attrs(({ theme }) => controlAttrs(theme))`
   cursor: pointer;
+  user-select: none;
 
   display: flex;
   justify-content: center;

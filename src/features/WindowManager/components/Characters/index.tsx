@@ -38,12 +38,12 @@ export const CharactersContent = () => {
   return (
     <>
       <WindowOverlayManager overlays={overlays} />
-      <S.Wrapper>
+      <S.WindowContentWrapper>
         {characters.map((character) => (
           <CharacterCard key={character.id} character={character} />
         ))}
         <AddCharacterCard onClick={handleOpenCreateCharacterOverlay} />
-      </S.Wrapper>
+      </S.WindowContentWrapper>
     </>
   )
 }
