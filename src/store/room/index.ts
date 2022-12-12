@@ -62,10 +62,12 @@ export const roomSlice = createSlice({
       return initialState
     },
     emitRequestRoomChat: (state) => {
-      const payload: I_EmitPayload[E_Emit.requestRoomMessages] = {
-        roomId: state.id,
+      if (state.id) {
+        const payload: I_EmitPayload[E_Emit.requestRoomMessages] = {
+          roomId: state.id,
+        }
+        socket.emit(E_Emit.requestRoomMessages, payload)
       }
-      socket.emit(E_Emit.requestRoomMessages, payload)
     },
     setRoomChat: (state, action: PayloadAction<{ messages: I_RoomMessage[] }>) => {
       state.messages = action.payload.messages

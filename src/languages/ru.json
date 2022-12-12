@@ -250,6 +250,15 @@
       "fields": {
         "message": "Напишите сообщение..."
       }
+    },
+    "users": {
+      "title": "Пользователи",
+      "lobby": {
+        "title": "Лобби"
+      },
+      "room": {
+        "title": "Комната"
+      }
     }
   },
   "notification": {

@@ -44,6 +44,7 @@ export const ChatPanel = () => {
   const [chatType, setChatType] = useState<E_ChatType>(E_ChatType.lobby)
   const [chatOptions, setChatOptions] = useState(instanceChatOptions)
   const chatFieldRef = useRef<HTMLInputElement>(null)
+  const chatEndRef = useRef<HTMLDivElement>(null)
 
   const handleChangeMessage = ({ target }: ChangeEvent<HTMLInputElement>) => {
     setMessage(target.value)
@@ -76,6 +77,14 @@ export const ChatPanel = () => {
       handleSend()
     }
   }
+
+  const scrollToBottom = () => {
+    chatEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }
+
+  useEffect(() => {
+    scrollToBottom()
+  }, [lobbyMessages, roomMessages])
 
   useEffect(() => {
     if (roomId) {
@@ -124,6 +133,7 @@ export const ChatPanel = () => {
                 />
               ))
             : '...'}
+          <div ref={chatEndRef} />
         </S.MessagesWrapper>
         <div>
           <S.MessageFieldWrapper>
