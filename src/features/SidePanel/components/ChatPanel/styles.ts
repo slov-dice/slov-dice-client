@@ -2,9 +2,7 @@ import styled from 'styled-components'
 
 import { Panel, BaseTitle } from '../styles'
 
-export const ChatPanel = styled(Panel)`
-  height: 100%;
-`
+export const ChatPanel = styled(Panel)``
 
 export const Title = styled(BaseTitle)``
 

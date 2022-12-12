@@ -1,30 +1,44 @@
-import { useLayoutEffect, useMemo, useState } from 'react'
+import { useEffect, useLayoutEffect, useMemo, useState } from 'react'
 
+import { instanceUsersOptions } from './data'
+import { User } from './extensions/User'
 import { emitRequestUsers } from './slice'
 import { subscribe, unsubscribe } from './socket'
 import * as S from './styles'
+import { sortUsers } from './utils'
 
-import { Button } from 'components/Buttons'
+import { Switch, T_SwitchOption } from 'components/Switch'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { useStoreSelector } from 'hooks/useStoreSelector'
+import { t } from 'languages'
+import { E_ChatType } from 'models/shared/app'
 
 export const UsersPanel = () => {
   const dispatch = useStoreDispatch()
 
-  const [isLobbyUsers, setIsLobbyUsers] = useState(true)
+  const [usersType, setUsersType] = useState<E_ChatType>(E_ChatType.lobby)
+  const [usersOptions, setUsersOptions] = useState(instanceUsersOptions)
 
-  const { lobbyUsers, roomUsers } = useStoreSelector((store) => ({
+  const { lobbyUsers, roomUsers, roomId, profileId } = useStoreSelector((store) => ({
     lobbyUsers: store.usersPanel.lobbyUsers,
     roomUsers: store.room.users,
+    roomId: store.room.id,
+    profileId: store.profile.id,
   }))
+
+  const sortedLobbyUsers = useMemo(() => sortUsers(lobbyUsers, profileId), [lobbyUsers, profileId])
 
   const roomUsersToLobbyUsers = useMemo(
     () =>
-      lobbyUsers.filter((lobbyUser) =>
+      sortedLobbyUsers.filter((lobbyUser) =>
         roomUsers.some((roomUser) => roomUser.userId === lobbyUser.id),
       ),
-    [lobbyUsers, roomUsers],
+    [sortedLobbyUsers, roomUsers],
   )
+
+  const handleSwitchChatType = (option: T_SwitchOption) => {
+    setUsersType(option.value as E_ChatType)
+  }
 
   useLayoutEffect(() => {
     dispatch(subscribe())
@@ -35,34 +49,50 @@ export const UsersPanel = () => {
     }
   }, [dispatch])
 
-  const handleOpenLobbyUsers = () => {
-    setIsLobbyUsers(true)
-  }
-
-  const handleOpenRoomUsers = () => {
-    setIsLobbyUsers(false)
-  }
+  useEffect(() => {
+    if (roomId) {
+      setUsersOptions(instanceUsersOptions)
+      setUsersType(instanceUsersOptions[1].value as E_ChatType)
+    } else {
+      setUsersOptions([instanceUsersOptions[0]])
+      setUsersType(instanceUsersOptions[0].value as E_ChatType)
+    }
+  }, [roomId])
 
   return (
     <S.UsersPanel>
-      <span>Users</span>
+      <S.Title>{t('sidePanels.users.title')}</S.Title>
       <div>
-        <Button mod={Button.mod.secondary} onClick={handleOpenLobbyUsers}>
-          LOBBY
-        </Button>
-        <Button mod={Button.mod.secondary} onClick={handleOpenRoomUsers}>
-          ROOM
-        </Button>
+        <Switch
+          value={usersType}
+          onChange={handleSwitchChatType}
+          options={usersOptions}
+          name='chatType'
+        />
       </div>
-      <pre style={{ overflow: 'auto', height: 600 }}>
-        {isLobbyUsers
-          ? lobbyUsers.length
-            ? JSON.stringify(lobbyUsers, undefined, 2)
-            : '...'
-          : roomUsersToLobbyUsers.length
-          ? JSON.stringify(roomUsersToLobbyUsers, undefined, 2)
-          : '...'}
-      </pre>
+      <S.ContentSection>
+        <S.UsersWrapper>
+          {usersType === E_ChatType.lobby
+            ? sortedLobbyUsers.length
+              ? sortedLobbyUsers.map((user) => (
+                  <User
+                    key={user.id + E_ChatType.lobby}
+                    nickname={user.nickname}
+                    status={user.status}
+                  />
+                ))
+              : '...'
+            : roomUsersToLobbyUsers.length
+            ? roomUsersToLobbyUsers.map((user) => (
+                <User
+                  key={user.id + E_ChatType.lobby}
+                  nickname={user.nickname}
+                  status={user.status}
+                />
+              ))
+            : '...'}
+        </S.UsersWrapper>
+      </S.ContentSection>
     </S.UsersPanel>
   )
 }

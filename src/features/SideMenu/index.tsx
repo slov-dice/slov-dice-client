@@ -1,4 +1,4 @@
-import { Navigation } from './components/Navigation'
+import { Navigation } from './extensions/Navigation'
 import { toggleSideMenu } from './slice'
 import * as S from './styles'
 

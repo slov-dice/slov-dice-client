@@ -5,6 +5,7 @@ export const Panel = styled.div`
   flex-direction: column;
   gap: 18px;
 
+  height: 100%;
   padding: 18px;
 `
 

@@ -226,6 +226,15 @@
       "fields": {
         "message": "Write a message..."
       }
+    },
+    "users": {
+      "title": "Users",
+      "lobby": {
+        "title": "Lobby"
+      },
+      "room": {
+        "title": "Room"
+      }
     }
   },
   "sideMenu": {
