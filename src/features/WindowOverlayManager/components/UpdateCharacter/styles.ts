@@ -8,13 +8,25 @@ import {
   BarTextBase,
 } from '../styles'
 
+import * as C from 'styles/components'
+
 export const OverlayHeader = styled(OverlayHeaderBase)``
+
+export const RemoveCharacter = styled(C.Control)`
+  position: absolute;
+  top: 8px;
+  right: -8px;
+
+  border: 1px solid ${({ theme }) => theme.colors.white_10};
+`
 
 export const OverlayContent = styled.div`
   padding: 16px;
 `
 
 export const ContentTop = styled.div`
+  position: relative;
+
   display: flex;
   flex-direction: column;
   gap: 16px;

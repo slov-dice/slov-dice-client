@@ -147,7 +147,8 @@
   },
   "windowCharacters": {
     "level": "Level",
-    "createCharacter": "Create Character"
+    "createCharacter": "Create Character",
+    "addEffect": "Add effect"
   },
   "createCharacterOverlay": {
     "title": "Character Creator",
@@ -166,7 +167,8 @@
     "title": "Character Editor",
     "actions": {
       "save": "Save",
-      "cancel": "Cancel"
+      "cancel": "Cancel",
+      "remove": "Remove Character"
     }
   },
   "auth": {

@@ -1,14 +1,6 @@
-import styled, { keyframes } from 'styled-components'
+import styled from 'styled-components'
 
-const glowSpin = keyframes`
- 0% {
-  rotate: 0deg;
- }
-
- 100% {
-  rotate: 360deg;
- }
-`
+import { glowSpin } from 'styles/animations'
 
 export const Wrapper = styled.div`
   position: relative;

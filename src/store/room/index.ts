@@ -176,6 +176,26 @@ export const roomSlice = createSlice({
         (character) => (character.id === action.payload.id ? action.payload : character),
       )
     },
+
+    emitRemoveCharacterInCharactersWindow: (
+      state,
+      action: PayloadAction<{ characterId: T_CharacterId }>,
+    ) => {
+      const payload: I_EmitPayload[E_Emit.removeCharacterInCharactersWindow] = {
+        roomId: state.id,
+        characterId: action.payload.characterId,
+      }
+
+      socket.emit(E_Emit.removeCharacterInCharactersWindow, payload)
+    },
+    setRemovedCharacterInCharactersWindow: (
+      state,
+      action: PayloadAction<{ characterId: T_CharacterId }>,
+    ) => {
+      state.game.characters.window.characters = state.game.characters.window.characters.filter(
+        (character) => character.id !== action.payload.characterId,
+      )
+    },
   },
 })
 

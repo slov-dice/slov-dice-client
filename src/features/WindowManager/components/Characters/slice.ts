@@ -146,30 +146,6 @@ export const gameCharactersSlice = createSlice({
     closeLastCharacterWindowOverlay: (state) => {
       state.overlays = state.overlays.map((overlay) => ({ ...overlay, isOpen: false }))
     },
-
-    // setCharacterWindowSettingsBars: (state, action: PayloadAction<T_CharacterBar[]>) => {
-    //   state.settings.bars = action.payload
-    //   state.characters = state.characters.map((character) => {
-    //     character.bars = action.payload
-    //     return character
-    //   })
-    // },
-
-    // setCharacterWindowSettingsSpecials: (state, action: PayloadAction<T_CharacterSpecial[]>) => {
-    //   state.settings.specials = action.payload
-    //   state.characters = state.characters.map((character) => {
-    //     character.specials = action.payload
-    //     return character
-    //   })
-    // },
-
-    // setCharacterWindowSettingsEffects: (state, action: PayloadAction<T_CharacterEffect[]>) => {
-    //   state.settings.effects = action.payload
-    //   state.characters = state.characters.map((character) => {
-    //     character.effects = []
-    //     return character
-    //   })
-    // },
   },
 })
 

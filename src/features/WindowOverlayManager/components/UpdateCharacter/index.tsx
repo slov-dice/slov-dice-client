@@ -1,8 +1,10 @@
+import Tippy from '@tippyjs/react'
 import { useCallback, useState } from 'react'
 
 import * as S from './styles'
 
 import CloseIcon from 'assets/icons/app/close.svg'
+import TrashIcon from 'assets/icons/app/trash.svg'
 import { Button } from 'components/Buttons'
 import {
   AddCharacterEffect,
@@ -16,20 +18,19 @@ import {
 } from 'components/Character'
 import { E_WindowOverlay } from 'features/WindowOverlayManager/models'
 import { useActions } from 'hooks/useActions'
+import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { useStoreSelector } from 'hooks/useStoreSelector'
 import { t } from 'languages'
 import { T_CharacterBarId, T_CharacterSpecialId } from 'models/shared/game/character'
+import { roomActions } from 'store/room'
 import * as C from 'styles/components'
 import { getBar, getEffect, getSpecial } from 'utils/game/effects'
 import { calculateBarDimension } from 'utils/helpers/calculates'
 
 export const UpdateCharacterOverlay = () => {
-  const {
-    closeCharacterWindowOverlay,
-    removeCharacterEffect,
-    emitUpdateCharacterInCharactersWindow,
-  } = useActions()
+  const { closeCharacterWindowOverlay, removeCharacterEffect } = useActions()
 
+  const dispatch = useStoreDispatch()
   const payload = useStoreSelector(
     (state) =>
       state.gameCharacters.overlays.find(
@@ -91,7 +92,14 @@ export const UpdateCharacterOverlay = () => {
   }, [closeCharacterWindowOverlay])
 
   const handleUpdateCharacter = () => {
-    emitUpdateCharacterInCharactersWindow({ ...character, ...characterEditor })
+    dispatch(
+      roomActions.emitUpdateCharacterInCharactersWindow({ ...character, ...characterEditor }),
+    )
+    handleClose()
+  }
+
+  const handleRemoveCharacter = () => {
+    dispatch(roomActions.emitRemoveCharacterInCharactersWindow({ characterId: character.id }))
     handleClose()
   }
 
@@ -106,6 +114,11 @@ export const UpdateCharacterOverlay = () => {
         </S.OverlayHeader>
         <S.OverlayContent>
           <S.ContentTop>
+            <Tippy content={t('updateCharacterOverlay.actions.remove')}>
+              <S.RemoveCharacter onClick={handleRemoveCharacter}>
+                <TrashIcon />
+              </S.RemoveCharacter>
+            </Tippy>
             <CharacterLevel value={character.level} onChange={handleChangeCharacterLevel} />
             <CharacterAvatar characterId='characterEditor' image={characterEditor.avatar} />
           </S.ContentTop>
