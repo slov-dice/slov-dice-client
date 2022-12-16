@@ -67,7 +67,7 @@ export const UsersPanel = () => {
           value={usersType}
           onChange={handleSwitchChatType}
           options={usersOptions}
-          name='chatType'
+          name='usersType'
         />
       </div>
       <S.ContentSection>

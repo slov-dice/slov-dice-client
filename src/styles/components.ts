@@ -111,3 +111,8 @@ export const LinkBlank = styled(Link).attrs({
 })`
   border-bottom: 1px solid ${({ theme }) => theme.colors.primary_80};
 `
+
+export const Row = styled.div`
+  display: flex;
+  gap: 16px;
+`

@@ -26,6 +26,7 @@ export const ContentBlockBase = styled.div<{ direction?: 'column' | 'row' }>`
   gap: 16px;
 
   width: 100%;
+  min-height: 81px;
   padding: 12px;
 
   background-color: #2b2b2b;

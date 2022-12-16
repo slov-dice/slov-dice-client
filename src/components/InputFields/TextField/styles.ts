@@ -5,7 +5,7 @@ export const Input = styled.input<{ fullWidth: boolean }>`
   max-width: 100%;
   height: 38px;
   max-height: 100%;
-  padding: 8px 18px;
+  padding: 8px 12px;
 
   font-size: 16px;
   line-height: 24px;

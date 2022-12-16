@@ -10,6 +10,6 @@ export const Panel = styled.div`
 `
 
 export const BaseTitle = styled.span`
-  font-size: 42px;
+  font-size: 32px;
   text-transform: uppercase;
 `

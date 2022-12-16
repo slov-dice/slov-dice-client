@@ -1,3 +1,4 @@
+import Tippy from '@tippyjs/react'
 import { useCallback, useState } from 'react'
 import { v4 } from 'uuid'
 
@@ -5,6 +6,7 @@ import { formCreateCharacter, T_FormCreateCharacter } from './data'
 import * as S from './styles'
 
 import CloseIcon from 'assets/icons/app/close.svg'
+import EditIcon from 'assets/icons/app/edit.svg'
 import { Button } from 'components/Buttons'
 import {
   CharacterAvatar,
@@ -16,8 +18,9 @@ import {
   CharacterEffect,
   AddCharacterEffect,
 } from 'components/Character'
+import { gameCharactersActions } from 'features/WindowManager/components/Characters/slice'
 import { E_WindowOverlay } from 'features/WindowOverlayManager/models'
-import { useActions } from 'hooks/useActions'
+import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { useStoreSelector } from 'hooks/useStoreSelector'
 import { t } from 'languages'
 import {
@@ -26,29 +29,34 @@ import {
   T_CharacterBarId,
   T_CharacterSpecialId,
 } from 'models/shared/game/character'
+import { roomActions } from 'store/room'
 import * as C from 'styles/components'
 import { getBar, getEffect, getSpecial } from 'utils/game/effects'
 import { calculateBarDimension } from 'utils/helpers/calculates'
 
 export const CreateCharacterOverlay = () => {
-  const {
-    closeCharacterWindowOverlay,
-    removeCharacterEffect,
-    setCharacterCreatorBar,
-    setCharacterCreatorSpecial,
-    emitCreateCharacterInCharactersWindow,
-  } = useActions()
-  const { characterCreator, settings, language } = useStoreSelector((store) => ({
+  const dispatch = useStoreDispatch()
+
+  const { characterCreator, settings } = useStoreSelector((store) => ({
     characterCreator: store.gameCharacters.characterCreator,
     settings: store.room.game.characters.settings,
-    language: store.app.language,
   }))
   const [character, setCharacter] = useState<T_FormCreateCharacter>(formCreateCharacter)
 
   const handleClose = useCallback(() => {
     setCharacter(formCreateCharacter)
-    closeCharacterWindowOverlay(E_WindowOverlay.createCharacter)
-  }, [closeCharacterWindowOverlay])
+    dispatch(gameCharactersActions.closeCharacterWindowOverlay(E_WindowOverlay.createCharacter))
+  }, [dispatch])
+
+  const handleOpenBattlefieldActionsEditorOverlay = () => {
+    dispatch(
+      gameCharactersActions.openCharacterWindowOverlay({
+        name: E_WindowOverlay.battlefieldActionsEditor,
+        payload: 'characterCreator',
+        isOpen: true,
+      }),
+    )
+  }
 
   const handleChangeCharacterLevel = (value: number) => {
     setCharacter((prev) => ({ ...prev, level: value }))
@@ -63,23 +71,31 @@ export const CreateCharacterOverlay = () => {
   }
 
   const handleChangeCharacterBarCurrentValue = (id: T_CharacterBarId, value: number) => {
-    setCharacterCreatorBar({ id, value, property: 'current' })
+    dispatch(gameCharactersActions.setCharacterCreatorBar({ id, value, property: 'current' }))
   }
 
   const handleChangeCharacterBarMaxValue = (id: T_CharacterBarId, value: number) => {
-    setCharacterCreatorBar({ id, value, property: 'max' })
+    dispatch(gameCharactersActions.setCharacterCreatorBar({ id, value, property: 'max' }))
   }
 
   const handleChangeCharacterSpecial = (id: T_CharacterSpecialId, value: number) => {
-    setCharacterCreatorSpecial({ id, value })
+    dispatch(gameCharactersActions.setCharacterCreatorSpecial({ id, value }))
   }
 
   const handleRemoveCharacterEffect = (effectId: string) => {
-    removeCharacterEffect({ characterId: 'characterCreator', effectId })
+    dispatch(
+      gameCharactersActions.removeCharacterEffect({ characterId: 'characterCreator', effectId }),
+    )
   }
 
   const handleCreateCharacter = () => {
-    emitCreateCharacterInCharactersWindow({ id: v4(), ...character, ...characterCreator })
+    dispatch(
+      roomActions.emitCreateCharacterInCharactersWindow({
+        id: v4(),
+        ...character,
+        ...characterCreator,
+      }),
+    )
     handleClose()
   }
 
@@ -113,7 +129,7 @@ export const CreateCharacterOverlay = () => {
                   color={baseBar.color}
                   barHeight={calculateBarDimension(bar.current, bar.max)}
                 >
-                  <S.BarName>{baseBar.name[language]}</S.BarName>
+                  <S.BarName>{baseBar.name}</S.BarName>
                   <S.BarText>
                     <CharacterBarText
                       id={bar.id}
@@ -155,6 +171,14 @@ export const CreateCharacterOverlay = () => {
               )
             })}
             <AddCharacterEffect characterId='characterCreator' />
+          </S.ContentBlock>
+
+          <S.ContentBlock direction='row'>
+            <Tippy content={t('windowCharacters.editActions')}>
+              <S.EditActions onClick={handleOpenBattlefieldActionsEditorOverlay}>
+                <EditIcon />
+              </S.EditActions>
+            </Tippy>
           </S.ContentBlock>
         </S.ContentWrapper>
         <C.Divider decorated />

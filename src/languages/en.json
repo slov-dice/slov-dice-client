@@ -147,7 +147,9 @@
   },
   "windowCharacters": {
     "level": "Level",
-    "createCharacter": "Create Character"
+    "createCharacter": "Create Character",
+    "addEffect": "Add Effect",
+    "editActions": "Actions Editor"
   },
   "createCharacterOverlay": {
     "title": "Character Creator",
@@ -165,6 +167,21 @@
   "updateCharacterOverlay": {
     "title": "Character Editor",
     "actions": {
+      "save": "Save",
+      "cancel": "Cancel",
+      "remove": "Remove Character"
+    }
+  },
+  "battlefieldActionsEditor": {
+    "title": "Actions Editor",
+    "fields": {
+      "title": "Title",
+      "description": "Description",
+      "target": "Target",
+      "value": "Value (+x/-x)"
+    },
+    "actions": {
+      "add": "Add",
       "save": "Save",
       "cancel": "Cancel"
     }

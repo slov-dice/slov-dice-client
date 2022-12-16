@@ -81,6 +81,13 @@ export const subscribe = createAsyncThunk('roomPage', async (_, { dispatch }) =>
       dispatch(roomActions.setUpdatedCharacterInCharactersWindow(data.character))
     },
   )
+
+  socket.on(
+    E_Subscribe.getRemovedCharacterInCharactersWindow,
+    (data: I_SubscriptionData[E_Subscribe.getRemovedCharacterInCharactersWindow]) => {
+      dispatch(roomActions.setRemovedCharacterInCharactersWindow(data))
+    },
+  )
 })
 
 export const unsubscribe = () => {
@@ -90,4 +97,5 @@ export const unsubscribe = () => {
   socket.off(E_Subscribe.getCharactersWindowSettingsEffects)
   socket.off(E_Subscribe.getCreatedCharacterInCharactersWindow)
   socket.off(E_Subscribe.getUpdatedCharacterInCharactersWindow)
+  socket.off(E_Subscribe.getRemovedCharacterInCharactersWindow)
 }
