@@ -17,4 +17,8 @@ export const initialStateSlice: I_WindowOverlay[] = [
     isOpen: false,
     name: E_WindowOverlay.updateCharacterEffect,
   },
+  {
+    isOpen: false,
+    name: E_WindowOverlay.battlefieldActionsEditor,
+  },
 ]

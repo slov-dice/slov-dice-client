@@ -6,7 +6,7 @@ export const addBlockAttrs = (theme: DefaultTheme): HTMLMotionProps<'div'> => ({
   whileTap: { scale: 0.95 },
 })
 
-export const removeBlockAttrs = () => ({
+export const removeBlockAttrs = (): HTMLMotionProps<'div'> => ({
   whileHover: { opacity: 0.75 },
   whileTap: { scale: 0.95, opacity: 0.75 },
 })

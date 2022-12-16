@@ -148,7 +148,8 @@
   "windowCharacters": {
     "level": "Уровень",
     "createCharacter": "Создать персонажа",
-    "addEffect": "Добавить эффект"
+    "addEffect": "Добавить эффект",
+    "editActions": "Редактор действий"
   },
   "createCharacterOverlay": {
     "title": "Создание персонажа",
@@ -169,6 +170,20 @@
       "save": "Сохранить",
       "cancel": "Отмена",
       "remove": "Удалить персонажа"
+    }
+  },
+  "battlefieldActionsEditor": {
+    "title": "Редактор действий",
+    "fields": {
+      "title": "Название",
+      "description": "Описание",
+      "target": "Цель",
+      "value": "Значение (+x/-x)"
+    },
+    "actions": {
+      "add": "Добавить",
+      "save": "Сохранить",
+      "cancel": "Отмена"
     }
   },
   "auth": {

@@ -30,7 +30,7 @@ export const Select = styled.select<{ fullWidth: boolean }>`
   max-width: 100%;
   height: 54px;
   max-height: 100%;
-  padding: 12px 18px;
+  padding: 12px;
 
   font-size: 16px;
   line-height: 24px;

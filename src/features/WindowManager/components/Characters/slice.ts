@@ -11,6 +11,7 @@ import {
   T_BaseCharacterBar,
   T_BaseCharacterSpecial,
   T_CharacterBarId,
+  T_CharacterAction,
 } from 'models/shared/game/character'
 
 interface I_InitialState {
@@ -20,6 +21,7 @@ interface I_InitialState {
     bars: T_CharacterBar[]
     specials: T_CharacterSpecial[]
     effects: T_CharacterEffectId[]
+    actions: T_CharacterAction[]
   }
   characterEditor: {
     avatar: string
@@ -29,7 +31,7 @@ interface I_InitialState {
 
 const initialState: I_InitialState = {
   overlays: initialStateSlice,
-  characterCreator: { avatar: '', effects: [], bars: [], specials: [] },
+  characterCreator: { avatar: '', effects: [], bars: [], specials: [], actions: [] },
   characterEditor: { avatar: '', effects: [] },
 }
 
@@ -52,6 +54,7 @@ export const gameCharactersSlice = createSlice({
           current: 5,
         })),
         effects: [],
+        actions: [],
       }
     },
 

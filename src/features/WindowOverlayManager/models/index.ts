@@ -11,4 +11,5 @@ export enum E_WindowOverlay {
   updateCharacter = 'updateCharacter',
   pickCharacterAvatar = 'pickCharacterAvatar',
   updateCharacterEffect = 'updateCharacterEffect',
+  battlefieldActionsEditor = 'battlefieldActionsEditor',
 }

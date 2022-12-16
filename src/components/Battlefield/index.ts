@@ -1,1 +1,1 @@
-export { BattlefieldCard } from './Card'
+export { BattlefieldCard } from './BattlefieldCard'

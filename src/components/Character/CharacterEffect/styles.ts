@@ -47,7 +47,7 @@ export const EffectRemove = styled(motion.span).attrs(effectRemoveAttrs)`
   height: 14px;
 
   opacity: 1;
-  background: ${({ theme }) => theme.colors.primary};
+  background: ${({ theme }) => theme.colors.primary_50};
   border-radius: 50%;
 
   fill: ${({ theme }) => theme.colors.white};

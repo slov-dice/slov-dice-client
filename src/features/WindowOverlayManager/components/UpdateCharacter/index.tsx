@@ -199,5 +199,5 @@ export const UpdateCharacterOverlay = () => {
       </div>
     )
   }
-  return '...'
+  return <>...</>
 }

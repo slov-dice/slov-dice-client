@@ -82,8 +82,6 @@ export const EffectsTab = () => {
     emitUpdateCharactersWindowSettingsEffects(data.effects)
   }
 
-  console.log('fields', fields)
-
   return (
     <S.TabPanel>
       <S.EffectsWrapper>

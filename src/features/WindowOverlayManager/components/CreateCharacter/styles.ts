@@ -8,6 +8,8 @@ import {
   BarWrapperBase,
 } from '../styles'
 
+import * as C from 'styles/components'
+
 export const OverlayHeader = styled(OverlayHeaderBase)``
 
 export const OverlayContent = styled.div`
@@ -29,7 +31,9 @@ export const ContentWrapper = styled.div`
   gap: 24px;
 `
 
-export const ContentBlock = styled(ContentBlockBase)``
+export const ContentBlock = styled(ContentBlockBase)`
+  position: relative;
+`
 
 export const BarWrapper = styled(BarWrapperBase)``
 
@@ -44,4 +48,17 @@ export const ContentBottom = styled.div`
 
   max-width: min(600px, 100%);
   margin-left: auto;
+`
+
+export const EditActions = styled(C.Control)`
+  position: absolute;
+  top: 8px;
+  right: 8px;
+
+  fill: ${({ theme }) => theme.colors.white};
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
 `

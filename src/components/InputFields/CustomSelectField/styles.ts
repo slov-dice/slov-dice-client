@@ -4,13 +4,25 @@ export const SelectContainer = styled.div`
   position: relative;
 
   width: fit-content;
+  min-width: 150px;
+
+  :before {
+    content: '';
+
+    position: absolute;
+    top: 17px;
+    right: 8px;
+
+    border: 6px solid transparent;
+    border-top: 6px solid ${({ theme }) => theme.colors.white_50};
+  }
 `
 export const SelectHeader = styled.div`
   cursor: pointer;
   user-select: none;
 
   height: 36px;
-  padding: 8px 18px;
+  padding: 8px 24px 8px 12px;
 
   font-size: 16px;
   line-height: 24px;
@@ -30,18 +42,17 @@ export const SelectList = styled.ul`
   z-index: 100;
   top: 36px;
 
+  overflow: hidden;
   display: flex;
   flex-direction: column;
-  gap: 8px;
 
   box-sizing: border-box;
-  width: fit-content;
+  width: 100%;
   margin: 0;
   padding: 0;
 
-  background: #373737;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
+  background-color: ${({ theme }) => theme.colors.black};
+  border-radius: 8px;
   box-shadow: rgba(0, 0, 0, 10%) 0 6px 12px -2px, rgba(0, 0, 0, 40%) 0 3px 7px -3px;
 
   &:first-child {
@@ -52,12 +63,21 @@ export const ListItem = styled.li`
   cursor: pointer;
   user-select: none;
 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   height: 36px;
-  margin-inline: 8px;
   padding: 4px;
+
+  border-top: 1px solid ${({ theme }) => theme.colors.white_05};
 
   svg {
     width: 100%;
     height: 100%;
+  }
+
+  :hover {
+    background-color: ${({ theme }) => theme.colors.primary_50};
   }
 `
