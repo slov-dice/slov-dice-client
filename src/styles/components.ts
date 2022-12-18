@@ -116,3 +116,7 @@ export const Row = styled.div`
   display: flex;
   gap: 16px;
 `
+
+export const ParagraphPreLine = styled.p`
+  white-space: pre-line;
+`

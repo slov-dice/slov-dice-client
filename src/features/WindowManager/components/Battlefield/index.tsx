@@ -5,14 +5,16 @@ import * as S from './styles'
 import EditIcon from 'assets/icons/app/edit.svg'
 import { BattlefieldCard } from 'components/Battlefield'
 import { gameBattlefieldActions } from 'features/WindowManager/components/Battlefield/slice'
+import { WindowOverlayManager } from 'features/WindowOverlayManager'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { useStoreSelector } from 'hooks/useStoreSelector'
 
 export const BattlefieldContent = () => {
   const dispatch = useStoreDispatch()
-  const { characters, activeCard } = useStoreSelector((store) => ({
+  const { characters, activeCard, overlays } = useStoreSelector((store) => ({
     characters: store.room.game.characters.window.characters,
     activeCard: store.gameBattlefield.activeCard,
+    overlays: store.gameBattlefield.overlays,
   }))
 
   const handleCardAction = useCallback(
@@ -40,55 +42,62 @@ export const BattlefieldContent = () => {
   }, [handleCardAction])
 
   return (
-    <S.WindowContentWrapper>
-      <S.FieldWrapper>
-        <S.MasterFieldEdit>
-          <EditIcon />
-        </S.MasterFieldEdit>
-        <S.CardsWrapper>
-          <BattlefieldCard
-            id='1'
-            bars={[
-              {
-                id: 'f2eb29cf-9bbe-4445-98ea-a33f0bc26961',
-                current: 100,
-                max: 100,
-              },
-            ]}
-            name='Skeleton Warrior'
-            avatar=''
-          />
-          <BattlefieldCard
-            id='2'
-            bars={[
-              {
-                id: 'f2eb29cf-9bbe-4445-98ea-a33f0bc26961',
-                current: 100,
-                max: 100,
-              },
-            ]}
-            name='Skeleton Warrior'
-            avatar=''
-          />
-        </S.CardsWrapper>
-      </S.FieldWrapper>
+    <>
+      <WindowOverlayManager overlays={overlays} />
 
-      <S.FieldWrapper>
-        <S.PlayerFieldEdit>
-          <EditIcon />
-        </S.PlayerFieldEdit>
-        <S.CardsWrapper>
-          {characters.map((character) => (
+      <S.WindowContentWrapper>
+        <S.FieldWrapper>
+          <S.MasterFieldEdit>
+            <EditIcon />
+          </S.MasterFieldEdit>
+          <S.CardsWrapper>
             <BattlefieldCard
-              key={character.id}
-              id={character.id}
-              bars={character.bars}
-              name={character.name}
-              avatar={character.avatar}
+              id='1'
+              bars={[
+                {
+                  id: 'f2eb29cf-9bbe-4445-98ea-a33f0bc26961',
+                  current: 100,
+                  max: 100,
+                },
+              ]}
+              name='Skeleton Warrior'
+              avatar=''
+              actions={[]}
             />
-          ))}
-        </S.CardsWrapper>
-      </S.FieldWrapper>
-    </S.WindowContentWrapper>
+            <BattlefieldCard
+              id='2'
+              bars={[
+                {
+                  id: 'f2eb29cf-9bbe-4445-98ea-a33f0bc26961',
+                  current: 100,
+                  max: 100,
+                },
+              ]}
+              name='Skeleton Warrior'
+              avatar=''
+              actions={[]}
+            />
+          </S.CardsWrapper>
+        </S.FieldWrapper>
+
+        <S.FieldWrapper>
+          <S.PlayerFieldEdit>
+            <EditIcon />
+          </S.PlayerFieldEdit>
+          <S.CardsWrapper>
+            {characters.map((character) => (
+              <BattlefieldCard
+                key={character.id}
+                id={character.id}
+                bars={character.bars}
+                name={character.name}
+                avatar={character.avatar}
+                actions={character.actions}
+              />
+            ))}
+          </S.CardsWrapper>
+        </S.FieldWrapper>
+      </S.WindowContentWrapper>
+    </>
   )
 }

@@ -21,6 +21,8 @@ export const OverlayHeaderBase = styled.div`
 `
 
 export const ContentBlockBase = styled.div<{ direction?: 'column' | 'row' }>`
+  position: relative;
+
   display: flex;
   flex-direction: ${({ direction = 'column' }) => (direction === 'column' ? 'column' : 'row')};
   gap: 16px;

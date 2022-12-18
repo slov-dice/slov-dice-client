@@ -31,9 +31,7 @@ export const ContentWrapper = styled.div`
   gap: 24px;
 `
 
-export const ContentBlock = styled(ContentBlockBase)`
-  position: relative;
-`
+export const ContentBlock = styled(ContentBlockBase)``
 
 export const BarWrapper = styled(BarWrapperBase)``
 
@@ -60,5 +58,17 @@ export const EditActions = styled(C.Control)`
   svg {
     width: 100%;
     height: 100%;
+  }
+`
+
+export const CharacterAction = styled.div`
+  width: 180px;
+  padding: 8px;
+
+  border: 1px solid ${({ theme }) => theme.colors.white};
+  border-radius: 4px;
+
+  div:first-child {
+    font-weight: 700;
   }
 `

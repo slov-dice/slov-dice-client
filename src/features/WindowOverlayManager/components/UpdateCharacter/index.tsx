@@ -4,6 +4,7 @@ import { useCallback, useState } from 'react'
 import * as S from './styles'
 
 import CloseIcon from 'assets/icons/app/close.svg'
+import EditIcon from 'assets/icons/app/edit.svg'
 import TrashIcon from 'assets/icons/app/trash.svg'
 import { Button } from 'components/Buttons'
 import {
@@ -16,8 +17,8 @@ import {
   CharacterName,
   CharacterSpecial,
 } from 'components/Character'
+import { gameCharactersActions } from 'features/WindowManager/components/Characters/slice'
 import { E_WindowOverlay } from 'features/WindowOverlayManager/models'
-import { useActions } from 'hooks/useActions'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { useStoreSelector } from 'hooks/useStoreSelector'
 import { t } from 'languages'
@@ -28,8 +29,6 @@ import { getBar, getEffect, getSpecial } from 'utils/game/effects'
 import { calculateBarDimension } from 'utils/helpers/calculates'
 
 export const UpdateCharacterOverlay = () => {
-  const { closeCharacterWindowOverlay, removeCharacterEffect } = useActions()
-
   const dispatch = useStoreDispatch()
   const payload = useStoreSelector(
     (state) =>
@@ -84,12 +83,24 @@ export const UpdateCharacterOverlay = () => {
   }
 
   const handleRemoveCharacterEffect = (effectId: string) => {
-    removeCharacterEffect({ characterId: 'characterEditor', effectId })
+    dispatch(
+      gameCharactersActions.removeCharacterEffect({ characterId: 'characterEditor', effectId }),
+    )
   }
 
   const handleClose = useCallback(() => {
-    closeCharacterWindowOverlay(E_WindowOverlay.updateCharacter)
-  }, [closeCharacterWindowOverlay])
+    dispatch(gameCharactersActions.closeCharacterWindowOverlay(E_WindowOverlay.updateCharacter))
+  }, [dispatch])
+
+  const handleOpenBattlefieldActionsEditorOverlay = () => {
+    dispatch(
+      gameCharactersActions.openCharacterWindowOverlay({
+        name: E_WindowOverlay.battlefieldActionsEditor,
+        payload: 'characterEditor',
+        isOpen: true,
+      }),
+    )
+  }
 
   const handleUpdateCharacter = () => {
     dispatch(
@@ -184,6 +195,20 @@ export const UpdateCharacterOverlay = () => {
                 )
               })}
               <AddCharacterEffect characterId='characterEditor' />
+            </S.ContentBlock>
+            <S.ContentBlock direction='row'>
+              {characterEditor.actions.map((action) => (
+                <S.CharacterAction key={action.id}>
+                  <div>{action.title}</div>
+                  <hr />
+                  <C.ParagraphPreLine>{action.description}</C.ParagraphPreLine>
+                </S.CharacterAction>
+              ))}
+              <Tippy content={t('windowCharacters.editActions')}>
+                <S.EditActions onClick={handleOpenBattlefieldActionsEditorOverlay}>
+                  <EditIcon />
+                </S.EditActions>
+              </Tippy>
             </S.ContentBlock>
           </S.ContentWrapper>
           <C.Divider decorated />

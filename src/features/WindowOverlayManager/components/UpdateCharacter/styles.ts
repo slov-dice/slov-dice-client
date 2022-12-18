@@ -57,3 +57,28 @@ export const ContentBottom = styled.div`
   max-width: min(600px, 100%);
   margin-left: auto;
 `
+
+export const EditActions = styled(C.Control)`
+  position: absolute;
+  top: 8px;
+  right: 8px;
+
+  fill: ${({ theme }) => theme.colors.white};
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+`
+
+export const CharacterAction = styled.div`
+  width: 180px;
+  padding: 8px;
+
+  border: 1px solid ${({ theme }) => theme.colors.white};
+  border-radius: 4px;
+
+  div:first-child {
+    font-weight: 700;
+  }
+`

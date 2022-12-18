@@ -174,6 +174,13 @@ export const CreateCharacterOverlay = () => {
           </S.ContentBlock>
 
           <S.ContentBlock direction='row'>
+            {characterCreator.actions.map((action) => (
+              <S.CharacterAction key={action.id}>
+                <div>{action.title}</div>
+                <hr />
+                <C.ParagraphPreLine>{action.description}</C.ParagraphPreLine>
+              </S.CharacterAction>
+            ))}
             <Tippy content={t('windowCharacters.editActions')}>
               <S.EditActions onClick={handleOpenBattlefieldActionsEditorOverlay}>
                 <EditIcon />

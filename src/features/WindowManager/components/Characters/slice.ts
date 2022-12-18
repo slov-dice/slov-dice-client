@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-import { initialStateSlice } from './data'
+import { initialOverlayStateSlice } from './data'
 
 import { E_WindowOverlay, I_WindowOverlay } from 'features/WindowOverlayManager/models'
 import {
@@ -26,13 +26,14 @@ interface I_InitialState {
   characterEditor: {
     avatar: string
     effects: T_CharacterEffectId[]
+    actions: T_CharacterAction[]
   }
 }
 
 const initialState: I_InitialState = {
-  overlays: initialStateSlice,
+  overlays: initialOverlayStateSlice,
   characterCreator: { avatar: '', effects: [], bars: [], specials: [], actions: [] },
-  characterEditor: { avatar: '', effects: [] },
+  characterEditor: { avatar: '', effects: [], actions: [] },
 }
 
 export const gameCharactersSlice = createSlice({
@@ -131,6 +132,19 @@ export const gameCharactersSlice = createSlice({
       state.characterEditor = {
         avatar: action.payload.avatar,
         effects: action.payload.effects,
+        actions: action.payload.actions,
+      }
+    },
+
+    setCharacterActions: (
+      state,
+      action: PayloadAction<{ characterId: string; actions: T_CharacterAction[] }>,
+    ) => {
+      if (action.payload.characterId === 'characterCreator') {
+        state.characterCreator.actions = action.payload.actions
+      }
+      if (action.payload.characterId === 'characterEditor') {
+        state.characterEditor.actions = action.payload.actions
       }
     },
 

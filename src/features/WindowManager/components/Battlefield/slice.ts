@@ -1,6 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
+import { initialOverlayStateSlice } from './data'
+
+import { E_WindowOverlay, I_WindowOverlay } from 'features/WindowOverlayManager/models'
+
 interface I_InitialState {
+  overlays: I_WindowOverlay[]
   activeCard: {
     id: string
     action: string
@@ -16,6 +21,7 @@ interface I_InitialState {
 }
 
 const initialState: I_InitialState = {
+  overlays: initialOverlayStateSlice,
   activeCard: {
     id: '',
     action: '',
@@ -52,6 +58,22 @@ export const gameBattlefieldSlice = createSlice({
     },
     disableAction: (state) => {
       state.action = { from: { id: '' }, to: { id: '' } }
+    },
+
+    openBattlefieldWindowOverlay: (state, action: PayloadAction<I_WindowOverlay>) => {
+      state.overlays = state.overlays.map((overlay) =>
+        overlay.name === action.payload.name ? action.payload : overlay,
+      )
+    },
+
+    closeBattlefieldWindowOverlay: (state, action: PayloadAction<E_WindowOverlay>) => {
+      state.overlays = state.overlays.map((overlay) =>
+        overlay.name === action.payload ? { ...overlay, isOpen: false } : overlay,
+      )
+    },
+
+    closeLastBattlefieldWindowOverlay: (state) => {
+      state.overlays = state.overlays.map((overlay) => ({ ...overlay, isOpen: false }))
     },
   },
 })

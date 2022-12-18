@@ -9,6 +9,7 @@ import PlusIcon from 'assets/icons/app/plus.svg'
 import { Button } from 'components/Buttons'
 import { CustomSelectField, TextareaField, TextField } from 'components/InputFields'
 import { T_CustomSelectOption } from 'components/InputFields/CustomSelectField/models'
+import { gameBattlefieldActions } from 'features/WindowManager/components/Battlefield/slice'
 import { gameCharactersActions } from 'features/WindowManager/components/Characters/slice'
 import { E_WindowOverlay } from 'features/WindowOverlayManager/models'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
@@ -31,6 +32,9 @@ export const BattlefieldActionsEditor = () => {
     if (overlayPayload === 'characterCreator') {
       return store.gameCharacters.characterCreator.actions
     }
+    if (overlayPayload === 'characterEditor') {
+      return store.gameCharacters.characterEditor.actions
+    }
   })
 
   const { control, register, handleSubmit } = useForm({
@@ -44,10 +48,20 @@ export const BattlefieldActionsEditor = () => {
   })
 
   const handleClose = useCallback(() => {
-    dispatch(
-      gameCharactersActions.closeCharacterWindowOverlay(E_WindowOverlay.battlefieldActionsEditor),
-    )
-  }, [dispatch])
+    console.log('overlayPayload', overlayPayload)
+    if (overlayPayload?.startsWith('character')) {
+      dispatch(
+        gameCharactersActions.closeCharacterWindowOverlay(E_WindowOverlay.battlefieldActionsEditor),
+      )
+    }
+    if (overlayPayload?.startsWith('battlefield')) {
+      dispatch(
+        gameBattlefieldActions.closeBattlefieldWindowOverlay(
+          E_WindowOverlay.battlefieldActionsEditor,
+        ),
+      )
+    }
+  }, [dispatch, overlayPayload])
 
   const handleAddAction = () => {
     append({
@@ -63,7 +77,12 @@ export const BattlefieldActionsEditor = () => {
   }
 
   const handleSaveActions = () => {
-    handleClose()
+    if (overlayPayload && fields) {
+      dispatch(
+        gameCharactersActions.setCharacterActions({ characterId: overlayPayload, actions: fields }),
+      )
+      handleClose()
+    }
   }
 
   const handleChangeSelectBar = (option: T_CustomSelectOption, fieldIndex?: number) => {
@@ -93,11 +112,13 @@ export const BattlefieldActionsEditor = () => {
           {fields.map((field, index) => (
             <S.ContentBlock key={index}>
               <TextField
-                {...register(`actions.${index}.title`)}
+                value={field.title}
+                onChange={(e) => update(index, { ...field, title: e.target.value })}
                 placeholder={t('battlefieldActionsEditor.fields.title')}
               />
               <TextareaField
-                {...register(`actions.${index}.description`)}
+                value={field.description}
+                onChange={(e) => update(index, { ...field, description: e.target.value })}
                 placeholder={t('battlefieldActionsEditor.fields.description')}
                 fullWidth
               />
@@ -105,7 +126,7 @@ export const BattlefieldActionsEditor = () => {
               <C.Row>
                 <CustomSelectField
                   fieldIndex={index}
-                  value={field.target.barId || optionsBars[0].value}
+                  value={field.target.barId}
                   onChange={handleChangeSelectBar}
                   options={optionsBars}
                 />
@@ -130,7 +151,9 @@ export const BattlefieldActionsEditor = () => {
           <Button onClick={handleClose} mod={Button.mod.secondary}>
             {t('battlefieldActionsEditor.actions.cancel')}
           </Button>
-          <Button onClick={handleSaveActions}>{t('battlefieldActionsEditor.actions.save')}</Button>
+          <Button onClick={handleSubmit(handleSaveActions)}>
+            {t('battlefieldActionsEditor.actions.save')}
+          </Button>
         </S.ContentBottom>
       </S.OverlayContent>
     </div>
