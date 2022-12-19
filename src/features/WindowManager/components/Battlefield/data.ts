@@ -5,4 +5,8 @@ export const initialOverlayStateSlice: I_WindowOverlay[] = [
     isOpen: false,
     name: E_WindowOverlay.battlefieldActionsEditor,
   },
+  {
+    isOpen: false,
+    name: E_WindowOverlay.battlefieldEditor,
+  },
 ]

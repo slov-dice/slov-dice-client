@@ -3,6 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { initialOverlayStateSlice } from './data'
 
 import { E_WindowOverlay, I_WindowOverlay } from 'features/WindowOverlayManager/models'
+import { T_CharacterAction } from 'models/shared/game/character'
 
 interface I_InitialState {
   overlays: I_WindowOverlay[]
@@ -17,6 +18,10 @@ interface I_InitialState {
     to: {
       id: string
     }
+  }
+
+  characterEditor: {
+    actions: T_CharacterAction[]
   }
 }
 
@@ -33,6 +38,9 @@ const initialState: I_InitialState = {
     to: {
       id: '',
     },
+  },
+  characterEditor: {
+    actions: [],
   },
 }
 
@@ -58,6 +66,12 @@ export const gameBattlefieldSlice = createSlice({
     },
     disableAction: (state) => {
       state.action = { from: { id: '' }, to: { id: '' } }
+    },
+
+    setCharacterEditor: (state, action: PayloadAction<{ actions: T_CharacterAction[] }>) => {
+      state.characterEditor = {
+        actions: action.payload.actions,
+      }
     },
 
     openBattlefieldWindowOverlay: (state, action: PayloadAction<I_WindowOverlay>) => {

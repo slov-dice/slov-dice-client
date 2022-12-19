@@ -5,7 +5,11 @@ import * as S from './styles'
 import EditIcon from 'assets/icons/app/edit.svg'
 import { BattlefieldCard } from 'components/Battlefield'
 import { gameBattlefieldActions } from 'features/WindowManager/components/Battlefield/slice'
+import { E_Window } from 'features/WindowManager/models'
 import { WindowOverlayManager } from 'features/WindowOverlayManager'
+import { WindowOverlayManagerProvider } from 'features/WindowOverlayManager/context'
+import { E_WindowOverlay } from 'features/WindowOverlayManager/models'
+import { useEventListener } from 'hooks/useEventListener'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { useStoreSelector } from 'hooks/useStoreSelector'
 
@@ -35,6 +39,25 @@ export const BattlefieldContent = () => {
     [activeCard.id, dispatch],
   )
 
+  const handleOpenBattlefieldEditorOverlay = () => {
+    dispatch(
+      gameBattlefieldActions.openBattlefieldWindowOverlay({
+        name: E_WindowOverlay.battlefieldEditor,
+        isOpen: true,
+      }),
+    )
+  }
+
+  const handleEsc = useCallback(
+    (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        dispatch(gameBattlefieldActions.closeLastBattlefieldWindowOverlay())
+      }
+    },
+    [dispatch],
+  )
+  useEventListener('keydown', handleEsc)
+
   useEffect(() => {
     document.addEventListener('click', handleCardAction)
 
@@ -42,12 +65,11 @@ export const BattlefieldContent = () => {
   }, [handleCardAction])
 
   return (
-    <>
+    <WindowOverlayManagerProvider location={E_Window.battlefield}>
       <WindowOverlayManager overlays={overlays} />
-
       <S.WindowContentWrapper>
         <S.FieldWrapper>
-          <S.MasterFieldEdit>
+          <S.MasterFieldEdit onClick={handleOpenBattlefieldEditorOverlay}>
             <EditIcon />
           </S.MasterFieldEdit>
           <S.CardsWrapper>
@@ -81,7 +103,7 @@ export const BattlefieldContent = () => {
         </S.FieldWrapper>
 
         <S.FieldWrapper>
-          <S.PlayerFieldEdit>
+          <S.PlayerFieldEdit onClick={handleOpenBattlefieldEditorOverlay}>
             <EditIcon />
           </S.PlayerFieldEdit>
           <S.CardsWrapper>
@@ -98,6 +120,6 @@ export const BattlefieldContent = () => {
           </S.CardsWrapper>
         </S.FieldWrapper>
       </S.WindowContentWrapper>
-    </>
+    </WindowOverlayManagerProvider>
   )
 }

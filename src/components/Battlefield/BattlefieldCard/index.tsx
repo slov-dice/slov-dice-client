@@ -63,6 +63,7 @@ export const BattlefieldCard = ({ name, avatar, bars, id, actions }: I_Battlefie
   }
 
   const handleOpenBattlefieldActionsEditorOverlay = () => {
+    dispatch(gameBattlefieldActions.setCharacterEditor({ actions }))
     dispatch(
       gameBattlefieldActions.openBattlefieldWindowOverlay({
         name: E_WindowOverlay.battlefieldActionsEditor,

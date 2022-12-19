@@ -3,7 +3,9 @@ import { useCallback } from 'react'
 import * as S from './styles'
 
 import { AddCharacterCard, CharacterCard } from 'components/Character'
+import { E_Window } from 'features/WindowManager/models'
 import { WindowOverlayManager } from 'features/WindowOverlayManager'
+import { WindowOverlayManagerProvider } from 'features/WindowOverlayManager/context'
 import { E_WindowOverlay } from 'features/WindowOverlayManager/models'
 import { useActions } from 'hooks/useActions'
 import { useEventListener } from 'hooks/useEventListener'
@@ -36,7 +38,7 @@ export const CharactersContent = () => {
   useEventListener('keydown', handleEsc)
 
   return (
-    <>
+    <WindowOverlayManagerProvider location={E_Window.characters}>
       <WindowOverlayManager overlays={overlays} />
       <S.WindowContentWrapper>
         {characters.map((character) => (
@@ -44,6 +46,6 @@ export const CharactersContent = () => {
         ))}
         <AddCharacterCard onClick={handleOpenCreateCharacterOverlay} />
       </S.WindowContentWrapper>
-    </>
+    </WindowOverlayManagerProvider>
   )
 }

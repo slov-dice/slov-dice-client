@@ -51,12 +51,14 @@ export const CardsWrapper = styled.div`
 
 export const MasterFieldEdit = styled(C.Control)`
   position: absolute;
+  z-index: 10;
   top: 4px;
   right: 4px;
 `
 
 export const PlayerFieldEdit = styled(C.Control)`
   position: absolute;
+  z-index: 10;
   right: 4px;
   bottom: 4px;
 `

@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from 'react'
+import { useCallback, useContext, useMemo } from 'react'
 import { useFieldArray, useForm } from 'react-hook-form'
 import { v4 } from 'uuid'
 
@@ -11,20 +11,28 @@ import { CustomSelectField, TextareaField, TextField } from 'components/InputFie
 import { T_CustomSelectOption } from 'components/InputFields/CustomSelectField/models'
 import { gameBattlefieldActions } from 'features/WindowManager/components/Battlefield/slice'
 import { gameCharactersActions } from 'features/WindowManager/components/Characters/slice'
-import { E_WindowOverlay } from 'features/WindowOverlayManager/models'
+import { E_Window } from 'features/WindowManager/models'
+import { windowOverlayManagerContext } from 'features/WindowOverlayManager/context'
+import { E_WindowOverlay, I_WindowOverlay } from 'features/WindowOverlayManager/models'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { useStoreSelector } from 'hooks/useStoreSelector'
 import { t } from 'languages'
 import { T_CharacterBarId } from 'models/shared/game/character'
 import * as C from 'styles/components'
 
+const findOverlay = (overlay: I_WindowOverlay) =>
+  overlay.name === E_WindowOverlay.battlefieldActionsEditor
+
 export const BattlefieldActionsEditor = () => {
+  const { location } = useContext(windowOverlayManagerContext)
+
   const dispatch = useStoreDispatch()
 
   const { overlayPayload, settingsBars } = useStoreSelector((store) => ({
-    overlayPayload: store.gameCharacters.overlays.find(
-      (overlay) => overlay.name === E_WindowOverlay.battlefieldActionsEditor,
-    )?.payload,
+    overlayPayload:
+      location === E_Window.characters
+        ? store.gameCharacters.overlays.find(findOverlay)?.payload
+        : store.gameBattlefield.overlays.find(findOverlay)?.payload,
     settingsBars: store.room.game.characters.settings.bars,
   }))
 
@@ -34,6 +42,9 @@ export const BattlefieldActionsEditor = () => {
     }
     if (overlayPayload === 'characterEditor') {
       return store.gameCharacters.characterEditor.actions
+    }
+    if (overlayPayload === 'battlefieldEditor') {
+      return store.gameBattlefield.characterEditor.actions
     }
   })
 
@@ -48,7 +59,6 @@ export const BattlefieldActionsEditor = () => {
   })
 
   const handleClose = useCallback(() => {
-    console.log('overlayPayload', overlayPayload)
     if (overlayPayload?.startsWith('character')) {
       dispatch(
         gameCharactersActions.closeCharacterWindowOverlay(E_WindowOverlay.battlefieldActionsEditor),
@@ -78,9 +88,17 @@ export const BattlefieldActionsEditor = () => {
 
   const handleSaveActions = () => {
     if (overlayPayload && fields) {
-      dispatch(
-        gameCharactersActions.setCharacterActions({ characterId: overlayPayload, actions: fields }),
-      )
+      if (location === E_Window.characters) {
+        dispatch(
+          gameCharactersActions.setCharacterActions({
+            characterId: overlayPayload,
+            actions: fields,
+          }),
+        )
+      }
+      // Добавление на поле боя
+      // if (location === E_Window.battlefield) {
+      // }
       handleClose()
     }
   }
