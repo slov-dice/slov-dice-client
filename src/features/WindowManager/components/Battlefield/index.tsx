@@ -39,11 +39,12 @@ export const BattlefieldContent = () => {
     [activeCard.id, dispatch],
   )
 
-  const handleOpenBattlefieldEditorOverlay = () => {
+  const handleOpenBattlefieldEditorOverlay = (field: 'master' | 'players') => () => {
     dispatch(
       gameBattlefieldActions.openBattlefieldWindowOverlay({
         name: E_WindowOverlay.battlefieldEditor,
         isOpen: true,
+        payload: field,
       }),
     )
   }
@@ -69,7 +70,7 @@ export const BattlefieldContent = () => {
       <WindowOverlayManager overlays={overlays} />
       <S.WindowContentWrapper>
         <S.FieldWrapper>
-          <S.MasterFieldEdit onClick={handleOpenBattlefieldEditorOverlay}>
+          <S.MasterFieldEdit onClick={handleOpenBattlefieldEditorOverlay('master')}>
             <EditIcon />
           </S.MasterFieldEdit>
           <S.CardsWrapper>
@@ -103,7 +104,7 @@ export const BattlefieldContent = () => {
         </S.FieldWrapper>
 
         <S.FieldWrapper>
-          <S.PlayerFieldEdit onClick={handleOpenBattlefieldEditorOverlay}>
+          <S.PlayerFieldEdit onClick={handleOpenBattlefieldEditorOverlay('players')}>
             <EditIcon />
           </S.PlayerFieldEdit>
           <S.CardsWrapper>

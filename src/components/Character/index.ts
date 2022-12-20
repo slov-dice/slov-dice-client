@@ -1,4 +1,3 @@
-export { AddCharacterCard } from './AddCharacterCard'
 export { AddCharacterEffect } from './AddCharacterEffect'
 export { CharacterBar } from './CharacterBar'
 export { CharacterCard } from './CharacterCard'

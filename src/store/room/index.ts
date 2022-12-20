@@ -37,6 +37,14 @@ const initialState: I_FullRoom = {
         specials: [],
       },
     },
+    battlefield: {
+      window: {
+        masterDummies: [],
+        masterField: [],
+        playersDummies: [],
+        playersField: [],
+      },
+    },
   },
 }
 
