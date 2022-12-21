@@ -2,7 +2,7 @@ import Tippy from '@tippyjs/react'
 import { useCallback, useState } from 'react'
 import { v4 } from 'uuid'
 
-import { formCreateDummy, T_FormCreateDummy } from './data'
+import { getFormCreateDummy, T_FormCreateDummy } from './data'
 import * as S from './styles'
 
 import CloseIcon from 'assets/icons/app/close.svg'
@@ -32,11 +32,11 @@ import { calculateBarDimension } from 'utils/helpers/calculates'
 export const CreateDummyOverlay = () => {
   const dispatch = useStoreDispatch()
 
-  const { characterCreator, settings } = useStoreSelector((store) => ({
-    characterCreator: store.gameCharacters.characterCreator,
-    settings: store.room.game.characters.settings,
+  const { settingsBars, dummyCreator } = useStoreSelector((store) => ({
+    settingsBars: store.room.game.characters.settings.bars,
+    dummyCreator: store.gameBattlefield.dummyCreator,
   }))
-  const [character, setCharacter] = useState<T_FormCreateDummy>(formCreateDummy)
+  const [dummy, setDummy] = useState<T_FormCreateDummy>(getFormCreateDummy(settingsBars))
 
   const handleOpenBattlefieldActionsEditorOverlay = () => {
     dispatch(
@@ -49,20 +49,30 @@ export const CreateDummyOverlay = () => {
   }
 
   const handleClose = useCallback(() => {
-    setCharacter(formCreateDummy)
+    setDummy(getFormCreateDummy(settingsBars))
     dispatch(gameBattlefieldActions.closeBattlefieldWindowOverlay(E_WindowOverlay.createDummy))
-  }, [dispatch])
+  }, [dispatch, settingsBars])
 
   const handleChangeCharacterName = (value: string) => {
-    setCharacter((prev) => ({ ...prev, name: value }))
+    setDummy((prev) => ({ ...prev, name: value }))
   }
 
-  const handleChangeCharacterBarCurrentValue = (id: T_CharacterBarId, value: number) => {
-    // dispatch(gameCharactersActions.setCharacterCreatorBar({ id, value, property: 'current' }))
+  const handleChangeCharacterDescription = (value: string) => {
+    setDummy((prev) => ({ ...prev, description: value }))
   }
 
   const handleChangeCharacterBarMaxValue = (id: T_CharacterBarId, value: number) => {
-    // dispatch(gameCharactersActions.setCharacterCreatorBar({ id, value, property: 'max' }))
+    setDummy((prev) => ({
+      ...prev,
+      bars: prev.bars.map((bar) => (bar.id === id ? { ...bar, max: value } : bar)),
+    }))
+  }
+
+  const handleCheckBarInclude = (id: T_CharacterBarId, value: boolean) => {
+    setDummy((prev) => ({
+      ...prev,
+      bars: prev.bars.map((bar) => (bar.id === id ? { ...bar, include: value } : bar)),
+    }))
   }
 
   const handleCreateCharacter = () => {
@@ -72,48 +82,47 @@ export const CreateDummyOverlay = () => {
   return (
     <div>
       <S.OverlayHeader>
-        <span>{t('createCharacterOverlay.title')}</span>
+        <span>Создание болванки</span>
         <C.Control onClick={handleClose}>
           <CloseIcon />
         </C.Control>
       </S.OverlayHeader>
       <S.OverlayContent>
         <S.ContentTop>
-          <CharacterAvatar characterId='characterCreator' image={characterCreator.avatar} />
+          <CharacterAvatar characterId='characterCreator' image={dummyCreator.avatar} />
         </S.ContentTop>
         <S.ContentWrapper>
           <S.ContentBlock>
-            <CharacterName value={character.name} onChange={handleChangeCharacterName} />
+            <CharacterName value={dummy.name} onChange={handleChangeCharacterName} />
+            <CharacterDescription
+              value={dummy.description}
+              onChange={handleChangeCharacterDescription}
+            />
           </S.ContentBlock>
           <S.ContentBlock>
-            {characterCreator.bars.map((bar) => {
-              const baseBar: T_BaseCharacterBar = getBar(bar.id, settings.bars)
+            {dummy.bars.map((bar) => {
+              const baseBar: T_BaseCharacterBar = getBar(bar.id, settingsBars)
               return (
-                <S.BarWrapper
-                  key={bar.id}
-                  color={baseBar.color}
-                  barHeight={calculateBarDimension(bar.current, bar.max)}
-                >
-                  <S.BarName>{baseBar.name}</S.BarName>
+                <S.BarWrapper key={bar.id} color={baseBar.color} barHeight={100}>
+                  <S.BarName>Макс. {baseBar.name}</S.BarName>
                   <S.BarText>
-                    <CharacterBarText
-                      id={bar.id}
-                      value={bar.current}
-                      onChange={handleChangeCharacterBarCurrentValue}
-                    />
-                    <span>/</span>
                     <CharacterBarText
                       id={bar.id}
                       value={bar.max}
                       onChange={handleChangeCharacterBarMaxValue}
                     />
                   </S.BarText>
+                  <input
+                    type='checkbox'
+                    checked={bar.include}
+                    onChange={(e) => handleCheckBarInclude(bar.id, e.target.checked)}
+                  />
                 </S.BarWrapper>
               )
             })}
           </S.ContentBlock>
           <S.ContentBlock direction='row'>
-            {characterCreator.actions.map((action) => (
+            {dummyCreator.actions.map((action) => (
               <S.CharacterAction key={action.id}>
                 <div>{action.title}</div>
                 <hr />

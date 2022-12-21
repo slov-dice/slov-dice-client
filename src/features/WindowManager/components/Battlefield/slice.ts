@@ -23,6 +23,10 @@ interface I_InitialState {
   characterEditor: {
     actions: T_CharacterAction[]
   }
+  dummyCreator: {
+    avatar: string
+    actions: T_CharacterAction[]
+  }
 }
 
 const initialState: I_InitialState = {
@@ -40,6 +44,10 @@ const initialState: I_InitialState = {
     },
   },
   characterEditor: {
+    actions: [],
+  },
+  dummyCreator: {
+    avatar: '',
     actions: [],
   },
 }
