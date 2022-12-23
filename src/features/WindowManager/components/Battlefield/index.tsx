@@ -25,7 +25,6 @@ export const BattlefieldContent = () => {
     (e: any) => {
       if (activeCard.id) {
         if (e.target.id) {
-          console.log(activeCard.id, 'make action on', e.target.id)
           dispatch(
             gameBattlefieldActions.setAction({
               from: { id: activeCard.id },
@@ -65,6 +64,7 @@ export const BattlefieldContent = () => {
     return () => document.removeEventListener('click', handleCardAction)
   }, [handleCardAction])
 
+  console.log('overlays', overlays)
   return (
     <WindowOverlayManagerProvider location={E_Window.battlefield}>
       <WindowOverlayManager overlays={overlays} />
@@ -76,19 +76,6 @@ export const BattlefieldContent = () => {
           <S.CardsWrapper>
             <BattlefieldCard
               id='1'
-              bars={[
-                {
-                  id: 'f2eb29cf-9bbe-4445-98ea-a33f0bc26961',
-                  current: 100,
-                  max: 100,
-                },
-              ]}
-              name='Skeleton Warrior'
-              avatar=''
-              actions={[]}
-            />
-            <BattlefieldCard
-              id='2'
               bars={[
                 {
                   id: 'f2eb29cf-9bbe-4445-98ea-a33f0bc26961',

@@ -17,16 +17,21 @@ const findOverlay = (overlay: I_WindowOverlay) => overlay.name === E_WindowOverl
 export const BattlefieldEditor = () => {
   const dispatch = useStoreDispatch()
 
-  const { overlayPayload, settingsBars } = useStoreSelector((store) => ({
-    overlayPayload: store.gameBattlefield.overlays.find(findOverlay)?.payload,
-    settingsBars: store.room.game.characters.settings.bars,
-  }))
+  const { overlayPayload, settingsBars, masterDummies, playersDummies } = useStoreSelector(
+    (store) => ({
+      overlayPayload: store.gameBattlefield.overlays.find(findOverlay)?.payload,
+      settingsBars: store.room.game.characters.settings.bars,
+      masterDummies: store.room.game.battlefield.window.masterDummies,
+      playersDummies: store.room.game.battlefield.window.playersDummies,
+    }),
+  )
 
   const handleOpenCreateDummyOverlay = () => {
     // dispatch(gameBattlefieldActions.setCharacterCreator({ settingsBars, settingsSpecials }))
     dispatch(
       gameBattlefieldActions.openBattlefieldWindowOverlay({
         name: E_WindowOverlay.createDummy,
+        payload: overlayPayload,
         isOpen: true,
       }),
     )
@@ -38,7 +43,6 @@ export const BattlefieldEditor = () => {
     )
   }, [dispatch])
 
-  console.log('overlayPayload', overlayPayload)
   return (
     <div>
       <S.OverlayHeader>
@@ -48,6 +52,8 @@ export const BattlefieldEditor = () => {
         </C.Control>
       </S.OverlayHeader>
       <S.OverlayContent>
+        {JSON.stringify(masterDummies, null, 2)}
+        {JSON.stringify(playersDummies, null, 2)}
         <AddCard onClick={handleOpenCreateDummyOverlay}>
           <span>Добавить болванку</span>
           <div>

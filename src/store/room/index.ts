@@ -8,6 +8,7 @@ import {
   I_Character,
   T_CharacterId,
 } from 'models/shared/game/character'
+import { T_BaseDummy } from 'models/shared/game/dummy'
 import {
   E_Emit,
   I_EmitPayload,
@@ -203,6 +204,32 @@ export const roomSlice = createSlice({
       state.game.characters.window.characters = state.game.characters.window.characters.filter(
         (character) => character.id !== action.payload.characterId,
       )
+    },
+
+    // Battlefield Window
+    emitCreateDummyInBattlefield: (
+      state,
+      action: PayloadAction<{ dummy: T_BaseDummy; field: 'master' | 'players' }>,
+    ) => {
+      const payload: I_EmitPayload[E_Emit.createDummyInBattlefieldWindow] = {
+        roomId: state.id,
+        dummy: action.payload.dummy,
+        field: action.payload.field,
+      }
+
+      socket.emit(E_Emit.createDummyInBattlefieldWindow, payload)
+    },
+
+    setCreatedDummyInBattlefieldWindow: (
+      state,
+      action: PayloadAction<{ dummy: T_BaseDummy; field: 'master' | 'players' }>,
+    ) => {
+      if (action.payload.field === 'master') {
+        state.game.battlefield.window.masterDummies.push(action.payload.dummy)
+      }
+      if (action.payload.field === 'players') {
+        state.game.battlefield.window.playersDummies.push(action.payload.dummy)
+      }
     },
   },
 })

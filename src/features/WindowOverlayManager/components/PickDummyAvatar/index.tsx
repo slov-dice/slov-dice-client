@@ -1,70 +1,59 @@
 import { useCallback } from 'react'
 
-import { characterAvatars } from './data'
+import { dummiesAvatars } from './data'
 import * as S from './styles'
 
 import CloseIcon from 'assets/icons/app/close.svg'
+import { gameBattlefieldActions } from 'features/WindowManager/components/Battlefield/slice'
 import { E_WindowOverlay } from 'features/WindowOverlayManager/models'
-import { useActions } from 'hooks/useActions'
+import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { useStoreSelector } from 'hooks/useStoreSelector'
 import { t } from 'languages'
 import * as C from 'styles/components'
 
 export const PickDummyAvatarOverlay = () => {
-  const {
-    closeCharacterWindowOverlay,
-    setCharacterAvatar,
-    emitUpdateCharacterFieldInCharactersWindow,
-  } = useActions()
+  const dispatch = useStoreDispatch()
 
   const overlayPayload = useStoreSelector(
     (state) =>
-      state.gameCharacters.overlays.find(
-        (overlay) => overlay.name === E_WindowOverlay.pickCharacterAvatar,
+      state.gameBattlefield.overlays.find(
+        (overlay) => overlay.name === E_WindowOverlay.pickDummyAvatar,
       )?.payload,
   )
 
-  const characterAvatar = useStoreSelector((store) => {
-    if (overlayPayload === 'characterCreator') {
-      return store.gameCharacters.characterCreator.avatar
+  const dummyAvatar = useStoreSelector((store) => {
+    if (overlayPayload === 'dummyCreator') {
+      return store.gameBattlefield.dummyCreator.avatar
     }
-    if (overlayPayload === 'characterEditor') {
-      return store.gameCharacters.characterEditor.avatar
+    if (overlayPayload === 'dummyEditor') {
+      return store.gameBattlefield.dummyEditor.avatar
     }
-    return store.room.game.characters.window.characters.find(
-      (character) => character.id === overlayPayload,
-    )?.avatar
   })
 
   const handleClose = useCallback(() => {
-    closeCharacterWindowOverlay(E_WindowOverlay.pickCharacterAvatar)
-  }, [closeCharacterWindowOverlay])
+    dispatch(gameBattlefieldActions.closeBattlefieldWindowOverlay(E_WindowOverlay.pickDummyAvatar))
+  }, [dispatch])
 
   const handlePickAvatar = (avatar: string) => () => {
     if (overlayPayload) {
-      if (overlayPayload === 'characterCreator' || overlayPayload === 'characterEditor') {
-        setCharacterAvatar({ characterId: overlayPayload, avatar })
+      if (overlayPayload === 'dummyCreator' || overlayPayload === 'dummyEditor') {
+        dispatch(gameBattlefieldActions.setDummyAvatar({ characterId: overlayPayload, avatar }))
         return
       }
-      emitUpdateCharacterFieldInCharactersWindow({
-        characterId: overlayPayload,
-        field: 'avatar',
-        value: avatar,
-      })
     }
   }
 
   return (
     <div>
       <S.OverlayHeader>
-        <span>{t('pickCharacterAvatarOverlay.title')}</span>
+        <span>Аватар болванки</span>
         <C.Control onClick={handleClose}>
           <CloseIcon />
         </C.Control>
       </S.OverlayHeader>
       <S.OverlayContent>
-        {characterAvatars.map((avatar, index) => {
-          const isSelected = characterAvatar === avatar
+        {dummiesAvatars.map((avatar, index) => {
+          const isSelected = dummyAvatar === avatar
           return (
             <S.AvatarWrapper
               key={index}

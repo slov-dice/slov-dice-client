@@ -20,7 +20,8 @@ interface I_InitialState {
     }
   }
 
-  characterEditor: {
+  dummyEditor: {
+    avatar: string
     actions: T_CharacterAction[]
   }
   dummyCreator: {
@@ -43,7 +44,8 @@ const initialState: I_InitialState = {
       id: '',
     },
   },
-  characterEditor: {
+  dummyEditor: {
+    avatar: '',
     actions: [],
   },
   dummyCreator: {
@@ -76,9 +78,39 @@ export const gameBattlefieldSlice = createSlice({
       state.action = { from: { id: '' }, to: { id: '' } }
     },
 
-    setCharacterEditor: (state, action: PayloadAction<{ actions: T_CharacterAction[] }>) => {
-      state.characterEditor = {
+    setDummyEditor: (
+      state,
+      action: PayloadAction<{ actions: T_CharacterAction[]; avatar: string }>,
+    ) => {
+      state.dummyEditor = {
+        avatar: action.payload.avatar,
         actions: action.payload.actions,
+      }
+    },
+
+    setDummyAvatar: (state, action: PayloadAction<{ characterId: string; avatar: string }>) => {
+      // Если создаётся болванка
+      if (action.payload.characterId === 'dummyCreator') {
+        state.dummyCreator.avatar = action.payload.avatar
+        return
+      }
+
+      // Если болванка редактируется
+      if (action.payload.characterId === 'dummyEditor') {
+        state.dummyEditor.avatar = action.payload.avatar
+        return
+      }
+    },
+
+    setDummyActions: (
+      state,
+      action: PayloadAction<{ characterId: string; actions: T_CharacterAction[] }>,
+    ) => {
+      if (action.payload.characterId === 'dummyCreator') {
+        state.dummyCreator.actions = action.payload.actions
+      }
+      if (action.payload.characterId === 'dummyEditor') {
+        state.dummyEditor.actions = action.payload.actions
       }
     },
 

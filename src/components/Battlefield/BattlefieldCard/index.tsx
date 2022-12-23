@@ -8,7 +8,7 @@ import * as S from './styles'
 import ActionIcon from 'assets/icons/app/action.svg'
 import BackIcon from 'assets/icons/app/arrow-left.svg'
 import EditIcon from 'assets/icons/app/edit.svg'
-import Monster1Image from 'assets/images/mon1.png'
+import Monster1Image from 'assets/images/dummies/dummy1.png'
 import { Button } from 'components/Buttons'
 import { CharacterBar } from 'components/Character'
 import { gameBattlefieldActions } from 'features/WindowManager/components/Battlefield/slice'
@@ -63,7 +63,7 @@ export const BattlefieldCard = ({ name, avatar, bars, id, actions }: I_Battlefie
   }
 
   const handleOpenBattlefieldActionsEditorOverlay = () => {
-    dispatch(gameBattlefieldActions.setCharacterEditor({ actions }))
+    dispatch(gameBattlefieldActions.setDummyEditor({ actions, avatar }))
     dispatch(
       gameBattlefieldActions.openBattlefieldWindowOverlay({
         name: E_WindowOverlay.battlefieldActionsEditor,

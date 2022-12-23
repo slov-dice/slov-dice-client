@@ -10,30 +10,28 @@ import EditIcon from 'assets/icons/app/edit.svg'
 import { Button } from 'components/Buttons'
 import {
   CharacterAvatar,
-  CharacterLevel,
   CharacterName,
   CharacterDescription,
   CharacterBarText,
-  CharacterSpecial,
-  CharacterEffect,
-  AddCharacterEffect,
 } from 'components/Character'
 import { gameBattlefieldActions } from 'features/WindowManager/components/Battlefield/slice'
-import { gameCharactersActions } from 'features/WindowManager/components/Characters/slice'
-import { E_WindowOverlay } from 'features/WindowOverlayManager/models'
+import { E_WindowOverlay, I_WindowOverlay } from 'features/WindowOverlayManager/models'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { useStoreSelector } from 'hooks/useStoreSelector'
 import { t } from 'languages'
 import { T_BaseCharacterBar, T_CharacterBarId } from 'models/shared/game/character'
+import { roomActions } from 'store/room'
 import * as C from 'styles/components'
 import { getBar } from 'utils/game/effects'
-import { calculateBarDimension } from 'utils/helpers/calculates'
+
+const findOverlay = (overlay: I_WindowOverlay) => overlay.name === E_WindowOverlay.createDummy
 
 export const CreateDummyOverlay = () => {
   const dispatch = useStoreDispatch()
 
-  const { settingsBars, dummyCreator } = useStoreSelector((store) => ({
+  const { settingsBars, dummyCreator, overlayPayload } = useStoreSelector((store) => ({
     settingsBars: store.room.game.characters.settings.bars,
+    overlayPayload: store.gameBattlefield.overlays.find(findOverlay)?.payload,
     dummyCreator: store.gameBattlefield.dummyCreator,
   }))
   const [dummy, setDummy] = useState<T_FormCreateDummy>(getFormCreateDummy(settingsBars))
@@ -42,7 +40,7 @@ export const CreateDummyOverlay = () => {
     dispatch(
       gameBattlefieldActions.openBattlefieldWindowOverlay({
         name: E_WindowOverlay.battlefieldActionsEditor,
-        payload: 'battlefieldEditor',
+        payload: 'dummyCreator',
         isOpen: true,
       }),
     )
@@ -64,18 +62,28 @@ export const CreateDummyOverlay = () => {
   const handleChangeCharacterBarMaxValue = (id: T_CharacterBarId, value: number) => {
     setDummy((prev) => ({
       ...prev,
-      bars: prev.bars.map((bar) => (bar.id === id ? { ...bar, max: value } : bar)),
+      bars: prev.barsMax.map((bar) => (bar.id === id ? { ...bar, max: value } : bar)),
     }))
   }
 
   const handleCheckBarInclude = (id: T_CharacterBarId, value: boolean) => {
     setDummy((prev) => ({
       ...prev,
-      bars: prev.bars.map((bar) => (bar.id === id ? { ...bar, include: value } : bar)),
+      bars: prev.barsMax.map((bar) => (bar.id === id ? { ...bar, include: value } : bar)),
     }))
   }
 
-  const handleCreateCharacter = () => {
+  const handleCreateDummy = () => {
+    dispatch(
+      roomActions.emitCreateDummyInBattlefield({
+        field: overlayPayload as 'master' | 'players',
+        dummy: {
+          id: v4(),
+          ...dummy,
+          ...dummyCreator,
+        },
+      }),
+    )
     handleClose()
   }
 
@@ -89,7 +97,7 @@ export const CreateDummyOverlay = () => {
       </S.OverlayHeader>
       <S.OverlayContent>
         <S.ContentTop>
-          <CharacterAvatar characterId='characterCreator' image={dummyCreator.avatar} />
+          <CharacterAvatar characterId='dummyCreator' image={dummyCreator.avatar} />
         </S.ContentTop>
         <S.ContentWrapper>
           <S.ContentBlock>
@@ -100,7 +108,7 @@ export const CreateDummyOverlay = () => {
             />
           </S.ContentBlock>
           <S.ContentBlock>
-            {dummy.bars.map((bar) => {
+            {dummy.barsMax.map((bar) => {
               const baseBar: T_BaseCharacterBar = getBar(bar.id, settingsBars)
               return (
                 <S.BarWrapper key={bar.id} color={baseBar.color} barHeight={100}>
@@ -141,9 +149,7 @@ export const CreateDummyOverlay = () => {
           <Button onClick={handleClose} mod={Button.mod.secondary}>
             {t('createCharacterOverlay.actions.cancel')}
           </Button>
-          <Button onClick={handleCreateCharacter}>
-            {t('createCharacterOverlay.actions.create')}
-          </Button>
+          <Button onClick={handleCreateDummy}>{t('createCharacterOverlay.actions.create')}</Button>
         </S.ContentBottom>
       </S.OverlayContent>
     </div>

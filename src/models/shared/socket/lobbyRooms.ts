@@ -15,6 +15,7 @@ import {
   T_BaseCharacterSpecial,
   T_CharacterId,
 } from 'models/shared/game/character'
+import { T_BaseDummy } from 'models/shared/game/dummy'
 
 export enum E_Subscribe {
   getPreviewRooms = 'getPreviewRooms',
@@ -32,6 +33,9 @@ export enum E_Subscribe {
   getCreatedCharacterInCharactersWindow = 'getCreatedCharacterInCharactersWindow',
   getUpdatedCharacterInCharactersWindow = 'getUpdatedCharacterInCharactersWindow',
   getRemovedCharacterInCharactersWindow = 'getRemovedCharacterInCharactersWindow',
+
+  // Battlefield Window
+  getCreatedDummyInBattlefieldWindow = 'getCreatedDummyInBattlefieldWindow',
 }
 
 export interface I_SubscriptionData {
@@ -78,6 +82,10 @@ export interface I_SubscriptionData {
   [E_Subscribe.getRemovedCharacterInCharactersWindow]: {
     characterId: T_CharacterId
   }
+  [E_Subscribe.getCreatedDummyInBattlefieldWindow]: {
+    dummy: T_BaseDummy
+    field: 'master' | 'players'
+  }
 }
 
 export enum E_Emit {
@@ -98,6 +106,9 @@ export enum E_Emit {
   updateCharacterInCharactersWindow = 'updateCharacterInCharactersWindow',
   updateCharacterFieldInCharactersWindow = 'updateCharacterFieldInCharactersWindow',
   removeCharacterInCharactersWindow = 'removeCharacterInCharactersWindow',
+
+  // Battlefield Window
+  createDummyInBattlefieldWindow = 'createDummyInBattlefieldWindow',
 }
 
 export interface I_EmitPayload {
@@ -157,5 +168,11 @@ export interface I_EmitPayload {
   [E_Emit.removeCharacterInCharactersWindow]: {
     roomId: T_RoomId
     characterId: string
+  }
+
+  [E_Emit.createDummyInBattlefieldWindow]: {
+    roomId: T_RoomId
+    field: 'master' | 'players'
+    dummy: T_BaseDummy
   }
 }

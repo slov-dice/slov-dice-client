@@ -43,8 +43,11 @@ export const BattlefieldActionsEditor = () => {
     if (overlayPayload === 'characterEditor') {
       return store.gameCharacters.characterEditor.actions
     }
-    if (overlayPayload === 'battlefieldEditor') {
-      return store.gameBattlefield.characterEditor.actions
+    if (overlayPayload === 'dummyCreator') {
+      return store.gameBattlefield.dummyCreator.actions
+    }
+    if (overlayPayload === 'dummyEditor') {
+      return store.gameBattlefield.dummyEditor.actions
     }
   })
 
@@ -64,7 +67,7 @@ export const BattlefieldActionsEditor = () => {
         gameCharactersActions.closeCharacterWindowOverlay(E_WindowOverlay.battlefieldActionsEditor),
       )
     }
-    if (overlayPayload?.startsWith('battlefield')) {
+    if (overlayPayload?.startsWith('dummy')) {
       dispatch(
         gameBattlefieldActions.closeBattlefieldWindowOverlay(
           E_WindowOverlay.battlefieldActionsEditor,
@@ -89,16 +92,26 @@ export const BattlefieldActionsEditor = () => {
   const handleSaveActions = () => {
     if (overlayPayload && fields) {
       if (location === E_Window.characters) {
-        dispatch(
-          gameCharactersActions.setCharacterActions({
-            characterId: overlayPayload,
-            actions: fields,
-          }),
-        )
+        if (overlayPayload?.startsWith('character')) {
+          dispatch(
+            gameCharactersActions.setCharacterActions({
+              characterId: overlayPayload,
+              actions: fields,
+            }),
+          )
+        }
       }
       // Добавление на поле боя
-      // if (location === E_Window.battlefield) {
-      // }
+      if (location === E_Window.battlefield) {
+        if (overlayPayload?.startsWith('dummy')) {
+          dispatch(
+            gameBattlefieldActions.setDummyActions({
+              characterId: overlayPayload,
+              actions: fields,
+            }),
+          )
+        }
+      }
       handleClose()
     }
   }

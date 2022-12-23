@@ -88,6 +88,15 @@ export const subscribe = createAsyncThunk('roomPage', async (_, { dispatch }) =>
       dispatch(roomActions.setRemovedCharacterInCharactersWindow(data))
     },
   )
+
+  socket.on(
+    E_Subscribe.getCreatedDummyInBattlefieldWindow,
+    (data: I_SubscriptionData[E_Subscribe.getCreatedDummyInBattlefieldWindow]) => {
+      dispatch(
+        roomActions.setCreatedDummyInBattlefieldWindow({ dummy: data.dummy, field: data.field }),
+      )
+    },
+  )
 })
 
 export const unsubscribe = () => {
@@ -98,4 +107,5 @@ export const unsubscribe = () => {
   socket.off(E_Subscribe.getCreatedCharacterInCharactersWindow)
   socket.off(E_Subscribe.getUpdatedCharacterInCharactersWindow)
   socket.off(E_Subscribe.getRemovedCharacterInCharactersWindow)
+  socket.off(E_Subscribe.getCreatedDummyInBattlefieldWindow)
 }
