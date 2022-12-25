@@ -12,13 +12,27 @@ import { E_WindowOverlay } from 'features/WindowOverlayManager/models'
 import { useEventListener } from 'hooks/useEventListener'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { useStoreSelector } from 'hooks/useStoreSelector'
+import { E_Field } from 'models/shared/game/battlefield'
+import { getDummy, getDummyBars } from 'utils/game/effects'
 
 export const BattlefieldContent = () => {
   const dispatch = useStoreDispatch()
-  const { characters, activeCard, overlays } = useStoreSelector((store) => ({
+  const {
+    characters,
+    activeCard,
+    overlays,
+    masterField,
+    masterDummies,
+    playersField,
+    playersDummies,
+  } = useStoreSelector((store) => ({
     characters: store.room.game.characters.window.characters,
     activeCard: store.gameBattlefield.activeCard,
     overlays: store.gameBattlefield.overlays,
+    masterField: store.room.game.battlefield.window.masterField,
+    masterDummies: store.room.game.battlefield.window.masterDummies,
+    playersField: store.room.game.battlefield.window.playersField,
+    playersDummies: store.room.game.battlefield.window.playersDummies,
   }))
 
   const handleCardAction = useCallback(
@@ -38,7 +52,7 @@ export const BattlefieldContent = () => {
     [activeCard.id, dispatch],
   )
 
-  const handleOpenBattlefieldEditorOverlay = (field: 'master' | 'players') => () => {
+  const handleOpenBattlefieldEditorOverlay = (field: E_Field) => () => {
     dispatch(
       gameBattlefieldActions.openBattlefieldWindowOverlay({
         name: E_WindowOverlay.battlefieldEditor,
@@ -64,34 +78,34 @@ export const BattlefieldContent = () => {
     return () => document.removeEventListener('click', handleCardAction)
   }, [handleCardAction])
 
-  console.log('overlays', overlays)
   return (
     <WindowOverlayManagerProvider location={E_Window.battlefield}>
       <WindowOverlayManager overlays={overlays} />
       <S.WindowContentWrapper>
         <S.FieldWrapper>
-          <S.MasterFieldEdit onClick={handleOpenBattlefieldEditorOverlay('master')}>
+          <S.MasterFieldEdit onClick={handleOpenBattlefieldEditorOverlay(E_Field.master)}>
             <EditIcon />
           </S.MasterFieldEdit>
           <S.CardsWrapper>
-            <BattlefieldCard
-              id='1'
-              bars={[
-                {
-                  id: 'f2eb29cf-9bbe-4445-98ea-a33f0bc26961',
-                  current: 100,
-                  max: 100,
-                },
-              ]}
-              name='Skeleton Warrior'
-              avatar=''
-              actions={[]}
-            />
+            {masterField.map((dummy) => {
+              const baseDummy = getDummy(dummy.id, masterDummies)
+              const dummyBars = getDummyBars(dummy.barsCurrent, baseDummy.barsMax)
+              return (
+                <BattlefieldCard
+                  key={dummy.subId}
+                  name={baseDummy.name}
+                  actions={baseDummy.actions}
+                  id={dummy.subId}
+                  bars={dummyBars}
+                  avatar={baseDummy.avatar}
+                />
+              )
+            })}
           </S.CardsWrapper>
         </S.FieldWrapper>
 
         <S.FieldWrapper>
-          <S.PlayerFieldEdit onClick={handleOpenBattlefieldEditorOverlay('players')}>
+          <S.PlayerFieldEdit onClick={handleOpenBattlefieldEditorOverlay(E_Field.players)}>
             <EditIcon />
           </S.PlayerFieldEdit>
           <S.CardsWrapper>
@@ -105,6 +119,20 @@ export const BattlefieldContent = () => {
                 actions={character.actions}
               />
             ))}
+            {playersField.map((dummy) => {
+              const baseDummy = getDummy(dummy.id, playersDummies)
+              const dummyBars = getDummyBars(dummy.barsCurrent, baseDummy.barsMax)
+              return (
+                <BattlefieldCard
+                  key={dummy.subId}
+                  name={baseDummy.name}
+                  actions={baseDummy.actions}
+                  id={dummy.subId}
+                  bars={dummyBars}
+                  avatar={baseDummy.avatar}
+                />
+              )
+            })}
           </S.CardsWrapper>
         </S.FieldWrapper>
       </S.WindowContentWrapper>

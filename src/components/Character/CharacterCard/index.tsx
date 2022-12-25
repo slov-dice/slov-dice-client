@@ -2,7 +2,6 @@ import * as S from './styles'
 
 import {
   AddCharacterEffect,
-  CharacterAvatar,
   CharacterBar,
   CharacterEffect,
   CharacterLevel,
@@ -11,6 +10,7 @@ import {
 } from '../'
 
 import EditIcon from 'assets/icons/app/edit.svg'
+import { AvatarPicker } from 'components/game'
 import { gameCharactersActions } from 'features/WindowManager/components/Characters/slice'
 import { E_WindowOverlay } from 'features/WindowOverlayManager/models'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
@@ -95,7 +95,7 @@ export const CharacterCard = ({ character }: I_CharacterCardProps) => {
     <S.CardWrapper>
       <S.LeftSection>
         <CharacterLevel onChange={handleChangeCharacterLevel} value={character.level} />
-        <CharacterAvatar image={character.avatar} characterId={character.id} />
+        <AvatarPicker image={character.avatar} characterId={character.id} />
         <S.BarsWrapper>
           {character.bars.map((bar) => {
             const baseBar = getBar(bar.id, settings.bars)

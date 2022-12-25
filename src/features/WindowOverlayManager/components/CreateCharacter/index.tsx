@@ -9,7 +9,6 @@ import CloseIcon from 'assets/icons/app/close.svg'
 import EditIcon from 'assets/icons/app/edit.svg'
 import { Button } from 'components/Buttons'
 import {
-  CharacterAvatar,
   CharacterLevel,
   CharacterName,
   CharacterDescription,
@@ -18,6 +17,7 @@ import {
   CharacterEffect,
   AddCharacterEffect,
 } from 'components/Character'
+import { AvatarPicker } from 'components/game'
 import { gameCharactersActions } from 'features/WindowManager/components/Characters/slice'
 import { E_WindowOverlay } from 'features/WindowOverlayManager/models'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
@@ -48,10 +48,10 @@ export const CreateCharacterOverlay = () => {
     dispatch(gameCharactersActions.closeCharacterWindowOverlay(E_WindowOverlay.createCharacter))
   }, [dispatch])
 
-  const handleOpenBattlefieldActionsEditorOverlay = () => {
+  const handleOpenActionsEditorOverlay = () => {
     dispatch(
       gameCharactersActions.openCharacterWindowOverlay({
-        name: E_WindowOverlay.battlefieldActionsEditor,
+        name: E_WindowOverlay.actionsEditor,
         payload: 'characterCreator',
         isOpen: true,
       }),
@@ -110,7 +110,7 @@ export const CreateCharacterOverlay = () => {
       <S.OverlayContent>
         <S.ContentTop>
           <CharacterLevel value={character.level} onChange={handleChangeCharacterLevel} />
-          <CharacterAvatar characterId='characterCreator' image={characterCreator.avatar} />
+          <AvatarPicker characterId='characterCreator' image={characterCreator.avatar} />
         </S.ContentTop>
         <S.ContentWrapper>
           <S.ContentBlock>
@@ -182,7 +182,7 @@ export const CreateCharacterOverlay = () => {
               </S.CharacterAction>
             ))}
             <Tippy content={t('windowCharacters.editActions')}>
-              <S.EditActions onClick={handleOpenBattlefieldActionsEditorOverlay}>
+              <S.EditActions onClick={handleOpenActionsEditorOverlay}>
                 <EditIcon />
               </S.EditActions>
             </Tippy>

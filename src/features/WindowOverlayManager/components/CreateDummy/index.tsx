@@ -8,17 +8,14 @@ import * as S from './styles'
 import CloseIcon from 'assets/icons/app/close.svg'
 import EditIcon from 'assets/icons/app/edit.svg'
 import { Button } from 'components/Buttons'
-import {
-  CharacterAvatar,
-  CharacterName,
-  CharacterDescription,
-  CharacterBarText,
-} from 'components/Character'
+import { CharacterName, CharacterDescription, CharacterBarText } from 'components/Character'
+import { AvatarPicker } from 'components/game'
 import { gameBattlefieldActions } from 'features/WindowManager/components/Battlefield/slice'
 import { E_WindowOverlay, I_WindowOverlay } from 'features/WindowOverlayManager/models'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { useStoreSelector } from 'hooks/useStoreSelector'
 import { t } from 'languages'
+import { E_Field } from 'models/shared/game/battlefield'
 import { T_BaseCharacterBar, T_CharacterBarId } from 'models/shared/game/character'
 import { roomActions } from 'store/room'
 import * as C from 'styles/components'
@@ -36,10 +33,10 @@ export const CreateDummyOverlay = () => {
   }))
   const [dummy, setDummy] = useState<T_FormCreateDummy>(getFormCreateDummy(settingsBars))
 
-  const handleOpenBattlefieldActionsEditorOverlay = () => {
+  const handleOpenActionsEditorOverlay = () => {
     dispatch(
       gameBattlefieldActions.openBattlefieldWindowOverlay({
-        name: E_WindowOverlay.battlefieldActionsEditor,
+        name: E_WindowOverlay.actionsEditor,
         payload: 'dummyCreator',
         isOpen: true,
       }),
@@ -69,14 +66,14 @@ export const CreateDummyOverlay = () => {
   const handleCheckBarInclude = (id: T_CharacterBarId, value: boolean) => {
     setDummy((prev) => ({
       ...prev,
-      bars: prev.barsMax.map((bar) => (bar.id === id ? { ...bar, include: value } : bar)),
+      barsMax: prev.barsMax.map((bar) => (bar.id === id ? { ...bar, include: value } : bar)),
     }))
   }
 
   const handleCreateDummy = () => {
     dispatch(
       roomActions.emitCreateDummyInBattlefield({
-        field: overlayPayload as 'master' | 'players',
+        field: overlayPayload as E_Field,
         dummy: {
           id: v4(),
           ...dummy,
@@ -97,7 +94,7 @@ export const CreateDummyOverlay = () => {
       </S.OverlayHeader>
       <S.OverlayContent>
         <S.ContentTop>
-          <CharacterAvatar characterId='dummyCreator' image={dummyCreator.avatar} />
+          <AvatarPicker characterId='dummyCreator' image={dummyCreator.avatar} />
         </S.ContentTop>
         <S.ContentWrapper>
           <S.ContentBlock>
@@ -138,7 +135,7 @@ export const CreateDummyOverlay = () => {
               </S.CharacterAction>
             ))}
             <Tippy content={t('windowCharacters.editActions')}>
-              <S.EditActions onClick={handleOpenBattlefieldActionsEditorOverlay}>
+              <S.EditActions onClick={handleOpenActionsEditorOverlay}>
                 <EditIcon />
               </S.EditActions>
             </Tippy>

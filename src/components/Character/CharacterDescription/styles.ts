@@ -18,6 +18,7 @@ export const DescriptionWrapper = styled(motion.div).attrs(({ theme }) =>
   font-size: 18px;
   font-weight: 400;
   text-transform: none;
+  word-break: break-all;
 
   border-radius: 4px;
 `

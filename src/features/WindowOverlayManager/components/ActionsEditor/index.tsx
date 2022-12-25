@@ -20,10 +20,9 @@ import { t } from 'languages'
 import { T_CharacterBarId } from 'models/shared/game/character'
 import * as C from 'styles/components'
 
-const findOverlay = (overlay: I_WindowOverlay) =>
-  overlay.name === E_WindowOverlay.battlefieldActionsEditor
+const findOverlay = (overlay: I_WindowOverlay) => overlay.name === E_WindowOverlay.actionsEditor
 
-export const BattlefieldActionsEditor = () => {
+export const ActionsEditor = () => {
   const { location } = useContext(windowOverlayManagerContext)
 
   const dispatch = useStoreDispatch()
@@ -63,16 +62,10 @@ export const BattlefieldActionsEditor = () => {
 
   const handleClose = useCallback(() => {
     if (overlayPayload?.startsWith('character')) {
-      dispatch(
-        gameCharactersActions.closeCharacterWindowOverlay(E_WindowOverlay.battlefieldActionsEditor),
-      )
+      dispatch(gameCharactersActions.closeCharacterWindowOverlay(E_WindowOverlay.actionsEditor))
     }
     if (overlayPayload?.startsWith('dummy')) {
-      dispatch(
-        gameBattlefieldActions.closeBattlefieldWindowOverlay(
-          E_WindowOverlay.battlefieldActionsEditor,
-        ),
-      )
+      dispatch(gameBattlefieldActions.closeBattlefieldWindowOverlay(E_WindowOverlay.actionsEditor))
     }
   }, [dispatch, overlayPayload])
 

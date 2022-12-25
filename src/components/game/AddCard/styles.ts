@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 import { cardAttrs } from './motion'
 
-export const Card = styled(motion.div).attrs(({ theme }) => cardAttrs(theme))`
+export const Card = styled(motion.div).attrs(({ theme }) => cardAttrs(theme))<{ width?: number }>`
   cursor: pointer;
   user-select: none;
 
@@ -13,12 +13,13 @@ export const Card = styled(motion.div).attrs(({ theme }) => cardAttrs(theme))`
   align-items: center;
   justify-content: center;
 
-  width: 360px;
+  width: ${({ width }) => (width ? width : 360)}px;
   height: fit-content;
   min-height: 309px;
   padding: 8px;
 
   font-size: 24px;
+  text-align: center;
   text-transform: uppercase;
 
   background-color: ${({ theme }) => theme.colors.white_05};

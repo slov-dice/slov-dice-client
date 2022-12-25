@@ -97,6 +97,18 @@ export const subscribe = createAsyncThunk('roomPage', async (_, { dispatch }) =>
       )
     },
   )
+
+  socket.on(
+    E_Subscribe.getDummiesOnFieldInBattlefieldWindow,
+    (data: I_SubscriptionData[E_Subscribe.getDummiesOnFieldInBattlefieldWindow]) => {
+      dispatch(
+        roomActions.setDummiesOnFieldInBattlefieldWindow({
+          dummies: data.dummies,
+          field: data.field,
+        }),
+      )
+    },
+  )
 })
 
 export const unsubscribe = () => {
@@ -108,4 +120,5 @@ export const unsubscribe = () => {
   socket.off(E_Subscribe.getUpdatedCharacterInCharactersWindow)
   socket.off(E_Subscribe.getRemovedCharacterInCharactersWindow)
   socket.off(E_Subscribe.getCreatedDummyInBattlefieldWindow)
+  socket.off(E_Subscribe.getDummiesOnFieldInBattlefieldWindow)
 }

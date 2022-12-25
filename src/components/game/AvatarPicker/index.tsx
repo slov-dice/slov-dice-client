@@ -11,16 +11,16 @@ import { windowOverlayManagerContext } from 'features/WindowOverlayManager/conte
 import { E_WindowOverlay } from 'features/WindowOverlayManager/models'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
 
-interface I_CharacterAvatarProps {
+interface I_AvatarPickerProps {
   image?: string
   characterId?: string
 }
 
-export const CharacterAvatar = ({ image, characterId }: I_CharacterAvatarProps) => {
+export const AvatarPicker = ({ image, characterId }: I_AvatarPickerProps) => {
   const { location } = useContext(windowOverlayManagerContext)
   const dispatch = useStoreDispatch()
 
-  const handleOpenPickCharacterAvatarOverlay = () => {
+  const handleOpenPickAvatarOverlay = () => {
     if (location === E_Window.characters) {
       dispatch(
         gameCharactersActions.openCharacterWindowOverlay({
@@ -42,7 +42,7 @@ export const CharacterAvatar = ({ image, characterId }: I_CharacterAvatarProps) 
   }
 
   return (
-    <S.AvatarWrapper onClick={handleOpenPickCharacterAvatarOverlay}>
+    <S.AvatarWrapper onClick={handleOpenPickAvatarOverlay}>
       <S.AvatarImage src={image || PlaceholderImage} alt='avatar' />
       <S.EditAvatar>
         <S.EditAvatarIcon>

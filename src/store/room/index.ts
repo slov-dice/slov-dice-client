@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 import { E_RoomType, I_FullRoom, I_RoomMessage } from 'models/shared/app'
+import { E_Field } from 'models/shared/game/battlefield'
 import {
   T_BaseCharacterBar,
   T_BaseCharacterSpecial,
@@ -8,7 +9,7 @@ import {
   I_Character,
   T_CharacterId,
 } from 'models/shared/game/character'
-import { T_BaseDummy } from 'models/shared/game/dummy'
+import { T_BaseDummy, T_Dummy } from 'models/shared/game/dummy'
 import {
   E_Emit,
   I_EmitPayload,
@@ -209,7 +210,7 @@ export const roomSlice = createSlice({
     // Battlefield Window
     emitCreateDummyInBattlefield: (
       state,
-      action: PayloadAction<{ dummy: T_BaseDummy; field: 'master' | 'players' }>,
+      action: PayloadAction<{ dummy: T_BaseDummy; field: E_Field }>,
     ) => {
       const payload: I_EmitPayload[E_Emit.createDummyInBattlefieldWindow] = {
         roomId: state.id,
@@ -219,16 +220,39 @@ export const roomSlice = createSlice({
 
       socket.emit(E_Emit.createDummyInBattlefieldWindow, payload)
     },
-
     setCreatedDummyInBattlefieldWindow: (
       state,
-      action: PayloadAction<{ dummy: T_BaseDummy; field: 'master' | 'players' }>,
+      action: PayloadAction<{ dummy: T_BaseDummy; field: E_Field }>,
     ) => {
       if (action.payload.field === 'master') {
         state.game.battlefield.window.masterDummies.push(action.payload.dummy)
       }
       if (action.payload.field === 'players') {
         state.game.battlefield.window.playersDummies.push(action.payload.dummy)
+      }
+    },
+
+    emitAddDummyToFieldInBattlefieldWindow: (
+      state,
+      action: PayloadAction<{ dummy: T_BaseDummy; field: E_Field }>,
+    ) => {
+      const payload: I_EmitPayload[E_Emit.addDummyToFieldInBattlefieldWindow] = {
+        roomId: state.id,
+        dummy: action.payload.dummy,
+        field: action.payload.field,
+      }
+
+      socket.emit(E_Emit.addDummyToFieldInBattlefieldWindow, payload)
+    },
+    setDummiesOnFieldInBattlefieldWindow: (
+      state,
+      action: PayloadAction<{ dummies: T_Dummy[]; field: E_Field }>,
+    ) => {
+      if (action.payload.field === 'master') {
+        state.game.battlefield.window.masterField = action.payload.dummies
+      }
+      if (action.payload.field === 'players') {
+        state.game.battlefield.window.playersField = action.payload.dummies
       }
     },
   },

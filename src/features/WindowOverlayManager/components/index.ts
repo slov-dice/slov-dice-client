@@ -1,6 +1,6 @@
 import { FC } from 'react'
 
-import { BattlefieldActionsEditor } from './BattlefieldActionsEditor'
+import { ActionsEditor } from './ActionsEditor'
 import { BattlefieldEditor } from './BattlefieldEditor'
 import { CreateCharacterOverlay } from './CreateCharacter'
 import { CreateDummyOverlay } from './CreateDummy'
@@ -16,7 +16,7 @@ export const windowOverlayComponents: Record<E_WindowOverlay, FC> = {
   [E_WindowOverlay.updateCharacter]: UpdateCharacterOverlay,
   [E_WindowOverlay.pickCharacterAvatar]: PickCharacterAvatarOverlay,
   [E_WindowOverlay.updateCharacterEffect]: UpdateCharacterEffectOverlay,
-  [E_WindowOverlay.battlefieldActionsEditor]: BattlefieldActionsEditor,
+  [E_WindowOverlay.actionsEditor]: ActionsEditor,
   [E_WindowOverlay.battlefieldEditor]: BattlefieldEditor,
   [E_WindowOverlay.createDummy]: CreateDummyOverlay,
   [E_WindowOverlay.pickDummyAvatar]: PickDummyAvatarOverlay,

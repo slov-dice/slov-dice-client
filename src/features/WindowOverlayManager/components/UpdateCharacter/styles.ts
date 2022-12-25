@@ -73,6 +73,7 @@ export const EditActions = styled(C.Control)`
 
 export const CharacterAction = styled.div`
   width: 180px;
+  height: fit-content;
   padding: 8px;
 
   border: 1px solid ${({ theme }) => theme.colors.white};

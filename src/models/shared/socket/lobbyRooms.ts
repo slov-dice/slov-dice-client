@@ -8,6 +8,7 @@ import {
   T_RoomId,
   T_UserId,
 } from 'models/shared/app'
+import { E_Field } from 'models/shared/game/battlefield'
 import {
   I_Character,
   T_BaseCharacterBar,
@@ -15,7 +16,7 @@ import {
   T_BaseCharacterSpecial,
   T_CharacterId,
 } from 'models/shared/game/character'
-import { T_BaseDummy } from 'models/shared/game/dummy'
+import { T_BaseDummy, T_Dummy } from 'models/shared/game/dummy'
 
 export enum E_Subscribe {
   getPreviewRooms = 'getPreviewRooms',
@@ -36,6 +37,7 @@ export enum E_Subscribe {
 
   // Battlefield Window
   getCreatedDummyInBattlefieldWindow = 'getCreatedDummyInBattlefieldWindow',
+  getDummiesOnFieldInBattlefieldWindow = 'getDummiesOnFieldInBattlefieldWindow',
 }
 
 export interface I_SubscriptionData {
@@ -84,7 +86,11 @@ export interface I_SubscriptionData {
   }
   [E_Subscribe.getCreatedDummyInBattlefieldWindow]: {
     dummy: T_BaseDummy
-    field: 'master' | 'players'
+    field: E_Field
+  }
+  [E_Subscribe.getDummiesOnFieldInBattlefieldWindow]: {
+    dummies: T_Dummy[]
+    field: E_Field
   }
 }
 
@@ -109,6 +115,7 @@ export enum E_Emit {
 
   // Battlefield Window
   createDummyInBattlefieldWindow = 'createDummyInBattlefieldWindow',
+  addDummyToFieldInBattlefieldWindow = 'addDummyToFieldInBattlefieldWindow',
 }
 
 export interface I_EmitPayload {
@@ -172,7 +179,12 @@ export interface I_EmitPayload {
 
   [E_Emit.createDummyInBattlefieldWindow]: {
     roomId: T_RoomId
-    field: 'master' | 'players'
+    field: E_Field
+    dummy: T_BaseDummy
+  }
+  [E_Emit.addDummyToFieldInBattlefieldWindow]: {
+    roomId: T_RoomId
+    field: E_Field
     dummy: T_BaseDummy
   }
 }

@@ -66,8 +66,8 @@ export const BattlefieldCard = ({ name, avatar, bars, id, actions }: I_Battlefie
     dispatch(gameBattlefieldActions.setDummyEditor({ actions, avatar }))
     dispatch(
       gameBattlefieldActions.openBattlefieldWindowOverlay({
-        name: E_WindowOverlay.battlefieldActionsEditor,
-        payload: 'battlefieldEditor',
+        name: E_WindowOverlay.actionsEditor,
+        payload: 'dummyEditor',
         isOpen: true,
       }),
     )
@@ -134,11 +134,11 @@ export const BattlefieldCard = ({ name, avatar, bars, id, actions }: I_Battlefie
                 <S.BackButton onClick={() => setIsFront(true)}>
                   <BackIcon />
                 </S.BackButton>
-                <Tippy content={t('windowCharacters.editActions')}>
+                {/* <Tippy content={t('windowCharacters.editActions')}>
                   <S.EditButton onClick={handleOpenBattlefieldActionsEditorOverlay}>
                     <EditIcon />
                   </S.EditButton>
-                </Tippy>
+                </Tippy> */}
 
                 <S.CardTitle>Pick the action</S.CardTitle>
                 <S.CardActionsContent>
