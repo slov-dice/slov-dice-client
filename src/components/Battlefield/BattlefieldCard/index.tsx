@@ -42,7 +42,7 @@ export const BattlefieldCard = ({ name, avatar, bars, id, actions }: I_Battlefie
     action: store.gameBattlefield.action,
   }))
 
-  const handleActivate = (action: string) => () => {
+  const handleActivate = (action: T_CharacterAction) => () => {
     dispatch(gameBattlefieldActions.setActiveCard({ id, action }))
     setIsFront(true)
   }
@@ -145,7 +145,7 @@ export const BattlefieldCard = ({ name, avatar, bars, id, actions }: I_Battlefie
                   {actions.map((action) => (
                     <Button
                       key={action.id}
-                      onClick={handleActivate('attack1')}
+                      onClick={handleActivate(action)}
                       mod={Button.mod.secondary}
                     >
                       {action.title}

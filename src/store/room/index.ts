@@ -8,8 +8,9 @@ import {
   T_BaseCharacterEffect,
   I_Character,
   T_CharacterId,
+  T_CharacterAction,
 } from 'models/shared/game/character'
-import { T_BaseDummy, T_Dummy } from 'models/shared/game/dummy'
+import { T_BaseDummy, T_Dummy, T_DummyId } from 'models/shared/game/dummy'
 import {
   E_Emit,
   I_EmitPayload,
@@ -254,6 +255,37 @@ export const roomSlice = createSlice({
       if (action.payload.field === 'players') {
         state.game.battlefield.window.playersField = action.payload.dummies
       }
+    },
+
+    emitMakeActionInBattlefieldWindow: (
+      state,
+      action: PayloadAction<{
+        action: T_CharacterAction
+        actionTarget: T_DummyId | T_CharacterId
+        actionInitiator: T_DummyId | T_CharacterId
+      }>,
+    ) => {
+      const payload: I_EmitPayload[E_Emit.makeActionInBattlefieldWindow] = {
+        roomId: state.id,
+        action: action.payload.action,
+        actionInitiator: action.payload.actionInitiator,
+        actionTarget: action.payload.actionTarget,
+      }
+
+      socket.emit(E_Emit.makeActionInBattlefieldWindow, payload)
+    },
+
+    setCharactersAndDummies: (
+      state,
+      action: PayloadAction<{
+        characters: I_Character[]
+        masterField: T_Dummy[]
+        playersField: T_Dummy[]
+      }>,
+    ) => {
+      state.game.characters.window.characters = action.payload.characters
+      state.game.battlefield.window.masterField = action.payload.masterField
+      state.game.battlefield.window.playersField = action.payload.playersField
     },
   },
 })

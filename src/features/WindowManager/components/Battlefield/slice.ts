@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-import { initialOverlayStateSlice } from './data'
+import { initialOverlayStateSlice, initialActiveCardActionSlice } from './data'
 
 import { E_WindowOverlay, I_WindowOverlay } from 'features/WindowOverlayManager/models'
 import { T_CharacterAction } from 'models/shared/game/character'
@@ -9,7 +9,7 @@ interface I_InitialState {
   overlays: I_WindowOverlay[]
   activeCard: {
     id: string
-    action: string
+    action: T_CharacterAction
   }
   action: {
     from: {
@@ -34,7 +34,7 @@ const initialState: I_InitialState = {
   overlays: initialOverlayStateSlice,
   activeCard: {
     id: '',
-    action: '',
+    action: initialActiveCardActionSlice,
   },
   action: {
     from: {
@@ -62,13 +62,13 @@ export const gameBattlefieldSlice = createSlice({
       state,
       action: PayloadAction<{
         id: string
-        action: string
+        action: T_CharacterAction
       }>,
     ) => {
       state.activeCard = action.payload
     },
     disableActiveCard: (state) => {
-      state.activeCard = { id: '', action: '' }
+      state.activeCard = { id: '', action: initialActiveCardActionSlice }
     },
 
     setAction: (state, action: PayloadAction<{ from: { id: string }; to: { id: string } }>) => {

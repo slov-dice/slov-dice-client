@@ -14,9 +14,10 @@ import {
   T_BaseCharacterBar,
   T_BaseCharacterEffect,
   T_BaseCharacterSpecial,
+  T_CharacterAction,
   T_CharacterId,
 } from 'models/shared/game/character'
-import { T_BaseDummy, T_Dummy } from 'models/shared/game/dummy'
+import { T_BaseDummy, T_Dummy, T_DummyId } from 'models/shared/game/dummy'
 
 export enum E_Subscribe {
   getPreviewRooms = 'getPreviewRooms',
@@ -38,6 +39,7 @@ export enum E_Subscribe {
   // Battlefield Window
   getCreatedDummyInBattlefieldWindow = 'getCreatedDummyInBattlefieldWindow',
   getDummiesOnFieldInBattlefieldWindow = 'getDummiesOnFieldInBattlefieldWindow',
+  getInitiationActionInBattlefieldWindow = 'getInitiationActionInBattlefieldWindow',
 }
 
 export interface I_SubscriptionData {
@@ -92,6 +94,13 @@ export interface I_SubscriptionData {
     dummies: T_Dummy[]
     field: E_Field
   }
+  [E_Subscribe.getInitiationActionInBattlefieldWindow]: {
+    to: { id: T_DummyId | T_CharacterId }
+    from: { id: T_DummyId | T_CharacterId }
+    characters: I_Character[]
+    masterField: T_Dummy[]
+    playersField: T_Dummy[]
+  }
 }
 
 export enum E_Emit {
@@ -116,6 +125,7 @@ export enum E_Emit {
   // Battlefield Window
   createDummyInBattlefieldWindow = 'createDummyInBattlefieldWindow',
   addDummyToFieldInBattlefieldWindow = 'addDummyToFieldInBattlefieldWindow',
+  makeActionInBattlefieldWindow = 'makeActionInBattlefieldWindow',
 }
 
 export interface I_EmitPayload {
@@ -176,7 +186,6 @@ export interface I_EmitPayload {
     roomId: T_RoomId
     characterId: string
   }
-
   [E_Emit.createDummyInBattlefieldWindow]: {
     roomId: T_RoomId
     field: E_Field
@@ -186,5 +195,11 @@ export interface I_EmitPayload {
     roomId: T_RoomId
     field: E_Field
     dummy: T_BaseDummy
+  }
+  [E_Emit.makeActionInBattlefieldWindow]: {
+    roomId: T_RoomId
+    actionTarget: T_DummyId | T_CharacterId
+    actionInitiator: T_DummyId | T_CharacterId
+    action: T_CharacterAction
   }
 }

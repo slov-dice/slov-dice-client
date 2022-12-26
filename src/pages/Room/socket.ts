@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { toast } from 'react-toastify'
 
+import { gameBattlefieldActions } from 'features/WindowManager/components/Battlefield/slice'
 import { E_Subscribe, I_SubscriptionData } from 'models/shared/socket/lobbyRooms'
 import { socket } from 'services/socket'
 import { joinRoom } from 'store/profile'
@@ -109,6 +110,25 @@ export const subscribe = createAsyncThunk('roomPage', async (_, { dispatch }) =>
       )
     },
   )
+
+  socket.on(
+    E_Subscribe.getInitiationActionInBattlefieldWindow,
+    (data: I_SubscriptionData[E_Subscribe.getInitiationActionInBattlefieldWindow]) => {
+      dispatch(
+        roomActions.setCharactersAndDummies({
+          characters: data.characters,
+          masterField: data.masterField,
+          playersField: data.playersField,
+        }),
+      )
+      dispatch(
+        gameBattlefieldActions.setAction({
+          from: data.from,
+          to: data.to,
+        }),
+      )
+    },
+  )
 })
 
 export const unsubscribe = () => {
@@ -121,4 +141,5 @@ export const unsubscribe = () => {
   socket.off(E_Subscribe.getRemovedCharacterInCharactersWindow)
   socket.off(E_Subscribe.getCreatedDummyInBattlefieldWindow)
   socket.off(E_Subscribe.getDummiesOnFieldInBattlefieldWindow)
+  socket.off(E_Subscribe.getInitiationActionInBattlefieldWindow)
 }

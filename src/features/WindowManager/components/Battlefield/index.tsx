@@ -13,6 +13,7 @@ import { useEventListener } from 'hooks/useEventListener'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { useStoreSelector } from 'hooks/useStoreSelector'
 import { E_Field } from 'models/shared/game/battlefield'
+import { roomActions } from 'store/room'
 import { getDummy, getDummyBars } from 'utils/game/effects'
 
 export const BattlefieldContent = () => {
@@ -35,23 +36,6 @@ export const BattlefieldContent = () => {
     playersDummies: store.room.game.battlefield.window.playersDummies,
   }))
 
-  const handleCardAction = useCallback(
-    (e: any) => {
-      if (activeCard.id) {
-        if (e.target.id) {
-          dispatch(
-            gameBattlefieldActions.setAction({
-              from: { id: activeCard.id },
-              to: { id: e.target.id },
-            }),
-          )
-          dispatch(gameBattlefieldActions.disableActiveCard())
-        }
-      }
-    },
-    [activeCard.id, dispatch],
-  )
-
   const handleOpenBattlefieldEditorOverlay = (field: E_Field) => () => {
     dispatch(
       gameBattlefieldActions.openBattlefieldWindowOverlay({
@@ -71,6 +55,24 @@ export const BattlefieldContent = () => {
     [dispatch],
   )
   useEventListener('keydown', handleEsc)
+
+  const handleCardAction = useCallback(
+    (e: any) => {
+      if (activeCard.id) {
+        if (e.target?.id) {
+          dispatch(
+            roomActions.emitMakeActionInBattlefieldWindow({
+              actionTarget: e.target.id,
+              actionInitiator: activeCard.id,
+              action: activeCard.action,
+            }),
+          )
+          dispatch(gameBattlefieldActions.disableActiveCard())
+        }
+      }
+    },
+    [activeCard, dispatch],
+  )
 
   useEffect(() => {
     document.addEventListener('click', handleCardAction)
