@@ -1,13 +1,16 @@
 import { motion } from 'framer-motion'
 import styled, { css } from 'styled-components'
 
-import { E_ButtonMod } from '.'
+import { E_ButtonMod, E_ButtonSize } from '.'
 
 import { buttonAttrs } from './motion'
+
+import { T_StyledVariants } from 'models/styled'
 
 interface ButtonProps {
   $onlyIcon: boolean
   $mod: E_ButtonMod
+  $size: E_ButtonSize
   rounded: boolean
   disabled: boolean
 }
@@ -26,7 +29,6 @@ export const Button = styled(motion.button).attrs<ButtonProps>(({ disabled }) =>
   justify-content: center;
 
   width: 100%;
-  height: 48px;
   max-height: 100%;
   padding: 0 16px;
 
@@ -38,6 +40,8 @@ export const Button = styled(motion.button).attrs<ButtonProps>(({ disabled }) =>
   background: ${({ theme }) => theme.colors.white_10};
   border: none;
   border-radius: ${({ rounded }) => (rounded ? 8 : 0)}px;
+
+  ${({ $size }) => sizes[$size]};
 
   ${({ theme, $mod, disabled }) => {
     switch ($mod) {
@@ -78,3 +82,18 @@ export const Button = styled(motion.button).attrs<ButtonProps>(({ disabled }) =>
           `}
   }
 `
+
+const sizes: T_StyledVariants<E_ButtonSize> = {
+  lg: css`
+    height: 56px;
+  `,
+  md: css`
+    height: 48px;
+  `,
+  sm: css`
+    height: 42px;
+  `,
+  xs: css`
+    height: 36px;
+  `,
+}

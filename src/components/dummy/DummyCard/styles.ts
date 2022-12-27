@@ -8,7 +8,7 @@ export const CardWrapper = styled.div`
 
   width: 360px;
   height: fit-content;
-  min-height: 309px;
+  min-height: 280px;
   padding: 8px;
 
   text-transform: uppercase;
@@ -49,23 +49,13 @@ export const NameWrapper = styled.span`
 
 export const InfoWrapper = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 8px;
-  justify-content: space-between;
+  align-items: flex-end;
+  justify-content: flex-end;
 
   height: 100%;
   padding-left: 8px;
-`
-
-export const Actions = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-`
-
-export const EditWrapper = styled.div`
-  display: flex;
-  justify-content: flex-end;
 `
 
 export const BarWrapper = styled.div<{ color: string; barHeight: number }>`

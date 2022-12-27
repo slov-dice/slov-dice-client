@@ -26,7 +26,7 @@ export const BattlefieldEditor = () => {
   }))
 
   const handleOpenCreateDummyOverlay = () => {
-    // dispatch(gameBattlefieldActions.setCharacterCreator({ settingsBars, settingsSpecials }))
+    dispatch(gameBattlefieldActions.setDummyCreator())
     dispatch(
       gameBattlefieldActions.openBattlefieldWindowOverlay({
         name: E_WindowOverlay.createDummy,
@@ -45,7 +45,7 @@ export const BattlefieldEditor = () => {
   return (
     <div>
       <S.OverlayHeader>
-        <span>Редактор {overlayPayload} поля</span>
+        <span>{t('battlefieldEditorOverlay.title')}</span>
         <C.Control onClick={handleClose}>
           <CloseIcon />
         </C.Control>
@@ -60,8 +60,8 @@ export const BattlefieldEditor = () => {
             <DummyCard key={dummy.id} field={overlayPayload} dummy={dummy} />
           ))}
 
-        <AddCard onClick={handleOpenCreateDummyOverlay}>
-          <span>Добавить болванку</span>
+        <AddCard height={280} onClick={handleOpenCreateDummyOverlay}>
+          <span>{t('battlefieldEditorOverlay.actions.add')}</span>
           <div>
             <PlusIcon />
           </div>

@@ -78,6 +78,10 @@ export const gameBattlefieldSlice = createSlice({
       state.action = { from: { id: '' }, to: { id: '' } }
     },
 
+    setDummyCreator: (state) => {
+      state.dummyCreator = { actions: [], avatar: '' }
+    },
+
     setDummyEditor: (
       state,
       action: PayloadAction<{ actions: T_CharacterAction[]; avatar: string }>,

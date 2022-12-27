@@ -8,8 +8,8 @@ import * as S from './styles'
 import CloseIcon from 'assets/icons/app/close.svg'
 import EditIcon from 'assets/icons/app/edit.svg'
 import { Button } from 'components/Buttons'
-import { CharacterName, CharacterDescription, CharacterBarText } from 'components/Character'
-import { AvatarPicker } from 'components/game'
+import { CharacterBarText } from 'components/Character'
+import { AvatarPicker, EditableText, EditableTextarea } from 'components/game'
 import { gameBattlefieldActions } from 'features/WindowManager/components/Battlefield/slice'
 import { E_WindowOverlay, I_WindowOverlay } from 'features/WindowOverlayManager/models'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
@@ -59,7 +59,7 @@ export const CreateDummyOverlay = () => {
   const handleChangeCharacterBarMaxValue = (id: T_CharacterBarId, value: number) => {
     setDummy((prev) => ({
       ...prev,
-      bars: prev.barsMax.map((bar) => (bar.id === id ? { ...bar, max: value } : bar)),
+      barsMax: prev.barsMax.map((bar) => (bar.id === id ? { ...bar, max: value } : bar)),
     }))
   }
 
@@ -87,7 +87,7 @@ export const CreateDummyOverlay = () => {
   return (
     <div>
       <S.OverlayHeader>
-        <span>Создание болванки</span>
+        <span>{t('createDummyOverlay.title')}</span>
         <C.Control onClick={handleClose}>
           <CloseIcon />
         </C.Control>
@@ -98,8 +98,8 @@ export const CreateDummyOverlay = () => {
         </S.ContentTop>
         <S.ContentWrapper>
           <S.ContentBlock>
-            <CharacterName value={dummy.name} onChange={handleChangeCharacterName} />
-            <CharacterDescription
+            <EditableText value={dummy.name} onChange={handleChangeCharacterName} />
+            <EditableTextarea
               value={dummy.description}
               onChange={handleChangeCharacterDescription}
             />
@@ -109,7 +109,9 @@ export const CreateDummyOverlay = () => {
               const baseBar: T_BaseCharacterBar = getBar(bar.id, settingsBars)
               return (
                 <S.BarWrapper key={bar.id} color={baseBar.color} barHeight={100}>
-                  <S.BarName>Макс. {baseBar.name}</S.BarName>
+                  <S.BarName>
+                    {t('createDummyOverlay.fields.max')} {baseBar.name}
+                  </S.BarName>
                   <S.BarText>
                     <CharacterBarText
                       id={bar.id}
@@ -144,9 +146,9 @@ export const CreateDummyOverlay = () => {
         <C.Divider decorated />
         <S.ContentBottom>
           <Button onClick={handleClose} mod={Button.mod.secondary}>
-            {t('createCharacterOverlay.actions.cancel')}
+            {t('createDummyOverlay.actions.cancel')}
           </Button>
-          <Button onClick={handleCreateDummy}>{t('createCharacterOverlay.actions.create')}</Button>
+          <Button onClick={handleCreateDummy}>{t('createDummyOverlay.actions.create')}</Button>
         </S.ContentBottom>
       </S.OverlayContent>
     </div>

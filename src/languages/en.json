@@ -158,6 +158,16 @@
       "cancel": "Cancel"
     }
   },
+  "createDummyOverlay": {
+    "title": "Dummy Creator",
+    "fields": {
+      "max": "max"
+    },
+    "actions": {
+      "create": "Create",
+      "cancel": "Cancel"
+    }
+  },
   "updateCharacterEffectOverlay": {
     "title": "Character Effects"
   },
@@ -184,6 +194,15 @@
       "add": "Add",
       "save": "Save",
       "cancel": "Cancel"
+    }
+  },
+  "battlefieldEditorOverlay": {
+    "title": "Field Editor",
+    "fields": {
+      "max": "max"
+    },
+    "actions": {
+      "add": "Add Dummy"
     }
   },
   "auth": {

@@ -158,6 +158,16 @@
       "cancel": "Отмена"
     }
   },
+  "createDummyOverlay": {
+    "title": "Создание болванки",
+    "fields": {
+      "max": "Макс."
+    },
+    "actions": {
+      "create": "Создать",
+      "cancel": "Отмена"
+    }
+  },
   "updateCharacterEffectOverlay": {
     "title": "Эффекты персонажа"
   },
@@ -172,7 +182,7 @@
       "remove": "Удалить персонажа"
     }
   },
-  "battlefieldActionsEditor": {
+  "actionsEditor": {
     "title": "Редактор действий",
     "fields": {
       "title": "Название",
@@ -184,6 +194,15 @@
       "add": "Добавить",
       "save": "Сохранить",
       "cancel": "Отмена"
+    }
+  },
+  "battlefieldEditorOverlay": {
+    "title": "Редактор поля",
+    "fields": {
+      "max": "Макс."
+    },
+    "actions": {
+      "add": "Добавить болванку"
     }
   },
   "auth": {

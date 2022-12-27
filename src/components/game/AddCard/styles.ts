@@ -3,7 +3,10 @@ import styled from 'styled-components'
 
 import { cardAttrs } from './motion'
 
-export const Card = styled(motion.div).attrs(({ theme }) => cardAttrs(theme))<{ width?: number }>`
+export const Card = styled(motion.div).attrs(({ theme }) => cardAttrs(theme))<{
+  width?: number
+  height?: number
+}>`
   cursor: pointer;
   user-select: none;
 
@@ -15,7 +18,7 @@ export const Card = styled(motion.div).attrs(({ theme }) => cardAttrs(theme))<{ 
 
   width: ${({ width }) => (width ? width : 360)}px;
   height: fit-content;
-  min-height: 309px;
+  min-height: ${({ height }) => (height ? height : 309)}px;
   padding: 8px;
 
   font-size: 24px;

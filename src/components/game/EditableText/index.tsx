@@ -4,12 +4,12 @@ import * as S from './styles'
 
 import { useEditable } from 'hooks/useEditable'
 
-interface I_CharacterNameProps {
+interface I_EditableTextProps {
   value: string
   onChange: (value: string) => void
 }
 
-export const CharacterName = ({ value, onChange }: I_CharacterNameProps) => {
+export const EditableText = ({ value, onChange }: I_EditableTextProps) => {
   const inputRef = useRef<HTMLInputElement>(null)
 
   const handleChangeName = () => {

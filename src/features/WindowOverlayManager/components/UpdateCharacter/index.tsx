@@ -10,13 +10,11 @@ import { Button } from 'components/Buttons'
 import {
   AddCharacterEffect,
   CharacterBarText,
-  CharacterDescription,
   CharacterEffect,
   CharacterLevel,
-  CharacterName,
   CharacterSpecial,
 } from 'components/Character'
-import { AvatarPicker } from 'components/game'
+import { AvatarPicker, EditableText, EditableTextarea } from 'components/game'
 import { gameCharactersActions } from 'features/WindowManager/components/Characters/slice'
 import { E_WindowOverlay } from 'features/WindowOverlayManager/models'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
@@ -135,8 +133,8 @@ export const UpdateCharacterOverlay = () => {
           </S.ContentTop>
           <S.ContentWrapper>
             <S.ContentBlock>
-              <CharacterName value={character.name} onChange={handleChangeCharacterName} />
-              <CharacterDescription
+              <EditableText value={character.name} onChange={handleChangeCharacterName} />
+              <EditableTextarea
                 value={character.description}
                 onChange={handleChangeCharacterDescription}
               />

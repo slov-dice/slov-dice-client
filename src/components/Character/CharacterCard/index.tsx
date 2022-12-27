@@ -5,12 +5,11 @@ import {
   CharacterBar,
   CharacterEffect,
   CharacterLevel,
-  CharacterName,
   CharacterSpecial,
 } from '../'
 
 import EditIcon from 'assets/icons/app/edit.svg'
-import { AvatarPicker } from 'components/game'
+import { AvatarPicker, EditableText } from 'components/game'
 import { gameCharactersActions } from 'features/WindowManager/components/Characters/slice'
 import { E_WindowOverlay } from 'features/WindowOverlayManager/models'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
@@ -111,7 +110,7 @@ export const CharacterCard = ({ character }: I_CharacterCardProps) => {
       </S.LeftSection>
       <S.RightSection>
         <S.NameWrapper>
-          <CharacterName value={character.name} onChange={handleChangeCharacterName} />
+          <EditableText value={character.name} onChange={handleChangeCharacterName} />
         </S.NameWrapper>
         <S.InfoWrapper>
           <div>

@@ -126,7 +126,7 @@ export const ActionsEditor = () => {
   return (
     <div>
       <S.OverlayHeader>
-        <span>{t('battlefieldActionsEditor.title')}</span>
+        <span>{t('actionsEditor.title')}</span>
         <C.Control onClick={handleClose}>
           <CloseIcon />
         </C.Control>
@@ -138,15 +138,15 @@ export const ActionsEditor = () => {
               <TextField
                 value={field.title}
                 onChange={(e) => update(index, { ...field, title: e.target.value })}
-                placeholder={t('battlefieldActionsEditor.fields.title')}
+                placeholder={t('actionsEditor.fields.title')}
               />
               <TextareaField
                 value={field.description}
                 onChange={(e) => update(index, { ...field, description: e.target.value })}
-                placeholder={t('battlefieldActionsEditor.fields.description')}
+                placeholder={t('actionsEditor.fields.description')}
                 fullWidth
               />
-              <div>{t('battlefieldActionsEditor.fields.target')}</div>
+              <div>{t('actionsEditor.fields.target')}</div>
               <C.Row>
                 <CustomSelectField
                   fieldIndex={index}
@@ -156,7 +156,7 @@ export const ActionsEditor = () => {
                 />
                 <TextField
                   {...register(`actions.${index}.target.value`)}
-                  placeholder={t('battlefieldActionsEditor.fields.value')}
+                  placeholder={t('actionsEditor.fields.value')}
                 />
               </C.Row>
               <S.BlockRemove onClick={handleRemoveAction(index)}>
@@ -166,17 +166,17 @@ export const ActionsEditor = () => {
           ))}
 
           <S.BlockAdd onClick={handleAddAction}>
-            <div>{t('battlefieldActionsEditor.actions.add')}</div>
+            <div>{t('actionsEditor.actions.add')}</div>
             <PlusIcon />
           </S.BlockAdd>
         </S.ContentWrapper>
         <C.Divider decorated />
         <S.ContentBottom>
           <Button onClick={handleClose} mod={Button.mod.secondary}>
-            {t('battlefieldActionsEditor.actions.cancel')}
+            {t('actionsEditor.actions.cancel')}
           </Button>
           <Button onClick={handleSubmit(handleSaveActions)}>
-            {t('battlefieldActionsEditor.actions.save')}
+            {t('actionsEditor.actions.save')}
           </Button>
         </S.ContentBottom>
       </S.OverlayContent>
