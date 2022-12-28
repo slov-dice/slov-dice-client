@@ -149,7 +149,8 @@
     "level": "Уровень",
     "createCharacter": "Создать персонажа",
     "addEffect": "Добавить эффект",
-    "editActions": "Редактор действий"
+    "editActions": "Редактор действий",
+    "editCharacter": "Редактировать персонажа"
   },
   "createCharacterOverlay": {
     "title": "Создание персонажа",
@@ -173,6 +174,9 @@
   },
   "pickCharacterAvatarOverlay": {
     "title": "Аватар персонажа"
+  },
+  "pickDummyAvatarOverlay": {
+    "title": "Аватар болванки"
   },
   "updateCharacterOverlay": {
     "title": "Редактирование персонажа",
@@ -202,7 +206,10 @@
       "max": "Макс."
     },
     "actions": {
-      "add": "Добавить болванку"
+      "add": "Добавить болванку",
+      "kill": "Удалить экземпляры болванки с поля",
+      "deploy": "Добавить на поле",
+      "edit": "Редактировать болванку"
     }
   },
   "auth": {

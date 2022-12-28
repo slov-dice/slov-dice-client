@@ -1,3 +1,5 @@
+import Tippy from '@tippyjs/react'
+
 import * as S from './styles'
 
 import EditIcon from 'assets/icons/app/edit.svg'
@@ -9,6 +11,7 @@ import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { useStoreSelector } from 'hooks/useStoreSelector'
 import { t } from 'languages'
 import { E_Field } from 'models/shared/game/battlefield'
+import { T_CharacterBarId } from 'models/shared/game/character'
 import { T_BaseDummy } from 'models/shared/game/dummy'
 import { roomActions } from 'store/room'
 import * as C from 'styles/components'
@@ -27,7 +30,28 @@ export const DummyCard = ({ dummy, field }: I_DummyCardProps) => {
     dispatch(roomActions.emitAddDummyToFieldInBattlefieldWindow({ dummy, field }))
   }
 
-  const handleChangeDummyName = (value: string) => {}
+  const handleChangeDummyName = (value: string) => {
+    dispatch(
+      roomActions.emitUpdateDummyFieldInBattlefieldWindow({
+        value,
+        field: 'name',
+        dummyId: dummy.id,
+        battlefield: field,
+      }),
+    )
+  }
+
+  const handleChangeDummyMaxBar = (id: T_CharacterBarId, value: number) => {
+    dispatch(
+      roomActions.emitUpdateDummyFieldInBattlefieldWindow({
+        value,
+        field: 'barsMax',
+        dummyId: dummy.id,
+        battlefield: field,
+        subFieldId: id,
+      }),
+    )
+  }
 
   return (
     <S.CardWrapper>
@@ -43,7 +67,11 @@ export const DummyCard = ({ dummy, field }: I_DummyCardProps) => {
                     {t('battlefieldEditorOverlay.fields.max')} {baseBar.name}
                   </S.BarName>
                   <S.BarText>
-                    <CharacterBarText id={bar.id} value={bar.max} onChange={() => {}} />
+                    <CharacterBarText
+                      id={bar.id}
+                      value={bar.max}
+                      onChange={handleChangeDummyMaxBar}
+                    />
                   </S.BarText>
                 </S.BarWrapper>
               )
@@ -57,15 +85,23 @@ export const DummyCard = ({ dummy, field }: I_DummyCardProps) => {
           <EditableText value={dummy.name} onChange={handleChangeDummyName} />
         </S.NameWrapper>
         <S.InfoWrapper>
-          <C.Control>
-            <SkullCrossbones />
-          </C.Control>
-          <C.Control onClick={handleAddDummyToBattlefield}>
-            <SwordsIcon />
-          </C.Control>
-          <C.Control>
-            <EditIcon />
-          </C.Control>
+          <S.BattlefieldAction>
+            <Tippy content={t('battlefieldEditorOverlay.actions.kill')}>
+              <C.Control>
+                <SkullCrossbones />
+              </C.Control>
+            </Tippy>
+            <Tippy content={t('battlefieldEditorOverlay.actions.deploy')}>
+              <C.Control onClick={handleAddDummyToBattlefield}>
+                <SwordsIcon />
+              </C.Control>
+            </Tippy>
+          </S.BattlefieldAction>
+          <Tippy content={t('battlefieldEditorOverlay.actions.edit')}>
+            <C.Control>
+              <EditIcon />
+            </C.Control>
+          </Tippy>
         </S.InfoWrapper>
       </S.RightSection>
     </S.CardWrapper>

@@ -287,6 +287,44 @@ export const roomSlice = createSlice({
       state.game.battlefield.window.masterField = action.payload.masterField
       state.game.battlefield.window.playersField = action.payload.playersField
     },
+    emitUpdateDummyFieldInBattlefieldWindow: (
+      state,
+      action: PayloadAction<{
+        dummyId: T_DummyId
+        battlefield: E_Field
+        field: string
+        value: string | number
+        subFieldId?: string
+      }>,
+    ) => {
+      const payload: I_EmitPayload[E_Emit.updateDummyFieldInBattlefieldWindow] = {
+        roomId: state.id,
+        dummyId: action.payload.dummyId,
+        battlefield: action.payload.battlefield,
+        field: action.payload.field,
+        value: action.payload.value,
+        subFieldId: action.payload.subFieldId,
+      }
+
+      socket.emit(E_Emit.updateDummyFieldInBattlefieldWindow, payload)
+    },
+    setUpdatedDummyInBattlefieldWindow: (
+      state,
+      action: PayloadAction<{ dummy: T_BaseDummy; field: E_Field }>,
+    ) => {
+      if (action.payload.field === E_Field.master) {
+        state.game.battlefield.window.masterDummies =
+          state.game.battlefield.window.masterDummies.map((dummy) =>
+            dummy.id === action.payload.dummy.id ? action.payload.dummy : dummy,
+          )
+      }
+      if (action.payload.field === E_Field.players) {
+        state.game.battlefield.window.playersDummies =
+          state.game.battlefield.window.playersDummies.map((dummy) =>
+            dummy.id === action.payload.dummy.id ? action.payload.dummy : dummy,
+          )
+      }
+    },
   },
 })
 

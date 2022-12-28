@@ -47,12 +47,17 @@ export const NameWrapper = styled.span`
   border-bottom: 1px dashed ${({ theme }) => theme.colors.white_50};
 `
 
+export const BattlefieldAction = styled.div`
+  display: flex;
+  gap: 8px;
+`
+
 export const InfoWrapper = styled.div`
   display: flex;
   flex-direction: row;
   gap: 8px;
   align-items: flex-end;
-  justify-content: flex-end;
+  justify-content: space-between;
 
   height: 100%;
   padding-left: 8px;

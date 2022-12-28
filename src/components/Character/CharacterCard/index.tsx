@@ -1,3 +1,5 @@
+import Tippy from '@tippyjs/react'
+
 import * as S from './styles'
 
 import {
@@ -14,6 +16,7 @@ import { gameCharactersActions } from 'features/WindowManager/components/Charact
 import { E_WindowOverlay } from 'features/WindowOverlayManager/models'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { useStoreSelector } from 'hooks/useStoreSelector'
+import { t } from 'languages'
 import { I_Character, T_CharacterBarId, T_CharacterSpecialId } from 'models/shared/game/character'
 import { roomActions } from 'store/room'
 import * as C from 'styles/components'
@@ -139,9 +142,11 @@ export const CharacterCard = ({ character }: I_CharacterCardProps) => {
             <AddCharacterEffect characterId={character.id} />
           </S.EffectsWrapper>
           <S.Actions>
-            <C.Control onClick={handleOpenUpdateCharacterOverlay}>
-              <EditIcon />
-            </C.Control>
+            <Tippy content={t('windowCharacters.editCharacter')}>
+              <C.Control onClick={handleOpenUpdateCharacterOverlay}>
+                <EditIcon />
+              </C.Control>
+            </Tippy>
           </S.Actions>
         </S.InfoWrapper>
       </S.RightSection>

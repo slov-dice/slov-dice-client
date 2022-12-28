@@ -9,6 +9,8 @@ import { E_WindowOverlay } from 'features/WindowOverlayManager/models'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { useStoreSelector } from 'hooks/useStoreSelector'
 import { t } from 'languages'
+import { E_Field } from 'models/shared/game/battlefield'
+import { roomActions } from 'store/room'
 import * as C from 'styles/components'
 
 export const PickDummyAvatarOverlay = () => {
@@ -21,12 +23,23 @@ export const PickDummyAvatarOverlay = () => {
       )?.payload,
   )
 
-  const dummyAvatar = useStoreSelector((store) => {
+  const { dummyAvatar, field } = useStoreSelector((store) => {
     if (overlayPayload === 'dummyCreator') {
-      return store.gameBattlefield.dummyCreator.avatar
+      return { dummyAvatar: store.gameBattlefield.dummyCreator.avatar, field: E_Field.master }
     }
     if (overlayPayload === 'dummyEditor') {
-      return store.gameBattlefield.dummyEditor.avatar
+      return { dummyAvatar: store.gameBattlefield.dummyEditor.avatar, field: E_Field.master }
+    }
+    const masterDummyAvatar = store.room.game.battlefield.window.masterDummies.find(
+      (dummy) => dummy.id === overlayPayload,
+    )?.avatar
+    return {
+      dummyAvatar:
+        masterDummyAvatar ||
+        store.room.game.battlefield.window.playersDummies.find(
+          (dummy) => dummy.id === overlayPayload,
+        )?.avatar,
+      field: masterDummyAvatar ? E_Field.master : E_Field.players,
     }
   })
 
@@ -40,13 +53,21 @@ export const PickDummyAvatarOverlay = () => {
         dispatch(gameBattlefieldActions.setDummyAvatar({ characterId: overlayPayload, avatar }))
         return
       }
+      dispatch(
+        roomActions.emitUpdateDummyFieldInBattlefieldWindow({
+          dummyId: overlayPayload,
+          field: 'avatar',
+          value: avatar,
+          battlefield: field,
+        }),
+      )
     }
   }
 
   return (
     <div>
       <S.OverlayHeader>
-        <span>Аватар болванки</span>
+        <span>{t('pickDummyAvatarOverlay.title')}</span>
         <C.Control onClick={handleClose}>
           <CloseIcon />
         </C.Control>

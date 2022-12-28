@@ -149,7 +149,8 @@
     "level": "Level",
     "createCharacter": "Create Character",
     "addEffect": "Add Effect",
-    "editActions": "Actions Editor"
+    "editActions": "Actions Editor",
+    "editCharacter": "Edit Character"
   },
   "createCharacterOverlay": {
     "title": "Character Creator",
@@ -173,6 +174,9 @@
   },
   "pickCharacterAvatarOverlay": {
     "title": "Character avatar"
+  },
+  "pickDummyAvatarOverlay": {
+    "title": "Dummy avatar"
   },
   "updateCharacterOverlay": {
     "title": "Character Editor",
@@ -202,7 +206,10 @@
       "max": "max"
     },
     "actions": {
-      "add": "Add Dummy"
+      "add": "Add Dummy",
+      "kill": "Remove copies of the dummy from the field",
+      "deploy": "Add to the field",
+      "edit": "Edit Dummy"
     }
   },
   "auth": {

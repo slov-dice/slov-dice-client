@@ -40,6 +40,7 @@ export enum E_Subscribe {
   getCreatedDummyInBattlefieldWindow = 'getCreatedDummyInBattlefieldWindow',
   getDummiesOnFieldInBattlefieldWindow = 'getDummiesOnFieldInBattlefieldWindow',
   getInitiationActionInBattlefieldWindow = 'getInitiationActionInBattlefieldWindow',
+  getUpdatedDummyInBattlefieldWindow = 'getUpdatedDummyInBattlefieldWindow',
 }
 
 export interface I_SubscriptionData {
@@ -100,6 +101,10 @@ export interface I_SubscriptionData {
     characters: I_Character[]
     masterField: T_Dummy[]
     playersField: T_Dummy[]
+  }
+  [E_Subscribe.getUpdatedDummyInBattlefieldWindow]: {
+    dummy: T_BaseDummy
+    field: E_Field
   }
 }
 
@@ -208,7 +213,9 @@ export interface I_EmitPayload {
   [E_Emit.updateDummyFieldInBattlefieldWindow]: {
     roomId: T_RoomId
     dummyId: T_DummyId
+    battlefield: E_Field
     field: string
     value: string | number
+    subFieldId?: string
   }
 }
