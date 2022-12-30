@@ -173,6 +173,17 @@
       "cancel": "Отмена"
     }
   },
+  "updateDummyOverlay": {
+    "title": "Редактор болванки",
+    "fields": {
+      "max": "Макс."
+    },
+    "actions": {
+      "cancel": "Отмена",
+      "save": "Сохранить",
+      "remove": "Удалить болванку"
+    }
+  },
   "updateCharacterEffectOverlay": {
     "title": "Эффекты персонажа"
   },

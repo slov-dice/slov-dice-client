@@ -173,6 +173,17 @@
       "cancel": "Cancel"
     }
   },
+  "updateDummyOverlay": {
+    "title": "Dummy Editor",
+    "fields": {
+      "max": "max"
+    },
+    "actions": {
+      "cancel": "Cancel",
+      "save": "Save",
+      "remove": "Remove Dummy"
+    }
+  },
   "updateCharacterEffectOverlay": {
     "title": "Character Effects"
   },
@@ -190,7 +201,7 @@
       "remove": "Remove Character"
     }
   },
-  "battlefieldActionsEditor": {
+  "actionsEditor": {
     "title": "Actions Editor",
     "fields": {
       "title": "Title",

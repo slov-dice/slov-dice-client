@@ -101,14 +101,14 @@ export const UpdateDummyOverlay = () => {
   return (
     <div>
       <S.OverlayHeader>
-        <span>{t('createDummyOverlay.title')}</span>
+        <span>{t('updateDummyOverlay.title')}</span>
         <C.Control onClick={handleClose}>
           <CloseIcon />
         </C.Control>
       </S.OverlayHeader>
       <S.OverlayContent>
         <S.ContentTop>
-          <Tippy content={t('updateCharacterOverlay.actions.remove')}>
+          <Tippy content={t('updateDummyOverlay.actions.remove')}>
             <S.RemoveDummy onClick={handleRemoveDummy}>
               <TrashIcon />
             </S.RemoveDummy>
@@ -129,7 +129,7 @@ export const UpdateDummyOverlay = () => {
               return (
                 <S.BarWrapper key={bar.id} color={baseBar.color} barHeight={100}>
                   <S.BarName>
-                    {t('createDummyOverlay.fields.max')} {baseBar.name}
+                    {t('updateDummyOverlay.fields.max')} {baseBar.name}
                   </S.BarName>
                   <S.BarText>
                     <CharacterBarText
@@ -165,9 +165,9 @@ export const UpdateDummyOverlay = () => {
         <C.Divider decorated />
         <S.ContentBottom>
           <Button onClick={handleClose} mod={Button.mod.secondary}>
-            {t('createDummyOverlay.actions.cancel')}
+            {t('updateDummyOverlay.actions.cancel')}
           </Button>
-          <Button onClick={handleUpdateDummy}>{t('createDummyOverlay.actions.create')}</Button>
+          <Button onClick={handleUpdateDummy}>{t('updateDummyOverlay.actions.save')}</Button>
         </S.ContentBottom>
       </S.OverlayContent>
     </div>
