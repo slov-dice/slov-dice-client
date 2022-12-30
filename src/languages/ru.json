@@ -152,6 +152,10 @@
     "editActions": "Редактор действий",
     "editCharacter": "Редактировать персонажа"
   },
+  "windowBattlefield": {
+    "kill": "Ты хочешь меня убить?",
+    "pick": "Выберите действие"
+  },
   "createCharacterOverlay": {
     "title": "Создание персонажа",
     "actions": {

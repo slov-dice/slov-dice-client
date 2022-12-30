@@ -152,6 +152,10 @@
     "editActions": "Actions Editor",
     "editCharacter": "Edit Character"
   },
+  "windowBattlefield": {
+    "kill": "Do you want to kill me?",
+    "pick": "Pick the action"
+  },
   "createCharacterOverlay": {
     "title": "Character Creator",
     "actions": {

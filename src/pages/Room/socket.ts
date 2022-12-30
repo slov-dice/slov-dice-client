@@ -31,6 +31,8 @@ export const subscribe = createAsyncThunk('roomPage', async (_, { dispatch }) =>
         roomActions.setCharactersWindowSettingsBars({
           settingsBars: data.bars,
           characters: data.characters,
+          masterDummies: data.masterDummies,
+          playersDummies: data.playersDummies,
         }),
       )
     },
@@ -138,6 +140,18 @@ export const subscribe = createAsyncThunk('roomPage', async (_, { dispatch }) =>
       )
     },
   )
+
+  socket.on(
+    E_Subscribe.getRemovedDummyInBattlefieldWindow,
+    (data: I_SubscriptionData[E_Subscribe.getRemovedDummyInBattlefieldWindow]) => {
+      dispatch(
+        roomActions.setRemovedDummyInBattlefieldWindow({
+          dummyId: data.dummyId,
+          field: data.field,
+        }),
+      )
+    },
+  )
 })
 
 export const unsubscribe = () => {
@@ -152,4 +166,5 @@ export const unsubscribe = () => {
   socket.off(E_Subscribe.getDummiesOnFieldInBattlefieldWindow)
   socket.off(E_Subscribe.getInitiationActionInBattlefieldWindow)
   socket.off(E_Subscribe.getUpdatedDummyInBattlefieldWindow)
+  socket.off(E_Subscribe.getRemovedDummyInBattlefieldWindow)
 }

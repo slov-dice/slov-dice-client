@@ -8,6 +8,7 @@ import { PickCharacterAvatarOverlay } from './PickCharacterAvatar'
 import { PickDummyAvatarOverlay } from './PickDummyAvatar'
 import { UpdateCharacterOverlay } from './UpdateCharacter'
 import { UpdateCharacterEffectOverlay } from './UpdateCharacterEffect'
+import { UpdateDummyOverlay } from './UpdateDummy'
 
 import { E_WindowOverlay } from '../models'
 
@@ -20,4 +21,5 @@ export const windowOverlayComponents: Record<E_WindowOverlay, FC> = {
   [E_WindowOverlay.battlefieldEditor]: BattlefieldEditor,
   [E_WindowOverlay.createDummy]: CreateDummyOverlay,
   [E_WindowOverlay.pickDummyAvatar]: PickDummyAvatarOverlay,
+  [E_WindowOverlay.updateDummy]: UpdateDummyOverlay,
 }

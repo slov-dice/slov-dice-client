@@ -343,3 +343,12 @@ export const CardAvatar = styled.img`
   border-top-left-radius: 2px;
   border-top-right-radius: 2px;
 `
+
+export const CardFrontActions = styled.div`
+  display: flex;
+  justify-content: flex-end;
+
+  padding-top: 8px;
+
+  border-top: 1px dashed ${({ theme }) => theme.colors.primary};
+`

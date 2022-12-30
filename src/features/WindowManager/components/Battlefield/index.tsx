@@ -100,6 +100,9 @@ export const BattlefieldContent = () => {
                   id={dummy.subId}
                   bars={dummyBars}
                   avatar={baseDummy.avatar}
+                  isCharacter={false}
+                  field={E_Field.master}
+                  subId={dummy.subId}
                 />
               )
             })}
@@ -119,6 +122,8 @@ export const BattlefieldContent = () => {
                 name={character.name}
                 avatar={character.avatar}
                 actions={character.actions}
+                isCharacter
+                field={E_Field.players}
               />
             ))}
             {playersField.map((dummy) => {
@@ -132,6 +137,9 @@ export const BattlefieldContent = () => {
                   id={dummy.subId}
                   bars={dummyBars}
                   avatar={baseDummy.avatar}
+                  isCharacter={false}
+                  field={E_Field.players}
+                  subId={dummy.subId}
                 />
               )
             })}

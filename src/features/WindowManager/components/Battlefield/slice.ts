@@ -4,6 +4,7 @@ import { initialOverlayStateSlice, initialActiveCardActionSlice } from './data'
 
 import { E_WindowOverlay, I_WindowOverlay } from 'features/WindowOverlayManager/models'
 import { T_CharacterAction } from 'models/shared/game/character'
+import { T_BaseDummy } from 'models/shared/game/dummy'
 
 interface I_InitialState {
   overlays: I_WindowOverlay[]
@@ -82,10 +83,7 @@ export const gameBattlefieldSlice = createSlice({
       state.dummyCreator = { actions: [], avatar: '' }
     },
 
-    setDummyEditor: (
-      state,
-      action: PayloadAction<{ actions: T_CharacterAction[]; avatar: string }>,
-    ) => {
+    setDummyEditor: (state, action: PayloadAction<T_BaseDummy>) => {
       state.dummyEditor = {
         avatar: action.payload.avatar,
         actions: action.payload.actions,

@@ -12,6 +12,10 @@ export const initialOverlayStateSlice: I_WindowOverlay[] = [
   },
   {
     isOpen: false,
+    name: E_WindowOverlay.updateDummy,
+  },
+  {
+    isOpen: false,
     name: E_WindowOverlay.actionsEditor,
   },
   {

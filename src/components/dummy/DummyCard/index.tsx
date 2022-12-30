@@ -7,6 +7,8 @@ import SwordsIcon from 'assets/icons/app/swords.svg'
 import SkullCrossbones from 'assets/icons/game/skull-crossbones.svg'
 import { CharacterBarText } from 'components/Character'
 import { AvatarPicker, EditableText } from 'components/game'
+import { gameBattlefieldActions } from 'features/WindowManager/components/Battlefield/slice'
+import { E_WindowOverlay } from 'features/WindowOverlayManager/models'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { useStoreSelector } from 'hooks/useStoreSelector'
 import { t } from 'languages'
@@ -28,6 +30,21 @@ export const DummyCard = ({ dummy, field }: I_DummyCardProps) => {
 
   const handleAddDummyToBattlefield = () => {
     dispatch(roomActions.emitAddDummyToFieldInBattlefieldWindow({ dummy, field }))
+  }
+
+  const handleOpenDummyEditor = () => {
+    dispatch(gameBattlefieldActions.setDummyEditor(dummy))
+    dispatch(
+      gameBattlefieldActions.openBattlefieldWindowOverlay({
+        isOpen: true,
+        name: E_WindowOverlay.updateDummy,
+        payload: dummy.id,
+      }),
+    )
+  }
+
+  const handleRemoveDummiesFromField = () => {
+    dispatch(roomActions.emitRemoveDummiesOnFieldInBattlefieldWindow({ dummyId: dummy.id, field }))
   }
 
   const handleChangeDummyName = (value: string) => {
@@ -87,7 +104,7 @@ export const DummyCard = ({ dummy, field }: I_DummyCardProps) => {
         <S.InfoWrapper>
           <S.BattlefieldAction>
             <Tippy content={t('battlefieldEditorOverlay.actions.kill')}>
-              <C.Control>
+              <C.Control onClick={handleRemoveDummiesFromField}>
                 <SkullCrossbones />
               </C.Control>
             </Tippy>
@@ -98,7 +115,7 @@ export const DummyCard = ({ dummy, field }: I_DummyCardProps) => {
             </Tippy>
           </S.BattlefieldAction>
           <Tippy content={t('battlefieldEditorOverlay.actions.edit')}>
-            <C.Control>
+            <C.Control onClick={handleOpenDummyEditor}>
               <EditIcon />
             </C.Control>
           </Tippy>

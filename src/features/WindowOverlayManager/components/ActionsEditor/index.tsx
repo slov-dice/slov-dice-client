@@ -94,7 +94,6 @@ export const ActionsEditor = () => {
           )
         }
       }
-      // Добавление на поле боя
       if (location === E_Window.battlefield) {
         if (overlayPayload?.startsWith('dummy')) {
           dispatch(

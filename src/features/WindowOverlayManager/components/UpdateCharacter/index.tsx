@@ -28,16 +28,16 @@ import { calculateBarDimension } from 'utils/helpers/calculates'
 
 export const UpdateCharacterOverlay = () => {
   const dispatch = useStoreDispatch()
-  const payload = useStoreSelector(
-    (state) =>
-      state.gameCharacters.overlays.find(
+  const overlayPayload = useStoreSelector(
+    (store) =>
+      store.gameCharacters.overlays.find(
         (overlay) => overlay.name === E_WindowOverlay.updateCharacter,
       )?.payload,
   )
 
   const { characterStore, characterEditor, settings } = useStoreSelector((store) => ({
     characterStore: store.room.game.characters.window.characters.find(
-      (character) => character.id === payload,
+      (character) => character.id === overlayPayload,
     ),
     settings: store.room.game.characters.settings,
     characterEditor: store.gameCharacters.characterEditor,
