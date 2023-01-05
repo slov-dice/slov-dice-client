@@ -149,7 +149,12 @@
     "level": "Level",
     "createCharacter": "Create Character",
     "addEffect": "Add Effect",
-    "editActions": "Actions Editor"
+    "editActions": "Actions Editor",
+    "editCharacter": "Edit Character"
+  },
+  "windowBattlefield": {
+    "kill": "Do you want to kill me?",
+    "pick": "Pick the action"
   },
   "createCharacterOverlay": {
     "title": "Character Creator",
@@ -158,11 +163,35 @@
       "cancel": "Cancel"
     }
   },
+  "createDummyOverlay": {
+    "title": "Dummy Creator",
+    "fields": {
+      "max": "max"
+    },
+    "actions": {
+      "create": "Create",
+      "cancel": "Cancel"
+    }
+  },
+  "updateDummyOverlay": {
+    "title": "Dummy Editor",
+    "fields": {
+      "max": "max"
+    },
+    "actions": {
+      "cancel": "Cancel",
+      "save": "Save",
+      "remove": "Remove Dummy"
+    }
+  },
   "updateCharacterEffectOverlay": {
     "title": "Character Effects"
   },
   "pickCharacterAvatarOverlay": {
     "title": "Character avatar"
+  },
+  "pickDummyAvatarOverlay": {
+    "title": "Dummy avatar"
   },
   "updateCharacterOverlay": {
     "title": "Character Editor",
@@ -172,7 +201,7 @@
       "remove": "Remove Character"
     }
   },
-  "battlefieldActionsEditor": {
+  "actionsEditor": {
     "title": "Actions Editor",
     "fields": {
       "title": "Title",
@@ -184,6 +213,18 @@
       "add": "Add",
       "save": "Save",
       "cancel": "Cancel"
+    }
+  },
+  "battlefieldEditorOverlay": {
+    "title": "Field Editor",
+    "fields": {
+      "max": "max"
+    },
+    "actions": {
+      "add": "Add Dummy",
+      "kill": "Remove copies of the dummy from the field",
+      "deploy": "Add to the field",
+      "edit": "Edit Dummy"
     }
   },
   "auth": {

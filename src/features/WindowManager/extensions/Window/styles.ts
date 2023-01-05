@@ -110,6 +110,7 @@ interface I_ResizerProps {
 }
 
 export const Resizer = styled.button<I_ResizerProps>`
+  user-select: none;
   position: absolute;
 
   width: 14px;

@@ -1,13 +1,19 @@
 import { useCallback } from 'react'
 
+import { gameCharactersActions } from './slice'
 import * as S from './styles'
 
-import { AddCharacterCard, CharacterCard } from 'components/Character'
+import PlusIcon from 'assets/icons/app/plus.svg'
+import { CharacterCard } from 'components/Character'
+import { AddCard } from 'components/game'
+import { E_Window } from 'features/WindowManager/models'
 import { WindowOverlayManager } from 'features/WindowOverlayManager'
+import { WindowOverlayManagerProvider } from 'features/WindowOverlayManager/context'
 import { E_WindowOverlay } from 'features/WindowOverlayManager/models'
-import { useActions } from 'hooks/useActions'
 import { useEventListener } from 'hooks/useEventListener'
+import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { useStoreSelector } from 'hooks/useStoreSelector'
+import { t } from 'languages'
 
 export const CharactersContent = () => {
   const { characters, settingsBars, settingsSpecials, overlays } = useStoreSelector((store) => ({
@@ -17,33 +23,44 @@ export const CharactersContent = () => {
     overlays: store.gameCharacters.overlays,
   }))
 
-  const { openCharacterWindowOverlay, closeLastCharacterWindowOverlay, setCharacterCreator } =
-    useActions()
+  const dispatch = useStoreDispatch()
 
   const handleOpenCreateCharacterOverlay = () => {
-    setCharacterCreator({ settingsBars, settingsSpecials })
-    openCharacterWindowOverlay({ name: E_WindowOverlay.createCharacter, isOpen: true })
+    dispatch(gameCharactersActions.setCharacterCreator({ settingsBars, settingsSpecials }))
+    dispatch(
+      dispatch(
+        gameCharactersActions.openCharacterWindowOverlay({
+          name: E_WindowOverlay.createCharacter,
+          isOpen: true,
+        }),
+      ),
+    )
   }
 
   const handleEsc = useCallback(
     (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
-        closeLastCharacterWindowOverlay()
+        dispatch(gameCharactersActions.closeLastCharacterWindowOverlay())
       }
     },
-    [closeLastCharacterWindowOverlay],
+    [dispatch],
   )
   useEventListener('keydown', handleEsc)
 
   return (
-    <>
+    <WindowOverlayManagerProvider location={E_Window.characters}>
       <WindowOverlayManager overlays={overlays} />
       <S.WindowContentWrapper>
         {characters.map((character) => (
           <CharacterCard key={character.id} character={character} />
         ))}
-        <AddCharacterCard onClick={handleOpenCreateCharacterOverlay} />
+        <AddCard onClick={handleOpenCreateCharacterOverlay}>
+          <span>{t('windowCharacters.createCharacter')}</span>
+          <div>
+            <PlusIcon />
+          </div>
+        </AddCard>
       </S.WindowContentWrapper>
-    </>
+    </WindowOverlayManagerProvider>
   )
 }

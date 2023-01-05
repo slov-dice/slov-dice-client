@@ -3,7 +3,10 @@ import styled from 'styled-components'
 
 import { cardAttrs } from './motion'
 
-export const Card = styled(motion.div).attrs(({ theme }) => cardAttrs(theme))`
+export const Card = styled(motion.div).attrs(({ theme }) => cardAttrs(theme))<{
+  width?: number
+  height?: number
+}>`
   cursor: pointer;
   user-select: none;
 
@@ -13,27 +16,28 @@ export const Card = styled(motion.div).attrs(({ theme }) => cardAttrs(theme))`
   align-items: center;
   justify-content: center;
 
-  width: 360px;
+  width: ${({ width }) => (width ? width : 360)}px;
   height: fit-content;
-  min-height: 309px;
+  min-height: ${({ height }) => (height ? height : 309)}px;
   padding: 8px;
 
   font-size: 24px;
+  text-align: center;
   text-transform: uppercase;
 
   background-color: ${({ theme }) => theme.colors.white_05};
   border-radius: 8px;
   box-shadow: rgba(0, 0, 0, 16%) 0 3px 6px, rgba(0, 0, 0, 23%) 0 3px 6px;
-`
 
-export const CardIcon = styled.div`
-  width: 72px;
-  height: 72px;
+  div {
+    width: 72px;
+    height: 72px;
 
-  fill: ${({ theme }) => theme.colors.white};
+    fill: ${({ theme }) => theme.colors.white};
 
-  svg {
-    width: 100%;
-    height: 100%;
+    svg {
+      width: 100%;
+      height: 100%;
+    }
   }
 `

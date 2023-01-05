@@ -1,6 +1,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { toast } from 'react-toastify'
 
+import { gameBattlefieldActions } from 'features/WindowManager/components/Battlefield/slice'
 import { E_Subscribe, I_SubscriptionData } from 'models/shared/socket/lobbyRooms'
 import { socket } from 'services/socket'
 import { joinRoom } from 'store/profile'
@@ -30,6 +31,8 @@ export const subscribe = createAsyncThunk('roomPage', async (_, { dispatch }) =>
         roomActions.setCharactersWindowSettingsBars({
           settingsBars: data.bars,
           characters: data.characters,
+          masterDummies: data.masterDummies,
+          playersDummies: data.playersDummies,
         }),
       )
     },
@@ -88,6 +91,67 @@ export const subscribe = createAsyncThunk('roomPage', async (_, { dispatch }) =>
       dispatch(roomActions.setRemovedCharacterInCharactersWindow(data))
     },
   )
+
+  socket.on(
+    E_Subscribe.getCreatedDummyInBattlefieldWindow,
+    (data: I_SubscriptionData[E_Subscribe.getCreatedDummyInBattlefieldWindow]) => {
+      dispatch(
+        roomActions.setCreatedDummyInBattlefieldWindow({ dummy: data.dummy, field: data.field }),
+      )
+    },
+  )
+
+  socket.on(
+    E_Subscribe.getDummiesOnFieldInBattlefieldWindow,
+    (data: I_SubscriptionData[E_Subscribe.getDummiesOnFieldInBattlefieldWindow]) => {
+      dispatch(
+        roomActions.setDummiesOnFieldInBattlefieldWindow({
+          dummies: data.dummies,
+          field: data.field,
+        }),
+      )
+    },
+  )
+
+  socket.on(
+    E_Subscribe.getInitiationActionInBattlefieldWindow,
+    (data: I_SubscriptionData[E_Subscribe.getInitiationActionInBattlefieldWindow]) => {
+      dispatch(
+        roomActions.setCharactersAndDummies({
+          characters: data.characters,
+          masterField: data.masterField,
+          playersField: data.playersField,
+        }),
+      )
+      dispatch(
+        gameBattlefieldActions.setAction({
+          from: data.from,
+          to: data.to,
+        }),
+      )
+    },
+  )
+
+  socket.on(
+    E_Subscribe.getUpdatedDummyInBattlefieldWindow,
+    (data: I_SubscriptionData[E_Subscribe.getUpdatedDummyInBattlefieldWindow]) => {
+      dispatch(
+        roomActions.setUpdatedDummyInBattlefieldWindow({ dummy: data.dummy, field: data.field }),
+      )
+    },
+  )
+
+  socket.on(
+    E_Subscribe.getRemovedDummyInBattlefieldWindow,
+    (data: I_SubscriptionData[E_Subscribe.getRemovedDummyInBattlefieldWindow]) => {
+      dispatch(
+        roomActions.setRemovedDummyInBattlefieldWindow({
+          dummyId: data.dummyId,
+          field: data.field,
+        }),
+      )
+    },
+  )
 })
 
 export const unsubscribe = () => {
@@ -98,4 +162,9 @@ export const unsubscribe = () => {
   socket.off(E_Subscribe.getCreatedCharacterInCharactersWindow)
   socket.off(E_Subscribe.getUpdatedCharacterInCharactersWindow)
   socket.off(E_Subscribe.getRemovedCharacterInCharactersWindow)
+  socket.off(E_Subscribe.getCreatedDummyInBattlefieldWindow)
+  socket.off(E_Subscribe.getDummiesOnFieldInBattlefieldWindow)
+  socket.off(E_Subscribe.getInitiationActionInBattlefieldWindow)
+  socket.off(E_Subscribe.getUpdatedDummyInBattlefieldWindow)
+  socket.off(E_Subscribe.getRemovedDummyInBattlefieldWindow)
 }

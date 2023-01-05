@@ -2,6 +2,8 @@ import { motion } from 'framer-motion'
 import Tilt from 'react-parallax-tilt'
 import styled, { css } from 'styled-components'
 
+import { actionAnimationDuration } from './'
+
 import { acting, glowSpin, shake } from 'styles/animations'
 import * as C from 'styles/components'
 
@@ -168,13 +170,13 @@ export const CardWrapper = styled(Tilt).attrs({
   ${({ isActionTarget }) =>
     isActionTarget &&
     css`
-      animation: ${shake} 1s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+      animation: ${shake} ${actionAnimationDuration}ms cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
     `}
 
     ${({ isActionInitiator }) =>
     isActionInitiator &&
     css`
-      animation: ${acting} 0.5s linear 1;
+      animation: ${acting} 500ms linear 1;
     `}
 `
 
@@ -293,8 +295,13 @@ export const BackButton = styled(C.Control)`
   z-index: 10;
   top: 8px;
   left: 8px;
+`
 
-  border: 1px solid ${({ theme }) => theme.colors.white_10};
+export const EditButton = styled(C.Control)`
+  position: absolute;
+  z-index: 10;
+  top: 8px;
+  right: 8px;
 `
 
 export const CardInfoContent = styled.div`
@@ -335,4 +342,13 @@ export const CardAvatar = styled.img`
   object-fit: cover;
   border-top-left-radius: 2px;
   border-top-right-radius: 2px;
+`
+
+export const CardFrontActions = styled.div`
+  display: flex;
+  justify-content: flex-end;
+
+  padding-top: 8px;
+
+  border-top: 1px dashed ${({ theme }) => theme.colors.primary};
 `

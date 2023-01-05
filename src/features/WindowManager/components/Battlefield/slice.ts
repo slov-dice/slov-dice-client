@@ -1,9 +1,16 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
+import { initialOverlayStateSlice, initialActiveCardActionSlice } from './data'
+
+import { E_WindowOverlay, I_WindowOverlay } from 'features/WindowOverlayManager/models'
+import { T_CharacterAction } from 'models/shared/game/character'
+import { T_BaseDummy } from 'models/shared/game/dummy'
+
 interface I_InitialState {
+  overlays: I_WindowOverlay[]
   activeCard: {
     id: string
-    action: string
+    action: T_CharacterAction
   }
   action: {
     from: {
@@ -13,12 +20,22 @@ interface I_InitialState {
       id: string
     }
   }
+
+  dummyEditor: {
+    avatar: string
+    actions: T_CharacterAction[]
+  }
+  dummyCreator: {
+    avatar: string
+    actions: T_CharacterAction[]
+  }
 }
 
 const initialState: I_InitialState = {
+  overlays: initialOverlayStateSlice,
   activeCard: {
     id: '',
-    action: '',
+    action: initialActiveCardActionSlice,
   },
   action: {
     from: {
@@ -27,6 +44,14 @@ const initialState: I_InitialState = {
     to: {
       id: '',
     },
+  },
+  dummyEditor: {
+    avatar: '',
+    actions: [],
+  },
+  dummyCreator: {
+    avatar: '',
+    actions: [],
   },
 }
 
@@ -38,13 +63,13 @@ export const gameBattlefieldSlice = createSlice({
       state,
       action: PayloadAction<{
         id: string
-        action: string
+        action: T_CharacterAction
       }>,
     ) => {
       state.activeCard = action.payload
     },
     disableActiveCard: (state) => {
-      state.activeCard = { id: '', action: '' }
+      state.activeCard = { id: '', action: initialActiveCardActionSlice }
     },
 
     setAction: (state, action: PayloadAction<{ from: { id: string }; to: { id: string } }>) => {
@@ -52,6 +77,59 @@ export const gameBattlefieldSlice = createSlice({
     },
     disableAction: (state) => {
       state.action = { from: { id: '' }, to: { id: '' } }
+    },
+
+    setDummyCreator: (state) => {
+      state.dummyCreator = { actions: [], avatar: '' }
+    },
+
+    setDummyEditor: (state, action: PayloadAction<T_BaseDummy>) => {
+      state.dummyEditor = {
+        avatar: action.payload.avatar,
+        actions: action.payload.actions,
+      }
+    },
+
+    setDummyAvatar: (state, action: PayloadAction<{ characterId: string; avatar: string }>) => {
+      // Если создаётся болванка
+      if (action.payload.characterId === 'dummyCreator') {
+        state.dummyCreator.avatar = action.payload.avatar
+        return
+      }
+
+      // Если болванка редактируется
+      if (action.payload.characterId === 'dummyEditor') {
+        state.dummyEditor.avatar = action.payload.avatar
+        return
+      }
+    },
+
+    setDummyActions: (
+      state,
+      action: PayloadAction<{ characterId: string; actions: T_CharacterAction[] }>,
+    ) => {
+      if (action.payload.characterId === 'dummyCreator') {
+        state.dummyCreator.actions = action.payload.actions
+      }
+      if (action.payload.characterId === 'dummyEditor') {
+        state.dummyEditor.actions = action.payload.actions
+      }
+    },
+
+    openBattlefieldWindowOverlay: (state, action: PayloadAction<I_WindowOverlay>) => {
+      state.overlays = state.overlays.map((overlay) =>
+        overlay.name === action.payload.name ? action.payload : overlay,
+      )
+    },
+
+    closeBattlefieldWindowOverlay: (state, action: PayloadAction<E_WindowOverlay>) => {
+      state.overlays = state.overlays.map((overlay) =>
+        overlay.name === action.payload ? { ...overlay, isOpen: false } : overlay,
+      )
+    },
+
+    closeLastBattlefieldWindowOverlay: (state) => {
+      state.overlays = state.overlays.map((overlay) => ({ ...overlay, isOpen: false }))
     },
   },
 })

@@ -149,7 +149,12 @@
     "level": "Уровень",
     "createCharacter": "Создать персонажа",
     "addEffect": "Добавить эффект",
-    "editActions": "Редактор действий"
+    "editActions": "Редактор действий",
+    "editCharacter": "Редактировать персонажа"
+  },
+  "windowBattlefield": {
+    "kill": "Ты хочешь меня убить?",
+    "pick": "Выберите действие"
   },
   "createCharacterOverlay": {
     "title": "Создание персонажа",
@@ -158,11 +163,35 @@
       "cancel": "Отмена"
     }
   },
+  "createDummyOverlay": {
+    "title": "Создание болванки",
+    "fields": {
+      "max": "Макс."
+    },
+    "actions": {
+      "create": "Создать",
+      "cancel": "Отмена"
+    }
+  },
+  "updateDummyOverlay": {
+    "title": "Редактор болванки",
+    "fields": {
+      "max": "Макс."
+    },
+    "actions": {
+      "cancel": "Отмена",
+      "save": "Сохранить",
+      "remove": "Удалить болванку"
+    }
+  },
   "updateCharacterEffectOverlay": {
     "title": "Эффекты персонажа"
   },
   "pickCharacterAvatarOverlay": {
     "title": "Аватар персонажа"
+  },
+  "pickDummyAvatarOverlay": {
+    "title": "Аватар болванки"
   },
   "updateCharacterOverlay": {
     "title": "Редактирование персонажа",
@@ -172,7 +201,7 @@
       "remove": "Удалить персонажа"
     }
   },
-  "battlefieldActionsEditor": {
+  "actionsEditor": {
     "title": "Редактор действий",
     "fields": {
       "title": "Название",
@@ -184,6 +213,18 @@
       "add": "Добавить",
       "save": "Сохранить",
       "cancel": "Отмена"
+    }
+  },
+  "battlefieldEditorOverlay": {
+    "title": "Редактор поля",
+    "fields": {
+      "max": "Макс."
+    },
+    "actions": {
+      "add": "Добавить болванку",
+      "kill": "Удалить экземпляры болванки с поля",
+      "deploy": "Добавить на поле",
+      "edit": "Редактировать болванку"
     }
   },
   "auth": {

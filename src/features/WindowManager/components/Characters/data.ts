@@ -1,6 +1,6 @@
 import { E_WindowOverlay, I_WindowOverlay } from 'features/WindowOverlayManager/models'
 
-export const initialStateSlice: I_WindowOverlay[] = [
+export const initialOverlayStateSlice: I_WindowOverlay[] = [
   {
     isOpen: false,
     name: E_WindowOverlay.createCharacter,
@@ -19,6 +19,6 @@ export const initialStateSlice: I_WindowOverlay[] = [
   },
   {
     isOpen: false,
-    name: E_WindowOverlay.battlefieldActionsEditor,
+    name: E_WindowOverlay.actionsEditor,
   },
 ]

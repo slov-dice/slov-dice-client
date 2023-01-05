@@ -8,8 +8,12 @@ export interface I_WindowOverlay {
 
 export enum E_WindowOverlay {
   createCharacter = 'createCharacter',
+  createDummy = 'createDummy',
   updateCharacter = 'updateCharacter',
   pickCharacterAvatar = 'pickCharacterAvatar',
   updateCharacterEffect = 'updateCharacterEffect',
-  battlefieldActionsEditor = 'battlefieldActionsEditor',
+  actionsEditor = 'actionsEditor',
+  battlefieldEditor = 'battlefieldEditor',
+  pickDummyAvatar = 'pickDummyAvatar',
+  updateDummy = 'updateDummy',
 }

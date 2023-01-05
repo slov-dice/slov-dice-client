@@ -1,3 +1,4 @@
+import Tippy from '@tippyjs/react'
 import { AnimatePresence } from 'framer-motion'
 import { useState, useRef, useMemo, useEffect } from 'react'
 import ReactParallaxTilt from 'react-parallax-tilt'
@@ -6,13 +7,18 @@ import * as S from './styles'
 
 import ActionIcon from 'assets/icons/app/action.svg'
 import BackIcon from 'assets/icons/app/arrow-left.svg'
-import Monster1Image from 'assets/images/mon1.png'
+import SkullCrossbones from 'assets/icons/game/skull-crossbones.svg'
+import Monster1Image from 'assets/images/dummies/dummy1.png'
 import { Button } from 'components/Buttons'
 import { CharacterBar } from 'components/Character'
 import { gameBattlefieldActions } from 'features/WindowManager/components/Battlefield/slice'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { useStoreSelector } from 'hooks/useStoreSelector'
-import { T_CharacterBar } from 'models/shared/game/character'
+import { t } from 'languages'
+import { E_Field } from 'models/shared/game/battlefield'
+import { T_CharacterAction, T_CharacterBar, T_CharacterBarId } from 'models/shared/game/character'
+import { roomActions } from 'store/room'
+import * as C from 'styles/components'
 import { getBar } from 'utils/game/effects'
 
 interface I_BattlefieldCardProps {
@@ -20,9 +26,24 @@ interface I_BattlefieldCardProps {
   avatar: string
   bars: T_CharacterBar[]
   id: string
+  subId?: string
+  actions: T_CharacterAction[]
+  isCharacter: boolean
+  field: E_Field
 }
 
-export const BattlefieldCard = ({ name, avatar, bars, id }: I_BattlefieldCardProps) => {
+export const actionAnimationDuration = 1000
+
+export const BattlefieldCard = ({
+  name,
+  avatar,
+  bars,
+  id,
+  actions,
+  isCharacter,
+  field,
+  subId,
+}: I_BattlefieldCardProps) => {
   const dispatch = useStoreDispatch()
 
   const [isFront, setIsFront] = useState(true)
@@ -34,13 +55,43 @@ export const BattlefieldCard = ({ name, avatar, bars, id }: I_BattlefieldCardPro
     action: store.gameBattlefield.action,
   }))
 
-  const handleActivate = (action: string) => () => {
+  const handleActivate = (action: T_CharacterAction) => () => {
     dispatch(gameBattlefieldActions.setActiveCard({ id, action }))
     setIsFront(true)
   }
 
   const handleDisable = () => {
     dispatch(gameBattlefieldActions.disableActiveCard())
+  }
+
+  const handleChangeCharacterBar = (barId: T_CharacterBarId, value: number) => {
+    if (isCharacter) {
+      dispatch(
+        roomActions.emitUpdateCharacterFieldInCharactersWindow({
+          characterId: id,
+          field: 'bars',
+          value,
+          subFieldId: barId,
+        }),
+      )
+    }
+    if (!isCharacter && subId) {
+      dispatch(
+        roomActions.emitUpdateDummyFieldOnFieldInBattlefieldWindow({
+          battlefield: field,
+          dummySubId: subId,
+          value,
+          field: 'barsCurrent',
+          subFieldId: barId,
+        }),
+      )
+    }
+  }
+
+  const handleKillDummyFromField = () => {
+    if (subId) {
+      dispatch(roomActions.emitRemoveDummyOnFieldInBattlefieldWindow({ dummySubId: subId, field }))
+    }
   }
 
   const isActive = useMemo(() => activeCard.id === id, [activeCard.id, id])
@@ -52,7 +103,7 @@ export const BattlefieldCard = ({ name, avatar, bars, id }: I_BattlefieldCardPro
     if (isActionTarget) {
       setTimeout(() => {
         dispatch(gameBattlefieldActions.disableAction())
-      }, 1000)
+      }, actionAnimationDuration)
     }
   }, [dispatch, isActionTarget])
 
@@ -91,11 +142,20 @@ export const BattlefieldCard = ({ name, avatar, bars, id }: I_BattlefieldCardPro
                     return (
                       <CharacterBar
                         key={bar.id}
-                        onChange={() => console.log(1)}
+                        onChange={handleChangeCharacterBar}
                         bar={{ ...bar, ...baseBar }}
                       />
                     )
                   })}
+                  {!isCharacter && (
+                    <S.CardFrontActions>
+                      <Tippy content={t('windowBattlefield.kill')}>
+                        <C.Control onClick={handleKillDummyFromField}>
+                          <SkullCrossbones />
+                        </C.Control>
+                      </Tippy>
+                    </S.CardFrontActions>
+                  )}
                 </S.CardInfoContent>
                 <S.Shadow />
               </S.CardInfoInner>
@@ -104,15 +164,18 @@ export const BattlefieldCard = ({ name, avatar, bars, id }: I_BattlefieldCardPro
                 <S.BackButton onClick={() => setIsFront(true)}>
                   <BackIcon />
                 </S.BackButton>
-                <S.CardTitle>Pick the action</S.CardTitle>
+
+                <S.CardTitle>{t('windowBattlefield.pick')}</S.CardTitle>
                 <S.CardActionsContent>
-                  <Button onClick={handleActivate('attack1')} mod={Button.mod.secondary}>
-                    attack1
-                  </Button>
-                  <Button onClick={handleActivate('attack2')} mod={Button.mod.secondary}>
-                    attack2
-                  </Button>
-                  <Button mod={Button.mod.secondary}>Edit actions</Button>
+                  {actions.map((action) => (
+                    <Button
+                      key={action.id}
+                      onClick={handleActivate(action)}
+                      mod={Button.mod.secondary}
+                    >
+                      {action.title}
+                    </Button>
+                  ))}
                 </S.CardActionsContent>
               </S.CardActionsInner>
             )}

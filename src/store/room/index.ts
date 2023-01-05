@@ -1,13 +1,16 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 import { E_RoomType, I_FullRoom, I_RoomMessage } from 'models/shared/app'
+import { E_Field } from 'models/shared/game/battlefield'
 import {
   T_BaseCharacterBar,
   T_BaseCharacterSpecial,
   T_BaseCharacterEffect,
   I_Character,
   T_CharacterId,
+  T_CharacterAction,
 } from 'models/shared/game/character'
+import { T_BaseDummy, T_Dummy, T_DummyId } from 'models/shared/game/dummy'
 import {
   E_Emit,
   I_EmitPayload,
@@ -35,6 +38,14 @@ const initialState: I_FullRoom = {
         bars: [],
         effects: [],
         specials: [],
+      },
+    },
+    battlefield: {
+      window: {
+        masterDummies: [],
+        masterField: [],
+        playersDummies: [],
+        playersField: [],
       },
     },
   },
@@ -86,10 +97,17 @@ export const roomSlice = createSlice({
     },
     setCharactersWindowSettingsBars: (
       state,
-      action: PayloadAction<{ settingsBars: T_BaseCharacterBar[]; characters: I_Character[] }>,
+      action: PayloadAction<{
+        settingsBars: T_BaseCharacterBar[]
+        characters: I_Character[]
+        masterDummies: T_BaseDummy[]
+        playersDummies: T_BaseDummy[]
+      }>,
     ) => {
       state.game.characters.settings.bars = action.payload.settingsBars
       state.game.characters.window.characters = action.payload.characters
+      state.game.battlefield.window.masterDummies = action.payload.masterDummies
+      state.game.battlefield.window.playersDummies = action.payload.playersDummies
     },
 
     emitUpdateCharactersWindowSettingsSpecials: (
@@ -195,6 +213,211 @@ export const roomSlice = createSlice({
       state.game.characters.window.characters = state.game.characters.window.characters.filter(
         (character) => character.id !== action.payload.characterId,
       )
+    },
+
+    // Battlefield Window
+    emitCreateDummyInBattlefield: (
+      state,
+      action: PayloadAction<{ dummy: T_BaseDummy; field: E_Field }>,
+    ) => {
+      const payload: I_EmitPayload[E_Emit.createDummyInBattlefieldWindow] = {
+        roomId: state.id,
+        dummy: action.payload.dummy,
+        field: action.payload.field,
+      }
+
+      socket.emit(E_Emit.createDummyInBattlefieldWindow, payload)
+    },
+    setCreatedDummyInBattlefieldWindow: (
+      state,
+      action: PayloadAction<{ dummy: T_BaseDummy; field: E_Field }>,
+    ) => {
+      if (action.payload.field === 'master') {
+        state.game.battlefield.window.masterDummies.push(action.payload.dummy)
+      }
+      if (action.payload.field === 'players') {
+        state.game.battlefield.window.playersDummies.push(action.payload.dummy)
+      }
+    },
+
+    emitAddDummyToFieldInBattlefieldWindow: (
+      state,
+      action: PayloadAction<{ dummy: T_BaseDummy; field: E_Field }>,
+    ) => {
+      const payload: I_EmitPayload[E_Emit.addDummyToFieldInBattlefieldWindow] = {
+        roomId: state.id,
+        dummy: action.payload.dummy,
+        field: action.payload.field,
+      }
+
+      socket.emit(E_Emit.addDummyToFieldInBattlefieldWindow, payload)
+    },
+    emitRemoveDummiesOnFieldInBattlefieldWindow: (
+      state,
+      action: PayloadAction<{ dummyId: T_DummyId; field: E_Field }>,
+    ) => {
+      const payload: I_EmitPayload[E_Emit.removeDummiesOnFieldInBattlefieldWindow] = {
+        roomId: state.id,
+        dummyId: action.payload.dummyId,
+        field: action.payload.field,
+      }
+
+      socket.emit(E_Emit.removeDummiesOnFieldInBattlefieldWindow, payload)
+    },
+    setDummiesOnFieldInBattlefieldWindow: (
+      state,
+      action: PayloadAction<{ dummies: T_Dummy[]; field: E_Field }>,
+    ) => {
+      if (action.payload.field === 'master') {
+        state.game.battlefield.window.masterField = action.payload.dummies
+      }
+      if (action.payload.field === 'players') {
+        state.game.battlefield.window.playersField = action.payload.dummies
+      }
+    },
+
+    emitMakeActionInBattlefieldWindow: (
+      state,
+      action: PayloadAction<{
+        action: T_CharacterAction
+        actionTarget: T_DummyId | T_CharacterId
+        actionInitiator: T_DummyId | T_CharacterId
+      }>,
+    ) => {
+      const payload: I_EmitPayload[E_Emit.makeActionInBattlefieldWindow] = {
+        roomId: state.id,
+        action: action.payload.action,
+        actionInitiator: action.payload.actionInitiator,
+        actionTarget: action.payload.actionTarget,
+      }
+
+      socket.emit(E_Emit.makeActionInBattlefieldWindow, payload)
+    },
+
+    setCharactersAndDummies: (
+      state,
+      action: PayloadAction<{
+        characters: I_Character[]
+        masterField: T_Dummy[]
+        playersField: T_Dummy[]
+      }>,
+    ) => {
+      state.game.characters.window.characters = action.payload.characters
+      state.game.battlefield.window.masterField = action.payload.masterField
+      state.game.battlefield.window.playersField = action.payload.playersField
+    },
+    emitUpdateDummyInBattlefieldWindow: (
+      state,
+      action: PayloadAction<{ field: E_Field; dummy: T_BaseDummy }>,
+    ) => {
+      const payload: I_EmitPayload[E_Emit.updateDummyInBattlefieldWindow] = {
+        roomId: state.id,
+        dummy: action.payload.dummy,
+        field: action.payload.field,
+      }
+
+      socket.emit(E_Emit.updateDummyInBattlefieldWindow, payload)
+    },
+    emitUpdateDummyFieldInBattlefieldWindow: (
+      state,
+      action: PayloadAction<{
+        dummyId: T_DummyId
+        battlefield: E_Field
+        field: string
+        value: string | number
+        subFieldId?: string
+      }>,
+    ) => {
+      const payload: I_EmitPayload[E_Emit.updateDummyFieldInBattlefieldWindow] = {
+        roomId: state.id,
+        dummyId: action.payload.dummyId,
+        battlefield: action.payload.battlefield,
+        field: action.payload.field,
+        value: action.payload.value,
+        subFieldId: action.payload.subFieldId,
+      }
+
+      socket.emit(E_Emit.updateDummyFieldInBattlefieldWindow, payload)
+    },
+
+    setUpdatedDummyInBattlefieldWindow: (
+      state,
+      action: PayloadAction<{ dummy: T_BaseDummy; field: E_Field }>,
+    ) => {
+      if (action.payload.field === E_Field.master) {
+        state.game.battlefield.window.masterDummies =
+          state.game.battlefield.window.masterDummies.map((dummy) =>
+            dummy.id === action.payload.dummy.id ? action.payload.dummy : dummy,
+          )
+      }
+      if (action.payload.field === E_Field.players) {
+        state.game.battlefield.window.playersDummies =
+          state.game.battlefield.window.playersDummies.map((dummy) =>
+            dummy.id === action.payload.dummy.id ? action.payload.dummy : dummy,
+          )
+      }
+    },
+
+    emitRemoveDummyInBattlefieldWindow: (
+      state,
+      action: PayloadAction<{ dummyId: T_DummyId; field: E_Field }>,
+    ) => {
+      const payload: I_EmitPayload[E_Emit.removeDummyInBattlefieldWindow] = {
+        roomId: state.id,
+        dummyId: action.payload.dummyId,
+        field: action.payload.field,
+      }
+
+      socket.emit(E_Emit.removeDummyInBattlefieldWindow, payload)
+    },
+    setRemovedDummyInBattlefieldWindow: (
+      state,
+      action: PayloadAction<{ dummyId: T_DummyId; field: E_Field }>,
+    ) => {
+      state.game.battlefield.window[
+        action.payload.field === E_Field.master ? 'masterDummies' : 'playersDummies'
+      ] = state.game.battlefield.window[
+        action.payload.field === E_Field.master ? 'masterDummies' : 'playersDummies'
+      ].filter((dummy) => dummy.id !== action.payload.dummyId)
+
+      state.game.battlefield.window[
+        action.payload.field === E_Field.master ? 'masterField' : 'playersField'
+      ] = state.game.battlefield.window[
+        action.payload.field === E_Field.master ? 'masterField' : 'playersField'
+      ].filter((dummy) => dummy.id !== action.payload.dummyId)
+    },
+    emitRemoveDummyOnFieldInBattlefieldWindow: (
+      state,
+      action: PayloadAction<{ dummySubId: string; field: E_Field }>,
+    ) => {
+      const payload: I_EmitPayload[E_Emit.removeDummyOnFieldInBattlefieldWindow] = {
+        roomId: state.id,
+        dummySubId: action.payload.dummySubId,
+        field: action.payload.field,
+      }
+
+      socket.emit(E_Emit.removeDummyOnFieldInBattlefieldWindow, payload)
+    },
+    emitUpdateDummyFieldOnFieldInBattlefieldWindow: (
+      state,
+      action: PayloadAction<{
+        dummySubId: string
+        battlefield: E_Field
+        field: string
+        value: number
+        subFieldId: string
+      }>,
+    ) => {
+      const payload: I_EmitPayload[E_Emit.updateDummyFieldOnFieldInBattlefieldWindow] = {
+        roomId: state.id,
+        field: action.payload.field,
+        dummySubId: action.payload.dummySubId,
+        battlefield: action.payload.battlefield,
+        value: action.payload.value,
+        subFieldId: action.payload.subFieldId,
+      }
+
+      socket.emit(E_Emit.updateDummyFieldOnFieldInBattlefieldWindow, payload)
     },
   },
 })
