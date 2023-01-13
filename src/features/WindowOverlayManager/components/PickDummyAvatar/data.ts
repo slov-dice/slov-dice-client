@@ -1,4 +1,5 @@
-import imageDummy1 from 'assets/images/dummies/dummy1.png'
-import imageDummy2 from 'assets/images/dummies/dummy2.png'
+const dummiesImages = import.meta.glob('../../../../../public/images/dummies/*.webp')
 
-export const dummiesAvatars = [imageDummy1, imageDummy2]
+export const dummiesAvatars = Object.keys(dummiesImages).map((path) =>
+  path.replace('/public', '').replace('../../../../..', ''),
+)

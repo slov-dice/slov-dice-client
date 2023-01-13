@@ -8,7 +8,6 @@ import * as S from './styles'
 import ActionIcon from 'assets/icons/app/action.svg'
 import BackIcon from 'assets/icons/app/arrow-left.svg'
 import SkullCrossbones from 'assets/icons/game/skull-crossbones.svg'
-import Monster1Image from 'assets/images/dummies/dummy1.png'
 import { Button } from 'components/Buttons'
 import { CharacterBar } from 'components/Character'
 import { gameBattlefieldActions } from 'features/WindowManager/components/Battlefield/slice'
@@ -135,7 +134,7 @@ export const BattlefieldCard = ({
                 <S.CardAction onClick={() => setIsFront(false)}>
                   <ActionIcon />
                 </S.CardAction>
-                <S.CardAvatar src={avatar || Monster1Image} alt='avatar' />
+                <S.CardAvatar src={avatar} alt='avatar' />
                 <S.CardInfoContent>
                   {bars.map((bar) => {
                     const baseBar = getBar(bar.id, settings.bars)
