@@ -12,7 +12,7 @@ import { E_WindowOverlay } from 'features/WindowOverlayManager/models'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { useStoreSelector } from 'hooks/useStoreSelector'
 import { t } from 'languages'
-import { E_Field } from 'models/shared/game/battlefield'
+import { E_Battlefield } from 'models/shared/game/battlefield'
 import { T_CharacterBarId } from 'models/shared/game/character'
 import { T_BaseDummy } from 'models/shared/game/dummy'
 import { roomActions } from 'store/room'
@@ -21,15 +21,15 @@ import { getBar } from 'utils/game/effects'
 
 interface I_DummyCardProps {
   dummy: T_BaseDummy
-  field: E_Field
+  battlefield: E_Battlefield
 }
 
-export const DummyCard = ({ dummy, field }: I_DummyCardProps) => {
+export const DummyCard = ({ dummy, battlefield }: I_DummyCardProps) => {
   const dispatch = useStoreDispatch()
   const settingsBars = useStoreSelector((store) => store.room.game.characters.settings.bars)
 
   const handleAddDummyToBattlefield = () => {
-    dispatch(roomActions.emitAddDummyToFieldInBattlefieldWindow({ dummy, field }))
+    dispatch(roomActions.emitAddDummyToBattlefield({ dummy, battlefield }))
   }
 
   const handleOpenDummyEditor = () => {
@@ -44,7 +44,9 @@ export const DummyCard = ({ dummy, field }: I_DummyCardProps) => {
   }
 
   const handleRemoveDummiesFromField = () => {
-    dispatch(roomActions.emitRemoveDummiesOnFieldInBattlefieldWindow({ dummyId: dummy.id, field }))
+    dispatch(
+      roomActions.emitRemoveDummiesOnFieldInBattlefieldWindow({ dummyId: dummy.id, battlefield }),
+    )
   }
 
   const handleChangeDummyName = (value: string) => {
@@ -53,7 +55,7 @@ export const DummyCard = ({ dummy, field }: I_DummyCardProps) => {
         value,
         field: 'name',
         dummyId: dummy.id,
-        battlefield: field,
+        battlefield,
       }),
     )
   }
@@ -64,7 +66,7 @@ export const DummyCard = ({ dummy, field }: I_DummyCardProps) => {
         value,
         field: 'barsMax',
         dummyId: dummy.id,
-        battlefield: field,
+        battlefield,
         subFieldId: id,
       }),
     )

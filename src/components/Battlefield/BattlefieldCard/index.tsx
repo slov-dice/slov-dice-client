@@ -14,7 +14,7 @@ import { gameBattlefieldActions } from 'features/WindowManager/components/Battle
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { useStoreSelector } from 'hooks/useStoreSelector'
 import { t } from 'languages'
-import { E_Field } from 'models/shared/game/battlefield'
+import { E_Battlefield } from 'models/shared/game/battlefield'
 import { T_CharacterAction, T_CharacterBar, T_CharacterBarId } from 'models/shared/game/character'
 import { roomActions } from 'store/room'
 import * as C from 'styles/components'
@@ -28,7 +28,7 @@ interface I_BattlefieldCardProps {
   subId?: string
   actions: T_CharacterAction[]
   isCharacter: boolean
-  field: E_Field
+  battlefield: E_Battlefield
 }
 
 export const actionAnimationDuration = 1000
@@ -40,7 +40,7 @@ export const BattlefieldCard = ({
   id,
   actions,
   isCharacter,
-  field,
+  battlefield,
   subId,
 }: I_BattlefieldCardProps) => {
   const dispatch = useStoreDispatch()
@@ -76,8 +76,8 @@ export const BattlefieldCard = ({
     }
     if (!isCharacter && subId) {
       dispatch(
-        roomActions.emitUpdateDummyFieldOnFieldInBattlefieldWindow({
-          battlefield: field,
+        roomActions.updateDummyFieldOnBattlefield({
+          battlefield,
           dummySubId: subId,
           value,
           field: 'barsCurrent',
@@ -89,7 +89,7 @@ export const BattlefieldCard = ({
 
   const handleKillDummyFromField = () => {
     if (subId) {
-      dispatch(roomActions.emitRemoveDummyOnFieldInBattlefieldWindow({ dummySubId: subId, field }))
+      dispatch(roomActions.emitRemoveDummyOnBattlefield({ dummySubId: subId, battlefield }))
     }
   }
 

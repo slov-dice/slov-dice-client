@@ -12,7 +12,7 @@ import { E_WindowOverlay } from 'features/WindowOverlayManager/models'
 import { useEventListener } from 'hooks/useEventListener'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { useStoreSelector } from 'hooks/useStoreSelector'
-import { E_Field } from 'models/shared/game/battlefield'
+import { E_Battlefield } from 'models/shared/game/battlefield'
 import { roomActions } from 'store/room'
 import { getDummy, getDummyBars } from 'utils/game/effects'
 
@@ -36,12 +36,12 @@ export const BattlefieldContent = () => {
     playersDummies: store.room.game.battlefield.window.playersDummies,
   }))
 
-  const handleOpenBattlefieldEditorOverlay = (field: E_Field) => () => {
+  const handleOpenBattlefieldEditorOverlay = (battlefield: E_Battlefield) => () => {
     dispatch(
       gameBattlefieldActions.openBattlefieldWindowOverlay({
         name: E_WindowOverlay.battlefieldEditor,
         isOpen: true,
-        payload: field,
+        payload: battlefield,
       }),
     )
   }
@@ -85,7 +85,7 @@ export const BattlefieldContent = () => {
       <WindowOverlayManager overlays={overlays} />
       <S.WindowContentWrapper>
         <S.FieldWrapper>
-          <S.MasterFieldEdit onClick={handleOpenBattlefieldEditorOverlay(E_Field.master)}>
+          <S.MasterFieldEdit onClick={handleOpenBattlefieldEditorOverlay(E_Battlefield.master)}>
             <EditIcon />
           </S.MasterFieldEdit>
           <S.CardsWrapper>
@@ -101,7 +101,7 @@ export const BattlefieldContent = () => {
                   bars={dummyBars}
                   avatar={baseDummy.avatar}
                   isCharacter={false}
-                  field={E_Field.master}
+                  battlefield={E_Battlefield.master}
                   subId={dummy.subId}
                 />
               )
@@ -110,7 +110,7 @@ export const BattlefieldContent = () => {
         </S.FieldWrapper>
 
         <S.FieldWrapper>
-          <S.PlayerFieldEdit onClick={handleOpenBattlefieldEditorOverlay(E_Field.players)}>
+          <S.PlayerFieldEdit onClick={handleOpenBattlefieldEditorOverlay(E_Battlefield.players)}>
             <EditIcon />
           </S.PlayerFieldEdit>
           <S.CardsWrapper>
@@ -123,7 +123,7 @@ export const BattlefieldContent = () => {
                 avatar={character.avatar}
                 actions={character.actions}
                 isCharacter
-                field={E_Field.players}
+                battlefield={E_Battlefield.players}
               />
             ))}
             {playersField.map((dummy) => {
@@ -138,7 +138,7 @@ export const BattlefieldContent = () => {
                   bars={dummyBars}
                   avatar={baseDummy.avatar}
                   isCharacter={false}
-                  field={E_Field.players}
+                  battlefield={E_Battlefield.players}
                   subId={dummy.subId}
                 />
               )

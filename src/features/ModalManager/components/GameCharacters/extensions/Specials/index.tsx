@@ -7,15 +7,16 @@ import CloseIcon from 'assets/icons/app/close.svg'
 import PlusIcon from 'assets/icons/app/plus.svg'
 import { Button } from 'components/Buttons'
 import { TextField } from 'components/InputFields'
-import { useActions } from 'hooks/useActions'
+import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { useStoreSelector } from 'hooks/useStoreSelector'
 import { t } from 'languages'
 import { T_BaseCharacterSpecial } from 'models/shared/game/character'
+import { roomActions } from 'store/room'
 import * as C from 'styles/components'
 
 export const SpecialsTab = () => {
   const settingsSpecials = useStoreSelector((store) => store.room.game.characters.settings.specials)
-  const { emitUpdateCharactersWindowSettingsSpecials } = useActions()
+  const dispatch = useStoreDispatch()
 
   const { control, register, handleSubmit } = useForm({
     defaultValues: { specials: settingsSpecials },
@@ -34,7 +35,7 @@ export const SpecialsTab = () => {
   }
 
   const handleUpdateSpecials = (data: { specials: T_BaseCharacterSpecial[] }) => {
-    emitUpdateCharactersWindowSettingsSpecials(data.specials)
+    dispatch(roomActions.emitUpdateCharactersSettingsSpecials(data.specials))
   }
 
   return (

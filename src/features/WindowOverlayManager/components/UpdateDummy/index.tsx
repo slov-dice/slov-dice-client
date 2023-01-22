@@ -14,7 +14,7 @@ import { E_WindowOverlay, I_WindowOverlay } from 'features/WindowOverlayManager/
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { useStoreSelector } from 'hooks/useStoreSelector'
 import { t } from 'languages'
-import { E_Field } from 'models/shared/game/battlefield'
+import { E_Battlefield } from 'models/shared/game/battlefield'
 import { T_BaseCharacterBar, T_CharacterBarId } from 'models/shared/game/character'
 import { roomActions } from 'store/room'
 import * as C from 'styles/components'
@@ -29,15 +29,15 @@ export const UpdateDummyOverlay = () => {
     (store) => store.gameBattlefield.overlays.find(findOverlay)?.payload,
   )
 
-  const field = useStoreSelector((store) =>
+  const battlefield = useStoreSelector((store) =>
     store.room.game.battlefield.window.masterDummies.find((dummy) => dummy.id === overlayPayload)
-      ? E_Field.master
-      : E_Field.players,
+      ? E_Battlefield.master
+      : E_Battlefield.players,
   )
 
   const { dummyStore, settingsBars, dummyEditor } = useStoreSelector((store) => ({
     dummyStore: store.room.game.battlefield.window[
-      field === E_Field.master ? 'masterDummies' : 'playersDummies'
+      battlefield === E_Battlefield.master ? 'masterDummies' : 'playersDummies'
     ].find((dummy) => dummy.id === overlayPayload),
     settingsBars: store.room.game.characters.settings.bars,
     dummyEditor: store.gameBattlefield.dummyEditor,
@@ -83,7 +83,7 @@ export const UpdateDummyOverlay = () => {
   const handleUpdateDummy = () => {
     dispatch(
       roomActions.emitUpdateDummyInBattlefieldWindow({
-        field: field,
+        battlefield,
         dummy: {
           ...dummy,
           ...dummyEditor,
@@ -94,7 +94,7 @@ export const UpdateDummyOverlay = () => {
   }
 
   const handleRemoveDummy = () => {
-    dispatch(roomActions.emitRemoveDummyInBattlefieldWindow({ dummyId: dummy.id, field }))
+    dispatch(roomActions.emitRemoveDummy({ dummyId: dummy.id, battlefield }))
     handleClose()
   }
 
