@@ -45,7 +45,7 @@ export const subscribe = createAsyncThunk('roomPage', async (_, { dispatch }) =>
       const message = data.message[language]
       toast[data.status](message)
       dispatch(
-        roomActions.setCharactersWindowSettingsSpecials({
+        roomActions.setCharactersSettingsSpecials({
           settingsSpecials: data.specials,
           characters: data.characters,
         }),
@@ -60,7 +60,7 @@ export const subscribe = createAsyncThunk('roomPage', async (_, { dispatch }) =>
       const message = data.message[language]
       toast[data.status](message)
       dispatch(
-        roomActions.setCharactersWindowSettingsEffects({
+        roomActions.setCharactersSettingsEffects({
           settingsEffects: data.effects,
           characters: data.characters,
         }),
@@ -74,21 +74,21 @@ export const subscribe = createAsyncThunk('roomPage', async (_, { dispatch }) =>
       const language = LocalStorage.getLanguage()
       const message = data.message[language]
       toast[data.status](message)
-      dispatch(roomActions.setCreatedCharacterInCharactersWindow(data.character))
+      dispatch(roomActions.setCreatedCharacter(data.character))
     },
   )
 
   socket.on(
     E_Subscribe.getUpdatedCharacter,
     (data: I_SubscriptionData[E_Subscribe.getUpdatedCharacter]) => {
-      dispatch(roomActions.setUpdatedCharacterInCharactersWindow(data.character))
+      dispatch(roomActions.setUpdatedCharacter(data.character))
     },
   )
 
   socket.on(
     E_Subscribe.getRemovedCharacter,
     (data: I_SubscriptionData[E_Subscribe.getRemovedCharacter]) => {
-      dispatch(roomActions.setRemovedCharacterInCharactersWindow(data))
+      dispatch(roomActions.setRemovedCharacter(data))
     },
   )
 
@@ -96,7 +96,7 @@ export const subscribe = createAsyncThunk('roomPage', async (_, { dispatch }) =>
     E_Subscribe.getCreatedDummy,
     (data: I_SubscriptionData[E_Subscribe.getCreatedDummy]) => {
       dispatch(
-        roomActions.setCreatedDummyInBattlefieldWindow({
+        roomActions.setCreatedDummy({
           dummy: data.dummy,
           battlefield: data.battlefield,
         }),
@@ -108,7 +108,7 @@ export const subscribe = createAsyncThunk('roomPage', async (_, { dispatch }) =>
     E_Subscribe.getDummiesOnBattlefield,
     (data: I_SubscriptionData[E_Subscribe.getDummiesOnBattlefield]) => {
       dispatch(
-        roomActions.setDummiesOnFieldInBattlefieldWindow({
+        roomActions.setDummiesOnBattlefield({
           dummies: data.dummies,
           battlefield: data.battlefield,
         }),
@@ -139,7 +139,7 @@ export const subscribe = createAsyncThunk('roomPage', async (_, { dispatch }) =>
     E_Subscribe.getUpdatedDummy,
     (data: I_SubscriptionData[E_Subscribe.getUpdatedDummy]) => {
       dispatch(
-        roomActions.setUpdatedDummyInBattlefieldWindow({
+        roomActions.setUpdatedDummy({
           dummy: data.dummy,
           battlefield: data.battlefield,
         }),
@@ -151,7 +151,7 @@ export const subscribe = createAsyncThunk('roomPage', async (_, { dispatch }) =>
     E_Subscribe.getRemovedDummy,
     (data: I_SubscriptionData[E_Subscribe.getRemovedDummy]) => {
       dispatch(
-        roomActions.setRemovedDummyInBattlefieldWindow({
+        roomActions.setRemovedDummy({
           dummyId: data.dummyId,
           battlefield: data.battlefield,
         }),

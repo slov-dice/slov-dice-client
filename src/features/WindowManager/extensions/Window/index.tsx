@@ -16,7 +16,8 @@ import ExpandIcon from 'assets/icons/app/expand.svg'
 import SettingsIcon from 'assets/icons/app/gear.svg'
 import MinusIcon from 'assets/icons/app/minus.svg'
 import PlusIcon from 'assets/icons/app/plus.svg'
-import { useActions } from 'hooks/useActions'
+import { windowManagerActions } from 'features/WindowManager/slice'
+import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { t } from 'languages'
 import { getAppIcon } from 'utils/icons/app'
 
@@ -35,8 +36,9 @@ export const Window = ({
   content,
   focused,
 }: I_WindowProps) => {
+  const dispatch = useStoreDispatch()
+
   const wrapperRef = useRef<HTMLDivElement>(null)
-  const { setWindowFocus } = useActions()
   const theme = useTheme()
   const dragControls = useDragControls()
 
@@ -93,7 +95,7 @@ export const Window = ({
   })
 
   const handleFocus = () => {
-    setWindowFocus(content)
+    dispatch(windowManagerActions.setWindowFocus(content))
   }
 
   return (

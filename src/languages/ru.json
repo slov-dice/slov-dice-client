@@ -80,7 +80,22 @@
       "title": "Настройки профиля"
     },
     "roomSettings": {
-      "title": "Настройки комнаты"
+      "title": "Настройки комнаты",
+      "tabs": {
+        "bars": {
+          "title": "Бары",
+          "fields": {
+            "name": "Название"
+          },
+          "actions": {
+            "add": "Добавить",
+            "save": "Сохранить"
+          }
+        },
+        "roomState": {
+          "title": "Состояние комнаты"
+        }
+      }
     },
     "restorePassword": {
       "title": "Восстановление пароля",
@@ -106,16 +121,6 @@
     "gameCharacters": {
       "title": "Настройки персонажей",
       "tabs": {
-        "bars": {
-          "title": "Бары",
-          "fields": {
-            "name": "Название"
-          },
-          "actions": {
-            "add": "Добавить",
-            "save": "Сохранить"
-          }
-        },
         "specials": {
           "title": "Характеристики",
           "fields": {

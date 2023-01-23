@@ -44,6 +44,8 @@ export const Option = styled.li<{ isSelected: boolean }>`
   height: 38px;
   padding: 8px;
 
+  white-space: nowrap;
+
   background: ${({ theme, isSelected }) =>
     isSelected ? theme.colors.primary_50 : theme.colors.white_05};
   border-radius: 5px;

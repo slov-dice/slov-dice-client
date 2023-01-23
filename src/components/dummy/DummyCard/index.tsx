@@ -29,7 +29,7 @@ export const DummyCard = ({ dummy, battlefield }: I_DummyCardProps) => {
   const settingsBars = useStoreSelector((store) => store.room.game.characters.settings.bars)
 
   const handleAddDummyToBattlefield = () => {
-    dispatch(roomActions.emitAddDummyToBattlefield({ dummy, battlefield }))
+    dispatch(roomActions.emitAddDummy({ dummy, battlefield }))
   }
 
   const handleOpenDummyEditor = () => {
@@ -44,14 +44,12 @@ export const DummyCard = ({ dummy, battlefield }: I_DummyCardProps) => {
   }
 
   const handleRemoveDummiesFromField = () => {
-    dispatch(
-      roomActions.emitRemoveDummiesOnFieldInBattlefieldWindow({ dummyId: dummy.id, battlefield }),
-    )
+    dispatch(roomActions.emitRemoveDummiesOnBattlefield({ dummyId: dummy.id, battlefield }))
   }
 
   const handleChangeDummyName = (value: string) => {
     dispatch(
-      roomActions.emitUpdateDummyFieldInBattlefieldWindow({
+      roomActions.emitUpdateDummyField({
         value,
         field: 'name',
         dummyId: dummy.id,
@@ -62,7 +60,7 @@ export const DummyCard = ({ dummy, battlefield }: I_DummyCardProps) => {
 
   const handleChangeDummyMaxBar = (id: T_CharacterBarId, value: number) => {
     dispatch(
-      roomActions.emitUpdateDummyFieldInBattlefieldWindow({
+      roomActions.emitUpdateDummyField({
         value,
         field: 'barsMax',
         dummyId: dummy.id,

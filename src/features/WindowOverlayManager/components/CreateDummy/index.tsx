@@ -72,7 +72,7 @@ export const CreateDummyOverlay = () => {
 
   const handleCreateDummy = () => {
     dispatch(
-      roomActions.emitCreateDummyInBattlefield({
+      roomActions.emitCreateDummy({
         battlefield: overlayPayload as E_Battlefield,
         dummy: {
           id: v4(),

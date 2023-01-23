@@ -16,7 +16,7 @@ import { openModal } from 'features/ModalManager/slice'
 import { E_Panels } from 'features/SidePanel/models'
 import { openSidePanel } from 'features/SidePanel/slice'
 import { E_Window } from 'features/WindowManager/models'
-import { useActions } from 'hooks/useActions'
+import { windowManagerActions } from 'features/WindowManager/slice'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { useStoreSelector } from 'hooks/useStoreSelector'
 import { E_Routes } from 'models/routes'
@@ -31,7 +31,6 @@ interface NavigationProps {
 export const Navigation = ({ toggleMenu }: NavigationProps) => {
   const navigate = useNavigate()
   const dispatch = useStoreDispatch()
-  const { openWindow } = useActions()
   const { statuses, roomId, isRoomPageOpen } = useStoreSelector((store) => ({
     statuses: store.profile.statuses,
     roomId: store.room.id,
@@ -57,7 +56,7 @@ export const Navigation = ({ toggleMenu }: NavigationProps) => {
     }
 
     if (item.actionType === E_TaskItemActionType.window) {
-      openWindow(item.actionPayload as E_Window)
+      dispatch(windowManagerActions.openWindow(item.actionPayload as E_Window))
     }
 
     if (item.actionType === E_TaskItemActionType.panel) {

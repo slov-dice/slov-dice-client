@@ -8,11 +8,12 @@ import PlusIcon from 'assets/icons/app/plus.svg'
 import { Button } from 'components/Buttons'
 import { TextField, TextareaField, CustomSelectField } from 'components/InputFields'
 import { T_CustomSelectOption } from 'components/InputFields/CustomSelectField/models'
-import { useActions } from 'hooks/useActions'
+import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { useStoreSelector } from 'hooks/useStoreSelector'
 import { t } from 'languages'
 import { E_EffectType, T_BaseCharacterEffect } from 'models/shared/game/character'
 import { E_EffectIcon } from 'models/shared/game/extra/effects'
+import { roomActions } from 'store/room'
 import * as C from 'styles/components'
 import { getGameIcon } from 'utils/game/effects/icons'
 
@@ -40,7 +41,7 @@ const optionsTypes: T_CustomSelectOption[] = [
 
 export const EffectsTab = () => {
   const settingsEffects = useStoreSelector((store) => store.room.game.characters.settings.effects)
-  const { emitUpdateCharactersWindowSettingsEffects } = useActions()
+  const dispatch = useStoreDispatch()
 
   const { control, register, handleSubmit } = useForm({
     defaultValues: { effects: settingsEffects },
@@ -79,7 +80,7 @@ export const EffectsTab = () => {
   }
 
   const handleUpdateEffects = (data: { effects: T_BaseCharacterEffect[] }) => {
-    emitUpdateCharactersWindowSettingsEffects(data.effects)
+    dispatch(roomActions.emitUpdateCharactersSettingsEffects(data.effects))
   }
 
   return (

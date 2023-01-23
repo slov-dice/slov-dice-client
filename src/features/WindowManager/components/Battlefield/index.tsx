@@ -61,7 +61,7 @@ export const BattlefieldContent = () => {
       if (activeCard.id) {
         if (e.target?.id) {
           dispatch(
-            roomActions.emitMakeActionInBattlefieldWindow({
+            roomActions.emitMakeActionInBattlefield({
               actionTarget: e.target.id,
               actionInitiator: activeCard.id,
               action: activeCard.action,

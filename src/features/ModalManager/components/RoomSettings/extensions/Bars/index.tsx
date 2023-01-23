@@ -7,15 +7,16 @@ import CloseIcon from 'assets/icons/app/close.svg'
 import PlusIcon from 'assets/icons/app/plus.svg'
 import { Button } from 'components/Buttons'
 import { ColorField, TextField } from 'components/InputFields'
-import { useActions } from 'hooks/useActions'
+import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { useStoreSelector } from 'hooks/useStoreSelector'
 import { t } from 'languages'
 import { T_BaseCharacterBar } from 'models/shared/game/character'
+import { roomActions } from 'store/room'
 import * as C from 'styles/components'
 
 export const BarsTab = () => {
   const settingsBars = useStoreSelector((store) => store.room.game.characters.settings.bars)
-  const { emitUpdateCharactersWindowSettingsBars } = useActions()
+  const dispatch = useStoreDispatch()
 
   const { control, register, handleSubmit } = useForm({ defaultValues: { bars: settingsBars } })
   const { fields, append, remove } = useFieldArray({
@@ -32,7 +33,7 @@ export const BarsTab = () => {
   }
 
   const handleUpdateBars = (data: { bars: T_BaseCharacterBar[] }) => {
-    emitUpdateCharactersWindowSettingsBars(data.bars)
+    dispatch(roomActions.emitUpdateSettingsBars(data.bars))
   }
 
   return (
@@ -42,7 +43,7 @@ export const BarsTab = () => {
           <S.BarBlock key={field.id}>
             <TextField
               {...register(`bars.${index}.name`)}
-              placeholder={t('modals.gameCharacters.tabs.bars.fields.name')}
+              placeholder={t('modals.roomSettings.tabs.bars.fields.name')}
             />
             <ColorField {...register(`bars.${index}.color`)} fullWidth />
             <S.BarRemove onClick={handleRemoveBar(index)}>
@@ -51,7 +52,7 @@ export const BarsTab = () => {
           </S.BarBlock>
         ))}
         <S.BarAdd onClick={handleAddBar}>
-          <div>{t('modals.gameCharacters.tabs.bars.actions.add')}</div>
+          <div>{t('modals.roomSettings.tabs.bars.actions.add')}</div>
           <PlusIcon />
         </S.BarAdd>
       </S.BarsWrapper>
@@ -60,7 +61,7 @@ export const BarsTab = () => {
 
       <S.TabPanelBottom>
         <Button onClick={handleSubmit(handleUpdateBars)}>
-          {t('modals.gameCharacters.tabs.bars.actions.save')}
+          {t('modals.roomSettings.tabs.bars.actions.save')}
         </Button>
       </S.TabPanelBottom>
     </S.TabPanel>

@@ -66,7 +66,7 @@ export const BattlefieldCard = ({
   const handleChangeCharacterBar = (barId: T_CharacterBarId, value: number) => {
     if (isCharacter) {
       dispatch(
-        roomActions.emitUpdateCharacterFieldInCharactersWindow({
+        roomActions.emitUpdateCharacterField({
           characterId: id,
           field: 'bars',
           value,
