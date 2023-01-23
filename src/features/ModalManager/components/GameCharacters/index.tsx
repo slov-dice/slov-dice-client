@@ -1,4 +1,4 @@
-import { BarsTab, EffectsTab, SpecialsTab } from './extensions'
+import { EffectsTab, SpecialsTab } from './extensions'
 import * as S from './styles'
 
 import CloseIcon from 'assets/icons/app/close.svg'
@@ -23,9 +23,6 @@ export const GameCharactersModal = () => {
       <C.Title>{t('modals.gameCharacters.title')}</C.Title>
       <S.ModalContent>
         <Tabs>
-          <Tab id='bars' tabTitle='modals.gameCharacters.tabs.bars.title'>
-            <BarsTab />
-          </Tab>
           <Tab id='specials' tabTitle='modals.gameCharacters.tabs.specials.title'>
             <SpecialsTab />
           </Tab>

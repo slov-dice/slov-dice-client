@@ -1,15 +1,5 @@
-import imageChar1 from 'assets/images/characters/char1.png'
-import imageChar2 from 'assets/images/characters/char2.png'
-import imageChar3 from 'assets/images/characters/char3.png'
-import imageChar4 from 'assets/images/characters/char4.png'
-import imageChar5 from 'assets/images/characters/char5.png'
-import imageChar6 from 'assets/images/characters/char6.png'
+const charactersImages = import.meta.glob('../../../../../public/images/characters/*.webp')
 
-export const characterAvatars = [
-  imageChar1,
-  imageChar2,
-  imageChar3,
-  imageChar4,
-  imageChar5,
-  imageChar6,
-]
+export const characterAvatars = Object.keys(charactersImages).map((path) =>
+  path.replace('/public', '').replace('../../../../..', ''),
+)

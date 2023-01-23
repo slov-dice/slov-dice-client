@@ -9,7 +9,7 @@ import { E_WindowOverlay } from 'features/WindowOverlayManager/models'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { useStoreSelector } from 'hooks/useStoreSelector'
 import { t } from 'languages'
-import { E_Field } from 'models/shared/game/battlefield'
+import { E_Battlefield } from 'models/shared/game/battlefield'
 import { roomActions } from 'store/room'
 import * as C from 'styles/components'
 
@@ -23,12 +23,18 @@ export const PickDummyAvatarOverlay = () => {
       )?.payload,
   )
 
-  const { dummyAvatar, field } = useStoreSelector((store) => {
+  const { dummyAvatar, battlefield } = useStoreSelector((store) => {
     if (overlayPayload === 'dummyCreator') {
-      return { dummyAvatar: store.gameBattlefield.dummyCreator.avatar, field: E_Field.master }
+      return {
+        dummyAvatar: store.gameBattlefield.dummyCreator.avatar,
+        battlefield: E_Battlefield.master,
+      }
     }
     if (overlayPayload === 'dummyEditor') {
-      return { dummyAvatar: store.gameBattlefield.dummyEditor.avatar, field: E_Field.master }
+      return {
+        dummyAvatar: store.gameBattlefield.dummyEditor.avatar,
+        battlefield: E_Battlefield.master,
+      }
     }
     const masterDummyAvatar = store.room.game.battlefield.window.masterDummies.find(
       (dummy) => dummy.id === overlayPayload,
@@ -39,7 +45,7 @@ export const PickDummyAvatarOverlay = () => {
         store.room.game.battlefield.window.playersDummies.find(
           (dummy) => dummy.id === overlayPayload,
         )?.avatar,
-      field: masterDummyAvatar ? E_Field.master : E_Field.players,
+      field: masterDummyAvatar ? E_Battlefield.master : E_Battlefield.players,
     }
   })
 
@@ -48,17 +54,17 @@ export const PickDummyAvatarOverlay = () => {
   }, [dispatch])
 
   const handlePickAvatar = (avatar: string) => () => {
-    if (overlayPayload) {
+    if (overlayPayload && battlefield) {
       if (overlayPayload === 'dummyCreator' || overlayPayload === 'dummyEditor') {
         dispatch(gameBattlefieldActions.setDummyAvatar({ characterId: overlayPayload, avatar }))
         return
       }
       dispatch(
-        roomActions.emitUpdateDummyFieldInBattlefieldWindow({
+        roomActions.emitUpdateDummyField({
           dummyId: overlayPayload,
           field: 'avatar',
           value: avatar,
-          battlefield: field,
+          battlefield,
         }),
       )
     }

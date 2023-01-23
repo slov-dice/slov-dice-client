@@ -88,7 +88,7 @@ export const CreateCharacterOverlay = () => {
 
   const handleCreateCharacter = () => {
     dispatch(
-      roomActions.emitCreateCharacterInCharactersWindow({
+      roomActions.emitCreateCharacter({
         id: v4(),
         ...character,
         ...characterCreator,

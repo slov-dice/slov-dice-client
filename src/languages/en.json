@@ -80,7 +80,22 @@
       "title": "Profile settings"
     },
     "roomSettings": {
-      "title": "Room settings"
+      "title": "Room settings",
+      "tabs": {
+        "bars": {
+          "title": "Bars",
+          "fields": {
+            "name": "Name"
+          },
+          "actions": {
+            "add": "Add",
+            "save": "Save"
+          }
+        },
+        "roomState": {
+          "title": "Room State"
+        }
+      }
     },
     "restorePassword": {
       "title": "Restore password",
@@ -106,16 +121,6 @@
     "gameCharacters": {
       "title": "Characters settings",
       "tabs": {
-        "bars": {
-          "title": "Bars",
-          "fields": {
-            "name": "Name"
-          },
-          "actions": {
-            "add": "Add",
-            "save": "Save"
-          }
-        },
         "specials": {
           "title": "Specials",
           "fields": {

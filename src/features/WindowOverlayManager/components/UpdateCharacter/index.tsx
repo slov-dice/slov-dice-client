@@ -101,14 +101,12 @@ export const UpdateCharacterOverlay = () => {
   }
 
   const handleUpdateCharacter = () => {
-    dispatch(
-      roomActions.emitUpdateCharacterInCharactersWindow({ ...character, ...characterEditor }),
-    )
+    dispatch(roomActions.emitUpdateCharacter({ ...character, ...characterEditor }))
     handleClose()
   }
 
   const handleRemoveCharacter = () => {
-    dispatch(roomActions.emitRemoveCharacterInCharactersWindow({ characterId: character.id }))
+    dispatch(roomActions.emitRemoveCharacter({ characterId: character.id }))
     handleClose()
   }
 

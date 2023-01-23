@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 import { E_RoomType, I_FullRoom, I_RoomMessage } from 'models/shared/app'
-import { E_Field } from 'models/shared/game/battlefield'
+import { E_Battlefield } from 'models/shared/game/battlefield'
 import {
   T_BaseCharacterBar,
   T_BaseCharacterSpecial,
@@ -85,17 +85,14 @@ export const roomSlice = createSlice({
     },
 
     // Characters Window
-    emitUpdateCharactersWindowSettingsBars: (
-      state,
-      action: PayloadAction<T_BaseCharacterBar[]>,
-    ) => {
-      const payload: I_EmitPayload[E_Emit.updateCharactersWindowSettingsBars] = {
+    emitUpdateSettingsBars: (state, action: PayloadAction<T_BaseCharacterBar[]>) => {
+      const payload: I_EmitPayload[E_Emit.updateSettingsBars] = {
         roomId: state.id,
         bars: action.payload,
       }
-      socket.emit(E_Emit.updateCharactersWindowSettingsBars, payload)
+      socket.emit(E_Emit.updateSettingsBars, payload)
     },
-    setCharactersWindowSettingsBars: (
+    setSettingsBars: (
       state,
       action: PayloadAction<{
         settingsBars: T_BaseCharacterBar[]
@@ -110,17 +107,17 @@ export const roomSlice = createSlice({
       state.game.battlefield.window.playersDummies = action.payload.playersDummies
     },
 
-    emitUpdateCharactersWindowSettingsSpecials: (
+    emitUpdateCharactersSettingsSpecials: (
       state,
       action: PayloadAction<T_BaseCharacterSpecial[]>,
     ) => {
-      const payload: I_EmitPayload[E_Emit.updateCharactersWindowSettingsSpecials] = {
+      const payload: I_EmitPayload[E_Emit.updateCharactersSettingsSpecials] = {
         roomId: state.id,
         specials: action.payload,
       }
-      socket.emit(E_Emit.updateCharactersWindowSettingsSpecials, payload)
+      socket.emit(E_Emit.updateCharactersSettingsSpecials, payload)
     },
-    setCharactersWindowSettingsSpecials: (
+    setCharactersSettingsSpecials: (
       state,
       action: PayloadAction<{
         settingsSpecials: T_BaseCharacterSpecial[]
@@ -131,17 +128,17 @@ export const roomSlice = createSlice({
       state.game.characters.window.characters = action.payload.characters
     },
 
-    emitUpdateCharactersWindowSettingsEffects: (
+    emitUpdateCharactersSettingsEffects: (
       state,
       action: PayloadAction<T_BaseCharacterEffect[]>,
     ) => {
-      const payload: I_EmitPayload[E_Emit.updateCharactersWindowSettingsEffects] = {
+      const payload: I_EmitPayload[E_Emit.updateCharactersSettingsEffects] = {
         roomId: state.id,
         effects: action.payload,
       }
-      socket.emit(E_Emit.updateCharactersWindowSettingsEffects, payload)
+      socket.emit(E_Emit.updateCharactersSettingsEffects, payload)
     },
-    setCharactersWindowSettingsEffects: (
+    setCharactersSettingsEffects: (
       state,
       action: PayloadAction<{
         settingsEffects: T_BaseCharacterEffect[]
@@ -152,25 +149,25 @@ export const roomSlice = createSlice({
       state.game.characters.window.characters = action.payload.characters
     },
 
-    emitCreateCharacterInCharactersWindow: (state, action: PayloadAction<I_Character>) => {
-      const payload: I_EmitPayload[E_Emit.createCharacterInCharactersWindow] = {
+    emitCreateCharacter: (state, action: PayloadAction<I_Character>) => {
+      const payload: I_EmitPayload[E_Emit.createCharacter] = {
         roomId: state.id,
         character: action.payload,
       }
-      socket.emit(E_Emit.createCharacterInCharactersWindow, payload)
+      socket.emit(E_Emit.createCharacter, payload)
     },
-    setCreatedCharacterInCharactersWindow: (state, action: PayloadAction<I_Character>) => {
+    setCreatedCharacter: (state, action: PayloadAction<I_Character>) => {
       state.game.characters.window.characters.push(action.payload)
     },
 
-    emitUpdateCharacterInCharactersWindow: (state, action: PayloadAction<I_Character>) => {
-      const payload: I_EmitPayload[E_Emit.updateCharacterInCharactersWindow] = {
+    emitUpdateCharacter: (state, action: PayloadAction<I_Character>) => {
+      const payload: I_EmitPayload[E_Emit.updateCharacter] = {
         roomId: state.id,
         character: action.payload,
       }
-      socket.emit(E_Emit.updateCharacterInCharactersWindow, payload)
+      socket.emit(E_Emit.updateCharacter, payload)
     },
-    emitUpdateCharacterFieldInCharactersWindow: (
+    emitUpdateCharacterField: (
       state,
       action: PayloadAction<{
         characterId: T_CharacterId
@@ -179,7 +176,7 @@ export const roomSlice = createSlice({
         subFieldId?: string
       }>,
     ) => {
-      const payload: I_EmitPayload[E_Emit.updateCharacterFieldInCharactersWindow] = {
+      const payload: I_EmitPayload[E_Emit.updateCharacterField] = {
         roomId: state.id,
         characterId: action.payload.characterId,
         field: action.payload.field,
@@ -187,96 +184,90 @@ export const roomSlice = createSlice({
         subFieldId: action.payload.subFieldId,
       }
 
-      socket.emit(E_Emit.updateCharacterFieldInCharactersWindow, payload)
+      socket.emit(E_Emit.updateCharacterField, payload)
     },
-    setUpdatedCharacterInCharactersWindow: (state, action: PayloadAction<I_Character>) => {
+    setUpdatedCharacter: (state, action: PayloadAction<I_Character>) => {
       state.game.characters.window.characters = state.game.characters.window.characters.map(
         (character) => (character.id === action.payload.id ? action.payload : character),
       )
     },
 
-    emitRemoveCharacterInCharactersWindow: (
-      state,
-      action: PayloadAction<{ characterId: T_CharacterId }>,
-    ) => {
-      const payload: I_EmitPayload[E_Emit.removeCharacterInCharactersWindow] = {
+    emitRemoveCharacter: (state, action: PayloadAction<{ characterId: T_CharacterId }>) => {
+      const payload: I_EmitPayload[E_Emit.removeCharacter] = {
         roomId: state.id,
         characterId: action.payload.characterId,
       }
 
-      socket.emit(E_Emit.removeCharacterInCharactersWindow, payload)
+      socket.emit(E_Emit.removeCharacter, payload)
     },
-    setRemovedCharacterInCharactersWindow: (
-      state,
-      action: PayloadAction<{ characterId: T_CharacterId }>,
-    ) => {
+    setRemovedCharacter: (state, action: PayloadAction<{ characterId: T_CharacterId }>) => {
       state.game.characters.window.characters = state.game.characters.window.characters.filter(
         (character) => character.id !== action.payload.characterId,
       )
     },
 
     // Battlefield Window
-    emitCreateDummyInBattlefield: (
+    emitCreateDummy: (
       state,
-      action: PayloadAction<{ dummy: T_BaseDummy; field: E_Field }>,
+      action: PayloadAction<{ dummy: T_BaseDummy; battlefield: E_Battlefield }>,
     ) => {
-      const payload: I_EmitPayload[E_Emit.createDummyInBattlefieldWindow] = {
+      const payload: I_EmitPayload[E_Emit.createDummy] = {
         roomId: state.id,
         dummy: action.payload.dummy,
-        field: action.payload.field,
+        battlefield: action.payload.battlefield,
       }
 
-      socket.emit(E_Emit.createDummyInBattlefieldWindow, payload)
+      socket.emit(E_Emit.createDummy, payload)
     },
-    setCreatedDummyInBattlefieldWindow: (
+    setCreatedDummy: (
       state,
-      action: PayloadAction<{ dummy: T_BaseDummy; field: E_Field }>,
+      action: PayloadAction<{ dummy: T_BaseDummy; battlefield: E_Battlefield }>,
     ) => {
-      if (action.payload.field === 'master') {
+      if (action.payload.battlefield === E_Battlefield.master) {
         state.game.battlefield.window.masterDummies.push(action.payload.dummy)
       }
-      if (action.payload.field === 'players') {
+      if (action.payload.battlefield === E_Battlefield.players) {
         state.game.battlefield.window.playersDummies.push(action.payload.dummy)
       }
     },
 
-    emitAddDummyToFieldInBattlefieldWindow: (
+    emitAddDummy: (
       state,
-      action: PayloadAction<{ dummy: T_BaseDummy; field: E_Field }>,
+      action: PayloadAction<{ dummy: T_BaseDummy; battlefield: E_Battlefield }>,
     ) => {
-      const payload: I_EmitPayload[E_Emit.addDummyToFieldInBattlefieldWindow] = {
+      const payload: I_EmitPayload[E_Emit.addDummyToBattlefield] = {
         roomId: state.id,
         dummy: action.payload.dummy,
-        field: action.payload.field,
+        battlefield: action.payload.battlefield,
       }
 
-      socket.emit(E_Emit.addDummyToFieldInBattlefieldWindow, payload)
+      socket.emit(E_Emit.addDummyToBattlefield, payload)
     },
-    emitRemoveDummiesOnFieldInBattlefieldWindow: (
+    emitRemoveDummiesOnBattlefield: (
       state,
-      action: PayloadAction<{ dummyId: T_DummyId; field: E_Field }>,
+      action: PayloadAction<{ dummyId: T_DummyId; battlefield: E_Battlefield }>,
     ) => {
-      const payload: I_EmitPayload[E_Emit.removeDummiesOnFieldInBattlefieldWindow] = {
+      const payload: I_EmitPayload[E_Emit.removeDummiesOnBattlefield] = {
         roomId: state.id,
         dummyId: action.payload.dummyId,
-        field: action.payload.field,
+        battlefield: action.payload.battlefield,
       }
 
-      socket.emit(E_Emit.removeDummiesOnFieldInBattlefieldWindow, payload)
+      socket.emit(E_Emit.removeDummiesOnBattlefield, payload)
     },
-    setDummiesOnFieldInBattlefieldWindow: (
+    setDummiesOnBattlefield: (
       state,
-      action: PayloadAction<{ dummies: T_Dummy[]; field: E_Field }>,
+      action: PayloadAction<{ dummies: T_Dummy[]; battlefield: E_Battlefield }>,
     ) => {
-      if (action.payload.field === 'master') {
+      if (action.payload.battlefield === E_Battlefield.master) {
         state.game.battlefield.window.masterField = action.payload.dummies
       }
-      if (action.payload.field === 'players') {
+      if (action.payload.battlefield === E_Battlefield.players) {
         state.game.battlefield.window.playersField = action.payload.dummies
       }
     },
 
-    emitMakeActionInBattlefieldWindow: (
+    emitMakeActionInBattlefield: (
       state,
       action: PayloadAction<{
         action: T_CharacterAction
@@ -284,14 +275,14 @@ export const roomSlice = createSlice({
         actionInitiator: T_DummyId | T_CharacterId
       }>,
     ) => {
-      const payload: I_EmitPayload[E_Emit.makeActionInBattlefieldWindow] = {
+      const payload: I_EmitPayload[E_Emit.makeActionInBattlefield] = {
         roomId: state.id,
         action: action.payload.action,
         actionInitiator: action.payload.actionInitiator,
         actionTarget: action.payload.actionTarget,
       }
 
-      socket.emit(E_Emit.makeActionInBattlefieldWindow, payload)
+      socket.emit(E_Emit.makeActionInBattlefield, payload)
     },
 
     setCharactersAndDummies: (
@@ -306,29 +297,29 @@ export const roomSlice = createSlice({
       state.game.battlefield.window.masterField = action.payload.masterField
       state.game.battlefield.window.playersField = action.payload.playersField
     },
-    emitUpdateDummyInBattlefieldWindow: (
+    emitUpdateDummy: (
       state,
-      action: PayloadAction<{ field: E_Field; dummy: T_BaseDummy }>,
+      action: PayloadAction<{ battlefield: E_Battlefield; dummy: T_BaseDummy }>,
     ) => {
-      const payload: I_EmitPayload[E_Emit.updateDummyInBattlefieldWindow] = {
+      const payload: I_EmitPayload[E_Emit.updateDummy] = {
         roomId: state.id,
         dummy: action.payload.dummy,
-        field: action.payload.field,
+        battlefield: action.payload.battlefield,
       }
 
-      socket.emit(E_Emit.updateDummyInBattlefieldWindow, payload)
+      socket.emit(E_Emit.updateDummy, payload)
     },
-    emitUpdateDummyFieldInBattlefieldWindow: (
+    emitUpdateDummyField: (
       state,
       action: PayloadAction<{
         dummyId: T_DummyId
-        battlefield: E_Field
+        battlefield: E_Battlefield
         field: string
         value: string | number
         subFieldId?: string
       }>,
     ) => {
-      const payload: I_EmitPayload[E_Emit.updateDummyFieldInBattlefieldWindow] = {
+      const payload: I_EmitPayload[E_Emit.updateDummyField] = {
         roomId: state.id,
         dummyId: action.payload.dummyId,
         battlefield: action.payload.battlefield,
@@ -337,20 +328,19 @@ export const roomSlice = createSlice({
         subFieldId: action.payload.subFieldId,
       }
 
-      socket.emit(E_Emit.updateDummyFieldInBattlefieldWindow, payload)
+      socket.emit(E_Emit.updateDummyField, payload)
     },
-
-    setUpdatedDummyInBattlefieldWindow: (
+    setUpdatedDummy: (
       state,
-      action: PayloadAction<{ dummy: T_BaseDummy; field: E_Field }>,
+      action: PayloadAction<{ dummy: T_BaseDummy; battlefield: E_Battlefield }>,
     ) => {
-      if (action.payload.field === E_Field.master) {
+      if (action.payload.battlefield === E_Battlefield.master) {
         state.game.battlefield.window.masterDummies =
           state.game.battlefield.window.masterDummies.map((dummy) =>
             dummy.id === action.payload.dummy.id ? action.payload.dummy : dummy,
           )
       }
-      if (action.payload.field === E_Field.players) {
+      if (action.payload.battlefield === E_Battlefield.players) {
         state.game.battlefield.window.playersDummies =
           state.game.battlefield.window.playersDummies.map((dummy) =>
             dummy.id === action.payload.dummy.id ? action.payload.dummy : dummy,
@@ -358,57 +348,57 @@ export const roomSlice = createSlice({
       }
     },
 
-    emitRemoveDummyInBattlefieldWindow: (
+    emitRemoveDummy: (
       state,
-      action: PayloadAction<{ dummyId: T_DummyId; field: E_Field }>,
+      action: PayloadAction<{ dummyId: T_DummyId; battlefield: E_Battlefield }>,
     ) => {
-      const payload: I_EmitPayload[E_Emit.removeDummyInBattlefieldWindow] = {
+      const payload: I_EmitPayload[E_Emit.removeDummy] = {
         roomId: state.id,
         dummyId: action.payload.dummyId,
-        field: action.payload.field,
+        battlefield: action.payload.battlefield,
       }
 
-      socket.emit(E_Emit.removeDummyInBattlefieldWindow, payload)
+      socket.emit(E_Emit.removeDummy, payload)
     },
-    setRemovedDummyInBattlefieldWindow: (
+    setRemovedDummy: (
       state,
-      action: PayloadAction<{ dummyId: T_DummyId; field: E_Field }>,
+      action: PayloadAction<{ dummyId: T_DummyId; battlefield: E_Battlefield }>,
     ) => {
       state.game.battlefield.window[
-        action.payload.field === E_Field.master ? 'masterDummies' : 'playersDummies'
+        action.payload.battlefield === E_Battlefield.master ? 'masterDummies' : 'playersDummies'
       ] = state.game.battlefield.window[
-        action.payload.field === E_Field.master ? 'masterDummies' : 'playersDummies'
+        action.payload.battlefield === E_Battlefield.master ? 'masterDummies' : 'playersDummies'
       ].filter((dummy) => dummy.id !== action.payload.dummyId)
 
       state.game.battlefield.window[
-        action.payload.field === E_Field.master ? 'masterField' : 'playersField'
+        action.payload.battlefield === E_Battlefield.master ? 'masterField' : 'playersField'
       ] = state.game.battlefield.window[
-        action.payload.field === E_Field.master ? 'masterField' : 'playersField'
+        action.payload.battlefield === E_Battlefield.master ? 'masterField' : 'playersField'
       ].filter((dummy) => dummy.id !== action.payload.dummyId)
     },
-    emitRemoveDummyOnFieldInBattlefieldWindow: (
+    emitRemoveDummyOnBattlefield: (
       state,
-      action: PayloadAction<{ dummySubId: string; field: E_Field }>,
+      action: PayloadAction<{ dummySubId: string; battlefield: E_Battlefield }>,
     ) => {
-      const payload: I_EmitPayload[E_Emit.removeDummyOnFieldInBattlefieldWindow] = {
+      const payload: I_EmitPayload[E_Emit.removeDummyOnBattlefield] = {
         roomId: state.id,
         dummySubId: action.payload.dummySubId,
-        field: action.payload.field,
+        battlefield: action.payload.battlefield,
       }
 
-      socket.emit(E_Emit.removeDummyOnFieldInBattlefieldWindow, payload)
+      socket.emit(E_Emit.removeDummyOnBattlefield, payload)
     },
-    emitUpdateDummyFieldOnFieldInBattlefieldWindow: (
+    updateDummyFieldOnBattlefield: (
       state,
       action: PayloadAction<{
         dummySubId: string
-        battlefield: E_Field
+        battlefield: E_Battlefield
         field: string
         value: number
         subFieldId: string
       }>,
     ) => {
-      const payload: I_EmitPayload[E_Emit.updateDummyFieldOnFieldInBattlefieldWindow] = {
+      const payload: I_EmitPayload[E_Emit.updateDummyFieldOnBattlefield] = {
         roomId: state.id,
         field: action.payload.field,
         dummySubId: action.payload.dummySubId,
@@ -417,7 +407,7 @@ export const roomSlice = createSlice({
         subFieldId: action.payload.subFieldId,
       }
 
-      socket.emit(E_Emit.updateDummyFieldOnFieldInBattlefieldWindow, payload)
+      socket.emit(E_Emit.updateDummyFieldOnBattlefield, payload)
     },
   },
 })

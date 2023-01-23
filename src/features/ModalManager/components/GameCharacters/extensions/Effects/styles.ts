@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 
-import { TabPanelBase, TabPanelBottomBase, BlockRemove, BlockAdd } from '../styles'
+import { BlockAdd, BlockRemove } from 'styles/common/block'
+import { TabPanelBase, TabPanelBottomBase } from 'styles/common/tabs'
 
 export const TabPanel = styled(TabPanelBase)``
 export const TabPanelBottom = styled(TabPanelBottomBase)``

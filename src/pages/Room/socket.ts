@@ -22,13 +22,13 @@ export const subscribe = createAsyncThunk('roomPage', async (_, { dispatch }) =>
   })
 
   socket.on(
-    E_Subscribe.getCharactersWindowSettingsBars,
-    (data: I_SubscriptionData[E_Subscribe.getCharactersWindowSettingsBars]) => {
+    E_Subscribe.getSettingsBars,
+    (data: I_SubscriptionData[E_Subscribe.getSettingsBars]) => {
       const language = LocalStorage.getLanguage()
       const message = data.message[language]
       toast[data.status](message)
       dispatch(
-        roomActions.setCharactersWindowSettingsBars({
+        roomActions.setSettingsBars({
           settingsBars: data.bars,
           characters: data.characters,
           masterDummies: data.masterDummies,
@@ -39,13 +39,13 @@ export const subscribe = createAsyncThunk('roomPage', async (_, { dispatch }) =>
   )
 
   socket.on(
-    E_Subscribe.getCharactersWindowSettingsSpecials,
-    (data: I_SubscriptionData[E_Subscribe.getCharactersWindowSettingsSpecials]) => {
+    E_Subscribe.getCharactersSettingsSpecials,
+    (data: I_SubscriptionData[E_Subscribe.getCharactersSettingsSpecials]) => {
       const language = LocalStorage.getLanguage()
       const message = data.message[language]
       toast[data.status](message)
       dispatch(
-        roomActions.setCharactersWindowSettingsSpecials({
+        roomActions.setCharactersSettingsSpecials({
           settingsSpecials: data.specials,
           characters: data.characters,
         }),
@@ -54,13 +54,13 @@ export const subscribe = createAsyncThunk('roomPage', async (_, { dispatch }) =>
   )
 
   socket.on(
-    E_Subscribe.getCharactersWindowSettingsEffects,
-    (data: I_SubscriptionData[E_Subscribe.getCharactersWindowSettingsEffects]) => {
+    E_Subscribe.getCharactersSettingsEffects,
+    (data: I_SubscriptionData[E_Subscribe.getCharactersSettingsEffects]) => {
       const language = LocalStorage.getLanguage()
       const message = data.message[language]
       toast[data.status](message)
       dispatch(
-        roomActions.setCharactersWindowSettingsEffects({
+        roomActions.setCharactersSettingsEffects({
           settingsEffects: data.effects,
           characters: data.characters,
         }),
@@ -69,53 +69,56 @@ export const subscribe = createAsyncThunk('roomPage', async (_, { dispatch }) =>
   )
 
   socket.on(
-    E_Subscribe.getCreatedCharacterInCharactersWindow,
-    (data: I_SubscriptionData[E_Subscribe.getCreatedCharacterInCharactersWindow]) => {
+    E_Subscribe.getCreatedCharacter,
+    (data: I_SubscriptionData[E_Subscribe.getCreatedCharacter]) => {
       const language = LocalStorage.getLanguage()
       const message = data.message[language]
       toast[data.status](message)
-      dispatch(roomActions.setCreatedCharacterInCharactersWindow(data.character))
+      dispatch(roomActions.setCreatedCharacter(data.character))
     },
   )
 
   socket.on(
-    E_Subscribe.getUpdatedCharacterInCharactersWindow,
-    (data: I_SubscriptionData[E_Subscribe.getUpdatedCharacterInCharactersWindow]) => {
-      dispatch(roomActions.setUpdatedCharacterInCharactersWindow(data.character))
+    E_Subscribe.getUpdatedCharacter,
+    (data: I_SubscriptionData[E_Subscribe.getUpdatedCharacter]) => {
+      dispatch(roomActions.setUpdatedCharacter(data.character))
     },
   )
 
   socket.on(
-    E_Subscribe.getRemovedCharacterInCharactersWindow,
-    (data: I_SubscriptionData[E_Subscribe.getRemovedCharacterInCharactersWindow]) => {
-      dispatch(roomActions.setRemovedCharacterInCharactersWindow(data))
+    E_Subscribe.getRemovedCharacter,
+    (data: I_SubscriptionData[E_Subscribe.getRemovedCharacter]) => {
+      dispatch(roomActions.setRemovedCharacter(data))
     },
   )
 
   socket.on(
-    E_Subscribe.getCreatedDummyInBattlefieldWindow,
-    (data: I_SubscriptionData[E_Subscribe.getCreatedDummyInBattlefieldWindow]) => {
+    E_Subscribe.getCreatedDummy,
+    (data: I_SubscriptionData[E_Subscribe.getCreatedDummy]) => {
       dispatch(
-        roomActions.setCreatedDummyInBattlefieldWindow({ dummy: data.dummy, field: data.field }),
-      )
-    },
-  )
-
-  socket.on(
-    E_Subscribe.getDummiesOnFieldInBattlefieldWindow,
-    (data: I_SubscriptionData[E_Subscribe.getDummiesOnFieldInBattlefieldWindow]) => {
-      dispatch(
-        roomActions.setDummiesOnFieldInBattlefieldWindow({
-          dummies: data.dummies,
-          field: data.field,
+        roomActions.setCreatedDummy({
+          dummy: data.dummy,
+          battlefield: data.battlefield,
         }),
       )
     },
   )
 
   socket.on(
-    E_Subscribe.getInitiationActionInBattlefieldWindow,
-    (data: I_SubscriptionData[E_Subscribe.getInitiationActionInBattlefieldWindow]) => {
+    E_Subscribe.getDummiesOnBattlefield,
+    (data: I_SubscriptionData[E_Subscribe.getDummiesOnBattlefield]) => {
+      dispatch(
+        roomActions.setDummiesOnBattlefield({
+          dummies: data.dummies,
+          battlefield: data.battlefield,
+        }),
+      )
+    },
+  )
+
+  socket.on(
+    E_Subscribe.getInitiationActionOnBattlefield,
+    (data: I_SubscriptionData[E_Subscribe.getInitiationActionOnBattlefield]) => {
       dispatch(
         roomActions.setCharactersAndDummies({
           characters: data.characters,
@@ -133,21 +136,24 @@ export const subscribe = createAsyncThunk('roomPage', async (_, { dispatch }) =>
   )
 
   socket.on(
-    E_Subscribe.getUpdatedDummyInBattlefieldWindow,
-    (data: I_SubscriptionData[E_Subscribe.getUpdatedDummyInBattlefieldWindow]) => {
+    E_Subscribe.getUpdatedDummy,
+    (data: I_SubscriptionData[E_Subscribe.getUpdatedDummy]) => {
       dispatch(
-        roomActions.setUpdatedDummyInBattlefieldWindow({ dummy: data.dummy, field: data.field }),
+        roomActions.setUpdatedDummy({
+          dummy: data.dummy,
+          battlefield: data.battlefield,
+        }),
       )
     },
   )
 
   socket.on(
-    E_Subscribe.getRemovedDummyInBattlefieldWindow,
-    (data: I_SubscriptionData[E_Subscribe.getRemovedDummyInBattlefieldWindow]) => {
+    E_Subscribe.getRemovedDummy,
+    (data: I_SubscriptionData[E_Subscribe.getRemovedDummy]) => {
       dispatch(
-        roomActions.setRemovedDummyInBattlefieldWindow({
+        roomActions.setRemovedDummy({
           dummyId: data.dummyId,
-          field: data.field,
+          battlefield: data.battlefield,
         }),
       )
     },
@@ -156,15 +162,15 @@ export const subscribe = createAsyncThunk('roomPage', async (_, { dispatch }) =>
 
 export const unsubscribe = () => {
   socket.off(E_Subscribe.getFullRoom)
-  socket.off(E_Subscribe.getCharactersWindowSettingsBars)
-  socket.off(E_Subscribe.getCharactersWindowSettingsSpecials)
-  socket.off(E_Subscribe.getCharactersWindowSettingsEffects)
-  socket.off(E_Subscribe.getCreatedCharacterInCharactersWindow)
-  socket.off(E_Subscribe.getUpdatedCharacterInCharactersWindow)
-  socket.off(E_Subscribe.getRemovedCharacterInCharactersWindow)
-  socket.off(E_Subscribe.getCreatedDummyInBattlefieldWindow)
-  socket.off(E_Subscribe.getDummiesOnFieldInBattlefieldWindow)
-  socket.off(E_Subscribe.getInitiationActionInBattlefieldWindow)
-  socket.off(E_Subscribe.getUpdatedDummyInBattlefieldWindow)
-  socket.off(E_Subscribe.getRemovedDummyInBattlefieldWindow)
+  socket.off(E_Subscribe.getSettingsBars)
+  socket.off(E_Subscribe.getCharactersSettingsSpecials)
+  socket.off(E_Subscribe.getCharactersSettingsEffects)
+  socket.off(E_Subscribe.getCreatedCharacter)
+  socket.off(E_Subscribe.getUpdatedCharacter)
+  socket.off(E_Subscribe.getRemovedCharacter)
+  socket.off(E_Subscribe.getCreatedDummy)
+  socket.off(E_Subscribe.getDummiesOnBattlefield)
+  socket.off(E_Subscribe.getInitiationActionOnBattlefield)
+  socket.off(E_Subscribe.getUpdatedDummy)
+  socket.off(E_Subscribe.getRemovedDummy)
 }

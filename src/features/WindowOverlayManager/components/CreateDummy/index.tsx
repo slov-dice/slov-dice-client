@@ -15,7 +15,7 @@ import { E_WindowOverlay, I_WindowOverlay } from 'features/WindowOverlayManager/
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { useStoreSelector } from 'hooks/useStoreSelector'
 import { t } from 'languages'
-import { E_Field } from 'models/shared/game/battlefield'
+import { E_Battlefield } from 'models/shared/game/battlefield'
 import { T_BaseCharacterBar, T_CharacterBarId } from 'models/shared/game/character'
 import { roomActions } from 'store/room'
 import * as C from 'styles/components'
@@ -72,8 +72,8 @@ export const CreateDummyOverlay = () => {
 
   const handleCreateDummy = () => {
     dispatch(
-      roomActions.emitCreateDummyInBattlefield({
-        field: overlayPayload as E_Field,
+      roomActions.emitCreateDummy({
+        battlefield: overlayPayload as E_Battlefield,
         dummy: {
           id: v4(),
           ...dummy,

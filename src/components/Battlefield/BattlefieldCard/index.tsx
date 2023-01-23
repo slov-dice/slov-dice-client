@@ -8,14 +8,13 @@ import * as S from './styles'
 import ActionIcon from 'assets/icons/app/action.svg'
 import BackIcon from 'assets/icons/app/arrow-left.svg'
 import SkullCrossbones from 'assets/icons/game/skull-crossbones.svg'
-import Monster1Image from 'assets/images/dummies/dummy1.png'
 import { Button } from 'components/Buttons'
 import { CharacterBar } from 'components/Character'
 import { gameBattlefieldActions } from 'features/WindowManager/components/Battlefield/slice'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { useStoreSelector } from 'hooks/useStoreSelector'
 import { t } from 'languages'
-import { E_Field } from 'models/shared/game/battlefield'
+import { E_Battlefield } from 'models/shared/game/battlefield'
 import { T_CharacterAction, T_CharacterBar, T_CharacterBarId } from 'models/shared/game/character'
 import { roomActions } from 'store/room'
 import * as C from 'styles/components'
@@ -29,7 +28,7 @@ interface I_BattlefieldCardProps {
   subId?: string
   actions: T_CharacterAction[]
   isCharacter: boolean
-  field: E_Field
+  battlefield: E_Battlefield
 }
 
 export const actionAnimationDuration = 1000
@@ -41,7 +40,7 @@ export const BattlefieldCard = ({
   id,
   actions,
   isCharacter,
-  field,
+  battlefield,
   subId,
 }: I_BattlefieldCardProps) => {
   const dispatch = useStoreDispatch()
@@ -67,7 +66,7 @@ export const BattlefieldCard = ({
   const handleChangeCharacterBar = (barId: T_CharacterBarId, value: number) => {
     if (isCharacter) {
       dispatch(
-        roomActions.emitUpdateCharacterFieldInCharactersWindow({
+        roomActions.emitUpdateCharacterField({
           characterId: id,
           field: 'bars',
           value,
@@ -77,8 +76,8 @@ export const BattlefieldCard = ({
     }
     if (!isCharacter && subId) {
       dispatch(
-        roomActions.emitUpdateDummyFieldOnFieldInBattlefieldWindow({
-          battlefield: field,
+        roomActions.updateDummyFieldOnBattlefield({
+          battlefield,
           dummySubId: subId,
           value,
           field: 'barsCurrent',
@@ -90,7 +89,7 @@ export const BattlefieldCard = ({
 
   const handleKillDummyFromField = () => {
     if (subId) {
-      dispatch(roomActions.emitRemoveDummyOnFieldInBattlefieldWindow({ dummySubId: subId, field }))
+      dispatch(roomActions.emitRemoveDummyOnBattlefield({ dummySubId: subId, battlefield }))
     }
   }
 
@@ -135,7 +134,7 @@ export const BattlefieldCard = ({
                 <S.CardAction onClick={() => setIsFront(false)}>
                   <ActionIcon />
                 </S.CardAction>
-                <S.CardAvatar src={avatar || Monster1Image} alt='avatar' />
+                <S.CardAvatar src={avatar} alt='avatar' />
                 <S.CardInfoContent>
                   {bars.map((bar) => {
                     const baseBar = getBar(bar.id, settings.bars)

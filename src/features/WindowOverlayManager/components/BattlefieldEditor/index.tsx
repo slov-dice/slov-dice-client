@@ -11,7 +11,7 @@ import { E_WindowOverlay, I_WindowOverlay } from 'features/WindowOverlayManager/
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { useStoreSelector } from 'hooks/useStoreSelector'
 import { t } from 'languages'
-import { E_Field } from 'models/shared/game/battlefield'
+import { E_Battlefield } from 'models/shared/game/battlefield'
 import * as C from 'styles/components'
 
 const findOverlay = (overlay: I_WindowOverlay) => overlay.name === E_WindowOverlay.battlefieldEditor
@@ -51,13 +51,13 @@ export const BattlefieldEditor = () => {
         </C.Control>
       </S.OverlayHeader>
       <S.OverlayContent>
-        {overlayPayload === E_Field.master &&
+        {overlayPayload === E_Battlefield.master &&
           masterDummies.map((dummy) => (
-            <DummyCard key={dummy.id} field={overlayPayload} dummy={dummy} />
+            <DummyCard key={dummy.id} battlefield={overlayPayload} dummy={dummy} />
           ))}
-        {overlayPayload === E_Field.players &&
+        {overlayPayload === E_Battlefield.players &&
           playersDummies.map((dummy) => (
-            <DummyCard key={dummy.id} field={overlayPayload} dummy={dummy} />
+            <DummyCard key={dummy.id} battlefield={overlayPayload} dummy={dummy} />
           ))}
 
         <AddCard height={280} onClick={handleOpenCreateDummyOverlay}>

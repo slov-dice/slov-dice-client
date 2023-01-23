@@ -2,21 +2,18 @@ import * as S from './styles'
 
 import CloseIcon from 'assets/icons/app/close.svg'
 import PlusIcon from 'assets/icons/app/plus.svg'
+import { gameCharactersActions } from 'features/WindowManager/components/Characters/slice'
 import { E_WindowOverlay } from 'features/WindowOverlayManager/models'
-import { useActions } from 'hooks/useActions'
+import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { useStoreSelector } from 'hooks/useStoreSelector'
 import { t } from 'languages'
 import { T_CharacterEffectId } from 'models/shared/game/character'
+import { roomActions } from 'store/room'
 import * as C from 'styles/components'
 import { getGameIcon } from 'utils/game/effects/icons'
 
 export const UpdateCharacterEffectOverlay = () => {
-  const {
-    closeCharacterWindowOverlay,
-    removeCharacterEffect,
-    addCharacterEffect,
-    emitUpdateCharacterFieldInCharactersWindow,
-  } = useActions()
+  const dispatch = useStoreDispatch()
 
   const { overlayPayload, settingsEffects } = useStoreSelector((store) => ({
     overlayPayload: store.gameCharacters.overlays.find(
@@ -38,24 +35,32 @@ export const UpdateCharacterEffectOverlay = () => {
   })
 
   const handleClose = () => {
-    closeCharacterWindowOverlay(E_WindowOverlay.updateCharacterEffect)
+    dispatch(
+      gameCharactersActions.closeCharacterWindowOverlay(E_WindowOverlay.updateCharacterEffect),
+    )
   }
 
   const handleToggleEffect = (effectId: T_CharacterEffectId) => () => {
     if (overlayPayload) {
       if (overlayPayload === 'characterCreator' || overlayPayload === 'characterEditor') {
         if (characterEffects?.includes(effectId)) {
-          removeCharacterEffect({ characterId: overlayPayload, effectId })
+          dispatch(
+            gameCharactersActions.removeCharacterEffect({ characterId: overlayPayload, effectId }),
+          )
           return
         }
-        addCharacterEffect({ characterId: overlayPayload, effectId })
+        dispatch(
+          gameCharactersActions.addCharacterEffect({ characterId: overlayPayload, effectId }),
+        )
         return
       }
-      emitUpdateCharacterFieldInCharactersWindow({
-        characterId: overlayPayload,
-        field: 'effects',
-        value: effectId,
-      })
+      dispatch(
+        roomActions.emitUpdateCharacterField({
+          characterId: overlayPayload,
+          field: 'effects',
+          value: effectId,
+        }),
+      )
     }
   }
 
