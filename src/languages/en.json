@@ -232,6 +232,11 @@
       "edit": "Edit Dummy"
     }
   },
+
+  "gridDocsOverlay": {
+    "title": "Docs"
+  },
+
   "auth": {
     "registration": "Create an Account",
     "login": "Login to Account",

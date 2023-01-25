@@ -16,4 +16,5 @@ export enum E_WindowOverlay {
   battlefieldEditor = 'battlefieldEditor',
   pickDummyAvatar = 'pickDummyAvatar',
   updateDummy = 'updateDummy',
+  gridDocs = 'gridDocs',
 }

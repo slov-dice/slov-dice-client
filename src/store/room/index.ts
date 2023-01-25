@@ -48,6 +48,11 @@ const initialState: I_FullRoom = {
         playersField: [],
       },
     },
+    textEditor: {
+      window: {
+        docs: [],
+      },
+    },
   },
 }
 

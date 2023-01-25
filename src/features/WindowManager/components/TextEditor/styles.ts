@@ -35,6 +35,8 @@ export const TopSection = styled.div`
 `
 
 export const TabMore = styled(Control)`
+  min-width: 28px;
+
   background-color: ${({ theme }) => theme.colors.white_05};
 `
 
