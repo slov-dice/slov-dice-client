@@ -11,6 +11,7 @@ import {
   T_CharacterAction,
 } from 'models/shared/game/character'
 import { T_BaseDummy, T_Dummy, T_DummyId } from 'models/shared/game/dummy'
+import { I_Doc, T_DocId } from 'models/shared/game/textEditor'
 import {
   E_Emit,
   I_EmitPayload,
@@ -413,6 +414,53 @@ export const roomSlice = createSlice({
       }
 
       socket.emit(E_Emit.updateDummyFieldOnBattlefield, payload)
+    },
+
+    emitCreateDoc: (state, action: PayloadAction<{ title: string; description: string }>) => {
+      const payload: I_EmitPayload[E_Emit.createDoc] = {
+        roomId: state.id,
+        title: action.payload.title,
+        description: action.payload.description,
+      }
+
+      socket.emit(E_Emit.createDoc, payload)
+    },
+
+    setCreatedDoc: (state, action: PayloadAction<{ doc: I_Doc }>) => {
+      state.game.textEditor.window.docs.push(action.payload.doc)
+    },
+
+    emitUpdateDoc: (
+      state,
+      action: PayloadAction<{ field: string; docId: T_DocId; value: string }>,
+    ) => {
+      const payload: I_EmitPayload[E_Emit.updateDoc] = {
+        roomId: state.id,
+        docId: action.payload.docId,
+        field: action.payload.field,
+        value: action.payload.value,
+      }
+
+      socket.emit(E_Emit.updateDoc, payload)
+    },
+    setUpdatedDoc: (state, action: PayloadAction<{ doc: I_Doc }>) => {
+      state.game.textEditor.window.docs = state.game.textEditor.window.docs.map((doc) =>
+        doc.id === action.payload.doc.id ? action.payload.doc : doc,
+      )
+    },
+
+    emitRemoveDoc: (state, action: PayloadAction<{ docId: T_DocId }>) => {
+      const payload: I_EmitPayload[E_Emit.removeDoc] = {
+        docId: action.payload.docId,
+        roomId: state.id,
+      }
+
+      socket.emit(E_Emit.removeDoc, payload)
+    },
+    setRemovedDoc: (state, action: PayloadAction<{ docId: T_DocId }>) => {
+      state.game.textEditor.window.docs = state.game.textEditor.window.docs.filter(
+        (doc) => doc.id !== action.payload.docId,
+      )
     },
   },
 })

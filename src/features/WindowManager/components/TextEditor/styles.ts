@@ -40,25 +40,43 @@ export const TabMore = styled(Control)`
   background-color: ${({ theme }) => theme.colors.white_05};
 `
 
-export const TabFile = styled.div`
+export const TabFile = styled.div<{ isActive: boolean }>`
+  cursor: pointer;
+
   position: relative;
 
   overflow: hidden;
   display: flex;
   align-items: center;
 
-  min-width: 90px;
-  max-width: 90px;
+  min-width: 20%;
+  max-width: 20%;
   padding-inline: 4px;
 
   white-space: nowrap;
 
-  background-color: ${({ theme }) => theme.colors.white_05};
+  background-color: ${({ theme, isActive }) =>
+    isActive ? theme.colors.white_50 : theme.colors.white_05};
 `
 
-export const Close = styled(Control)`
+export const Close = styled.div`
+  cursor: pointer;
+  user-select: none;
+
   position: absolute;
-  right: 2px;
+  right: 0;
+
+  display: flex;
+  justify-content: center;
+
+  width: 28px;
+  height: 28px;
+  padding: 0 4px;
+
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0%) 0%, inherit 20%);
+  border-radius: 15%;
+
+  fill: ${({ theme }) => theme.colors.white};
 `
 
 export const BottomSection = styled.div`

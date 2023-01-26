@@ -13,6 +13,7 @@ import {
   T_DummyBarsMax,
   T_DummyId,
 } from 'models/shared/game/dummy'
+import { I_Doc, T_DocId } from 'models/shared/game/textEditor'
 
 export const getBar = (id: T_CharacterBarId, bars: T_BaseCharacterBar[]): T_BaseCharacterBar =>
   bars.find((bar) => bar.id === id) || bars[0]
@@ -41,3 +42,6 @@ export const getDummyBars = (
     }
     return acc
   }, [] as T_CharacterBar[])
+
+export const getDoc = (docs: I_Doc[], docId: T_DocId): I_Doc =>
+  docs.find((doc) => doc.id === docId) || docs[0]

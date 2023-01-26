@@ -158,6 +158,18 @@ export const subscribe = createAsyncThunk('roomPage', async (_, { dispatch }) =>
       )
     },
   )
+
+  socket.on(E_Subscribe.getCreatedDoc, (data: I_SubscriptionData[E_Subscribe.getCreatedDoc]) => {
+    dispatch(roomActions.setCreatedDoc({ doc: data.doc }))
+  })
+
+  socket.on(E_Subscribe.getUpdatedDoc, (data: I_SubscriptionData[E_Subscribe.getUpdatedDoc]) => {
+    dispatch(roomActions.setUpdatedDoc({ doc: data.doc }))
+  })
+
+  socket.on(E_Subscribe.getRemovedDoc, (data: I_SubscriptionData[E_Subscribe.getRemovedDoc]) => {
+    dispatch(roomActions.setRemovedDoc({ docId: data.docId }))
+  })
 })
 
 export const unsubscribe = () => {
@@ -173,4 +185,7 @@ export const unsubscribe = () => {
   socket.off(E_Subscribe.getInitiationActionOnBattlefield)
   socket.off(E_Subscribe.getUpdatedDummy)
   socket.off(E_Subscribe.getRemovedDummy)
+  socket.off(E_Subscribe.getCreatedDoc)
+  socket.off(E_Subscribe.getUpdatedDoc)
+  socket.off(E_Subscribe.getRemovedDoc)
 }
