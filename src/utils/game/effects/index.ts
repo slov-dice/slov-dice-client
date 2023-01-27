@@ -43,5 +43,5 @@ export const getDummyBars = (
     return acc
   }, [] as T_CharacterBar[])
 
-export const getDoc = (docs: I_Doc[], docId: T_DocId): I_Doc =>
-  docs.find((doc) => doc.id === docId) || docs[0]
+export const getDoc = (docs: I_Doc[], docId: T_DocId): I_Doc | undefined =>
+  docs.find((doc) => doc.id === docId)

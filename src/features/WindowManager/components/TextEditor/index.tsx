@@ -67,13 +67,17 @@ export const TextEditorContent = () => {
           </S.TabMore>
           {openedDocs.map((docId) => {
             const doc = getDoc(docs, docId)
+            if (!doc) return null
             return (
               <S.TabFile
                 isActive={activeDocId === docId}
                 key={docId}
                 onClick={handleActiveDoc(docId)}
               >
-                <S.Close onClick={(e) => handleRemoveDocFromOpened(e, docId)}>
+                <S.Close
+                  isActive={activeDocId === docId}
+                  onClick={(e) => handleRemoveDocFromOpened(e, docId)}
+                >
                   <CloseIcon />
                 </S.Close>
                 <span>{doc.title}</span>

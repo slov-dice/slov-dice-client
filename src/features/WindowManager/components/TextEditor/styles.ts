@@ -57,9 +57,15 @@ export const TabFile = styled.div<{ isActive: boolean }>`
 
   background-color: ${({ theme, isActive }) =>
     isActive ? theme.colors.white_50 : theme.colors.white_05};
+
+  span {
+    overflow: hidden;
+
+    width: 98%;
+  }
 `
 
-export const Close = styled.div`
+export const Close = styled.div<{ isActive: boolean }>`
   cursor: pointer;
   user-select: none;
 
@@ -73,7 +79,11 @@ export const Close = styled.div`
   height: 28px;
   padding: 0 4px;
 
-  background: linear-gradient(90deg, rgba(255, 255, 255, 0%) 0%, inherit 20%);
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0%) 0%,
+    ${({ theme, isActive }) => (isActive ? '#8B8B8B' : '#2B2B2B')} 20%
+  );
   border-radius: 15%;
 
   fill: ${({ theme }) => theme.colors.white};

@@ -1,3 +1,4 @@
+import Tippy from '@tippyjs/react'
 import { ChangeEvent, useCallback, useState } from 'react'
 
 import * as S from './styles'
@@ -21,7 +22,7 @@ export const GridDocsOverlay = () => {
   const dispatch = useStoreDispatch()
   const docs = useStoreSelector((store) => store.room.game.textEditor.window.docs)
 
-  const [newDoc, setNewDoc] = useState({ title: '-', description: '-' })
+  const [newDoc, setNewDoc] = useState({ title: '', description: '' })
 
   const handleChangeDocTitle = (e: ChangeEvent<HTMLInputElement>) => {
     setNewDoc((prev) => ({ ...prev, title: e.target.value }))
@@ -33,6 +34,7 @@ export const GridDocsOverlay = () => {
 
   const handleCreateDoc = () => {
     dispatch(roomActions.emitCreateDoc({ title: newDoc.title, description: newDoc.description }))
+    setNewDoc({ title: '', description: '' })
   }
 
   const handleUpdateDocTitle = (value: string, docId: T_DocId) => {
@@ -64,7 +66,7 @@ export const GridDocsOverlay = () => {
       </S.OverlayHeader>
       <S.OverlayContent>
         {docs.map((doc) => (
-          <div key={doc.id}>
+          <S.DocCard key={doc.id}>
             <EditableText
               value={doc.title}
               onChange={(value) => handleUpdateDocTitle(value, doc.id)}
@@ -73,24 +75,42 @@ export const GridDocsOverlay = () => {
               value={doc.description}
               onChange={(value) => handleUpdateDocDescription(value, doc.id)}
             />
-            <div>
-              <C.Control onClick={handleRemoveDoc(doc.id)}>
-                <TrashIcon />
-              </C.Control>
-              <C.Control onClick={handleAddDocToOpened(doc.id)}>
-                <PlusIcon />
-              </C.Control>
-            </div>
-          </div>
-        ))}
-        <div>
-          <TextField value={newDoc.title} onChange={handleChangeDocTitle} />
-          <TextareaField value={newDoc.description} onChange={handleChangeDocDescription} />
+            <S.DocCardActions justify='space-between'>
+              <Tippy content='Удалить файл'>
+                <C.Control onClick={handleRemoveDoc(doc.id)}>
+                  <TrashIcon />
+                </C.Control>
+              </Tippy>
 
-          <C.Control onClick={handleCreateDoc}>
-            <CheckIcon />
-          </C.Control>
-        </div>
+              <Tippy content='Добавить в просмотр'>
+                <C.Control onClick={handleAddDocToOpened(doc.id)}>
+                  <PlusIcon />
+                </C.Control>
+              </Tippy>
+            </S.DocCardActions>
+          </S.DocCard>
+        ))}
+        <S.DocCard>
+          <TextField
+            placeholder='Название'
+            fullWidth
+            value={newDoc.title}
+            onChange={handleChangeDocTitle}
+          />
+          <TextareaField
+            placeholder='Описание'
+            fullWidth
+            value={newDoc.description}
+            onChange={handleChangeDocDescription}
+          />
+          <S.DocCardActions justify='flex-end'>
+            <Tippy content='Создать'>
+              <C.Control onClick={handleCreateDoc}>
+                <CheckIcon />
+              </C.Control>
+            </Tippy>
+          </S.DocCardActions>
+        </S.DocCard>
       </S.OverlayContent>
     </div>
   )
