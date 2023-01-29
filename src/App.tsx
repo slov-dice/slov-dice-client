@@ -15,6 +15,7 @@ import { CustomToast } from 'styles/libs/toastify'
 import 'assets/fonts/rubik/rubik.css'
 import 'react-toastify/dist/ReactToastify.css'
 import 'tippy.js/dist/tippy.css'
+import 'react-quill/dist/quill.snow.css'
 
 export const App = () => {
   const dispatch = useStoreDispatch()

@@ -1,4 +1,5 @@
-import { useState, MouseEvent, useMemo, ChangeEvent } from 'react'
+import { useState, MouseEvent, useMemo } from 'react'
+import ReactQuill from 'react-quill'
 
 import { gameTextEditorActions } from './slice'
 import * as S from './styles'
@@ -44,10 +45,8 @@ export const TextEditorContent = () => {
     }
   }
 
-  const handleChangeDocContent = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    dispatch(
-      roomActions.emitUpdateDoc({ docId: activeDocId, field: 'content', value: e.target.value }),
-    )
+  const handleChangeDocContent = (value: string) => {
+    dispatch(roomActions.emitUpdateDoc({ docId: activeDocId, field: 'content', value }))
   }
 
   const activeDoc = useMemo(() => {
@@ -87,7 +86,9 @@ export const TextEditorContent = () => {
         </S.TopSection>
 
         <S.BottomSection>
-          {activeDoc && <textarea value={activeDoc.content} onChange={handleChangeDocContent} />}
+          {activeDoc && (
+            <ReactQuill theme='snow' value={activeDoc.content} onChange={handleChangeDocContent} />
+          )}
         </S.BottomSection>
       </S.TextEditorWrapper>
     </WindowOverlayManagerProvider>
