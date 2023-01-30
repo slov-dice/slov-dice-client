@@ -20,7 +20,10 @@ import * as C from 'styles/components'
 
 export const GridDocsOverlay = () => {
   const dispatch = useStoreDispatch()
-  const docs = useStoreSelector((store) => store.room.game.textEditor.window.docs)
+  const { docs, openedDocs } = useStoreSelector((store) => ({
+    docs: store.room.game.textEditor.window.docs,
+    openedDocs: store.gameTextEditor.opened,
+  }))
 
   const [newDoc, setNewDoc] = useState({ title: '', description: '' })
 
@@ -48,8 +51,12 @@ export const GridDocsOverlay = () => {
     dispatch(roomActions.emitRemoveDoc({ docId }))
   }
 
-  const handleAddDocToOpened = (docId: T_DocId) => () => {
-    dispatch(gameTextEditorActions.openDoc(docId))
+  const handleToggleOpenedDoc = (docId: T_DocId) => () => {
+    if (openedDocs.includes(docId)) {
+      dispatch(gameTextEditorActions.closeDoc(docId))
+    } else {
+      dispatch(gameTextEditorActions.openDoc(docId))
+    }
   }
 
   const handleClose = useCallback(() => {
@@ -76,35 +83,44 @@ export const GridDocsOverlay = () => {
               onChange={(value) => handleUpdateDocDescription(value, doc.id)}
             />
             <S.DocCardActions justify='space-between'>
-              <Tippy content='Удалить файл'>
+              <Tippy content={t('gridDocsOverlay.actions.remove')}>
                 <C.Control onClick={handleRemoveDoc(doc.id)}>
                   <TrashIcon />
                 </C.Control>
               </Tippy>
 
-              <Tippy content='Добавить в просмотр'>
-                <C.Control onClick={handleAddDocToOpened(doc.id)}>
+              <Tippy
+                content={
+                  openedDocs.includes(doc.id)
+                    ? t('gridDocsOverlay.actions.removeFromView')
+                    : t('gridDocsOverlay.actions.addToView')
+                }
+              >
+                <S.AddToView
+                  isAdded={openedDocs.includes(doc.id)}
+                  onClick={handleToggleOpenedDoc(doc.id)}
+                >
                   <PlusIcon />
-                </C.Control>
+                </S.AddToView>
               </Tippy>
             </S.DocCardActions>
           </S.DocCard>
         ))}
         <S.DocCard>
           <TextField
-            placeholder='Название'
+            placeholder={t('gridDocsOverlay.fields.title')}
             fullWidth
             value={newDoc.title}
             onChange={handleChangeDocTitle}
           />
           <TextareaField
-            placeholder='Описание'
+            placeholder={t('gridDocsOverlay.fields.description')}
             fullWidth
             value={newDoc.description}
             onChange={handleChangeDocDescription}
           />
           <S.DocCardActions justify='flex-end'>
-            <Tippy content='Создать'>
+            <Tippy content={t('gridDocsOverlay.actions.create')}>
               <C.Control onClick={handleCreateDoc}>
                 <CheckIcon />
               </C.Control>

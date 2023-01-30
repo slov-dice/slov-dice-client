@@ -1,6 +1,8 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 import { OverlayHeaderBase } from '../styles'
+
+import * as C from 'styles/components'
 
 export const OverlayHeader = styled(OverlayHeaderBase)``
 
@@ -27,4 +29,32 @@ export const DocCard = styled.div`
 export const DocCardActions = styled.div<{ justify: 'space-between' | 'flex-end' }>`
   display: flex;
   justify-content: ${({ justify }) => justify};
+`
+
+export const AddToView = styled(C.Control)<{ isAdded: boolean }>`
+  transition-timing-function: ease;
+  transition-duration: 400ms;
+  transition-property: fill;
+
+  ${({ isAdded, theme }) =>
+    isAdded
+      ? css`
+          fill: ${theme.colors.primary};
+          svg {
+            transform: rotate(45deg);
+          }
+        `
+      : css`
+          fill: ${theme.colors.white};
+
+          svg {
+            transform: rotate(0);
+          }
+        `}
+
+  svg {
+    transition-timing-function: ease;
+    transition-duration: 400ms;
+    transition-property: transform;
+  }
 `

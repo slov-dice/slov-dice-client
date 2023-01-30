@@ -234,7 +234,17 @@
   },
 
   "gridDocsOverlay": {
-    "title": "Документы"
+    "title": "Документы",
+    "fields": {
+      "title": "Название",
+      "description": "Описание"
+    },
+    "actions": {
+      "remove": "Удалить файл",
+      "addToView": "Добавить в просмотр",
+      "removeFromView": "Удалить из просмотр",
+      "create": "Создать файл"
+    }
   },
 
   "auth": {
