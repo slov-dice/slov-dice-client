@@ -232,6 +232,21 @@
       "edit": "Редактировать болванку"
     }
   },
+
+  "gridDocsOverlay": {
+    "title": "Документы",
+    "fields": {
+      "title": "Название",
+      "description": "Описание"
+    },
+    "actions": {
+      "remove": "Удалить файл",
+      "addToView": "Добавить в просмотр",
+      "removeFromView": "Удалить из просмотр",
+      "create": "Создать файл"
+    }
+  },
+
   "auth": {
     "registration": "Создать аккаунт",
     "login": "Войти в аккаунт",

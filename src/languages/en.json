@@ -232,6 +232,21 @@
       "edit": "Edit Dummy"
     }
   },
+
+  "gridDocsOverlay": {
+    "title": "Docs",
+    "fields": {
+      "title": "Title",
+      "description": "Description"
+    },
+    "actions": {
+      "remove": "Remove file",
+      "addToView": "Add to view",
+      "removeFromView": "Remove from view",
+      "create": "Create file"
+    }
+  },
+
   "auth": {
     "registration": "Create an Account",
     "login": "Login to Account",

@@ -45,7 +45,7 @@ export const PickCharacterAvatarOverlay = () => {
         return
       }
       dispatch(
-        roomActions.emitUpdateCharacterFieldInCharactersWindow({
+        roomActions.emitUpdateCharacterField({
           characterId: overlayPayload,
           field: 'avatar',
           value: avatar,

@@ -82,7 +82,7 @@ export const UpdateDummyOverlay = () => {
 
   const handleUpdateDummy = () => {
     dispatch(
-      roomActions.updateDummy({
+      roomActions.emitUpdateDummy({
         battlefield,
         dummy: {
           ...dummy,
