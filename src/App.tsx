@@ -9,6 +9,7 @@ import { AppRoutes } from 'routes'
 import { authAPI } from 'services/auth'
 import { subscribe, unsubscribe } from 'store/room/socket'
 import { GlobalStyles } from 'styles/global'
+import { ReactQuillStyles } from 'styles/libs/react-quill'
 import { TippyStyles } from 'styles/libs/tippy'
 import { CustomToast } from 'styles/libs/toastify'
 
@@ -53,6 +54,7 @@ export const App = () => {
       <SidePanel />
       <GlobalStyles />
       <TippyStyles />
+      <ReactQuillStyles />
       <CustomToast />
     </>
   )

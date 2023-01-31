@@ -1,3 +1,4 @@
+import { DeltaStatic, Sources } from 'quill'
 import { useState, MouseEvent, useMemo } from 'react'
 import ReactQuill from 'react-quill'
 
@@ -45,13 +46,22 @@ export const TextEditorContent = () => {
     }
   }
 
-  const handleChangeDocContent = (value: string) => {
-    dispatch(roomActions.emitUpdateDoc({ docId: activeDocId, field: 'content', value }))
+  const handleChangeDocContent = (value: string, _delta: DeltaStatic, source: Sources) => {
+    if (source === 'user') {
+      dispatch(
+        roomActions.emitUpdateDoc({
+          docId: activeDocId,
+          field: 'content',
+          value,
+        }),
+      )
+    }
   }
 
   const activeDoc = useMemo(() => {
     if (activeDocId) {
-      return getDoc(docs, activeDocId)
+      const doc = getDoc(docs, activeDocId)
+      return doc
     }
     return null
   }, [activeDocId, docs])
@@ -87,7 +97,12 @@ export const TextEditorContent = () => {
 
         <S.BottomSection>
           {activeDoc && (
-            <ReactQuill theme='snow' value={activeDoc.content} onChange={handleChangeDocContent} />
+            <ReactQuill
+              style={{ width: '100%' }}
+              theme='snow'
+              value={activeDoc.content}
+              onChange={handleChangeDocContent}
+            />
           )}
         </S.BottomSection>
       </S.TextEditorWrapper>
