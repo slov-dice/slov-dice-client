@@ -148,6 +148,13 @@
           }
         }
       }
+    },
+    "saveGame": {
+      "title": "Saving the game",
+      "description": "Saving characters, blanks, documents and chat history in JSON format.",
+      "actions": {
+        "download": "Download"
+      }
     }
   },
   "windowCharacters": {

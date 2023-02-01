@@ -24,3 +24,5 @@ export const modalManagerSlice = createSlice({
 })
 
 export const { openModal, closeModal } = modalManagerSlice.actions
+
+export const modalManagerActions = modalManagerSlice.actions

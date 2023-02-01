@@ -7,6 +7,7 @@ export enum E_Modal {
   restorePassword = 'restorePassword',
   gameInventory = 'gameInventory',
   gameCharacters = 'gameCharacters',
+  saveGame = 'saveGame',
 }
 export interface I_Modal {
   content: E_Modal
