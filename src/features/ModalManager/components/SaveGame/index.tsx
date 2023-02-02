@@ -24,11 +24,16 @@ export const SaveGameModal = () => {
   const handleDownloadGame = () => {
     const gameSave: T_GameSave = { game, messages }
     const jsonString = `data:text/json;chatset=utf-8,${encodeURIComponent(
-      JSON.stringify(gameSave),
+      JSON.stringify(gameSave, null, 2),
     )}`
     const link = document.createElement('a')
     link.href = jsonString
-    link.download = `${name}.json`
+    const dateCreating = new Date()
+    const fullDate = [
+      [dateCreating.getFullYear(), dateCreating.getMonth() + 1, dateCreating.getUTCDate()],
+      [dateCreating.getHours(), dateCreating.getMinutes(), dateCreating.getSeconds()],
+    ]
+    link.download = `${name}-${fullDate[0].join('.')}-${fullDate[1].join('.')}.json`
 
     link.click()
   }

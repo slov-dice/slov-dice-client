@@ -4,6 +4,7 @@ import { CreateRoomModal } from './CreateRoom'
 import { GameCharactersModal } from './GameCharacters'
 import { GameInventoryModal } from './GameInventory'
 import { JoinRoomModal } from './JoinRoom'
+import { LoadGameModal } from './LoadGame'
 import { ResetPasswordModal } from './RestorePassword'
 import { RoomSettingsModal } from './RoomSettings'
 import { SaveGameModal } from './SaveGame'
@@ -22,4 +23,5 @@ export const modalComponents: Record<E_Modal, FC> = {
   [E_Modal.gameInventory]: GameInventoryModal,
   [E_Modal.gameCharacters]: GameCharactersModal,
   [E_Modal.saveGame]: SaveGameModal,
+  [E_Modal.loadGame]: LoadGameModal,
 }

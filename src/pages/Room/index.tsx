@@ -31,18 +31,6 @@ export const Room = () => {
   return (
     <>
       <S.Page ref={pageRef}>
-        <div
-          style={{
-            position: 'absolute',
-            fontSize: 10,
-            overflowY: 'auto',
-            maxHeight: 1100,
-            zIndex: 100,
-            padding: 12,
-          }}
-        >
-          <pre>{JSON.stringify(room.game, null, 2)}</pre>
-        </div>
         <WindowManager dragConstraintsRef={pageRef} />
         <HeroBackground />
       </S.Page>

@@ -8,6 +8,7 @@ export enum E_Modal {
   gameInventory = 'gameInventory',
   gameCharacters = 'gameCharacters',
   saveGame = 'saveGame',
+  loadGame = 'loadGame',
 }
 export interface I_Modal {
   content: E_Modal

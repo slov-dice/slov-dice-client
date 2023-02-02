@@ -151,9 +151,16 @@
     },
     "saveGame": {
       "title": "Saving the game",
-      "description": "Saving characters, blanks, documents and chat history in JSON format.",
+      "description": "Saving characters, dummies, documents and chat history in JSON format.",
       "actions": {
         "download": "Download"
+      }
+    },
+    "loadGame": {
+      "title": "Download the game",
+      "description": "Upload a JSON file. To upload characters, dummies, documents and chat history.",
+      "actions": {
+        "upload": "Upload"
       }
     }
   },
@@ -347,7 +354,9 @@
   },
   "notification": {
     "unknownError": "Unknown error",
-    "roomFull": "Room is full"
+    "roomFull": "Room is full",
+    "fileVerifiedSuccess": "The file has been successfully checked for validity",
+    "fileVerifiedError": "The file is invalid"
   },
   "validation": {
     "required": "Enter the field",
