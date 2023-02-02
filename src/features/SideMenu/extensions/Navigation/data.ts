@@ -72,14 +72,14 @@ export const data: I_TaskItem[] = [
     icon: E_AppIcon.save,
     visibility: [E_TaskItemVisibility.authenticated, E_TaskItemVisibility.inRoom],
     actionType: E_TaskItemActionType.modal,
-    actionPayload: E_Modal.createRoom,
+    actionPayload: E_Modal.saveGame,
   },
   {
     name: 'sideMenu.loadGames',
     icon: E_AppIcon.upload,
     visibility: [E_TaskItemVisibility.authenticated, E_TaskItemVisibility.inRoom],
     actionType: E_TaskItemActionType.modal,
-    actionPayload: E_Modal.createRoom,
+    actionPayload: E_Modal.loadGame,
   },
   {
     name: 'sideMenu.leaveRoom',

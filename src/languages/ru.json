@@ -148,6 +148,20 @@
           }
         }
       }
+    },
+    "saveGame": {
+      "title": "Сохранение игры",
+      "description": "Сохранение персонажей, болванок, документов и истории чата в формате JSON.",
+      "actions": {
+        "download": "Скачать"
+      }
+    },
+    "loadGame": {
+      "title": "Загрузить игру",
+      "description": "Загрузить файл JSON. Для выгрузки персонажей, болванок, документов и истории чата.",
+      "actions": {
+        "upload": "Загрузить"
+      }
     }
   },
   "windowCharacters": {
@@ -341,7 +355,9 @@
   },
   "notification": {
     "unknownError": "Неизвестная ошибка",
-    "roomFull": "Нет места"
+    "roomFull": "Нет места",
+    "fileVerifiedSuccess": "Файл успешно проверен на валидность",
+    "fileVerifiedError": "Файл невалиден"
   },
   "validation": {
     "required": "Поле необходимо заполнить",
