@@ -170,6 +170,13 @@ export const subscribe = createAsyncThunk('roomPage', async (_, { dispatch }) =>
   socket.on(E_Subscribe.getRemovedDoc, (data: I_SubscriptionData[E_Subscribe.getRemovedDoc]) => {
     dispatch(roomActions.setRemovedDoc({ docId: data.docId }))
   })
+
+  socket.on(E_Subscribe.getSavedGame, (data: I_SubscriptionData[E_Subscribe.getSavedGame]) => {
+    const language = LocalStorage.getLanguage()
+    const message = data.message[language]
+    toast[data.status](message)
+    dispatch(roomActions.setSavedGame({ save: data.save }))
+  })
 })
 
 export const unsubscribe = () => {
@@ -188,4 +195,5 @@ export const unsubscribe = () => {
   socket.off(E_Subscribe.getCreatedDoc)
   socket.off(E_Subscribe.getUpdatedDoc)
   socket.off(E_Subscribe.getRemovedDoc)
+  socket.off(E_Subscribe.getSavedGame)
 }

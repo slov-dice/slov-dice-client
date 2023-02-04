@@ -11,6 +11,7 @@ import {
   T_CharacterAction,
 } from 'models/shared/game/character'
 import { T_BaseDummy, T_Dummy, T_DummyId } from 'models/shared/game/dummy'
+import { T_GameSave } from 'models/shared/game/save'
 import { I_Doc, T_DocId } from 'models/shared/game/textEditor'
 import {
   E_Emit,
@@ -461,6 +462,19 @@ export const roomSlice = createSlice({
       state.game.textEditor.window.docs = state.game.textEditor.window.docs.filter(
         (doc) => doc.id !== action.payload.docId,
       )
+    },
+
+    emitLoadGame: (state, action: PayloadAction<{ save: T_GameSave }>) => {
+      const payload: I_EmitPayload[E_Emit.loadGame] = {
+        roomId: state.id,
+        save: action.payload.save,
+      }
+
+      socket.emit(E_Emit.loadGame, payload)
+    },
+    setSavedGame: (state, action: PayloadAction<{ save: T_GameSave }>) => {
+      state.messages = action.payload.save.messages
+      state.game = action.payload.save.game
     },
   },
 })
