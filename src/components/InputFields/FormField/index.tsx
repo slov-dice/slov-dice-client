@@ -20,7 +20,7 @@ export const FormField = (props: I_FormFieldProps) => {
   const error = (errors[props.name]?.message as any) || ''
 
   return (
-    <S.FormField>
+    <S.FormFieldWrapper>
       <S.Input
         {...props}
         {...register(props.name)}
@@ -28,6 +28,6 @@ export const FormField = (props: I_FormFieldProps) => {
         autoComplete='off'
       />
       <S.Error>{t(error)}</S.Error>
-    </S.FormField>
+    </S.FormFieldWrapper>
   )
 }

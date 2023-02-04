@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 
+import { E_Locale } from 'models/shared/app'
+
 export const Wrapper = styled.div`
   position: relative;
   z-index: ${({ theme }) => theme.order.content};
@@ -211,13 +213,16 @@ export const MediaBox = styled.div`
   width: 100%;
 `
 
-export const YTPlayer = styled.iframe.attrs({
-  src: 'https://www.youtube.com/embed/ZrdLM5hTmr0',
+export const YTPlayer = styled.iframe.attrs<{ language: E_Locale }>(({ language }) => ({
+  src:
+    language === E_Locale.ru
+      ? 'https://www.youtube.com/embed/ZrdLM5hTmr0'
+      : 'https://www.youtube.com/embed/ANdG2DGm0CQ',
   title: 'YouTube video player',
   frameBorder: '0',
   allow: 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture',
   allowFullScreen: true,
-})`
+}))<{ language: E_Locale }>`
   width: 100%;
   height: 100%;
 `

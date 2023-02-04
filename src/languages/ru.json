@@ -296,7 +296,7 @@
   "sideMenu": {
     "auth": "Авторизация",
     "translator": "Перевод",
-    "createRoom": "Создать",
+    "createRoom": "Создать комнату",
     "joinRoom": "Присоединиться",
     "users": "Пользователи",
     "chat": "Чат",

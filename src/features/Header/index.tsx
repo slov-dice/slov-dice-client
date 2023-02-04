@@ -7,8 +7,7 @@ import { Toolbar } from './components/Toolbar'
 import * as S from './styles'
 
 import { Logo } from 'components/Logo'
-import { SideMenu } from 'features/SideMenu'
-import { toggleSideMenu } from 'features/SideMenu/slice'
+import { sideMenuActions } from 'features/SideMenu/slice'
 import { closeSidePanel } from 'features/SidePanel/slice'
 import { useEventListener } from 'hooks/useEventListener'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
@@ -34,7 +33,7 @@ export const Header = () => {
     location.pathname !== E_Routes.authCallback
 
   const handleToggleSideMenu = () => {
-    dispatch(toggleSideMenu())
+    dispatch(sideMenuActions.toggleSideMenu())
 
     if (!sideMenuVisible && sidePanel !== null) {
       dispatch(closeSidePanel())
@@ -62,7 +61,6 @@ export const Header = () => {
         <S.Header isTransparent={isTransparent}>
           <S.WrapperControl sideMenuVisible={sideMenuVisible}>
             <Control onClick={handleToggleSideMenu} />
-            <SideMenu />
           </S.WrapperControl>
           <Logo isHeader />
           <Toolbar />

@@ -318,7 +318,7 @@
   "sideMenu": {
     "auth": "Authentication",
     "translator": "Translator",
-    "createRoom": "Create",
+    "createRoom": "Create room",
     "joinRoom": "Join",
     "users": "Users",
     "chat": "Chat",

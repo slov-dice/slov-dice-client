@@ -1,5 +1,7 @@
+import { AnimatePresence } from 'framer-motion'
+
 import { Navigation } from './extensions/Navigation'
-import { toggleSideMenu } from './slice'
+import { sideMenuActions } from './slice'
 import * as S from './styles'
 
 import { closeSidePanel } from 'features/SidePanel/slice'
@@ -14,17 +16,22 @@ export const SideMenu = () => {
   const dispatch = useStoreDispatch()
 
   const handleToggle = () => {
-    dispatch(toggleSideMenu())
+    dispatch(sideMenuActions.toggleSideMenu())
     if (!sideMenuVisible && sidePanel !== null) {
       dispatch(closeSidePanel())
     }
   }
 
   return (
-    <div>
-      <S.Container />
-      <Navigation toggleMenu={handleToggle} />
-      <S.Overlay onClick={handleToggle} />
-    </div>
+    <AnimatePresence>
+      {sideMenuVisible && (
+        <S.Container>
+          <S.SideMenuWrapper>
+            <Navigation toggleMenu={handleToggle} />
+          </S.SideMenuWrapper>
+          <S.Overlay onClick={handleToggle} />
+        </S.Container>
+      )}
+    </AnimatePresence>
   )
 }

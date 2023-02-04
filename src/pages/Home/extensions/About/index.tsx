@@ -1,10 +1,13 @@
 import * as S from './styles'
 
+import { useStoreSelector } from 'hooks/useStoreSelector'
 import { t } from 'languages'
 import { E_Routes } from 'models/routes'
 import * as C from 'styles/components'
 
 export const About = () => {
+  const language = useStoreSelector((store) => store.app.language)
+
   return (
     <S.Wrapper>
       <S.Inner>
@@ -36,7 +39,7 @@ export const About = () => {
           </div>
         </S.InfoBox>
         <S.MediaBox>
-          <S.YTPlayer />
+          <S.YTPlayer language={language} />
         </S.MediaBox>
         <div />
       </S.Inner>

@@ -3,25 +3,27 @@ import styled from 'styled-components'
 
 import { containerAttrs, overlayAttrs } from './motion'
 
-export const Container = styled(motion.div).attrs(containerAttrs)`
+export const Container = styled.div`
+  position: relative;
+`
+
+export const SideMenuWrapper = styled(motion.div).attrs(containerAttrs)`
   position: fixed;
-  z-index: ${({ theme }) => theme.order.sideMenuContent};
-  top: 0;
+  z-index: ${({ theme }) => theme.order.sidePanelContent};
   bottom: 0;
   left: 0;
 
-  width: 300px;
+  width: ${({ theme }) => theme.sizes.sidePanel.width}px;
+  height: calc(100vh - ${({ theme }) => theme.sizes.header.height}px);
+  padding: 16px;
 
-  background: ${({ theme }) => theme.colors.black};
-
-  @media ${({ theme }) => theme.media.sm} {
-    width: 100%;
-  }
+  background-color: ${({ theme }) => theme.colors.black};
+  box-shadow: rgb(0 0 0 / 50%) 0 9px 10px;
 `
 
 export const Overlay = styled(motion.div).attrs(overlayAttrs)`
   position: fixed;
-  z-index: ${({ theme }) => theme.order.sideMenuOverlay};
+  z-index: ${({ theme }) => theme.order.sidePanelOverlay};
   top: 0;
   right: 0;
   bottom: 0;

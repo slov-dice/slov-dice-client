@@ -1,10 +1,15 @@
 import { HTMLMotionProps } from 'framer-motion'
 
-export const containerAttrs = (): HTMLMotionProps<'div'> => ({
-  initial: { x: '-100%' },
+export const sidePanelAttrs = (): HTMLMotionProps<'div'> => ({
+  initial: { x: '100%' },
   animate: { x: 0 },
-  exit: { x: '-100%' },
+  exit: { x: '100%' },
   transition: { x: { type: 'easeInOut' } },
+})
+
+export const sidePanelWrapperAttrs = (): HTMLMotionProps<'div'> => ({
+  initial: { x: 200 },
+  animate: { x: 0 },
 })
 
 export const overlayAttrs = (): HTMLMotionProps<'div'> => ({

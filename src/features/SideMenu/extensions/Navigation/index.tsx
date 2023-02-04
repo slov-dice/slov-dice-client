@@ -1,7 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 
 import { data } from './data'
-import * as S from './styles'
 
 import { NavigationItem, NavigationDivider } from '../NavigationItem'
 
@@ -75,7 +74,7 @@ export const Navigation = ({ toggleMenu }: NavigationProps) => {
   }
 
   return (
-    <S.Navigation>
+    <ul>
       {data.map((item) => {
         if (statuses.isAuth && item.visibility.includes(E_TaskItemVisibility.authenticated)) {
           if (isRoomPageOpen && item.visibility.includes(E_TaskItemVisibility.inRoom)) {
@@ -124,6 +123,6 @@ export const Navigation = ({ toggleMenu }: NavigationProps) => {
           )
         }
       })}
-    </S.Navigation>
+    </ul>
   )
 }

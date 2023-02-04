@@ -8,6 +8,7 @@ import {
 import { changeToolbarItemIcon } from 'features/Header/slice'
 import { E_Modal } from 'features/ModalManager/models'
 import { openModal } from 'features/ModalManager/slice'
+import { sideMenuActions } from 'features/SideMenu/slice'
 import { E_Panels } from 'features/SidePanel/models'
 import { closeSidePanel, openSidePanel } from 'features/SidePanel/slice'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
@@ -32,6 +33,7 @@ export const Toolbar = () => {
         return
       }
       dispatch(openSidePanel(payload as E_Panels))
+      dispatch(sideMenuActions.closeSideMenu())
     } else if (type === E_TaskItemActionType.fullScreen) {
       FullScreen.toggle()
       const icon = FullScreen.getValue() ? E_AppIcon.expand : E_AppIcon.compress

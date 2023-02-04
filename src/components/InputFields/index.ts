@@ -1,4 +1,5 @@
 export { FormField } from './FormField'
+export { FormPasswordField } from './FormPasswordField'
 export { ChatField } from './ChatField'
 export { TextField } from './TextField'
 export { TextareaField } from './TextareaField'

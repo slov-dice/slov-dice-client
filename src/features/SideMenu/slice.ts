@@ -15,7 +15,10 @@ export const sideMenuSlice = createSlice({
     toggleSideMenu: (state) => {
       state.isOpen = !state.isOpen
     },
+    closeSideMenu: (state) => {
+      state.isOpen = false
+    },
   },
 })
 
-export const { toggleSideMenu } = sideMenuSlice.actions
+export const sideMenuActions = sideMenuSlice.actions

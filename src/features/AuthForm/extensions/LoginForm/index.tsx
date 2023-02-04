@@ -7,7 +7,7 @@ import { useSignIn } from './useSignIn'
 import { I_FormSignIn } from '../../models/form'
 
 import { Button, LinkButton } from 'components/Buttons'
-import { FormField } from 'components/InputFields'
+import { FormField, FormPasswordField } from 'components/InputFields'
 import { E_Modal } from 'features/ModalManager/models'
 import { openModal } from 'features/ModalManager/slice'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
@@ -41,7 +41,7 @@ export const LoginForm = () => {
       <FormProvider {...formSignIn}>
         <FormField name='email' placeholder={t('auth.form.email')} />
         <C.Divider h={16} />
-        <FormField name='password' placeholder={t('auth.form.password')} />
+        <FormPasswordField name='password' placeholder={t('auth.form.password')} />
         <C.Divider />
         <Button disabled={signInProgress.isLoading} onClick={formSignIn.handleSubmit(handleSignIn)}>
           {signInProgress.isLoading ? t('auth.loading') : t('auth.form.actions.login')}

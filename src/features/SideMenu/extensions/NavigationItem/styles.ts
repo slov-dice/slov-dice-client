@@ -18,7 +18,7 @@ export const NavigationItem = styled(motion.li).attrs(({ theme }) => navigationI
   border-radius: 5px;
 `
 
-export const NavigationDivider = styled(motion.li)`
+export const NavigationDivider = styled.li`
   width: 100%;
   height: 2px;
   margin-bottom: 10px;
@@ -26,7 +26,7 @@ export const NavigationDivider = styled(motion.li)`
   background-color: ${({ theme }) => theme.colors.white_50};
 `
 
-export const NavigationItemIcon = styled(motion.div)`
+export const NavigationItemIcon = styled.div`
   display: flex;
   flex: 40px 0;
   align-items: center;
