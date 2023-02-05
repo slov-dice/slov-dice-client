@@ -29,7 +29,7 @@ export const GlobalStyles = createGlobalStyle`
     }
   }
 
-  input, textarea {
+  input, textarea, button {
     font-family: Rubik, sans-serif;
   }
 

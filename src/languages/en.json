@@ -51,6 +51,15 @@
       "resources": "Resources"
     }
   },
+  "lobby": {
+    "title": "Room List",
+    "noRoomsCreated": "No one has created a room yet 🔍",
+    "actions": {
+      "create": "Create room",
+      "return": "Return",
+      "join": "Join"
+    }
+  },
   "modals": {
     "translator": {
       "title": "Translation",
