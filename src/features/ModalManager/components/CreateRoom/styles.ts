@@ -13,3 +13,11 @@ export const ModalActions = styled(BaseModalActions)`
   grid: 1fr / 1fr 2fr;
   gap: 16px;
 `
+
+export const ModalContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  height: 100%;
+`
