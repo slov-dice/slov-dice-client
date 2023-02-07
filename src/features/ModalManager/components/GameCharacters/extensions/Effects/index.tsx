@@ -6,7 +6,12 @@ import * as S from './styles'
 import CloseIcon from 'assets/icons/app/close.svg'
 import PlusIcon from 'assets/icons/app/plus.svg'
 import { Button } from 'components/Buttons'
-import { TextField, TextareaField, CustomSelectField } from 'components/InputFields'
+import {
+  TextField,
+  TextareaField,
+  CustomSelectField,
+  E_TextFieldSize,
+} from 'components/InputFields'
 import { T_CustomSelectOption } from 'components/InputFields/CustomSelectField/models'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { useStoreSelector } from 'hooks/useStoreSelector'
@@ -102,6 +107,7 @@ export const EffectsTab = () => {
             />
             <TextField
               {...register(`effects.${index}.name`)}
+              size={E_TextFieldSize.xs}
               placeholder={t('modals.gameCharacters.tabs.effects.fields.name')}
             />
             <TextareaField

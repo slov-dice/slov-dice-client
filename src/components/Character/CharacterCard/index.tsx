@@ -43,7 +43,7 @@ export const CharacterCard = ({ character }: I_CharacterCardProps) => {
 
   const handleChangeCharacterLevel = (value: number) => {
     dispatch(
-      roomActions.emitUpdateCharacterFieldInCharactersWindow({
+      roomActions.emitUpdateCharacterField({
         characterId: character.id,
         field: 'level',
         value,
@@ -53,7 +53,7 @@ export const CharacterCard = ({ character }: I_CharacterCardProps) => {
 
   const handleChangeCharacterName = (value: string) => {
     dispatch(
-      roomActions.emitUpdateCharacterFieldInCharactersWindow({
+      roomActions.emitUpdateCharacterField({
         characterId: character.id,
         field: 'name',
         value,
@@ -63,7 +63,7 @@ export const CharacterCard = ({ character }: I_CharacterCardProps) => {
 
   const handleChangeCharacterBar = (id: T_CharacterBarId, value: number) => {
     dispatch(
-      roomActions.emitUpdateCharacterFieldInCharactersWindow({
+      roomActions.emitUpdateCharacterField({
         characterId: character.id,
         field: 'bars',
         value,
@@ -74,7 +74,7 @@ export const CharacterCard = ({ character }: I_CharacterCardProps) => {
 
   const handleChangeCharacterSpecial = (id: T_CharacterSpecialId, value: number) => {
     dispatch(
-      roomActions.emitUpdateCharacterFieldInCharactersWindow({
+      roomActions.emitUpdateCharacterField({
         characterId: character.id,
         field: 'specials',
         value,
@@ -85,7 +85,7 @@ export const CharacterCard = ({ character }: I_CharacterCardProps) => {
 
   const handleRemoveCharacterEffect = (effectId: string) => {
     dispatch(
-      roomActions.emitUpdateCharacterFieldInCharactersWindow({
+      roomActions.emitUpdateCharacterField({
         characterId: character.id,
         field: 'effects',
         value: effectId,

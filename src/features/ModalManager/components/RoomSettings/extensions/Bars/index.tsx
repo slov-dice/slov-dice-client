@@ -6,7 +6,7 @@ import * as S from './styles'
 import CloseIcon from 'assets/icons/app/close.svg'
 import PlusIcon from 'assets/icons/app/plus.svg'
 import { Button } from 'components/Buttons'
-import { ColorField, TextField } from 'components/InputFields'
+import { ColorField, E_TextFieldSize, TextField } from 'components/InputFields'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { useStoreSelector } from 'hooks/useStoreSelector'
 import { t } from 'languages'
@@ -43,6 +43,7 @@ export const BarsTab = () => {
           <S.BarBlock key={field.id}>
             <TextField
               {...register(`bars.${index}.name`)}
+              size={E_TextFieldSize.xs}
               placeholder={t('modals.roomSettings.tabs.bars.fields.name')}
             />
             <ColorField {...register(`bars.${index}.color`)} fullWidth />

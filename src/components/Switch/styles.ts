@@ -23,7 +23,8 @@ export const Option = styled.li<{ isSelected: boolean }>`
   align-items: center;
 
   width: 100%;
-  padding: 16px;
+  min-height: 48px;
+  padding-inline: 16px;
 
   background: ${({ theme, isSelected }) =>
     isSelected ? theme.colors.primary_50 : theme.colors.white_05};

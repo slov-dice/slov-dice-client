@@ -7,7 +7,12 @@ import * as S from './styles'
 import CloseIcon from 'assets/icons/app/close.svg'
 import PlusIcon from 'assets/icons/app/plus.svg'
 import { Button } from 'components/Buttons'
-import { CustomSelectField, TextareaField, TextField } from 'components/InputFields'
+import {
+  CustomSelectField,
+  E_TextFieldSize,
+  TextareaField,
+  TextField,
+} from 'components/InputFields'
 import { T_CustomSelectOption } from 'components/InputFields/CustomSelectField/models'
 import { gameBattlefieldActions } from 'features/WindowManager/components/Battlefield/slice'
 import { gameCharactersActions } from 'features/WindowManager/components/Characters/slice'
@@ -136,6 +141,7 @@ export const ActionsEditor = () => {
             <S.ContentBlock key={index}>
               <TextField
                 value={field.title}
+                size={E_TextFieldSize.xs}
                 onChange={(e) => update(index, { ...field, title: e.target.value })}
                 placeholder={t('actionsEditor.fields.title')}
               />
@@ -155,6 +161,7 @@ export const ActionsEditor = () => {
                 />
                 <TextField
                   {...register(`actions.${index}.target.value`)}
+                  size={E_TextFieldSize.xs}
                   placeholder={t('actionsEditor.fields.value')}
                 />
               </C.Row>

@@ -67,7 +67,7 @@ export const AuthForm = () => {
               {t(AuthBottom[authFormContent].description)}
               &nbsp;
               <LinkButton onClick={handleBottomReplace}>
-                {t(AuthBottom[authFormContent].button)}
+                <div>{t(AuthBottom[authFormContent].button)}</div>
               </LinkButton>
             </S.BottomAction>
             <LanguageSwitcher />
