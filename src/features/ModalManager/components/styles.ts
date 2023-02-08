@@ -48,6 +48,12 @@ export const BaseModalClose = styled.span`
 `
 
 export const BaseModalContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  height: 100%;
+
   color: ${({ theme }) => theme.colors.white_50};
 `
 

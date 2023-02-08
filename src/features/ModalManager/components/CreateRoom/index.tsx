@@ -77,7 +77,6 @@ export const CreateRoomModal = () => {
       <S.ModalContent>
         <div>
           <C.Divider />
-
           <TextField
             value={form['room-name']}
             onChange={handleChangeForm}

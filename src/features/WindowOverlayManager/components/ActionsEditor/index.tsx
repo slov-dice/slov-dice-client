@@ -28,10 +28,8 @@ import * as C from 'styles/components'
 const findOverlay = (overlay: I_WindowOverlay) => overlay.name === E_WindowOverlay.actionsEditor
 
 export const ActionsEditor = () => {
-  const { location } = useContext(windowOverlayManagerContext)
-
   const dispatch = useStoreDispatch()
-
+  const { location } = useContext(windowOverlayManagerContext)
   const { overlayPayload, settingsBars } = useStoreSelector((store) => ({
     overlayPayload:
       location === E_Window.characters

@@ -1,3 +1,4 @@
+import { useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
@@ -5,8 +6,9 @@ import * as S from './styles'
 
 import LockIcon from 'assets/icons/app/lock.svg'
 import { Button } from 'components/Buttons'
+import { modalManagerContext } from 'features/ModalManager/context'
 import { E_Modal } from 'features/ModalManager/models'
-import { openModal } from 'features/ModalManager/slice'
+import { modalManagerActions, openModal } from 'features/ModalManager/slice'
 import { useMediaQuery } from 'hooks/useMediaQuery'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { useStoreSelector } from 'hooks/useStoreSelector'
@@ -19,6 +21,7 @@ import { E_MediaQuery } from 'styles/theme'
 export const RoomList = () => {
   const dispatch = useStoreDispatch()
   const navigate = useNavigate()
+  const { setEnterPasswordRoomPayload } = useContext(modalManagerContext)
   const { rooms, currentRoomId, isUserInRoom } = useStoreSelector((store) => ({
     rooms: store.lobbyPage.rooms,
     currentRoomId: store.room.id,
@@ -44,8 +47,8 @@ export const RoomList = () => {
 
     // Вход в комнату, если есть пароль
     if (room.type === E_RoomType.private) {
-      const password = prompt('Enter the password') || ''
-      dispatch(roomActions.emitJoinRoom({ roomId: room.id, password }))
+      setEnterPasswordRoomPayload({ roomId: room.id })
+      dispatch(modalManagerActions.openModal(E_Modal.enterPasswordRoom))
       return
     }
 

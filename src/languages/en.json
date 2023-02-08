@@ -82,6 +82,17 @@
         "create": "Create"
       }
     },
+    "enterPasswordRoom": {
+      "title": "Joining a room",
+      "paragraph": "Enter the password to enter the room.",
+      "fields": {
+        "password": "Password"
+      },
+      "actions": {
+        "cancel": "Cancel",
+        "join": "Join"
+      }
+    },
     "joinRoom": {
       "title": "Join to room"
     },

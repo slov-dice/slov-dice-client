@@ -82,6 +82,17 @@
         "create": "Создать"
       }
     },
+    "enterPasswordRoom": {
+      "title": "Вход в комнату",
+      "paragraph": "Введите пароль для входа в комнату.",
+      "fields": {
+        "password": "Пароль"
+      },
+      "actions": {
+        "cancel": "Отмена",
+        "join": "Присоединиться"
+      }
+    },
     "joinRoom": {
       "title": "Войти в комнату"
     },

@@ -4,6 +4,7 @@ import { toast } from 'react-toastify'
 
 import { setRooms, updateRoom } from './slice'
 
+import { modalManagerActions } from 'features/ModalManager/slice'
 import { E_Subscribe, I_SubscriptionData } from 'models/shared/socket/lobbyRooms'
 import { socket } from 'services/socket'
 import { joinRoom } from 'store/profile'
@@ -35,6 +36,7 @@ export const subscribe = createAsyncThunk(
       }
 
       if (!data.fullRoom) return
+      dispatch(modalManagerActions.closeModal())
       dispatch(roomActions.setRoom(data.fullRoom))
       dispatch(joinRoom())
       navigate(`/room/${data.fullRoom.id}`)
