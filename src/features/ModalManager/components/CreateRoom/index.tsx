@@ -10,6 +10,7 @@ import { TextField, SelectField } from 'components/InputFields'
 import { Switch, T_SwitchOption } from 'components/Switch'
 import { closeModal } from 'features/ModalManager/slice'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
+import { useStoreSelector } from 'hooks/useStoreSelector'
 import { t } from 'languages'
 import { E_RoomType } from 'models/shared/app'
 import { roomActions } from 'store/room'
@@ -17,6 +18,10 @@ import * as C from 'styles/components'
 
 export const CreateRoomModal = () => {
   const dispatch = useStoreDispatch()
+
+  const { isUserInRoom } = useStoreSelector((store) => ({
+    isUserInRoom: store.profile.statuses.inRoom,
+  }))
 
   const [form, setForm] = useState({
     'room-name': '',
@@ -62,6 +67,9 @@ export const CreateRoomModal = () => {
       roomSize: form['room-size'],
       roomPassword: roomPassword,
       roomType,
+    }
+    if (isUserInRoom) {
+      dispatch(roomActions.emitLeaveRoom())
     }
     dispatch(roomActions.emitCreateRoom(createRoomPayload))
     handleClose()

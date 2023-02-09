@@ -26,6 +26,8 @@ export const ConfirmLeaveRoom = () => {
   }
 
   const handleConfirm = () => {
+    dispatch(roomActions.emitLeaveRoom())
+
     if (confirmLeaveRoomPayload.roomType === E_RoomType.public) {
       dispatch(
         roomActions.emitJoinRoom({
