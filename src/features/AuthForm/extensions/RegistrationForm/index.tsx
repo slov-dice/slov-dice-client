@@ -7,8 +7,9 @@ import { useSignUp } from './useSignUp'
 import { I_FormSignUp } from '../../models/form'
 
 import { Button } from 'components/Buttons'
-import { FormField } from 'components/InputFields'
+import { FormField, FormPasswordField } from 'components/InputFields'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
+import { useStoreSelector } from 'hooks/useStoreSelector'
 import { t } from 'languages'
 import { E_AuthType } from 'models/shared/app'
 import * as C from 'styles/components'
@@ -17,6 +18,7 @@ import { signUpSchema } from 'utils/validations/auth'
 
 export const RegistrationForm = () => {
   const dispatch = useStoreDispatch()
+  const language = useStoreSelector((store) => store.app.language)
 
   const { fetchSignUp, signUpProgress } = useSignUp(dispatch)
 
@@ -28,9 +30,8 @@ export const RegistrationForm = () => {
   const handleSignUp: SubmitHandler<I_FormSignUp> = async (values) => {
     LocalStorage.setAuthType(E_AuthType.email)
     const { rePassword, ...rest } = values
-    await fetchSignUp({ ...rest })
+    await fetchSignUp({ ...rest, language })
   }
-  // eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjUwLCJlbWFpbCI6InJldHJvLmJvdDIyMEBnbWFpbC5jb20iLCJpYXQiOjE2NjA5MTIzOTAsImV4cCI6MTY2MDkxMzI5MH0.TED6e-PJSY_lElDrAkZA9bJwd5stmi55Flve6TE-RNw
 
   return (
     <S.Wrapper initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
@@ -39,9 +40,9 @@ export const RegistrationForm = () => {
         <C.Divider h={16} />
         <FormField name='nickname' placeholder={t('auth.form.nickname')} />
         <C.Divider h={16} />
-        <FormField name='password' placeholder={t('auth.form.password')} />
+        <FormPasswordField name='password' placeholder={t('auth.form.password')} />
         <C.Divider h={16} />
-        <FormField name='rePassword' placeholder={t('auth.form.rePassword')} />
+        <FormPasswordField name='rePassword' placeholder={t('auth.form.rePassword')} />
         <C.Divider />
         <Button disabled={signUpProgress.isLoading} onClick={formSignUp.handleSubmit(handleSignUp)}>
           {signUpProgress.isLoading ? t('auth.loading') : t('auth.form.actions.registration')}

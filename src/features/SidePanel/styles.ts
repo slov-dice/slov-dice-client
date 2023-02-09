@@ -1,11 +1,13 @@
 import { motion } from 'framer-motion'
 import styled from 'styled-components'
 
-export const Wrapper = styled.div`
+import { overlayAttrs, sidePanelAttrs, sidePanelWrapperAttrs } from './motion'
+
+export const Container = styled.div`
   position: relative;
 `
 
-export const SidePanel = styled(motion.div)`
+export const SidePanelWrapper = styled(motion.div).attrs(sidePanelAttrs)`
   position: fixed;
   z-index: ${({ theme }) => theme.order.sidePanelContent};
   right: 0;
@@ -18,18 +20,11 @@ export const SidePanel = styled(motion.div)`
   box-shadow: rgb(0 0 0 / 50%) 0 9px 10px;
 `
 
-export const SidePanelWrapper = styled(motion.div).attrs({
-  initial: { x: 200 },
-  animate: { x: 0 },
-})`
+export const SidePanelInner = styled(motion.div).attrs(sidePanelWrapperAttrs)`
   height: 100%;
 `
 
-export const Overlay = styled(motion.div).attrs({
-  initial: { opacity: 0 },
-  animate: { opacity: 1 },
-  exit: { opacity: 0 },
-})`
+export const Overlay = styled(motion.div).attrs(overlayAttrs)`
   position: fixed;
   z-index: ${({ theme }) => theme.order.sidePanelOverlay};
   top: 0;

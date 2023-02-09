@@ -1,6 +1,6 @@
 import { AnimatePresence } from 'framer-motion'
 
-import { Panel } from './components'
+import { Panel } from './extensions'
 import { closeSidePanel } from './slice'
 import * as S from './styles'
 
@@ -20,9 +20,9 @@ export const SidePanel = () => {
       const Content = Panel[sidePanel]
 
       return (
-        <S.SidePanelWrapper key={sidePanel}>
+        <S.SidePanelInner key={sidePanel}>
           <Content />
-        </S.SidePanelWrapper>
+        </S.SidePanelInner>
       )
     }
     return null
@@ -31,17 +31,10 @@ export const SidePanel = () => {
   return (
     <AnimatePresence>
       {sidePanel !== null && (
-        <S.Wrapper>
-          <S.SidePanel
-            initial={{ x: '100%' }}
-            animate={{ x: 0 }}
-            exit={{ x: '100%' }}
-            transition={{ x: { type: 'easeInOut' } }}
-          >
-            {getPanel()}
-          </S.SidePanel>
+        <S.Container>
+          <S.SidePanelWrapper>{getPanel()}</S.SidePanelWrapper>
           <S.Overlay onClick={handleClose} />
-        </S.Wrapper>
+        </S.Container>
       )}
     </AnimatePresence>
   )

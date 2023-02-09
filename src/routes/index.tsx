@@ -24,7 +24,7 @@ export const AppRoutes = () => {
             <Route path={E_Routes.home} element={<Pages.Home />} />
             <Route path={E_Routes.verification} element={<Pages.Verification />} />
             <Route path={E_Routes.authCallback} element={<Pages.AuthCallback />} />
-            <Route path='*' element={<Pages.NotFound />} />
+            <Route path='*' element={<Pages.Home />} />
           </Route>
         </Routes>
       </AnimatePresence>

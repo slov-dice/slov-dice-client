@@ -4,8 +4,8 @@ import { E_Modal } from 'features/ModalManager/models'
 import { E_Panels } from 'features/SidePanel/models'
 import { E_Locale } from 'models/shared/app'
 import { FullScreen } from 'utils/helpers/fullScreen'
-import { E_AppIcon } from 'utils/icons/app'
 import { LocalStorage } from 'utils/helpers/localStorage'
+import { E_AppIcon } from 'utils/icons/app'
 
 interface UI {
   language: E_Locale
@@ -52,12 +52,12 @@ export const initialState: UI = {
       actionType: E_TaskItemActionType.modal,
       actionPayload: E_Modal.translator,
     },
-    {
-      name: 'sideMenu.settings',
-      icon: E_AppIcon.settings,
-      visibility: [E_TaskItemVisibility.authenticated],
-      actionType: E_TaskItemActionType.modal,
-      actionPayload: E_Modal.settings,
-    },
+    // {
+    //   name: 'sideMenu.settings',
+    //   icon: E_AppIcon.settings,
+    //   visibility: [E_TaskItemVisibility.authenticated],
+    //   actionType: E_TaskItemActionType.modal,
+    //   actionPayload: E_Modal.settings,
+    // },
   ],
 }

@@ -116,13 +116,13 @@ export const data: I_TaskItem[] = [
     actionType: E_TaskItemActionType.modal,
     actionPayload: E_Modal.createRoom,
   },
-  {
-    name: 'sideMenu.joinRoom',
-    icon: E_AppIcon.join,
-    visibility: [E_TaskItemVisibility.authenticated, E_TaskItemVisibility.inLobby],
-    actionType: E_TaskItemActionType.modal,
-    actionPayload: E_Modal.joinRoom,
-  },
+  // {
+  //   name: 'sideMenu.joinRoom',
+  //   icon: E_AppIcon.join,
+  //   visibility: [E_TaskItemVisibility.authenticated, E_TaskItemVisibility.inLobby],
+  //   actionType: E_TaskItemActionType.modal,
+  //   actionPayload: E_Modal.joinRoom,
+  // },
   {
     name: 'room-lobby-0',
     icon: E_AppIcon.divider,
@@ -152,17 +152,17 @@ export const data: I_TaskItem[] = [
     actionType: E_TaskItemActionType.panel,
     actionPayload: E_Panels.chat,
   },
-  {
-    name: 'sideMenu.settings',
-    icon: E_AppIcon.settings,
-    visibility: [
-      E_TaskItemVisibility.authenticated,
-      E_TaskItemVisibility.inLobby,
-      E_TaskItemVisibility.inRoom,
-    ],
-    actionType: E_TaskItemActionType.modal,
-    actionPayload: E_Modal.settings,
-  },
+  // {
+  //   name: 'sideMenu.settings',
+  //   icon: E_AppIcon.settings,
+  //   visibility: [
+  //     E_TaskItemVisibility.authenticated,
+  //     E_TaskItemVisibility.inLobby,
+  //     E_TaskItemVisibility.inRoom,
+  //   ],
+  //   actionType: E_TaskItemActionType.modal,
+  //   actionPayload: E_Modal.settings,
+  // },
   {
     name: 'authenticated-divider-0',
     icon: E_AppIcon.divider,

@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const FormFieldWrapper = styled.div`
+export const FormPasswordFieldWrapper = styled.div`
   position: relative;
 
   display: flex;
@@ -31,6 +31,36 @@ export const Input = styled.input`
 
   ::placeholder {
     color: ${({ theme }) => theme.colors.white_50};
+  }
+
+  ::-ms-reveal {
+    opacity: 0;
+  }
+`
+
+export const IconWrapper = styled.div<{ passwordVisible: boolean }>`
+  cursor: pointer;
+  user-select: none;
+
+  position: absolute;
+  top: 16px;
+  right: 16px;
+
+  width: 18px;
+  height: 18px;
+
+  fill: ${({ theme }) => theme.colors.white};
+
+  svg {
+    position: absolute;
+  }
+
+  svg:nth-child(1) {
+    opacity: ${({ passwordVisible }) => (passwordVisible ? 0 : 1)};
+  }
+
+  svg:nth-child(2) {
+    opacity: ${({ passwordVisible }) => (passwordVisible ? 1 : 0)};
   }
 `
 

@@ -2,6 +2,7 @@ import { useLayoutEffect, useEffect } from 'react'
 
 import { connectAuthenticatedUser } from 'features/AuthForm/utils/dispatchers'
 import { ModalManager } from 'features/ModalManager'
+import { SideMenu } from 'features/SideMenu'
 import { SidePanel } from 'features/SidePanel'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { useStoreSelector } from 'hooks/useStoreSelector'
@@ -52,6 +53,7 @@ export const App = () => {
       {!isLoading && <AppRoutes />}
       <ModalManager />
       <SidePanel />
+      <SideMenu />
       <GlobalStyles />
       <TippyStyles />
       <ReactQuillStyles />

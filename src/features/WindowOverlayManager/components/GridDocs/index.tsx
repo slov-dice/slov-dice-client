@@ -8,7 +8,7 @@ import CloseIcon from 'assets/icons/app/close.svg'
 import PlusIcon from 'assets/icons/app/plus.svg'
 import TrashIcon from 'assets/icons/app/trash.svg'
 import { EditableText, EditableTextarea } from 'components/game'
-import { TextareaField, TextField } from 'components/InputFields'
+import { E_TextFieldSize, TextareaField, TextField } from 'components/InputFields'
 import { gameTextEditorActions } from 'features/WindowManager/components/TextEditor/slice'
 import { E_WindowOverlay } from 'features/WindowOverlayManager/models'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
@@ -110,6 +110,7 @@ export const GridDocsOverlay = () => {
           <TextField
             placeholder={t('gridDocsOverlay.fields.title')}
             fullWidth
+            size={E_TextFieldSize.xs}
             value={newDoc.title}
             onChange={handleChangeDocTitle}
           />

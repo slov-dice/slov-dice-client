@@ -1,4 +1,4 @@
-import { E_AuthType, T_LocaleText } from 'models/shared/app'
+import { E_AuthType, E_Locale, T_LocaleText } from 'models/shared/app'
 
 export interface I_AuthResponse {
   accessToken?: string
@@ -17,6 +17,7 @@ export interface I_SignUpPayload {
   email: string
   nickname: string
   password: string
+  language: E_Locale
 }
 
 export interface I_ThirdPartyAuthPayload {

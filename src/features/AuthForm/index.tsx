@@ -1,8 +1,8 @@
 import { AnimatePresence } from 'framer-motion'
 import { useLayoutEffect } from 'react'
 
-import { AuthTitle, AuthArrow, AuthContent, AuthBottom } from './components'
-import { LanguageSwitcher } from './components/LanguageSwitcher'
+import { AuthTitle, AuthArrow, AuthContent, AuthBottom } from './extensions'
+import { LanguageSwitcher } from './extensions/LanguageSwitcher'
 import { E_AuthContent } from './models'
 import { closeAuthForm, openAuthForm, switchAuthFormContent } from './slice'
 import * as S from './styles'
@@ -67,7 +67,7 @@ export const AuthForm = () => {
               {t(AuthBottom[authFormContent].description)}
               &nbsp;
               <LinkButton onClick={handleBottomReplace}>
-                {t(AuthBottom[authFormContent].button)}
+                <div>{t(AuthBottom[authFormContent].button)}</div>
               </LinkButton>
             </S.BottomAction>
             <LanguageSwitcher />

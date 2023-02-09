@@ -28,7 +28,7 @@ export const SelectWrapper = styled.div<{ isOpened: boolean }>`
 export const Select = styled.select<{ fullWidth: boolean }>`
   width: ${({ fullWidth }) => (fullWidth ? '100%' : '256px')};
   max-width: 100%;
-  height: 54px;
+  height: 48px;
   max-height: 100%;
   padding: 12px;
 

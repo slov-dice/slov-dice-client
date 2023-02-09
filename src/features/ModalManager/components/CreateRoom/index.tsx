@@ -10,6 +10,7 @@ import { TextField, SelectField } from 'components/InputFields'
 import { Switch, T_SwitchOption } from 'components/Switch'
 import { closeModal } from 'features/ModalManager/slice'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
+import { useStoreSelector } from 'hooks/useStoreSelector'
 import { t } from 'languages'
 import { E_RoomType } from 'models/shared/app'
 import { roomActions } from 'store/room'
@@ -17,6 +18,10 @@ import * as C from 'styles/components'
 
 export const CreateRoomModal = () => {
   const dispatch = useStoreDispatch()
+
+  const { isUserInRoom } = useStoreSelector((store) => ({
+    isUserInRoom: store.profile.statuses.inRoom,
+  }))
 
   const [form, setForm] = useState({
     'room-name': '',
@@ -63,6 +68,9 @@ export const CreateRoomModal = () => {
       roomPassword: roomPassword,
       roomType,
     }
+    if (isUserInRoom) {
+      dispatch(roomActions.emitLeaveRoom())
+    }
     dispatch(roomActions.emitCreateRoom(createRoomPayload))
     handleClose()
   }
@@ -73,55 +81,61 @@ export const CreateRoomModal = () => {
         <CloseIcon />
       </S.ModalClose>
       <C.Title>{t('modals.createRoom.title')}</C.Title>
-      <C.Divider />
 
-      <TextField
-        value={form['room-name']}
-        onChange={handleChangeForm}
-        name='room-name'
-        placeholder={t('modals.createRoom.fields.name')}
-        fullWidth
-      />
-      <C.Divider />
-      <SelectField
-        value={selectedSizeOption}
-        onChange={(item) => handleSelectSize(item)}
-        options={sizeOptions}
-        fullWidth
-      />
-      <C.Divider />
-      <Switch
-        value={selectedTypeOption.value}
-        onChange={handleSwitchType}
-        options={typeOptions}
-        name='roomType'
-      />
-      <C.Divider />
-      <AnimatePresence mode='wait'>
-        {selectedTypeOption === typeOptions[1] && (
-          <motion.div
-            initial={{ x: '-100%' }}
-            animate={{ x: '0%' }}
-            exit={{ x: '-100%' }}
-            transition={{ x: { type: 'ease' } }}
-          >
-            <TextField
-              onChange={handleChangeForm}
-              name='room-password'
-              placeholder={t('modals.createRoom.fields.password')}
-              fullWidth
-            />
-          </motion.div>
-        )}
-      </AnimatePresence>
-      <C.Divider />
+      <S.ModalContent>
+        <div>
+          <C.Divider />
+          <TextField
+            value={form['room-name']}
+            onChange={handleChangeForm}
+            name='room-name'
+            placeholder={t('modals.createRoom.fields.name')}
+            fullWidth
+          />
+          <C.Divider />
+          <SelectField
+            value={selectedSizeOption}
+            onChange={(item) => handleSelectSize(item)}
+            options={sizeOptions}
+            fullWidth
+          />
+          <C.Divider />
+          <Switch
+            value={selectedTypeOption.value}
+            onChange={handleSwitchType}
+            options={typeOptions}
+            name='roomType'
+          />
+          <C.Divider />
+          <AnimatePresence mode='wait'>
+            {selectedTypeOption === typeOptions[1] && (
+              <motion.div
+                initial={{ x: '-100%' }}
+                animate={{ x: '0%' }}
+                exit={{ x: '-100%' }}
+                transition={{ x: { type: 'ease' } }}
+              >
+                <TextField
+                  onChange={handleChangeForm}
+                  name='room-password'
+                  placeholder={t('modals.createRoom.fields.password')}
+                  fullWidth
+                />
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
 
-      <S.ModalActions>
-        <Button onClick={handleClose} mod={Button.mod.primary}>
-          {t('modals.createRoom.actions.cancel')}
-        </Button>
-        <Button onClick={handleCreateRoom}>{t('modals.createRoom.actions.create')}</Button>
-      </S.ModalActions>
+        <div>
+          <C.Divider decorated />
+          <S.ModalActions>
+            <Button onClick={handleClose} mod={Button.mod.primary}>
+              {t('modals.createRoom.actions.cancel')}
+            </Button>
+            <Button onClick={handleCreateRoom}>{t('modals.createRoom.actions.create')}</Button>
+          </S.ModalActions>
+        </div>
+      </S.ModalContent>
     </S.Modal>
   )
 }

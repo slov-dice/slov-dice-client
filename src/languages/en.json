@@ -51,6 +51,15 @@
       "resources": "Resources"
     }
   },
+  "lobby": {
+    "title": "Room List",
+    "noRoomsCreated": "No one has created a room yet 🔍",
+    "actions": {
+      "create": "Create room",
+      "return": "Return",
+      "join": "Join"
+    }
+  },
   "modals": {
     "translator": {
       "title": "Translation",
@@ -71,6 +80,26 @@
       "actions": {
         "cancel": "Cancel",
         "create": "Create"
+      }
+    },
+    "enterPasswordRoom": {
+      "title": "Joining a room",
+      "paragraph": "Enter the password to enter the room.",
+      "fields": {
+        "password": "Password"
+      },
+      "actions": {
+        "cancel": "Cancel",
+        "join": "Join"
+      }
+    },
+    "confirmLeaveRoom": {
+      "title": "Leave the room",
+      "paragraph1": "You are already in the room:",
+      "paragraph2": "Are you sure you want to leave the room and join the other one?",
+      "actions": {
+        "cancel": "Cancel",
+        "confirm": "Confirm"
       }
     },
     "joinRoom": {
@@ -332,7 +361,7 @@
   "sideMenu": {
     "auth": "Authentication",
     "translator": "Translator",
-    "createRoom": "Create",
+    "createRoom": "Create room",
     "joinRoom": "Join",
     "users": "Users",
     "chat": "Chat",

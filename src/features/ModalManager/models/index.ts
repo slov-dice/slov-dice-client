@@ -9,6 +9,8 @@ export enum E_Modal {
   gameCharacters = 'gameCharacters',
   saveGame = 'saveGame',
   loadGame = 'loadGame',
+  enterPasswordRoom = 'enterPasswordRoom',
+  confirmLeaveRoom = 'confirmLeaveRoom',
 }
 export interface I_Modal {
   content: E_Modal
