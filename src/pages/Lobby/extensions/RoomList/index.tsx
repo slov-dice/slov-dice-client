@@ -21,13 +21,14 @@ import { E_MediaQuery } from 'styles/theme'
 export const RoomList = () => {
   const dispatch = useStoreDispatch()
   const navigate = useNavigate()
-  const { setEnterPasswordRoomPayload } = useContext(modalManagerContext)
+  const isMatch = useMediaQuery(E_MediaQuery.lg)
+  const { setEnterPasswordRoomPayload, setConfirmLeaveRoomPayload } =
+    useContext(modalManagerContext)
   const { rooms, currentRoomId, isUserInRoom } = useStoreSelector((store) => ({
     rooms: store.lobbyPage.rooms,
     currentRoomId: store.room.id,
     isUserInRoom: store.profile.statuses.inRoom,
   }))
-  const isMatch = useMediaQuery(E_MediaQuery.lg)
 
   const handleJoin = (room: I_PreviewRoom) => () => {
     // Если комната переполнена
@@ -38,11 +39,9 @@ export const RoomList = () => {
 
     // Если пользователь в комнате
     if (isUserInRoom) {
-      const result = confirm(
-        'Вы уже находитесь в комнате. Хотите покинуть её и подключиться к другой?',
-      )
-      // Если пользователь не хочет покидать комнату
-      if (!result) return
+      setConfirmLeaveRoomPayload({ roomId: room.id, roomType: room.type })
+      dispatch(modalManagerActions.openModal(E_Modal.confirmLeaveRoom))
+      return
     }
 
     // Вход в комнату, если есть пароль

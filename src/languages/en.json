@@ -93,6 +93,15 @@
         "join": "Join"
       }
     },
+    "confirmLeaveRoom": {
+      "title": "Leave the room",
+      "paragraph1": "You are already in the room:",
+      "paragraph2": "Are you sure you want to leave the room and join the other one?",
+      "actions": {
+        "cancel": "Cancel",
+        "confirm": "Confirm"
+      }
+    },
     "joinRoom": {
       "title": "Join to room"
     },
