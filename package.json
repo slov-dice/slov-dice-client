@@ -4,12 +4,13 @@
   "version": "0.1.4",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "tsc && vite build",
+    "dev": "vite --mode dev",
+    "build": "tsc && vite build --mode prod",
     "preview": "vite preview",
     "lint:es": "eslint --ext .js,.jsx,.ts,.tsx src",
     "lint:es:fix": "npm run lint:es -- --fix",
-    "lint:sc": "stylelint src/"
+    "lint:sc": "stylelint src/",
+    "deploy": "rsync -avz --delete dist/ root@yaroslavweb98.fvds.ru:/var/www/slov-dice-front/src/"
   },
   "dependencies": {
     "@hookform/resolvers": "^2.9.7",
