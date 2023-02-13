@@ -77,10 +77,10 @@ export const RoomCardInfo = styled.div`
   }
 `
 
-export const RoomCardAction = styled(motion.div).attrs<{ isMatch: boolean }>(({ isMatch }) =>
-  isMatch ? {} : roomCardActionAttrs(),
+export const RoomCardAction = styled(motion.div).attrs<{ $isMatch: boolean }>(({ $isMatch }) =>
+  $isMatch ? {} : roomCardActionAttrs(),
 )<{
-  isMatch: boolean
+  $isMatch: boolean
 }>`
   position: absolute;
   bottom: 0;

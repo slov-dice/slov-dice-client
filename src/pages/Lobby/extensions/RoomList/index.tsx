@@ -87,7 +87,7 @@ export const RoomList = () => {
                     {room.currentSize}/{room.size}
                   </div>
                 </S.RoomCardInfo>
-                <S.RoomCardAction isMatch={isMatch}>
+                <S.RoomCardAction $isMatch={isMatch}>
                   <button onClick={inRoom ? handleBackToTheRoom : handleJoin(room)}>
                     {inRoom ? t('lobby.actions.return') : t('lobby.actions.join')}
                   </button>

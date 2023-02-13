@@ -3,9 +3,9 @@ import styled from 'styled-components'
 
 import { iconWrapperAttrs } from './motion'
 
-export const IconWrapper = styled(motion.div).attrs<{ isLeft: boolean }>(({ isLeft }) =>
-  iconWrapperAttrs(isLeft),
-)<{ isLeft: boolean }>`
+export const IconWrapper = styled(motion.div).attrs<{ $isLeft: boolean }>(({ $isLeft }) =>
+  iconWrapperAttrs($isLeft),
+)<{ $isLeft: boolean }>`
   position: absolute;
 
   opacity: 0.2;

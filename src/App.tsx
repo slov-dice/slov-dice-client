@@ -24,7 +24,7 @@ export const App = () => {
   const isAuth = useStoreSelector((store) => store.profile.statuses.isAuth)
   useStoreSelector((store) => store.app.language)
 
-  const [fetchCheck, { isSuccess, data, isLoading }] = authAPI.useCheckMutation()
+  const { isSuccess, data, isLoading } = authAPI.useCheckQuery()
   authAPI.useCheckTokenQuery(null, {
     pollingInterval: 60_000 * 10,
     skip: !isAuth,
@@ -38,15 +38,12 @@ export const App = () => {
     }
   }, [dispatch])
 
-  useLayoutEffect(() => {
-    fetchCheck()
-  }, [fetchCheck])
-
   useEffect(() => {
     if (isSuccess && data) {
       connectAuthenticatedUser(data, dispatch)
     }
   }, [isSuccess, data, dispatch])
+
   return (
     <>
       {!isLoading && <AppRoutes />}

@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import { toast } from 'react-toastify'
 
 import * as S from './styles'
 
@@ -31,15 +30,11 @@ export const AuthCallback = () => {
       }
     }
     handleAuth()
-  }, [thirdPartyAuth, code])
+  }, [code, thirdPartyAuth])
 
   // Успешная авторизация
   useEffect(() => {
     if (data && isSuccess) {
-      const language = LocalStorage.getLanguage()
-      const successMessage = data.message[language]
-      toast.success(successMessage)
-
       connectAuthenticatedUser(data, dispatch)
       setStatuses((prev) => [...prev, 'authCallback.stepSuccess'])
     }
@@ -48,10 +43,6 @@ export const AuthCallback = () => {
   // Ошибка при авторизации
   useEffect(() => {
     if (isError) {
-      const language = LocalStorage.getLanguage()
-      const errorMessage = (error as any).data?.[language] || t('notification.unknownError')
-      console.log(JSON.stringify(error))
-      toast.error(errorMessage)
       setStatuses((prev) => [...prev, 'authCallback.stepError'])
     }
   }, [isError, error])

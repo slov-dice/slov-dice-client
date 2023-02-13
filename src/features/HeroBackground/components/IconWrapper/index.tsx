@@ -13,7 +13,7 @@ interface I_IconWrapperProps {
 
 export const IconWrapper = ({ icon, item, isLeft, y }: I_IconWrapperProps) => {
   return (
-    <S.IconWrapper isLeft={isLeft} style={{ ...item, y }}>
+    <S.IconWrapper $isLeft={isLeft} style={{ ...item, y }}>
       {getHeroIcon(icon)}
     </S.IconWrapper>
   )
