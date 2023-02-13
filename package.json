@@ -10,7 +10,7 @@
     "lint:es": "eslint --ext .js,.jsx,.ts,.tsx src",
     "lint:es:fix": "npm run lint:es -- --fix",
     "lint:sc": "stylelint src/",
-    "deploy": "rsync -avz --delete dist/ root@yaroslavweb98.fvds.ru:/var/www/slov-dice-front/src/"
+    "deploy": "yarn build && rsync -avz --delete dist/ root@yaroslavweb98.fvds.ru:/var/www/slov-dice-front/src/"
   },
   "dependencies": {
     "@hookform/resolvers": "^2.9.7",

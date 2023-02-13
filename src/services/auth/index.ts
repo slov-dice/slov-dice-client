@@ -31,10 +31,9 @@ export const authAPI = createApi({
       }),
     }),
 
-    check: build.mutation<I_AuthResponse, void>({
+    check: build.query<I_AuthResponse, void>({
       query: () => ({
         url: 'check',
-        method: 'POST',
       }),
     }),
 

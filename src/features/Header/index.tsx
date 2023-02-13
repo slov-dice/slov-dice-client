@@ -41,19 +41,19 @@ export const Header = () => {
   }
 
   const handleScroll = () => {
-    if (!isGameRoutes) {
+    if (!isGameRoutes && !sidePanel && !sideMenuVisible) {
       setTransparent(window.scrollY <= 0)
     }
   }
   useEventListener('scroll', handleScroll)
 
   useEffect(() => {
-    if (isGameRoutes) {
+    if (isGameRoutes || sidePanel || sideMenuVisible) {
       setTransparent(false)
     } else {
       setTransparent(true)
     }
-  }, [isGameRoutes, pathname])
+  }, [isGameRoutes, pathname, sideMenuVisible, sidePanel])
 
   return (
     <AnimatePresence mode='wait'>
