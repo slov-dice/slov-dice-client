@@ -86,7 +86,7 @@ export const BaseTooltip = styled.div`
   height: auto;
 `
 
-export const LinkBlank = styled(Link).attrs({
+export const LinkBlank = styled.a.attrs({
   rel: 'noreferrer',
   target: '_blank',
 })`

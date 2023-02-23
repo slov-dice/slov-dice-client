@@ -72,7 +72,7 @@ interface I_ToolbarItemProps {
 }
 
 const ToolbarItem = ({ icon, onClick }: I_ToolbarItemProps) => (
-  <S.ToolbarItem isDivider={icon === E_AppIcon.divider} onClick={onClick}>
+  <S.ToolbarItem $isDivider={icon === E_AppIcon.divider} onClick={onClick}>
     {getAppIcon(icon)}
   </S.ToolbarItem>
 )

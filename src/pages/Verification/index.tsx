@@ -11,7 +11,7 @@ import { authAPI } from 'services/auth'
 import * as C from 'styles/components'
 import { LocalStorage } from 'utils/helpers/localStorage'
 
-export const Verification = () => {
+const Verification = () => {
   const [searchParams] = useSearchParams()
   const token = searchParams.get('token')
   const [fetchEmailConfirmation, { isSuccess, data, isError, error }] =
@@ -72,3 +72,5 @@ export const Verification = () => {
     </S.Page>
   )
 }
+
+export default Verification

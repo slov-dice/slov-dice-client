@@ -5,8 +5,8 @@ import styled, { css } from 'styled-components'
 import { wrapperAttrs } from './motion'
 
 export const Wrapper = styled(motion.div).attrs(({ theme }) => wrapperAttrs(theme))<{
-  relative: boolean
-  isHeader: boolean
+  $relative: boolean
+  $isHeader: boolean
 }>`
   display: flex;
   align-items: center;
@@ -18,8 +18,8 @@ export const Wrapper = styled(motion.div).attrs(({ theme }) => wrapperAttrs(them
   color: ${({ theme }) => theme.colors.primary};
   letter-spacing: -6px;
 
-  ${({ relative }) =>
-    relative
+  ${({ $relative }) =>
+    $relative
       ? css`
           position: relative;
         `
@@ -29,8 +29,8 @@ export const Wrapper = styled(motion.div).attrs(({ theme }) => wrapperAttrs(them
           transform: translate(50%);
         `}
 
-  ${({ isHeader }) =>
-    isHeader &&
+  ${({ $isHeader }) =>
+    $isHeader &&
     css`
       @media ${({ theme }) => theme.media.sm} {
         display: none;

@@ -43,7 +43,6 @@ export const App = () => {
       connectAuthenticatedUser(data, dispatch)
     }
   }, [isSuccess, data, dispatch])
-
   return (
     <>
       {!isLoading && <AppRoutes />}

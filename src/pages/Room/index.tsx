@@ -9,11 +9,11 @@ import { WindowManager } from 'features/WindowManager'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { useStoreSelector } from 'hooks/useStoreSelector'
 
-export const Room = () => {
+const Room = () => {
   const dispatch = useStoreDispatch()
 
   const pageRef = useRef<HTMLDivElement>(null)
-  const room = useStoreSelector((store) => store.room)
+  useStoreSelector((store) => store.room)
 
   useLayoutEffect(() => {
     dispatch(subscribe())
@@ -37,3 +37,5 @@ export const Room = () => {
     </>
   )
 }
+
+export default Room

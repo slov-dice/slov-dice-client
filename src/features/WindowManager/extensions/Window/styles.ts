@@ -8,9 +8,9 @@ import { E_ResizerPosition } from '../../models/window'
 import { T_StyledVariants } from 'models/styled'
 
 interface I_WrapperProps {
-  isResize: boolean
-  transformTransitionChanger: boolean
-  sizeTransitionChanger: boolean
+  $isResize: boolean
+  $transformTransitionChanger: boolean
+  $sizeTransitionChanger: boolean
 }
 
 export const Wrapper = styled(motion.div).attrs(wrapperAttrs)<I_WrapperProps>`
@@ -19,14 +19,14 @@ export const Wrapper = styled(motion.div).attrs(wrapperAttrs)<I_WrapperProps>`
 
   overflow: hidden;
 
-  transition: ${({ isResize, theme, transformTransitionChanger, sizeTransitionChanger }) => css`
-    ${isResize || (sizeTransitionChanger && !transformTransitionChanger)
+  transition: ${({ $isResize, theme, $transformTransitionChanger, $sizeTransitionChanger }) => css`
+    ${$isResize || ($sizeTransitionChanger && !$transformTransitionChanger)
       ? 0
       : theme.durations.ms300}ms width ease,
-    ${isResize || (sizeTransitionChanger && !transformTransitionChanger)
+    ${$isResize || ($sizeTransitionChanger && !$transformTransitionChanger)
       ? 0
       : theme.durations.ms300}ms height ease
-    ${transformTransitionChanger && `, ${theme.durations.ms300}ms transform ease`}
+    ${$transformTransitionChanger && `, ${theme.durations.ms300}ms transform ease`}
   `};
 `
 
@@ -52,6 +52,10 @@ export const HeaderLabel = styled.div`
 
   fill: ${({ theme }) => theme.colors.primary_80};
 
+  span:first-child {
+    width: 24px;
+  }
+
   svg {
     width: 100%;
     height: 100%;
@@ -65,11 +69,11 @@ export const HeaderControls = styled.div`
 `
 
 interface I_ControlProps {
-  isDivider?: boolean
+  $isDivider?: boolean
 }
 
-export const Control = styled(motion.div).attrs<I_ControlProps>(({ theme, isDivider }) =>
-  controlAttrs(theme, Boolean(isDivider)),
+export const Control = styled(motion.div).attrs<I_ControlProps>(({ theme, $isDivider }) =>
+  controlAttrs(theme, Boolean($isDivider)),
 )<I_ControlProps>`
   display: flex;
   justify-content: center;
@@ -80,8 +84,8 @@ export const Control = styled(motion.div).attrs<I_ControlProps>(({ theme, isDivi
 
   fill: ${({ theme }) => theme.colors.white};
 
-  ${({ isDivider }) =>
-    isDivider
+  ${({ $isDivider }) =>
+    $isDivider
       ? css`
           cursor: default;
 

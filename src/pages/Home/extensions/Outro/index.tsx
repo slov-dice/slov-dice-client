@@ -14,16 +14,16 @@ export const Outro = () => {
           <S.FloatTitle subTitle>{t('landing.outro.participants')}</S.FloatTitle>
           <S.FeaturesList>
             <li>
-              <C.LinkBlank to='https://github.com/kotofenum'>Kotofenum</C.LinkBlank>
+              <C.LinkBlank href='https://github.com/kotofenum'>Kotofenum</C.LinkBlank>
             </li>
             <li>
-              <C.LinkBlank to='https://github.com/anton-pribora'>Anton Pribora</C.LinkBlank>
+              <C.LinkBlank href='https://github.com/anton-pribora'>Anton Pribora</C.LinkBlank>
             </li>
             <li>
-              <C.LinkBlank to='https://github.com/Braxify'>Braxify</C.LinkBlank>
+              <C.LinkBlank href='https://github.com/Braxify'>Braxify</C.LinkBlank>
             </li>
             <li>
-              <C.LinkBlank to='https://github.com/xionerrr'>Xionerrr</C.LinkBlank>
+              <C.LinkBlank href='https://github.com/xionerrr'>Xionerrr</C.LinkBlank>
             </li>
           </S.FeaturesList>
           <S.IconWrapper>
@@ -34,10 +34,10 @@ export const Outro = () => {
           <S.FloatTitle subTitle>{t('landing.outro.resources')}</S.FloatTitle>
           <S.FeaturesList>
             <li>
-              <C.LinkBlank to='https://game-icons.net'>Game Icons</C.LinkBlank>
+              <C.LinkBlank href='https://game-icons.net'>Game Icons</C.LinkBlank>
             </li>
             <li>
-              <C.LinkBlank to='https://midjourney.com'>Midjourney</C.LinkBlank>
+              <C.LinkBlank href='https://midjourney.com'>Midjourney</C.LinkBlank>
             </li>
           </S.FeaturesList>
           <S.IconWrapper>
@@ -47,7 +47,7 @@ export const Outro = () => {
       </S.Inner>
       <S.Copyright>
         <div>
-          <C.LinkBlank to='https://github.com/YaroslavWeb'>YaroslavWeb</C.LinkBlank> ©2023 — Slov
+          <C.LinkBlank href='https://github.com/YaroslavWeb'>YaroslavWeb</C.LinkBlank> ©2023 — Slov
           Dice
         </div>
       </S.Copyright>

@@ -12,7 +12,7 @@ import { authAPI } from 'services/auth'
 import * as C from 'styles/components'
 import { LocalStorage } from 'utils/helpers/localStorage'
 
-export const AuthCallback = () => {
+const AuthCallback = () => {
   const [searchParams] = useSearchParams()
   const code = searchParams.get('code')
 
@@ -74,3 +74,5 @@ export const AuthCallback = () => {
     </S.Page>
   )
 }
+
+export default AuthCallback

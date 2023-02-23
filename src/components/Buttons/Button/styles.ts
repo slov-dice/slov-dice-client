@@ -11,7 +11,7 @@ interface ButtonProps {
   $onlyIcon: boolean
   $mod: E_ButtonMod
   $size: E_ButtonSize
-  rounded: boolean
+  $rounded: boolean
   disabled: boolean
 }
 
@@ -39,7 +39,7 @@ export const Button = styled(motion.button).attrs<ButtonProps>(({ disabled }) =>
 
   background: ${({ theme }) => theme.colors.white_10};
   border: none;
-  border-radius: ${({ rounded }) => (rounded ? 8 : 0)}px;
+  border-radius: ${({ $rounded }) => ($rounded ? 8 : 0)}px;
 
   ${({ $size }) => sizes[$size]};
 

@@ -9,7 +9,7 @@ interface I_LogoProps {
 
 export const Logo = ({ relative = false, isHeader = false }: I_LogoProps) => {
   return (
-    <S.Wrapper relative={relative} isHeader={isHeader}>
+    <S.Wrapper $relative={relative} $isHeader={isHeader}>
       <S.TextLink to={E_Routes.home}>SD</S.TextLink>
     </S.Wrapper>
   )

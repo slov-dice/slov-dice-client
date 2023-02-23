@@ -1,4 +1,6 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
+import { Link } from 'react-router-dom'
+
 import * as S from './styles'
 import { useGuestAuth } from './useGuestAuth'
 
@@ -51,10 +53,12 @@ export const Entry = () => {
         <EmailIcon /> {t('auth.email')}
       </Button>
       <C.Divider md={32} />
-      <Button onClick={handleGoogleAuth}>
-        <GoogleIcon />
-        {t('auth.google')}
-      </Button>
+      <Link to={import.meta.env.VITE_GOOGLE_AUTH_URL}>
+        <Button onClick={handleGoogleAuth}>
+          <GoogleIcon />
+          {t('auth.google')}
+        </Button>
+      </Link>
       <C.Divider md={32} />
       <Button onClick={handleDiscordAuth}>
         <DiscordIcon />
