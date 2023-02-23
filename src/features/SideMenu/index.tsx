@@ -28,6 +28,7 @@ export const SideMenu = () => {
         <S.Container>
           <S.SideMenuWrapper>
             <Navigation toggleMenu={handleToggle} />
+            <b>v{APP_VERSION}</b>
           </S.SideMenuWrapper>
           <S.Overlay onClick={handleToggle} />
         </S.Container>

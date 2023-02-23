@@ -58,8 +58,8 @@ export const Header = () => {
   return (
     <AnimatePresence mode='wait'>
       {isVisible && (
-        <S.Header isTransparent={isTransparent}>
-          <S.WrapperControl sideMenuVisible={sideMenuVisible}>
+        <S.Header $isTransparent={isTransparent}>
+          <S.WrapperControl $sideMenuVisible={sideMenuVisible}>
             <Control onClick={handleToggleSideMenu} />
           </S.WrapperControl>
           <Logo isHeader />

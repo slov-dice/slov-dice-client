@@ -9,7 +9,7 @@ import * as S from './styles'
 import { HeroBackground } from 'features/HeroBackground'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
 
-export const Lobby = () => {
+const Lobby = () => {
   const dispatch = useStoreDispatch()
   const navigate = useNavigate()
 
@@ -31,3 +31,5 @@ export const Lobby = () => {
     </S.Page>
   )
 }
+
+export default Lobby

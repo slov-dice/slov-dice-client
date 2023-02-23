@@ -39,7 +39,7 @@ const ButtonComponent = ({
     onClick={onClick}
     $mod={mod}
     $onlyIcon={onlyIcon}
-    rounded={rounded}
+    $rounded={rounded}
     disabled={disabled}
     $size={size}
   >

@@ -4,7 +4,7 @@ import { Outro } from './extensions/Outro'
 import { Players } from './extensions/Players'
 import * as S from './styles'
 
-export const Home = () => {
+const Home = () => {
   return (
     <S.Page>
       <Intro />
@@ -14,3 +14,5 @@ export const Home = () => {
     </S.Page>
   )
 }
+
+export default Home

@@ -110,9 +110,9 @@ export const Window = ({
       }}
       dragListener={false}
       dragControls={dragControls}
-      isResize={isResize}
-      transformTransitionChanger={transformTransitionChanger}
-      sizeTransitionChanger={sizeTransitionChanger}
+      $isResize={isResize}
+      $transformTransitionChanger={transformTransitionChanger}
+      $sizeTransitionChanger={sizeTransitionChanger}
       style={{ width, height, x, y }}
       onMouseDown={handleFocus}
     >
@@ -141,7 +141,7 @@ export const Window = ({
               <S.Control onMouseDown={handleOpenSettings}>
                 <SettingsIcon />
               </S.Control>
-              <S.Control isDivider>
+              <S.Control $isDivider>
                 <DividerIcon />
               </S.Control>
             </>

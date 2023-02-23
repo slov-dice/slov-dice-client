@@ -13,6 +13,10 @@ export const SideMenuWrapper = styled(motion.div).attrs(containerAttrs)`
   bottom: 0;
   left: 0;
 
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
   width: ${({ theme }) => theme.sizes.sidePanel.width}px;
   height: calc(100vh - ${({ theme }) => theme.sizes.header.height}px);
   padding: 16px;

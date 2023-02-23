@@ -8,7 +8,7 @@ export const headerAttrs = (
   initial: { y: -theme.sizes.header.height * 2 },
   animate: isTransparent ? 'transparent' : 'painted',
   exit: { y: -theme.sizes.header.height * 2 },
-  transition: { type: 'spring', stiffness: 50 },
+  transition: { type: 'spring', stiffness: 38 },
   variants: {
     transparent: {
       y: 0,
