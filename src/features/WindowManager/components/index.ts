@@ -6,6 +6,7 @@ import { InventoryContent } from './Inventory'
 import { MarketContent } from './Market'
 import { PlayerContent } from './Player'
 import { TextEditorContent } from './TextEditor'
+import { TutorialContent } from './Tutorial'
 
 import { E_Window, I_WindowHeader } from '../models'
 
@@ -39,6 +40,11 @@ export const windowHead: Record<E_Window, I_WindowHeader> = {
     icon: E_AppIcon.fileLines,
     settings: null,
   },
+  [E_Window.tutorial]: {
+    title: 'sideMenu.window.tutorial',
+    icon: E_AppIcon.info,
+    settings: null,
+  },
 }
 
 export const windowContentComponents: Record<E_Window, FC> = {
@@ -48,4 +54,5 @@ export const windowContentComponents: Record<E_Window, FC> = {
   [E_Window.market]: MarketContent,
   [E_Window.player]: PlayerContent,
   [E_Window.textEditor]: TextEditorContent,
+  [E_Window.tutorial]: TutorialContent,
 }

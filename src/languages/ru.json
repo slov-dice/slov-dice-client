@@ -356,7 +356,8 @@
       "market": "Магазин",
       "battlefield": "Поле боя",
       "player": "Плеер",
-      "textEditor": "Текстовой редактор"
+      "textEditor": "Текстовой редактор",
+      "tutorial": "Туториал"
     }
   },
   "sidePanels": {

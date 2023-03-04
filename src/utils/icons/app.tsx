@@ -12,6 +12,7 @@ import FileUserIcon from 'assets/icons/app/file-user.svg'
 import FortIcon from 'assets/icons/app/fort.svg'
 import JoinIcon from 'assets/icons/app/gamepad.svg'
 import SettingsIcon from 'assets/icons/app/gear.svg'
+import InfoIcon from 'assets/icons/app/info.svg'
 import LanguageIcon from 'assets/icons/app/language.svg'
 import LeaveRoomIcon from 'assets/icons/app/leave-room.svg'
 import LoginIcon from 'assets/icons/app/login.svg'
@@ -46,6 +47,7 @@ export enum E_AppIcon {
   swords = 'swords',
   upload = 'upload',
   users = 'users',
+  info = 'info',
 }
 
 export const getAppIcon = (icon: E_AppIcon): ReactNode => {
@@ -115,5 +117,8 @@ export const getAppIcon = (icon: E_AppIcon): ReactNode => {
 
     case E_AppIcon.users:
       return <UsersIcon />
+
+    case E_AppIcon.info:
+      return <InfoIcon />
   }
 }

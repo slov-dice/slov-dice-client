@@ -25,6 +25,7 @@ export const data: I_TaskItem[] = [
     actionType: E_TaskItemActionType.window,
     actionPayload: E_Window.battlefield,
   },
+
   // {
   //   name: 'sideMenu.window.inventory',
   //   icon: E_AppIcon.backpack,
@@ -52,6 +53,13 @@ export const data: I_TaskItem[] = [
     visibility: [E_TaskItemVisibility.authenticated, E_TaskItemVisibility.inRoom],
     actionType: E_TaskItemActionType.window,
     actionPayload: E_Window.textEditor,
+  },
+  {
+    name: 'sideMenu.window.tutorial',
+    icon: E_AppIcon.info,
+    visibility: [E_TaskItemVisibility.authenticated, E_TaskItemVisibility.inRoom],
+    actionType: E_TaskItemActionType.window,
+    actionPayload: E_Window.tutorial,
   },
   {
     name: 'room-divider-0',

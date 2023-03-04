@@ -58,7 +58,7 @@ export const CreateRoomModal = () => {
   }
 
   const handleCreateRoom = () => {
-    if (!form['room-name'].trim()) return
+    if (!form['room-name'].trim() || (form['room-private'] && !form['room-password'].trim())) return
     const roomPassword = form['room-password']
     const roomType = form['room-private'] ? E_RoomType.private : E_RoomType.public
 

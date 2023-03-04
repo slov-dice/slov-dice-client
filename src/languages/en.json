@@ -378,7 +378,8 @@
       "market": "Market",
       "battlefield": "Battlefield",
       "player": "player",
-      "textEditor": "Text Editor"
+      "textEditor": "Text Editor",
+      "tutorial": "Tutorial"
     }
   },
   "notification": {

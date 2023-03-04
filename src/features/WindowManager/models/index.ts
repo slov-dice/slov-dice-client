@@ -8,6 +8,7 @@ export enum E_Window {
   battlefield = 'battlefield',
   player = 'player',
   textEditor = 'textEditor',
+  tutorial = 'tutorial',
 }
 
 export interface I_WindowHeader {
