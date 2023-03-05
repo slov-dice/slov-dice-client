@@ -40,6 +40,8 @@ export const PickCharacterAvatarOverlay = () => {
 
   const handlePickAvatar = (avatar: string) => () => {
     if (overlayPayload) {
+      handleClose()
+
       if (overlayPayload === 'characterCreator' || overlayPayload === 'characterEditor') {
         dispatch(gameCharactersActions.setCharacterAvatar({ characterId: overlayPayload, avatar }))
         return

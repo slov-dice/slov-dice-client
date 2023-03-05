@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 import { BaseWrapper } from '../styles'
 
-export const WindowContentWrapper = styled(BaseWrapper)`
+export const Wrapper = styled(BaseWrapper)`
   display: flex;
   flex-wrap: wrap;
   gap: 48px;

@@ -25,9 +25,9 @@ export const About = () => {
               <C.Divider h={24} md={16} />
               <S.FeaturesList>
                 <li>{t('landing.about.feature1')}</li>
-                <li>{t('landing.about.feature2')}</li>
-                <li>{t('landing.about.feature3')}</li>
-                <li>{t('landing.about.feature4')}</li>
+                {/* <li>{t('landing.about.feature2')}</li> */}
+                {/* <li>{t('landing.about.feature3')}</li> */}
+                {/* <li>{t('landing.about.feature4')}</li> */}
                 <li>{t('landing.about.feature5')}</li>
                 <li>{t('landing.about.feature6')}</li>
                 <li>{t('landing.about.feature7')}</li>

@@ -4,10 +4,12 @@ import { ReactElement, useState } from 'react'
 import * as S from './styles'
 
 import { t } from 'languages'
+import { getRandomThousand } from 'utils/helpers/generators'
 
 interface I_TabsProps {
   children: ReactElement[]
 }
+const layoutId = getRandomThousand()
 
 export const Tabs = ({ children }: I_TabsProps) => {
   const [selectedTab, setSelectedTab] = useState<ReactElement>(children[0])
@@ -26,7 +28,7 @@ export const Tabs = ({ children }: I_TabsProps) => {
             onClick={handleSetActiveTab(item)}
           >
             {t(item.props.tabTitle)}
-            {item.props.id === selectedTab.props.id ? <S.Underline layoutId='underline' /> : null}
+            {item.props.id === selectedTab.props.id ? <S.Underline layoutId={layoutId} /> : null}
           </S.Option>
         ))}
       </S.TabBar>

@@ -1,5 +1,4 @@
 import { motion } from 'framer-motion'
-import { Link } from 'react-router-dom'
 import styled, { css } from 'styled-components'
 
 import { titleAttrs, controlAttrs } from './motion'
@@ -81,16 +80,20 @@ export const EditableInput = styled.input`
   outline: none;
 `
 
-export const BaseTooltip = styled.div`
-  width: 150px;
-  height: auto;
-`
-
 export const LinkBlank = styled.a.attrs({
   rel: 'noreferrer',
   target: '_blank',
 })`
   border-bottom: 1px solid ${({ theme }) => theme.colors.primary_80};
+`
+
+export const Img = styled.img`
+  width: 100%;
+  max-height: 520px;
+
+  object-fit: contain;
+  border: 2px solid ${({ theme }) => theme.colors.white_50};
+  border-radius: 2px;
 `
 
 export const Row = styled.div`

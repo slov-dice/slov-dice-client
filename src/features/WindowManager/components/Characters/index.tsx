@@ -50,7 +50,7 @@ export const CharactersContent = () => {
   return (
     <WindowOverlayManagerProvider location={E_Window.characters}>
       <WindowOverlayManager overlays={overlays} />
-      <S.WindowContentWrapper>
+      <S.Wrapper>
         {characters.map((character) => (
           <CharacterCard key={character.id} character={character} />
         ))}
@@ -60,7 +60,7 @@ export const CharactersContent = () => {
             <PlusIcon />
           </div>
         </AddCard>
-      </S.WindowContentWrapper>
+      </S.Wrapper>
     </WindowOverlayManagerProvider>
   )
 }

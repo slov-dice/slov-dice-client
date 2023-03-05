@@ -9,8 +9,8 @@ export const TabBar = styled.ul`
   gap: 4px;
 
   width: 100%;
-  max-width: fit-content;
   max-height: 48px;
+  margin-bottom: 16px;
   padding-bottom: 8px;
 
   font-size: 18px;
@@ -40,7 +40,7 @@ export const Option = styled.li<{ isSelected: boolean }>`
   flex: 1;
   align-items: center;
 
-  width: 100%;
+  width: fit-content;
   height: 38px;
   padding: 8px;
 

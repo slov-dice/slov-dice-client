@@ -7,7 +7,7 @@ interface I_InitialState {
 }
 
 const initialState: I_InitialState = {
-  windows: [],
+  windows: [{ content: E_Window.tutorial, focused: true }],
 }
 
 export const windowManagerSlice = createSlice({

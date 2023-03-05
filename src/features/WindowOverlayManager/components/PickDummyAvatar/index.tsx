@@ -55,6 +55,7 @@ export const PickDummyAvatarOverlay = () => {
 
   const handlePickAvatar = (avatar: string) => () => {
     if (overlayPayload && battlefield) {
+      handleClose()
       if (overlayPayload === 'dummyCreator' || overlayPayload === 'dummyEditor') {
         dispatch(gameBattlefieldActions.setDummyAvatar({ characterId: overlayPayload, avatar }))
         return

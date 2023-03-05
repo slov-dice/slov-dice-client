@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import throttle from 'lodash.throttle'
 
 import { E_RoomType, I_FullRoom, I_RoomMessage } from 'models/shared/app'
 import { E_Battlefield } from 'models/shared/game/battlefield'
@@ -31,6 +32,8 @@ const initialState: I_FullRoom = {
   type: E_RoomType.public,
   users: [],
   messages: [],
+  createdAt: new Date(),
+  updatedAt: new Date(),
   game: {
     characters: {
       window: {
@@ -57,6 +60,11 @@ const initialState: I_FullRoom = {
     },
   },
 }
+
+const throttleUpdate = throttle(
+  (args: I_EmitPayload[E_Emit.updateDoc]) => socket.emit(E_Emit.updateDoc, args),
+  500,
+)
 
 export const roomSlice = createSlice({
   name: 'room',
@@ -442,7 +450,11 @@ export const roomSlice = createSlice({
         value: action.payload.value,
       }
 
-      socket.emit(E_Emit.updateDoc, payload)
+      state.game.textEditor.window.docs = state.game.textEditor.window.docs.map((doc) =>
+        doc.id === action.payload.docId ? { ...doc, content: action.payload.value } : doc,
+      )
+
+      throttleUpdate(payload)
     },
     setUpdatedDoc: (state, action: PayloadAction<{ doc: I_Doc }>) => {
       state.game.textEditor.window.docs = state.game.textEditor.window.docs.map((doc) =>
