@@ -121,13 +121,22 @@ export const BattlefieldCard = ({
             {isFront ? (
               <S.CardInfoInner>
                 <AnimatePresence>
-                  {isActive && <S.CancelOverlay onClick={handleDisable}>Отмена</S.CancelOverlay>}
+                  {isActive && (
+                    <S.ActionOverlay>
+                      <S.ActionOverlayItem id={id}>
+                        {t('windowBattlefield.self')}
+                      </S.ActionOverlayItem>
+                      <S.ActionOverlayItem onClick={handleDisable}>
+                        {t('windowBattlefield.cancel')}
+                      </S.ActionOverlayItem>
+                    </S.ActionOverlay>
+                  )}
                 </AnimatePresence>
                 <AnimatePresence>
                   {isTarget && (
-                    <S.CancelOverlay id={id}>
+                    <S.ActionOverlay id={id}>
                       <ActionIcon />
-                    </S.CancelOverlay>
+                    </S.ActionOverlay>
                   )}
                 </AnimatePresence>
                 <S.CardTitle>{name}</S.CardTitle>

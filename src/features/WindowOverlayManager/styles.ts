@@ -14,7 +14,6 @@ export const WindowOverlay = styled(motion.div).attrs(windowOverlayAttrs)`
   height: 100%;
 
   background: ${({ theme }) => theme.colors.black_90};
-  backdrop-filter: blur(2px);
   border: 1px solid ${({ theme }) => theme.colors.white_10};
 
   ::-webkit-scrollbar {

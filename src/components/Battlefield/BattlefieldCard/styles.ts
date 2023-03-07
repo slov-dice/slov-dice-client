@@ -4,6 +4,8 @@ import styled, { css } from 'styled-components'
 
 import { actionAnimationDuration } from './'
 
+import { actionOverlayItemAttrs } from './motion'
+
 import { acting, glowSpin, shake } from 'styles/animations'
 import * as C from 'styles/components'
 
@@ -213,7 +215,7 @@ export const CardInfoInner = styled(motion.div).attrs({
   }
 `
 
-export const CancelOverlay = styled(motion.div).attrs({
+export const ActionOverlay = styled(motion.div).attrs({
   initial: { opacity: 0 },
   animate: { opacity: 1 },
   exit: { opacity: 0 },
@@ -224,6 +226,7 @@ export const CancelOverlay = styled(motion.div).attrs({
   z-index: 10;
 
   display: flex;
+  gap: 4px;
   align-items: center;
   justify-content: center;
 
@@ -239,6 +242,19 @@ export const CancelOverlay = styled(motion.div).attrs({
     aspect-ratio: 1;
     width: 30%;
   }
+`
+
+export const ActionOverlayItem = styled(motion.div).attrs(({ theme }) =>
+  actionOverlayItemAttrs(theme),
+)`
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+
+  height: 100%;
+
+  background-color: ${({ theme }) => theme.colors.white_05};
 `
 
 export const CardActionsInner = styled(motion.div).attrs({

@@ -7,6 +7,7 @@ export const SelectContainer = styled.div`
   min-width: 150px;
 
   :before {
+    pointer-events: none;
     content: '';
 
     position: absolute;

@@ -201,6 +201,8 @@
     "editCharacter": "Edit Character"
   },
   "windowBattlefield": {
+    "self": "Self",
+    "cancel": "Cancel",
     "kill": "Do you want to kill me?",
     "pick": "Pick the action"
   },
