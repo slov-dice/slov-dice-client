@@ -32,8 +32,8 @@ const initialState: I_FullRoom = {
   type: E_RoomType.public,
   users: [],
   messages: [],
-  createdAt: new Date(),
-  updatedAt: new Date(),
+  createdAt: null,
+  updatedAt: null,
   game: {
     characters: {
       window: {

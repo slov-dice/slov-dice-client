@@ -49,10 +49,10 @@ export const Window = ({
   const containerHeight = dragConstraintsRef.current?.clientHeight ?? 0
 
   // Актуальное состояние окна
-  const height = useMotionValue(defaultWindowSize)
-  const width = useMotionValue(defaultWindowSize)
-  const y = useMotionValue(0)
-  const x = useMotionValue(0)
+  const height = useMotionValue(defaultWindowSize + window.innerHeight * 0.25)
+  const width = useMotionValue(defaultWindowSize + window.innerWidth * 0.25)
+  const y = useMotionValue(window.innerHeight * 0.2)
+  const x = useMotionValue(window.innerWidth * 0.2)
 
   // Флаги для активации css transitions
   const [transformTransitionChanger, setTransformTransitionChanger] = useState(false)

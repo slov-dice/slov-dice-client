@@ -1,4 +1,4 @@
-export { TutorialBarsTab } from './TutorialBarsTab'
+export { TutorialRoomSettingsTab } from './TutorialRoomSettingsTab'
 export { TutorialBattlefieldTab } from './TutorialBattlefieldTab'
 export { TutorialCharactersTab } from './TutorialCharactersTab'
 export { TutorialGeneralTab } from './TutorialGeneralTab'

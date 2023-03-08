@@ -1,54 +1,50 @@
 import sideMenuImage from './assets/sideMenu.webp'
+import windowImage from './assets/window.gif'
 
+import { useStoreSelector } from 'hooks/useStoreSelector'
+import { t } from 'languages'
 import * as C from 'styles/components'
 
 export const TutorialGeneralTab = () => {
+  useStoreSelector((store) => store.app.language)
+
   return (
     <div>
       <div>
-        <h1>Добро пожаловать!</h1>
+        <h1>{t('windowTutorial.general.paragraph1.title')}</h1>
         <C.Divider h={8} md={4} />
-        <p>
-          Здесь вы сможете более подробно ознакомится с имеющимися механиками на нашей площадке.
-        </p>
+        <p>{t('windowTutorial.general.paragraph1.text1')}</p>
         <C.Divider h={8} md={4} />
-        <p>Все доступные инструменты находятся в левом меню:</p>
+        <C.Img src={windowImage} alt='side-menu' />
+        <C.Divider h={8} md={4} />
+        <p>{t('windowTutorial.general.paragraph1.text2')}</p>
         <C.Divider h={8} md={4} />
         <C.Img src={sideMenuImage} alt='side-menu' />
         <C.Divider h={16} md={8} />
       </div>
       <div>
-        <h1>Кубики</h1>
+        <h1>{t('windowTutorial.general.paragraph2.title')}</h1>
         <C.Divider h={8} md={4} />
-        <p>Бросок кубика происходит в правой боковой панели чата комнаты.</p>
+        <p>{t('windowTutorial.general.paragraph2.text1')}</p>
         <C.Divider h={8} md={4} />
-        <p>Это действие можно осуществить с помощью команды или нажатия необходимой кнопки.</p>
+        <p>{t('windowTutorial.general.paragraph2.text2')}</p>
         <C.Divider h={16} md={8} />
       </div>
       <div>
-        <h1>Сохранение и загрузка игры</h1>
+        <h1>{t('windowTutorial.general.paragraph3.title')}</h1>
         <C.Divider h={8} md={4} />
-        <p>
-          По завершению игровой сессии рекомендуем сохранять весь ваш прогресс. Так как удаление
-          комнаты происходит автоматически после 12 часов бездействия в ней.
-        </p>
+        <p>{t('windowTutorial.general.paragraph3.text1')}</p>
         <C.Divider h={8} md={4} />
-        <p>Загрузка игры происходит в ручную в соответствующем пункте бокового меню.</p>
+        <p>{t('windowTutorial.general.paragraph3.text2')}</p>
         <C.Divider h={16} md={8} />
       </div>
       <div>
-        <h1>Персонажи и болванки</h1>
+        <h1>{t('windowTutorial.general.paragraph4.title')}</h1>
         <C.Divider h={8} md={4} />
         <ul>
-          <li>
-            <b>Персонаж</b> — объект управляемый участниками комнаты. Используется для контроля
-            состояния(раздел «Персонажи») и проведения боёвок (раздел «Поле боя»).
-          </li>
+          <li>{t('windowTutorial.general.paragraph4.text1')}</li>
           <C.Divider h={8} md={4} />
-          <li>
-            <b>Болванка</b> — объект управляемый участниками комнаты. Является обычным мобиком,
-            которого создал Ведущий или игрок для проведения боёвок (раздел «Поле боя»).
-          </li>
+          <li>{t('windowTutorial.general.paragraph4.text2')}</li>
         </ul>
       </div>
     </div>

@@ -111,8 +111,8 @@ export interface I_PreviewRoom {
   currentSize: number
   type: E_RoomType
   users: I_RoomUser[]
-  updatedAt: Date
-  createdAt: Date
+  updatedAt: Date | null
+  createdAt: Date | null
 }
 
 export type I_FullRoomGame = {

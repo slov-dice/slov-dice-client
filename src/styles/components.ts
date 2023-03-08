@@ -92,7 +92,7 @@ export const Img = styled.img`
   max-height: 520px;
 
   object-fit: contain;
-  border: 2px solid ${({ theme }) => theme.colors.white_50};
+  border: 2px solid ${({ theme }) => theme.colors.white_05};
   border-radius: 2px;
 `
 

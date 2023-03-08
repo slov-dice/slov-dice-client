@@ -193,6 +193,105 @@
       }
     }
   },
+  "windowTutorial": {
+    "general": {
+      "tabTitle": "General",
+      "paragraph1": {
+        "title": "Welcome!",
+        "text1": "Here you can learn more about the available mechanics on our site.",
+        "text2": "All available tools are in the left menu:"
+      },
+      "paragraph2": {
+        "title": "Dice Roll",
+        "text1": "The dice roll takes place in the right side panel of the chat room.",
+        "text2": "This action can be performed using a command or by pressing the necessary button."
+      },
+      "paragraph3": {
+        "title": "Saving and loading the game",
+        "text1": "At the end of the game session, we recommend saving all your progress. Since the room is deleted automatically after 12 hours of inactivity in it.",
+        "text2": "The game is loaded manually in the corresponding side menu item."
+      },
+      "paragraph4": {
+        "title": "Characters and dummies",
+        "text1": "Character — is an object controlled by the participants of the room. It is used to monitor the state (section «Characters») and conduct combat operations (section «Battlefield»).",
+        "text2": "Dummy — is an object controlled by the participants of the room. It is an ordinary mob, which was created by the Host or the player to conduct combat (the «Battlefield» section)."
+      }
+    },
+    "roomSettings": {
+      "tabTitle": "Room Settings",
+      "paragraph1": {
+        "title": "Bars settings",
+        "text1": "One of the important components of any D&D event: setting up possible states for your imaginary creatures.",
+        "text2": "This option is located in the menu item «Room Settings». Since this mechanism will be applied to characters and dummies.",
+        "text3": "And so! You have decided what states all creatures will have, given a name, selected a color and pressed the save button. Now all existing characters and dummies will have these bars!"
+      }
+    },
+    "characters": {
+      "tabTitle": "Characters",
+      "paragraph1": {
+        "title": "Window «Characters»",
+        "subTitle1": "Specials",
+        "text1": "A strong, clever intellectual, or maybe a weak, clumsy fool?",
+        "text2": "You can set possible specials for the characters in the settings that are located in the header of this window.",
+        "subTitle2": "Effects",
+        "text3": "In the same place you can change the effects: name, icon, type (it's just a color) and description.",
+        "text4": "At the moment, the effects are a common reminder for players."
+      },
+      "paragraph2": {
+        "title": "Character creating",
+        "text1": "It's time for players to create their own game avatar:",
+        "listItem1": "1. In the «Characters» window, go to creation.",
+        "listItem2": "2. Assign the level of your hero (suddenly you are the master's favorite).",
+        "listItem3": "3. Choose an avatar from the available options.",
+        "listItem4": "4. In the first block, you can give a name and a description to your character.",
+        "listItem5": "5. The second block contains all available bars, their current and maximum values.",
+        "listItem6": "6. In the third block we assign characteristics.",
+        "listItem7": "7. Next is a block with character effects.",
+        "listItem8": "8. And finally: an action editor that will allow interaction between creatures on the battlefield (the «Battlefield» section).",
+        "listItem9": "9. Bam! <s>New tower</s> new character!"
+      },
+      "paragraph3": {
+        "title": "Character editing",
+        "text1": "You can edit all the displayed values in the character cards or go into full editing.",
+        "text2": "Numeric values can be changed:"
+      }
+    },
+    "battlefield": {
+      "tabTitle": "Battlefield",
+      "paragraph1": {
+        "title": "Window «Battlefield»",
+        "text1": "«Battlefield» animates a combat system that uses prescribed actions of creatures. In addition, you can create dummies templates and add them to the battlefield.",
+        "text2": "In the upper part there are the master's dummies.",
+        "text3": "At the bottom are the characters and the dummies of the players.",
+        "subTitle1": "Actions",
+        "text4": "Each character and dummy has actions that you can customize: name, description and target. Action has a target bar and an applied value to it. In the future, these actions will be displayed on the creature's card on the battlefield."
+      },
+      "paragraph2": {
+        "title": "Dummy creating",
+        "text1": "In order to add a dummy to the battlefield, you need to create its template. Its construction is almost identical to character creation. The blank contains: an avatar, general information, the maximum value of bars, turning on/off the bar and an action editor.",
+        "text2": "After successfully creating a template, you will have its card on which you can also: update all the displayed information, go into full editing, add a dummy and delete all its instances from the battlefield."
+      },
+      "paragraph3": {
+        "title": "How does the interaction happen?",
+        "text1": "The character cards and the added dummies are now displayed on your board:",
+        "text2": "Let's get started! The card consists of a name, an avatar, a button for calling actions, there are creature bars under the avatar, and dummies also have a specific deletion.",
+        "text3": "Next, we call the list of actions at the bottom of the card and select the necessary. The action can be applied to a creature, to yourself, or canceled:"
+      }
+    },
+    "textEditor": {
+      "tabTitle": "Text Editor",
+      "paragraph1": {
+        "title": "Window «Text Editor»",
+        "text1": "In this window you can write some notes, quests, plot, inventory accounting, etc.",
+        "text2": "To create a document, you need:",
+        "listItem1": "1. Go to the list of documents in the upper left corner of this window.",
+        "listItem2": "2. Give a description of the document and click the check mark, thereby we create it for all participants of the room.",
+        "listItem3": "3. Next, you can click on the + button in this card to make the document appear in your list.",
+        "listItem4": "4. Go back and click on the required document.",
+        "text3": "The document is edited in live mode."
+      }
+    }
+  },
   "windowCharacters": {
     "level": "Level",
     "createCharacter": "Create Character",

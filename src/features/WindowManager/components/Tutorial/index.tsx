@@ -1,5 +1,5 @@
 import {
-  TutorialBarsTab,
+  TutorialRoomSettingsTab,
   TutorialBattlefieldTab,
   TutorialCharactersTab,
   TutorialGeneralTab,
@@ -13,19 +13,19 @@ export const TutorialContent = () => {
   return (
     <S.Wrapper>
       <Tabs>
-        <Tab id='tutorial-general' tabTitle='Основное'>
+        <Tab id='tutorial-general' tabTitle='windowTutorial.general.tabTitle'>
           <TutorialGeneralTab />
         </Tab>
-        <Tab id='tutorial-bars' tabTitle='Бары'>
-          <TutorialBarsTab />
+        <Tab id='tutorial-bars' tabTitle='windowTutorial.roomSettings.tabTitle'>
+          <TutorialRoomSettingsTab />
         </Tab>
-        <Tab id='tutorial-characters' tabTitle='Персонажи'>
+        <Tab id='tutorial-characters' tabTitle='windowTutorial.characters.tabTitle'>
           <TutorialCharactersTab />
         </Tab>
-        <Tab id='tutorial-battlefield' tabTitle='Поле боя'>
+        <Tab id='tutorial-battlefield' tabTitle='windowTutorial.battlefield.tabTitle'>
           <TutorialBattlefieldTab />
         </Tab>
-        <Tab id='tutorial-text-editor' tabTitle='Текстовой редактор'>
+        <Tab id='tutorial-text-editor' tabTitle='windowTutorial.textEditor.tabTitle'>
           <TutorialTextEditorTab />
         </Tab>
       </Tabs>

@@ -1,84 +1,79 @@
 import characterCreatorImage from './assets/characterCreator.webp'
+import editValueMedia from './assets/editValue.gif'
 
+import { useStoreSelector } from 'hooks/useStoreSelector'
+import { t } from 'languages'
 import * as C from 'styles/components'
 
 export const TutorialCharactersTab = () => {
+  useStoreSelector((store) => store.app.language)
+
   return (
     <div>
       <div>
-        <h1>Настройка персонажей</h1>
+        <h1>{t('windowTutorial.characters.paragraph1.title')}</h1>
         <C.Divider h={8} md={4} />
-        <h2>Характеристики</h2>
-        <C.Divider h={8} md={4} />
-        <p>
-          <i>Сильный, ловкий интеллектуал, а может слабый, неуклюжий тУпик?</i>
-        </p>
+        <h2>{t('windowTutorial.characters.paragraph1.subTitle1')}</h2>
         <C.Divider h={8} md={4} />
         <p>
-          Можно задать возможные характеристики для персонажей в настройках, которые находятся в
-          шапке окна.
+          <i>{t('windowTutorial.characters.paragraph1.text1')}</i>
         </p>
+        <C.Divider h={8} md={4} />
+        <p>{t('windowTutorial.characters.paragraph1.text2')}</p>
 
         <C.Divider h={8} md={4} />
 
-        <h2>Эффекты</h2>
+        <h2>{t('windowTutorial.characters.paragraph1.subTitle2')}</h2>
         <C.Divider h={8} md={4} />
-        <p>
-          В том же месте вы можете изменять эффекты: название, иконка, тип (это просто цвет) и
-          описание.
-        </p>
+        <p>{t('windowTutorial.characters.paragraph1.text3')}</p>
         <C.Divider h={8} md={4} />
-        <i>На данный момент эффекты являются обычным напоминанием для игроков.</i>
+        <i>{t('windowTutorial.characters.paragraph1.text4')}</i>
         <C.Divider h={16} md={8} />
       </div>
       <div>
-        <h1>Создание персонажа</h1>
+        <h1>{t('windowTutorial.characters.paragraph2.title')}</h1>
         <C.Divider h={8} md={4} />
-        <p>Пришла пора игрокам создать своего игрового аватара:</p>
+        <p>{t('windowTutorial.characters.paragraph2.text1')}</p>
         <C.Divider h={8} md={4} />
         <ul>
-          <li>1. В окне «Персонажи» перейти в создание.</li>
+          <li>{t('windowTutorial.characters.paragraph2.listItem1')}</li>
           <C.Divider h={8} md={4} />
-          <li>2. Назначить уровень вашего героя (вдруг вы являетесь любимчиком ведущего).</li>
+          <li>{t('windowTutorial.characters.paragraph2.listItem2')}</li>
           <C.Divider h={8} md={4} />
-          <li>3. Выбрать аватар из доступных вариантов.</li>
+          <li>{t('windowTutorial.characters.paragraph2.listItem3')}</li>
           <C.Divider h={8} md={4} />
-          <li>4. В первом блоке вы можете дать имя и дать описание вашему персонажу.</li>
+          <li>{t('windowTutorial.characters.paragraph2.listItem4')}</li>
           <C.Divider h={8} md={4} />
-          <li>
-            5. Второй блок содержит все доступные бары, их актуальное и максимальное значение.
-          </li>
+          <li>{t('windowTutorial.characters.paragraph2.listItem5')}</li>
           <C.Divider h={8} md={4} />
-          <li>6. В третьем блоке назначаем характеристики.</li>
+          <li>{t('windowTutorial.characters.paragraph2.listItem6')}</li>
           <C.Divider h={8} md={4} />
-          <li>6. Далее блок с эффектами.</li>
+          <li>{t('windowTutorial.characters.paragraph2.listItem7')}</li>
           <C.Divider h={8} md={4} />
-          <li>
-            7. И последнее: редактор действий, который оживит вашего персонажа на поле боя (раздел
-            «Поле боя»).
-          </li>
+          <li>{t('windowTutorial.characters.paragraph2.listItem8')}</li>
           <C.Divider h={8} md={4} />
-          <li>
-            8. И, вуаля, <s>башня готова</s> персонаж готов!
-          </li>
+          <li
+            dangerouslySetInnerHTML={{
+              __html: t('windowTutorial.characters.paragraph2.listItem9'),
+            }}
+          />
           <C.Divider h={8} md={4} />
           <C.Img src={characterCreatorImage} alt='side-menu' />
           <C.Divider h={16} md={8} />
         </ul>
       </div>
       <div>
-        <h1>Редактирование персонажа</h1>
+        <h1>{t('windowTutorial.characters.paragraph3.title')}</h1>
         <C.Divider h={8} md={4} />
-        <p>
-          Вы можете редактировать все отображаемые значения в карточки персонажа или перейти в
-          полное редактирование.
-        </p>
+        <p>{t('windowTutorial.characters.paragraph3.text1')}</p>
         <C.Divider h={8} md={4} />
-        <p>
-          Изменение значения может быть статическим или динамическим. Например, вы можете ввести
-          число со знаком <i>плюс</i> или <i>минус</i> и данная операция примениться к нынешнему
-          значению.
-        </p>
+        <p
+          dangerouslySetInnerHTML={{
+            __html: t('windowTutorial.characters.paragraph3.text2'),
+          }}
+        />
+        <C.Divider h={8} md={4} />
+        <C.Img src={editValueMedia} alt='edit-value' />
       </div>
     </div>
   )

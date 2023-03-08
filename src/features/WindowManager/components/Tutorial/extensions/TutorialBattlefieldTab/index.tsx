@@ -2,65 +2,48 @@ import actionsImage from './assets/actions.webp'
 import battle1Image from './assets/battle1.webp'
 import battle2Image from './assets/battle2.webp'
 
+import { useStoreSelector } from 'hooks/useStoreSelector'
+import { t } from 'languages'
 import * as C from 'styles/components'
 
 export const TutorialBattlefieldTab = () => {
+  useStoreSelector((store) => store.app.language)
+
   return (
     <div>
       <div>
-        <h1>Подготовка поля боя</h1>
+        <h1>{t('windowTutorial.battlefield.paragraph1.title')}</h1>
         <C.Divider h={8} md={4} />
-        <p>
-          «Поле боя» оживляет боевую систему, которая использует прописанные действия существ. По
-          мимо этого вы можете создать шаблоны болванок и добавлять их на поле боя.
-        </p>
+        <p>{t('windowTutorial.battlefield.paragraph1.text1')}</p>
         <C.Divider h={8} md={4} />
-        <p>В верхней части находятся болванки ведущего.</p>
-        <p>В нижней находятся персонажи и болванки игроков.</p>
+        <p>{t('windowTutorial.battlefield.paragraph1.text2')}</p>
+        <p>{t('windowTutorial.battlefield.paragraph1.text3')}</p>
         <C.Divider h={8} md={4} />
-        <h2>Действия</h2>
+        <h2>{t('windowTutorial.battlefield.paragraph1.subTitle1')}</h2>
         <C.Divider h={8} md={4} />
-        <p>
-          У каждого персонажа и болванки есть действия, которые вы можете настраивать: название,
-          описание и цель. Цель имеет таргет бар и применяемое значение к ней. В дальнейшем эти
-          действия будут отображаться на карточке существа на поле боя.
-        </p>
+        <p>{t('windowTutorial.battlefield.paragraph1.text4')}</p>
         <C.Divider h={8} md={4} />
         <C.Img src={actionsImage} alt='actions' />
         <C.Divider h={16} md={8} />
       </div>
       <div>
-        <h1>Создание болванки</h1>
+        <h1>{t('windowTutorial.battlefield.paragraph2.title')}</h1>
         <C.Divider h={8} md={4} />
-        <p>
-          Для того чтобы добавить болванку на поле боя, необходимо создать её шаблон. Его построение
-          почти идентично созданию персонажа. Болванка содержит: аватар, общую информацию,
-          максимальное значение баров, включение/выключение бара и редактор действий.
-        </p>
+        <p>{t('windowTutorial.battlefield.paragraph2.text1')}</p>
         <C.Divider h={8} md={4} />
-        <p>
-          После успешного создания шаблона у вас появится его карточка на которой вы также можете:
-          обновлять всю отображаемую информацию, перейти в полное редактирование, добавить болванку
-          и удалить все его экземпляры с поля боя.
-        </p>
+        <p>{t('windowTutorial.battlefield.paragraph2.text2')}</p>
         <C.Divider h={16} md={8} />
       </div>
       <div>
-        <h1>Как происходит взаимодействие?</h1>
+        <h1>{t('windowTutorial.battlefield.paragraph3.title')}</h1>
         <C.Divider h={8} md={4} />
-        <p>Сейчас на вашей доске отображаются карточки персонажей и добавленные болванки:</p>
+        <p>{t('windowTutorial.battlefield.paragraph3.text1')}</p>
         <C.Divider h={8} md={4} />
         <C.Img src={battle1Image} alt='battle1' />
         <C.Divider h={8} md={4} />
-        <p>
-          Начнём! Карточка состоит из имени, аватарки, кнопки для вызова действий, под автаром
-          расположены бары существа и также у болванок есть конкретное удаление.
-        </p>
+        <p>{t('windowTutorial.battlefield.paragraph3.text2')}</p>
         <C.Divider h={8} md={4} />
-        <p>
-          Далее вызываем список действий в нижней части карточки и выбираем необходимое. Действие
-          можно применить на существо, на себя или отменить:
-        </p>
+        <p>{t('windowTutorial.battlefield.paragraph3.text3')}</p>
         <C.Divider h={8} md={4} />
         <C.Img src={battle2Image} alt='actions' />
       </div>

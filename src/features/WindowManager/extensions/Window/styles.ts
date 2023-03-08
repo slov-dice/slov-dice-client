@@ -32,6 +32,7 @@ export const Wrapper = styled(motion.div).attrs(wrapperAttrs)<I_WrapperProps>`
 
 export const Header = styled.div`
   user-select: none;
+  cursor: grab;
 
   display: flex;
   justify-content: space-between;
