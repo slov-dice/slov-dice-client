@@ -96,9 +96,16 @@ export const Img = styled.img`
   border-radius: 2px;
 `
 
-export const Row = styled.div`
+interface I_RowProps {
+  justify?: 'flex-start' | 'center' | 'flex-end' | 'space-evenly' | 'space-between' | 'space-around'
+  align?: 'flex-start' | 'center' | 'flex-end'
+}
+
+export const Row = styled.div<I_RowProps>`
   display: flex;
   gap: 16px;
+  align-items: ${({ align }) => align || 'flex-start'};
+  justify-content: ${({ justify }) => justify || 'flex-start'};
 `
 
 export const ParagraphPreLine = styled.p`

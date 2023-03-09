@@ -1,4 +1,7 @@
+import { motion } from 'framer-motion'
 import styled from 'styled-components'
+
+import { listItemAttrs } from './motion'
 
 export const SelectContainer = styled.div`
   position: relative;
@@ -53,6 +56,7 @@ export const SelectList = styled.ul`
   padding: 0;
 
   background-color: ${({ theme }) => theme.colors.black};
+  border: 1px solid ${({ theme }) => theme.colors.white_05};
   border-radius: 8px;
   box-shadow: rgba(0, 0, 0, 10%) 0 6px 12px -2px, rgba(0, 0, 0, 40%) 0 3px 7px -3px;
 
@@ -60,7 +64,7 @@ export const SelectList = styled.ul`
     padding-top: 8px;
   }
 `
-export const ListItem = styled.li`
+export const ListItem = styled(motion.li).attrs(({ theme }) => listItemAttrs(theme))`
   cursor: pointer;
   user-select: none;
 
@@ -76,9 +80,5 @@ export const ListItem = styled.li`
   svg {
     width: 100%;
     height: 100%;
-  }
-
-  :hover {
-    background-color: ${({ theme }) => theme.colors.primary_50};
   }
 `

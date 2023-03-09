@@ -85,3 +85,9 @@ export const BlockAdd = styled.div`
     fill: ${({ theme }) => theme.colors.white};
   }
 `
+
+export const AutocompleteWrapper = styled.div`
+  position: relative;
+
+  width: 100%;
+`

@@ -1,4 +1,4 @@
-import { useCallback, useContext, useMemo } from 'react'
+import { ChangeEvent, useCallback, useContext, useMemo, useState, KeyboardEvent } from 'react'
 import { useFieldArray, useForm } from 'react-hook-form'
 import { v4 } from 'uuid'
 
@@ -7,6 +7,7 @@ import * as S from './styles'
 import CloseIcon from 'assets/icons/app/close.svg'
 import PlusIcon from 'assets/icons/app/plus.svg'
 import { Button } from 'components/Buttons'
+import { ActionSuggests } from 'components/game'
 import {
   CustomSelectField,
   E_TextFieldSize,
@@ -24,6 +25,7 @@ import { useStoreSelector } from 'hooks/useStoreSelector'
 import { t } from 'languages'
 import { T_CharacterBarId } from 'models/shared/game/character'
 import * as C from 'styles/components'
+import { regExp } from 'utils/helpers/regExp'
 
 const findOverlay = (overlay: I_WindowOverlay) => overlay.name === E_WindowOverlay.actionsEditor
 
@@ -53,7 +55,9 @@ export const ActionsEditor = () => {
     }
   })
 
-  const { control, register, handleSubmit } = useForm({
+  const [currentSuggestIndex, setCurrentSuggestIndex] = useState<number | null>(null)
+
+  const { control, handleSubmit } = useForm({
     defaultValues: { actions: actions },
   })
 
@@ -120,6 +124,52 @@ export const ActionsEditor = () => {
     }
   }
 
+  const handleChangeTargetValue = (e: ChangeEvent<HTMLInputElement>, fieldIndex: number) => {
+    update(fieldIndex, {
+      ...fields[fieldIndex],
+      target: { ...fields[fieldIndex].target, value: e.target.value },
+    })
+  }
+
+  const handleTriggerSuggests = (fieldIndex: number) => {
+    if (fieldIndex === null) return
+
+    setCurrentSuggestIndex(fieldIndex)
+  }
+
+  const handleSelectSuggest = (suggest: any, fieldIndex: number) => {
+    update(fieldIndex, {
+      ...fields[fieldIndex],
+      target: {
+        ...fields[fieldIndex].target,
+        value: fields[fieldIndex].target.value + suggest.value + ' ',
+      },
+    })
+  }
+
+  const handleKeyDownValue = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (
+      !regExp.onlyNumber.test(e.key) &&
+      e.key !== '+' &&
+      e.key !== '-' &&
+      e.key !== '*' &&
+      e.key !== '/' &&
+      e.key !== '(' &&
+      e.key !== ')' &&
+      !(e.ctrlKey && e.key === 'c') &&
+      !(e.ctrlKey && e.key === 'v') &&
+      !(e.ctrlKey && e.key === 'a') &&
+      !(e.ctrlKey && e.key === 'z') &&
+      e.code !== 'Backspace' &&
+      e.code !== 'Delete' &&
+      e.code !== 'ArrowLeft' &&
+      e.code !== 'ArrowRight' &&
+      e.code !== 'Space'
+    ) {
+      e.preventDefault()
+    }
+  }
+
   const optionsBars: T_CustomSelectOption[] = useMemo(
     () => settingsBars.map((bar) => ({ value: bar.id, label: <div>{bar.name}</div> })),
     [settingsBars],
@@ -145,9 +195,9 @@ export const ActionsEditor = () => {
               />
               <TextareaField
                 value={field.description}
+                fullWidth
                 onChange={(e) => update(index, { ...field, description: e.target.value })}
                 placeholder={t('actionsEditor.fields.description')}
-                fullWidth
               />
               <div>{t('actionsEditor.fields.target')}</div>
               <C.Row>
@@ -157,11 +207,25 @@ export const ActionsEditor = () => {
                   onChange={handleChangeSelectBar}
                   options={optionsBars}
                 />
-                <TextField
-                  {...register(`actions.${index}.target.value`)}
-                  size={E_TextFieldSize.xs}
-                  placeholder={t('actionsEditor.fields.value')}
-                />
+              </C.Row>
+              <C.Row>
+                <S.AutocompleteWrapper>
+                  <TextField
+                    value={field.target.value}
+                    onChange={(e) => handleChangeTargetValue(e, index)}
+                    onFocus={() => handleTriggerSuggests(index)}
+                    onKeyDown={handleKeyDownValue}
+                    fullWidth
+                    size={E_TextFieldSize.xs}
+                    placeholder={t('actionsEditor.fields.value')}
+                  />
+                  {currentSuggestIndex === index && (
+                    <ActionSuggests
+                      onClose={() => setCurrentSuggestIndex(null)}
+                      onSelect={(suggest) => handleSelectSuggest(suggest, index)}
+                    />
+                  )}
+                </S.AutocompleteWrapper>
               </C.Row>
               <S.BlockRemove onClick={handleRemoveAction(index)}>
                 <CloseIcon />

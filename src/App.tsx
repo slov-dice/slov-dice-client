@@ -1,4 +1,4 @@
-import { useLayoutEffect, useEffect } from 'react'
+import { useEffect } from 'react'
 
 import { connectAuthenticatedUser } from 'features/AuthForm/utils/dispatchers'
 import { ModalManager } from 'features/ModalManager'

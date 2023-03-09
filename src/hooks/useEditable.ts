@@ -1,5 +1,7 @@
 import { RefObject, useEffect, useState, KeyboardEvent, ChangeEvent } from 'react'
 
+import { regExp } from 'utils/helpers/regExp'
+
 interface I_UseEditable {
   inputRef: RefObject<HTMLInputElement | HTMLTextAreaElement> | null
   initialInputValue: string
@@ -44,7 +46,7 @@ export const useEditable = ({
 
     if (pattern === 'numeric') {
       if (
-        !/[0-9]/.test(event.key) &&
+        !regExp.onlyNumber.test(event.key) &&
         event.key !== '+' &&
         event.key !== '-' &&
         event.code !== 'Backspace' &&

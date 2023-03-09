@@ -1,4 +1,4 @@
-import { ChangeEventHandler, forwardRef } from 'react'
+import { ChangeEventHandler, KeyboardEventHandler, forwardRef, FocusEventHandler } from 'react'
 
 import * as S from './styles'
 
@@ -15,6 +15,9 @@ interface I_TextFieldProps {
   placeholder?: string
   disabled?: boolean
   onChange?: ChangeEventHandler<HTMLInputElement>
+  onKeyDown?: KeyboardEventHandler<HTMLInputElement>
+  onFocus?: FocusEventHandler<HTMLInputElement>
+  onBlur?: FocusEventHandler<HTMLInputElement>
   type?: 'text'
   fullWidth?: boolean
   size?: E_TextFieldSize
