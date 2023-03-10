@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 import { suggestItemAttrs } from './motion'
 
@@ -36,8 +36,12 @@ export const SuggestsGroupTitle = styled.div`
   font-weight: 700;
 `
 
-export const SuggestItem = styled(motion.li).attrs(({ theme }) => suggestItemAttrs(theme))`
+export const SuggestItem = styled(motion.li).attrs(({ theme }) => suggestItemAttrs(theme))<{
+  color?: string
+}>`
   cursor: pointer;
+
+  position: relative;
 
   display: flex;
   flex-direction: column;
@@ -45,6 +49,22 @@ export const SuggestItem = styled(motion.li).attrs(({ theme }) => suggestItemAtt
   padding: 4px;
 
   border-top: 1px solid ${({ theme }) => theme.colors.white_05};
+
+  ${({ color }) =>
+    color &&
+    css`
+      :before {
+        content: '';
+
+        position: absolute;
+        left: 0;
+
+        width: 3px;
+        height: 90%;
+
+        background-color: ${color};
+      }
+    `}
 `
 
 export const SuggestItemLabel = styled.div`

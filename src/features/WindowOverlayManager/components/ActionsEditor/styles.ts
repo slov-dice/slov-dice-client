@@ -91,3 +91,12 @@ export const AutocompleteWrapper = styled.div`
 
   width: 100%;
 `
+
+export const AutocompleteWarning = styled.div`
+  position: absolute;
+  top: -16px;
+  left: 0;
+
+  font-size: 12px;
+  color: ${({ theme }) => theme.colors.white_50};
+`

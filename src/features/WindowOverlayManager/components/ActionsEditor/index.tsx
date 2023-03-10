@@ -23,8 +23,10 @@ import { E_WindowOverlay, I_WindowOverlay } from 'features/WindowOverlayManager/
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { useStoreSelector } from 'hooks/useStoreSelector'
 import { t } from 'languages'
+import { T_ActionSuggestValue } from 'models/shared/game/battlefield/action'
 import { T_CharacterBarId } from 'models/shared/game/character'
 import * as C from 'styles/components'
+import { getActionSuggests, validateActionValue } from 'utils/game/actions'
 import { regExp } from 'utils/helpers/regExp'
 
 const findOverlay = (overlay: I_WindowOverlay) => overlay.name === E_WindowOverlay.actionsEditor
@@ -32,13 +34,17 @@ const findOverlay = (overlay: I_WindowOverlay) => overlay.name === E_WindowOverl
 export const ActionsEditor = () => {
   const dispatch = useStoreDispatch()
   const { location } = useContext(windowOverlayManagerContext)
-  const { overlayPayload, settingsBars } = useStoreSelector((store) => ({
-    overlayPayload:
-      location === E_Window.characters
-        ? store.gameCharacters.overlays.find(findOverlay)?.payload
-        : store.gameBattlefield.overlays.find(findOverlay)?.payload,
-    settingsBars: store.room.game.characters.settings.bars,
-  }))
+  const { overlayPayload, settingsBars, settingsSpecials, language } = useStoreSelector(
+    (store) => ({
+      overlayPayload:
+        location === E_Window.characters
+          ? store.gameCharacters.overlays.find(findOverlay)?.payload
+          : store.gameBattlefield.overlays.find(findOverlay)?.payload,
+      settingsBars: store.room.game.characters.settings.bars,
+      settingsSpecials: store.room.game.characters.settings.specials,
+      language: store.app.language,
+    }),
+  )
 
   const actions = useStoreSelector((store) => {
     if (overlayPayload === 'characterCreator') {
@@ -56,6 +62,7 @@ export const ActionsEditor = () => {
   })
 
   const [currentSuggestIndex, setCurrentSuggestIndex] = useState<number | null>(null)
+  const actionSuggests = getActionSuggests(settingsBars, settingsSpecials, overlayPayload, language)
 
   const { control, handleSubmit } = useForm({
     defaultValues: { actions: actions },
@@ -137,7 +144,7 @@ export const ActionsEditor = () => {
     setCurrentSuggestIndex(fieldIndex)
   }
 
-  const handleSelectSuggest = (suggest: any, fieldIndex: number) => {
+  const handleSelectSuggest = (suggest: T_ActionSuggestValue, fieldIndex: number) => {
     update(fieldIndex, {
       ...fields[fieldIndex],
       target: {
@@ -156,10 +163,7 @@ export const ActionsEditor = () => {
       e.key !== '/' &&
       e.key !== '(' &&
       e.key !== ')' &&
-      !(e.ctrlKey && e.key === 'c') &&
-      !(e.ctrlKey && e.key === 'v') &&
-      !(e.ctrlKey && e.key === 'a') &&
-      !(e.ctrlKey && e.key === 'z') &&
+      !e.ctrlKey &&
       e.code !== 'Backspace' &&
       e.code !== 'Delete' &&
       e.code !== 'ArrowLeft' &&
@@ -208,8 +212,12 @@ export const ActionsEditor = () => {
                   options={optionsBars}
                 />
               </C.Row>
+              <C.Divider h={4} md={4} />
               <C.Row>
                 <S.AutocompleteWrapper>
+                  <S.AutocompleteWarning>
+                    {t(validateActionValue(field.target.value))}
+                  </S.AutocompleteWarning>
                   <TextField
                     value={field.target.value}
                     onChange={(e) => handleChangeTargetValue(e, index)}
@@ -221,6 +229,7 @@ export const ActionsEditor = () => {
                   />
                   {currentSuggestIndex === index && (
                     <ActionSuggests
+                      suggests={actionSuggests}
                       onClose={() => setCurrentSuggestIndex(null)}
                       onSelect={(suggest) => handleSelectSuggest(suggest, index)}
                     />

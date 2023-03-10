@@ -358,6 +358,17 @@
       "target": "Target",
       "value": "Value (+x/-x)"
     },
+    "suggests": {
+      "title": "Environment variables",
+      "bars": "Bars",
+      "specials": "Specials",
+      "others": "Others"
+    },
+    "validation": {
+      "emptyValue": "Enter a value",
+      "warningValue": "Perhaps your value is invalid!",
+      "validValue": "The value is valid"
+    },
     "actions": {
       "add": "Add",
       "save": "Save",
