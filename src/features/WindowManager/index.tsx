@@ -12,7 +12,9 @@ interface I_WindowManagerProps {
 
 export const WindowManager = ({ dragConstraintsRef }: I_WindowManagerProps) => {
   const windows = useStoreSelector((store) => store.windowManager.windows)
+
   useStoreSelector((store) => store.app.language)
+
   return (
     <AnimatePresence>
       {Boolean(windows.length) &&

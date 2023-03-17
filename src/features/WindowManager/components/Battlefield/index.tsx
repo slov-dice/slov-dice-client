@@ -26,6 +26,7 @@ export const BattlefieldContent = () => {
     masterDummies,
     playersField,
     playersDummies,
+    profileId,
   } = useStoreSelector((store) => ({
     characters: store.room.game.characters.window.characters,
     activeCard: store.gameBattlefield.activeCard,
@@ -34,6 +35,7 @@ export const BattlefieldContent = () => {
     masterDummies: store.room.game.battlefield.window.masterDummies,
     playersField: store.room.game.battlefield.window.playersField,
     playersDummies: store.room.game.battlefield.window.playersDummies,
+    profileId: store.profile.id,
   }))
 
   const handleOpenBattlefieldEditorOverlay = (battlefield: E_Battlefield) => () => {
@@ -65,13 +67,14 @@ export const BattlefieldContent = () => {
               actionTarget: e.target.id,
               actionInitiator: activeCard.id,
               action: activeCard.action,
+              userId: profileId,
             }),
           )
           dispatch(gameBattlefieldActions.disableActiveCard())
         }
       }
     },
-    [activeCard, dispatch],
+    [activeCard.action, activeCard.id, dispatch, profileId],
   )
 
   useEffect(() => {

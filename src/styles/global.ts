@@ -55,9 +55,15 @@ export const GlobalStyles = createGlobalStyle`
     text-decoration: none;
   }
 
+  svg {
+    width: 100%;
+    height: 100%;
+    
+    fill: ${({ theme }) => theme.colors.white};
+  }
+
   #root {
     display: flex;
     flex-direction: column;
   }
-
 `

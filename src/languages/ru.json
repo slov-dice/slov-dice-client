@@ -366,7 +366,6 @@
     },
     "validation": {
       "emptyValue": "Введите значение",
-      "warningValue": "Возможно, ваше значение невалидно!",
       "validValue": "Значение валидно"
     },
     "actions": {

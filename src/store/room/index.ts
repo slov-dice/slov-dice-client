@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import throttle from 'lodash.throttle'
 
-import { E_RoomType, I_FullRoom, I_RoomMessage } from 'models/shared/app'
+import { E_RoomType, I_FullRoom, I_RoomMessage, T_UserId } from 'models/shared/app'
 import { E_Battlefield } from 'models/shared/game/battlefield'
 import {
   T_BaseCharacterBar,
@@ -288,6 +288,7 @@ export const roomSlice = createSlice({
         action: T_CharacterAction
         actionTarget: T_DummyId | T_CharacterId
         actionInitiator: T_DummyId | T_CharacterId
+        userId: T_UserId
       }>,
     ) => {
       const payload: I_EmitPayload[E_Emit.makeActionInBattlefield] = {
@@ -295,6 +296,7 @@ export const roomSlice = createSlice({
         action: action.payload.action,
         actionInitiator: action.payload.actionInitiator,
         actionTarget: action.payload.actionTarget,
+        userId: action.payload.userId,
       }
 
       socket.emit(E_Emit.makeActionInBattlefield, payload)

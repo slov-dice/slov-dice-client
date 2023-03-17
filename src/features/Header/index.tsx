@@ -1,5 +1,6 @@
 import { AnimatePresence } from 'framer-motion'
 import { useEffect, useState } from 'react'
+import { isMobile } from 'react-device-detect'
 import { useLocation } from 'react-router-dom'
 
 import { Control } from './components/Control'
@@ -45,6 +46,7 @@ export const Header = () => {
       setTransparent(window.scrollY <= 0)
     }
   }
+
   useEventListener('scroll', handleScroll)
 
   useEffect(() => {
@@ -61,6 +63,11 @@ export const Header = () => {
         <S.Header $isTransparent={isTransparent}>
           <S.WrapperControl $sideMenuVisible={sideMenuVisible}>
             <Control onClick={handleToggleSideMenu} />
+            {isMobile && (
+              <S.TileControl>
+                <S.TileControlItem>4</S.TileControlItem>
+              </S.TileControl>
+            )}
           </S.WrapperControl>
           <Logo isHeader />
           <Toolbar />

@@ -93,7 +93,6 @@ export const validateActionValue = (value: string): string => {
       .replace(regExp.onlyWhitespace, ''),
   )
 
-  if (result === 0) return 'actionsEditor.validation.warningValue'
   return 'actionsEditor.validation.validValue'
 }
 

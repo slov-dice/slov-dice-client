@@ -28,3 +28,8 @@ export const wrapperControlAttrs = (sideMenuVisible: boolean): HTMLMotionProps<'
   animate: sideMenuVisible ? 'opened' : 'closed',
   exit: 'closed',
 })
+
+export const tabsControlAttrs = (theme: DefaultTheme) => ({
+  whileHover: { backgroundColor: theme.colors.white_30 },
+  whileTap: { scale: 0.95 },
+})

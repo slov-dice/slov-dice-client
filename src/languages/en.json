@@ -366,7 +366,6 @@
     },
     "validation": {
       "emptyValue": "Enter a value",
-      "warningValue": "Perhaps your value is invalid!",
       "validValue": "The value is valid"
     },
     "actions": {

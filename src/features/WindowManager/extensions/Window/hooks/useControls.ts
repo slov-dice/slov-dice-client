@@ -2,7 +2,7 @@ import { MotionValue, useMotionValue } from 'framer-motion'
 import { useState, MouseEvent, Dispatch, SetStateAction } from 'react'
 
 import { E_Modal } from 'features/ModalManager/models'
-import { openModal } from 'features/ModalManager/slice'
+import { modalManagerActions, openModal } from 'features/ModalManager/slice'
 import { E_Window } from 'features/WindowManager/models'
 import { windowManagerActions } from 'features/WindowManager/slice'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
@@ -120,7 +120,7 @@ export const useControls = ({
 
   const handleOpenSettings = (e: MouseEvent<HTMLDivElement>) => {
     e.stopPropagation()
-    if (modal) dispatch(openModal(modal))
+    if (modal) dispatch(modalManagerActions.openModal(modal))
   }
 
   return {

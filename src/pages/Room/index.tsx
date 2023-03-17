@@ -1,10 +1,12 @@
 import { useLayoutEffect, useRef } from 'react'
+import { isMobile } from 'react-device-detect'
 
 import { closeRoomPage, openRoomPage } from './slice'
 import { subscribe, unsubscribe } from './socket'
 import * as S from './styles'
 
 import { HeroBackground } from 'features/HeroBackground'
+import { TileManager } from 'features/TileManager'
 import { WindowManager } from 'features/WindowManager'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { useStoreSelector } from 'hooks/useStoreSelector'
@@ -31,7 +33,7 @@ const Room = () => {
   return (
     <>
       <S.Page ref={pageRef}>
-        <WindowManager dragConstraintsRef={pageRef} />
+        {isMobile ? <TileManager /> : <WindowManager dragConstraintsRef={pageRef} />}
         <HeroBackground />
       </S.Page>
     </>

@@ -23,6 +23,7 @@ import { sideMenuSlice } from 'features/SideMenu/slice'
 import { chatPanelSlice } from 'features/SidePanel/extensions/ChatPanel/slice'
 import { usersPanelSlice } from 'features/SidePanel/extensions/UsersPanel/slice'
 import { sidePanelSlice } from 'features/SidePanel/slice'
+import { tileManagerSlice } from 'features/TileManager/slice'
 import { gameBattlefieldSlice } from 'features/WindowManager/components/Battlefield/slice'
 import { gameCharactersSlice } from 'features/WindowManager/components/Characters/slice'
 import { gameTextEditorSlice } from 'features/WindowManager/components/TextEditor/slice'
@@ -52,6 +53,7 @@ const rootReducer = combineReducers({
   [sidePanelSlice.name]: sidePanelSlice.reducer,
   [modalManagerSlice.name]: modalManagerSlice.reducer,
   [windowManagerSlice.name]: windowManagerSlice.reducer,
+  [tileManagerSlice.name]: tileManagerSlice.reducer,
 
   // Component slices
   [restoreSlice.name]: restoreSlice.reducer,

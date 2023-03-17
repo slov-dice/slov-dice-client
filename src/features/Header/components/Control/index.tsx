@@ -6,7 +6,7 @@ interface I_ControlProps {
 
 export const Control = ({ onClick }: I_ControlProps) => (
   <S.Control onClick={onClick}>
-    <svg width='24' height='24' viewBox='0 0 24 24'>
+    <svg style={{ width: 24, height: 24 }} viewBox='0 0 24 24'>
       <S.Path
         variants={{
           closed: { d: 'M 2 4 L 19 4' },

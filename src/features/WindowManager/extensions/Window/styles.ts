@@ -56,11 +56,6 @@ export const HeaderLabel = styled.div`
   span:first-child {
     width: 24px;
   }
-
-  svg {
-    width: 100%;
-    height: 100%;
-  }
 `
 
 export const HeaderControls = styled.div`
@@ -101,11 +96,6 @@ export const Control = styled(motion.div).attrs<I_ControlProps>(({ theme, $isDiv
 
           width: 28px;
         `}
-
-  & > svg {
-    width: 100%;
-    height: 100%;
-  }
 `
 
 interface I_ResizerProps {
