@@ -40,9 +40,8 @@ export const BattlefieldContent = () => {
 
   const handleOpenBattlefieldEditorOverlay = (battlefield: E_Battlefield) => () => {
     dispatch(
-      gameBattlefieldActions.openBattlefieldWindowOverlay({
+      gameBattlefieldActions.openWindowOverlay({
         name: E_WindowOverlay.battlefieldEditor,
-        isOpen: true,
         payload: battlefield,
       }),
     )
@@ -51,7 +50,7 @@ export const BattlefieldContent = () => {
   const handleEsc = useCallback(
     (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
-        dispatch(gameBattlefieldActions.closeLastBattlefieldWindowOverlay())
+        dispatch(gameBattlefieldActions.closeLastWindowOverlay())
       }
     },
     [dispatch],

@@ -13,6 +13,7 @@ export const SideMenuWrapper = styled(motion.div).attrs(containerAttrs)`
   bottom: 0;
   left: 0;
 
+  overflow: auto;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -23,6 +24,19 @@ export const SideMenuWrapper = styled(motion.div).attrs(containerAttrs)`
 
   background-color: ${({ theme }) => theme.colors.black};
   box-shadow: rgb(0 0 0 / 50%) 0 9px 10px;
+
+  ::-webkit-scrollbar {
+    width: 2px;
+    height: 2px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #fff;
+  }
 `
 
 export const Overlay = styled(motion.div).attrs(overlayAttrs)`

@@ -63,11 +63,6 @@ export const Header = () => {
         <S.Header $isTransparent={isTransparent}>
           <S.WrapperControl $sideMenuVisible={sideMenuVisible}>
             <Control onClick={handleToggleSideMenu} />
-            {isMobile && (
-              <S.TileControl>
-                <S.TileControlItem>4</S.TileControlItem>
-              </S.TileControl>
-            )}
           </S.WrapperControl>
           <Logo isHeader />
           <Toolbar />

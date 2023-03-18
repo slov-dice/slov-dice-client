@@ -66,6 +66,23 @@
       "paragraph1": "The translation only includes UI texts.",
       "paragraph2": "Custom messages and titles will not be translated!"
     },
+    "changelog": {
+      "title": "Changelog",
+      "040": {
+        "listItem1": "Added support for variables for value in the action editor",
+        "listItem2": "Added support for mobile devices",
+        "listItem3": "Added a modal window with a list of changes versions «Changelog» (Yes, this is it)",
+        "listItem4": "Improved overlay logic for windows",
+        "listItem5": "Added PWA support"
+      },
+      "035": {
+        "listItem1": "Added «Tutorial» window",
+        "listItem2": "Added self-interaction capability when performing an action in the «BattleField» window",
+        "listItem3": "Updated website homepage",
+        "listItem4": "Removed blur effect on overlay windows",
+        "listItem5": "Added automatic removal of rooms"
+      }
+    },
     "createRoom": {
       "title": "Create a room",
       "fields": {
@@ -483,6 +500,7 @@
     "loadGames": "Load game",
     "leaveRoom": "Leave room",
     "returnRoom": "Return to room",
+    "changelog": "Changelog",
     "window": {
       "characters": "Characters",
       "inventory": "Inventory",

@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-import { initialOverlayStateSlice, initialActiveCardActionSlice } from './data'
+import { initialActiveCardActionSlice } from './data'
 
 import { E_WindowOverlay, I_WindowOverlay } from 'features/WindowOverlayManager/models'
 import { T_CharacterAction } from 'models/shared/game/character'
@@ -32,7 +32,7 @@ interface I_InitialState {
 }
 
 const initialState: I_InitialState = {
-  overlays: initialOverlayStateSlice,
+  overlays: [],
   activeCard: {
     id: '',
     action: initialActiveCardActionSlice,
@@ -116,20 +116,18 @@ export const gameBattlefieldSlice = createSlice({
       }
     },
 
-    openBattlefieldWindowOverlay: (state, action: PayloadAction<I_WindowOverlay>) => {
-      state.overlays = state.overlays.map((overlay) =>
-        overlay.name === action.payload.name ? action.payload : overlay,
-      )
+    openWindowOverlay: (state, action: PayloadAction<I_WindowOverlay>) => {
+      if (!state.overlays.some((overlay) => overlay.name === action.payload.name)) {
+        state.overlays.push(action.payload)
+      }
     },
 
-    closeBattlefieldWindowOverlay: (state, action: PayloadAction<E_WindowOverlay>) => {
-      state.overlays = state.overlays.map((overlay) =>
-        overlay.name === action.payload ? { ...overlay, isOpen: false } : overlay,
-      )
+    closeWindowOverlay: (state, action: PayloadAction<E_WindowOverlay>) => {
+      state.overlays = state.overlays.filter((overlay) => overlay.name !== action.payload)
     },
 
-    closeLastBattlefieldWindowOverlay: (state) => {
-      state.overlays = state.overlays.map((overlay) => ({ ...overlay, isOpen: false }))
+    closeLastWindowOverlay: (state) => {
+      state.overlays.pop()
     },
   },
 })

@@ -1,7 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-import { initialOverlayStateSlice } from './data'
-
 import { E_WindowOverlay, I_WindowOverlay } from 'features/WindowOverlayManager/models'
 import { T_DocId } from 'models/shared/game/textEditor'
 
@@ -11,7 +9,7 @@ interface I_InitialState {
 }
 
 const initialState: I_InitialState = {
-  overlays: initialOverlayStateSlice,
+  overlays: [],
   opened: [],
 }
 
@@ -32,19 +30,17 @@ export const gameTextEditorSlice = createSlice({
     },
 
     openWindowOverlay: (state, action: PayloadAction<I_WindowOverlay>) => {
-      state.overlays = state.overlays.map((overlay) =>
-        overlay.name === action.payload.name ? action.payload : overlay,
-      )
+      if (!state.overlays.some((overlay) => overlay.name === action.payload.name)) {
+        state.overlays.push(action.payload)
+      }
     },
 
     closeWindowOverlay: (state, action: PayloadAction<E_WindowOverlay>) => {
-      state.overlays = state.overlays.map((overlay) =>
-        overlay.name === action.payload ? { ...overlay, isOpen: false } : overlay,
-      )
+      state.overlays = state.overlays.filter((overlay) => overlay.name !== action.payload)
     },
 
     closeLastWindowOverlay: (state) => {
-      state.overlays = state.overlays.map((overlay) => ({ ...overlay, isOpen: false }))
+      state.overlays.pop()
     },
   },
 })

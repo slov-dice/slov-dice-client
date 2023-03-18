@@ -35,9 +35,7 @@ export const UpdateCharacterEffectOverlay = () => {
   })
 
   const handleClose = () => {
-    dispatch(
-      gameCharactersActions.closeCharacterWindowOverlay(E_WindowOverlay.updateCharacterEffect),
-    )
+    dispatch(gameCharactersActions.closeWindowOverlay(E_WindowOverlay.updateCharacterEffect))
   }
 
   const handleToggleEffect = (effectId: T_CharacterEffectId) => () => {

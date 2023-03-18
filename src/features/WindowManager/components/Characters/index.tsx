@@ -29,9 +29,8 @@ export const CharactersContent = () => {
     dispatch(gameCharactersActions.setCharacterCreator({ settingsBars, settingsSpecials }))
     dispatch(
       dispatch(
-        gameCharactersActions.openCharacterWindowOverlay({
+        gameCharactersActions.openWindowOverlay({
           name: E_WindowOverlay.createCharacter,
-          isOpen: true,
         }),
       ),
     )
@@ -40,7 +39,7 @@ export const CharactersContent = () => {
   const handleEsc = useCallback(
     (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
-        dispatch(gameCharactersActions.closeLastCharacterWindowOverlay())
+        dispatch(gameCharactersActions.closeLastWindowOverlay())
       }
     },
     [dispatch],

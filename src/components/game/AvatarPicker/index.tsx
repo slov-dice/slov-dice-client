@@ -23,18 +23,16 @@ export const AvatarPicker = ({ image, characterId }: I_AvatarPickerProps) => {
   const handleOpenPickAvatarOverlay = () => {
     if (location === E_Window.characters) {
       dispatch(
-        gameCharactersActions.openCharacterWindowOverlay({
+        gameCharactersActions.openWindowOverlay({
           name: E_WindowOverlay.pickCharacterAvatar,
-          isOpen: true,
           payload: characterId,
         }),
       )
     }
     if (location === E_Window.battlefield) {
       dispatch(
-        gameBattlefieldActions.openBattlefieldWindowOverlay({
+        gameBattlefieldActions.openWindowOverlay({
           name: E_WindowOverlay.pickDummyAvatar,
-          isOpen: true,
           payload: characterId,
         }),
       )

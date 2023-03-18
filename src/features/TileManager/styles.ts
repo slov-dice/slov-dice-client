@@ -3,9 +3,11 @@ import styled, { css } from 'styled-components'
 
 import { controlAttrs } from './motion'
 
-export const Tile = styled.div`
+export const Tile = styled.div<{ visible: boolean }>`
   position: relative;
   z-index: 20;
+
+  display: ${({ visible }) => (visible ? 'block' : 'none')};
 
   width: 100%;
   height: 100%;

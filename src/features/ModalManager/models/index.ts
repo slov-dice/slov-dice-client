@@ -11,6 +11,7 @@ export enum E_Modal {
   loadGame = 'loadGame',
   enterPasswordRoom = 'enterPasswordRoom',
   confirmLeaveRoom = 'confirmLeaveRoom',
+  changelog = 'changelog',
 }
 export interface I_Modal {
   content: E_Modal

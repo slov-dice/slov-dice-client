@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import throttle from 'lodash.throttle'
+import debounce from 'lodash.debounce'
 
 import { E_RoomType, I_FullRoom, I_RoomMessage, T_UserId } from 'models/shared/app'
 import { E_Battlefield } from 'models/shared/game/battlefield'
@@ -61,7 +61,7 @@ const initialState: I_FullRoom = {
   },
 }
 
-const throttleUpdate = throttle(
+const debounceUpdate = debounce(
   (args: I_EmitPayload[E_Emit.updateDoc]) => socket.emit(E_Emit.updateDoc, args),
   500,
 )
@@ -456,7 +456,7 @@ export const roomSlice = createSlice({
         doc.id === action.payload.docId ? { ...doc, content: action.payload.value } : doc,
       )
 
-      throttleUpdate(payload)
+      debounceUpdate(payload)
     },
     setUpdatedDoc: (state, action: PayloadAction<{ doc: I_Doc }>) => {
       state.game.textEditor.window.docs = state.game.textEditor.window.docs.map((doc) =>

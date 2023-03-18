@@ -17,6 +17,7 @@ import LanguageIcon from 'assets/icons/app/language.svg'
 import LeaveRoomIcon from 'assets/icons/app/leave-room.svg'
 import LoginIcon from 'assets/icons/app/login.svg'
 import LogoutIcon from 'assets/icons/app/logout.svg'
+import PersonSignIcon from 'assets/icons/app/person-sign.svg'
 import CreateIcon from 'assets/icons/app/plus.svg'
 import SaveIcon from 'assets/icons/app/save.svg'
 import StoreIcon from 'assets/icons/app/store.svg'
@@ -48,6 +49,7 @@ export enum E_AppIcon {
   upload = 'upload',
   users = 'users',
   info = 'info',
+  personSign = 'personSign',
 }
 
 export const getAppIcon = (icon: E_AppIcon): ReactNode => {
@@ -120,5 +122,8 @@ export const getAppIcon = (icon: E_AppIcon): ReactNode => {
 
     case E_AppIcon.info:
       return <InfoIcon />
+
+    case E_AppIcon.personSign:
+      return <PersonSignIcon />
   }
 }

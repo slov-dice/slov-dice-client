@@ -76,10 +76,10 @@ export const ActionsEditor = () => {
 
   const handleClose = useCallback(() => {
     if (overlayPayload?.startsWith('character')) {
-      dispatch(gameCharactersActions.closeCharacterWindowOverlay(E_WindowOverlay.actionsEditor))
+      dispatch(gameCharactersActions.closeWindowOverlay(E_WindowOverlay.actionsEditor))
     }
     if (overlayPayload?.startsWith('dummy')) {
-      dispatch(gameBattlefieldActions.closeBattlefieldWindowOverlay(E_WindowOverlay.actionsEditor))
+      dispatch(gameBattlefieldActions.closeWindowOverlay(E_WindowOverlay.actionsEditor))
     }
   }, [dispatch, overlayPayload])
 

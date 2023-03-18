@@ -28,9 +28,7 @@ export const TextEditorContent = () => {
   const [activeDocId, setActiveDocId] = useState('')
 
   const handleOpenGridDocsOverlay = () => {
-    dispatch(
-      gameTextEditorActions.openWindowOverlay({ name: E_WindowOverlay.gridDocs, isOpen: true }),
-    )
+    dispatch(gameTextEditorActions.openWindowOverlay({ name: E_WindowOverlay.gridDocs }))
   }
 
   const handleActiveDoc = (docId: T_DocId) => () => {

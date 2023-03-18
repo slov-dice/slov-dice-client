@@ -18,10 +18,9 @@ export const AddCharacterEffect = ({ characterId }: I_AddCharacterEffectProps) =
 
   const handleOpenAddCharacterOverlay = () => {
     dispatch(
-      gameCharactersActions.openCharacterWindowOverlay({
+      gameCharactersActions.openWindowOverlay({
         name: E_WindowOverlay.updateCharacterEffect,
         payload: characterId,
-        isOpen: true,
       }),
     )
   }

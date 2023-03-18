@@ -50,7 +50,7 @@ export const PickDummyAvatarOverlay = () => {
   })
 
   const handleClose = useCallback(() => {
-    dispatch(gameBattlefieldActions.closeBattlefieldWindowOverlay(E_WindowOverlay.pickDummyAvatar))
+    dispatch(gameBattlefieldActions.closeWindowOverlay(E_WindowOverlay.pickDummyAvatar))
   }, [dispatch])
 
   const handlePickAvatar = (avatar: string) => () => {

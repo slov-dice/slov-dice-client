@@ -35,7 +35,7 @@ export const PickCharacterAvatarOverlay = () => {
   })
 
   const handleClose = useCallback(() => {
-    dispatch(gameCharactersActions.closeCharacterWindowOverlay(E_WindowOverlay.pickCharacterAvatar))
+    dispatch(gameCharactersActions.closeWindowOverlay(E_WindowOverlay.pickCharacterAvatar))
   }, [dispatch])
 
   const handlePickAvatar = (avatar: string) => () => {

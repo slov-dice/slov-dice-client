@@ -1,3 +1,4 @@
+import { isMobile } from 'react-device-detect'
 import { useNavigate } from 'react-router-dom'
 
 import { data } from './data'
@@ -14,6 +15,7 @@ import { E_Modal } from 'features/ModalManager/models'
 import { openModal } from 'features/ModalManager/slice'
 import { E_Panels } from 'features/SidePanel/models'
 import { openSidePanel } from 'features/SidePanel/slice'
+import { tileManagerActions } from 'features/TileManager/slice'
 import { E_Window } from 'features/WindowManager/models'
 import { windowManagerActions } from 'features/WindowManager/slice'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
@@ -55,7 +57,11 @@ export const Navigation = ({ toggleMenu }: NavigationProps) => {
     }
 
     if (item.actionType === E_TaskItemActionType.window) {
-      dispatch(windowManagerActions.openWindow(item.actionPayload as E_Window))
+      if (isMobile) {
+        dispatch(tileManagerActions.openTile(item.actionPayload as E_Window))
+      } else {
+        dispatch(windowManagerActions.openWindow(item.actionPayload as E_Window))
+      }
     }
 
     if (item.actionType === E_TaskItemActionType.panel) {

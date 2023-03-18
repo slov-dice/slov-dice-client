@@ -1,5 +1,6 @@
 import { FC } from 'react'
 
+import { ChangelogModal } from './Changelog'
 import { ConfirmLeaveRoom } from './ConfirmLeaveRoom'
 import { CreateRoomModal } from './CreateRoom'
 import { EnterPasswordRoom } from './EnterPasswordRoom'
@@ -28,4 +29,5 @@ export const modalComponents: Record<E_Modal, FC> = {
   [E_Modal.loadGame]: LoadGameModal,
   [E_Modal.enterPasswordRoom]: EnterPasswordRoom,
   [E_Modal.confirmLeaveRoom]: ConfirmLeaveRoom,
+  [E_Modal.changelog]: ChangelogModal,
 }

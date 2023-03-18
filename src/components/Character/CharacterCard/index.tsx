@@ -33,9 +33,8 @@ export const CharacterCard = ({ character }: I_CharacterCardProps) => {
   const handleOpenUpdateCharacterOverlay = () => {
     dispatch(gameCharactersActions.setCharacterEditor(character))
     dispatch(
-      gameCharactersActions.openCharacterWindowOverlay({
+      gameCharactersActions.openWindowOverlay({
         name: E_WindowOverlay.updateCharacter,
-        isOpen: true,
         payload: character.id,
       }),
     )

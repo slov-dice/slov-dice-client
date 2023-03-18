@@ -35,17 +35,16 @@ export const CreateDummyOverlay = () => {
 
   const handleOpenActionsEditorOverlay = () => {
     dispatch(
-      gameBattlefieldActions.openBattlefieldWindowOverlay({
+      gameBattlefieldActions.openWindowOverlay({
         name: E_WindowOverlay.actionsEditor,
         payload: 'dummyCreator',
-        isOpen: true,
       }),
     )
   }
 
   const handleClose = useCallback(() => {
     setDummy(getFormCreateDummy(settingsBars))
-    dispatch(gameBattlefieldActions.closeBattlefieldWindowOverlay(E_WindowOverlay.createDummy))
+    dispatch(gameBattlefieldActions.closeWindowOverlay(E_WindowOverlay.createDummy))
   }, [dispatch, settingsBars])
 
   const handleChangeCharacterName = (value: string) => {

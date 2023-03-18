@@ -54,6 +54,8 @@ export const Control = styled(motion.div).attrs(({ theme }) => controlAttrs(them
   padding: 0 4px;
 
   border-radius: 15%;
+
+  fill: ${({ theme }) => theme.colors.white};
 `
 
 export const EditableInput = styled.input`

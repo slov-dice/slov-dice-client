@@ -190,6 +190,13 @@ export const data: I_TaskItem[] = [
     actionPayload: E_Modal.translator,
   },
   {
+    name: 'sideMenu.changelog',
+    icon: E_AppIcon.personSign,
+    visibility: [E_TaskItemVisibility.all],
+    actionType: E_TaskItemActionType.modal,
+    actionPayload: E_Modal.changelog,
+  },
+  {
     name: 'sideMenu.logout',
     icon: E_AppIcon.logout,
     visibility: [

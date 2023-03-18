@@ -35,8 +35,7 @@ export const DummyCard = ({ dummy, battlefield }: I_DummyCardProps) => {
   const handleOpenDummyEditor = () => {
     dispatch(gameBattlefieldActions.setDummyEditor(dummy))
     dispatch(
-      gameBattlefieldActions.openBattlefieldWindowOverlay({
-        isOpen: true,
+      gameBattlefieldActions.openWindowOverlay({
         name: E_WindowOverlay.updateDummy,
         payload: dummy.id,
       }),

@@ -87,15 +87,14 @@ export const UpdateCharacterOverlay = () => {
   }
 
   const handleClose = useCallback(() => {
-    dispatch(gameCharactersActions.closeCharacterWindowOverlay(E_WindowOverlay.updateCharacter))
+    dispatch(gameCharactersActions.closeWindowOverlay(E_WindowOverlay.updateCharacter))
   }, [dispatch])
 
   const handleOpenActionsEditorOverlay = () => {
     dispatch(
-      gameCharactersActions.openCharacterWindowOverlay({
+      gameCharactersActions.openWindowOverlay({
         name: E_WindowOverlay.actionsEditor,
         payload: 'characterEditor',
-        isOpen: true,
       }),
     )
   }

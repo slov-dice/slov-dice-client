@@ -28,18 +28,15 @@ export const BattlefieldEditor = () => {
   const handleOpenCreateDummyOverlay = () => {
     dispatch(gameBattlefieldActions.setDummyCreator())
     dispatch(
-      gameBattlefieldActions.openBattlefieldWindowOverlay({
+      gameBattlefieldActions.openWindowOverlay({
         name: E_WindowOverlay.createDummy,
         payload: overlayPayload,
-        isOpen: true,
       }),
     )
   }
 
   const handleClose = useCallback(() => {
-    dispatch(
-      gameBattlefieldActions.closeBattlefieldWindowOverlay(E_WindowOverlay.battlefieldEditor),
-    )
+    dispatch(gameBattlefieldActions.closeWindowOverlay(E_WindowOverlay.battlefieldEditor))
   }, [dispatch])
 
   return (
