@@ -15,7 +15,7 @@ export const TopSection = styled.div`
   gap: 4px;
 
   max-width: 100%;
-  height: 34px;
+  min-height: 34px;
   padding: 2px;
 
   border-bottom: 1px dashed ${({ theme }) => theme.colors.primary};
@@ -93,13 +93,6 @@ export const BottomSection = styled.div`
   display: flex;
   flex: 1;
 
+  max-height: 100%;
   padding: 8px;
-
-  textarea {
-    width: 100%;
-
-    color: ${({ theme }) => theme.colors.white};
-
-    background-color: ${({ theme }) => theme.colors.white_05};
-  }
 `

@@ -95,12 +95,7 @@ export const TextEditorContent = () => {
 
         <S.BottomSection>
           {activeDoc && (
-            <ReactQuill
-              style={{ width: '100%' }}
-              theme='snow'
-              value={activeDoc.content}
-              onChange={handleChangeDocContent}
-            />
+            <ReactQuill theme='snow' value={activeDoc.content} onChange={handleChangeDocContent} />
           )}
         </S.BottomSection>
       </S.TextEditorWrapper>
