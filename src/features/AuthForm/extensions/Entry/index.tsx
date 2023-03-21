@@ -34,12 +34,10 @@ export const Entry = () => {
 
   const handleGoogleAuth = () => {
     LocalStorage.setAuthType(E_AuthType.google)
-    location.replace(import.meta.env.VITE_GOOGLE_AUTH_URL)
   }
 
   const handleDiscordAuth = () => {
     LocalStorage.setAuthType(E_AuthType.discord)
-    location.replace(import.meta.env.VITE_DISCORD_AUTH_URL)
   }
 
   const handleGuestAuth = () => {
@@ -60,10 +58,12 @@ export const Entry = () => {
         </Button>
       </Link>
       <C.Divider md={32} />
-      <Button onClick={handleDiscordAuth}>
-        <DiscordIcon />
-        {t('auth.discord')}
-      </Button>
+      <Link to={import.meta.env.VITE_DISCORD_AUTH_URL}>
+        <Button onClick={handleDiscordAuth}>
+          <DiscordIcon />
+          {t('auth.discord')}
+        </Button>
+      </Link>
       <C.Divider h={72} md={56} />
       <Button disabled={guestAuthProgress.isLoading} onClick={handleGuestAuth}>
         <GuestIcon />

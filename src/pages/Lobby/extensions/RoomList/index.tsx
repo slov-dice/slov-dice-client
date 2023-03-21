@@ -1,4 +1,5 @@
 import { useContext } from 'react'
+import { isMobile } from 'react-device-detect'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
@@ -9,25 +10,25 @@ import { Button } from 'components/Buttons'
 import { modalManagerContext } from 'features/ModalManager/context'
 import { E_Modal } from 'features/ModalManager/models'
 import { modalManagerActions, openModal } from 'features/ModalManager/slice'
-import { useMediaQuery } from 'hooks/useMediaQuery'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { useStoreSelector } from 'hooks/useStoreSelector'
 import { t } from 'languages'
 import { E_RoomType, I_PreviewRoom } from 'models/shared/app'
+import { appActions } from 'store/app'
+import { E_AppLoader } from 'store/app/data'
 import { roomActions } from 'store/room'
 import * as C from 'styles/components'
-import { E_MediaQuery } from 'styles/theme'
 
 export const RoomList = () => {
   const dispatch = useStoreDispatch()
   const navigate = useNavigate()
-  const isMatch = useMediaQuery(E_MediaQuery.lg)
   const { setEnterPasswordRoomPayload, setConfirmLeaveRoomPayload } =
     useContext(modalManagerContext)
-  const { rooms, currentRoomId, isUserInRoom } = useStoreSelector((store) => ({
+  const { rooms, currentRoomId, isUserInRoom, isRoomJoining } = useStoreSelector((store) => ({
     rooms: store.lobbyPage.rooms,
     currentRoomId: store.room.id,
     isUserInRoom: store.profile.statuses.inRoom,
+    isRoomJoining: store.app.loaders.isRoomJoining,
   }))
 
   const handleJoin = (room: I_PreviewRoom) => () => {
@@ -52,6 +53,7 @@ export const RoomList = () => {
     }
 
     // Вход в комнату если она публичная
+    dispatch(appActions.setLoading({ loader: E_AppLoader.isRoomJoining, status: true }))
     dispatch(roomActions.emitJoinRoom({ roomId: room.id }))
   }
 
@@ -87,8 +89,11 @@ export const RoomList = () => {
                     {room.currentSize}/{room.size}
                   </div>
                 </S.RoomCardInfo>
-                <S.RoomCardAction $isMatch={isMatch}>
-                  <button onClick={inRoom ? handleBackToTheRoom : handleJoin(room)}>
+                <S.RoomCardAction $isMatch={isMobile}>
+                  <button
+                    disabled={isRoomJoining}
+                    onClick={inRoom ? handleBackToTheRoom : handleJoin(room)}
+                  >
                     {inRoom ? t('lobby.actions.return') : t('lobby.actions.join')}
                   </button>
                 </S.RoomCardAction>

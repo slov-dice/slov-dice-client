@@ -11,14 +11,17 @@ import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { useStoreSelector } from 'hooks/useStoreSelector'
 import { t } from 'languages'
 import { E_RoomType } from 'models/shared/app'
+import { appActions } from 'store/app'
+import { E_AppLoader } from 'store/app/data'
 import { roomActions } from 'store/room'
 import * as C from 'styles/components'
 
 export const ConfirmLeaveRoom = () => {
   const dispatch = useStoreDispatch()
   const { confirmLeaveRoomPayload, setEnterPasswordRoomPayload } = useContext(modalManagerContext)
-  const { roomName } = useStoreSelector((store) => ({
+  const { roomName, isRoomJoining } = useStoreSelector((store) => ({
     roomName: store.room.name,
+    isRoomJoining: store.app.loaders.isRoomJoining,
   }))
 
   const handleClose = () => {
@@ -29,6 +32,7 @@ export const ConfirmLeaveRoom = () => {
     dispatch(roomActions.emitLeaveRoom())
 
     if (confirmLeaveRoomPayload.roomType === E_RoomType.public) {
+      dispatch(appActions.setLoading({ loader: E_AppLoader.isRoomJoining, status: false }))
       dispatch(
         roomActions.emitJoinRoom({
           roomId: confirmLeaveRoomPayload.roomId,
@@ -65,7 +69,9 @@ export const ConfirmLeaveRoom = () => {
             <Button onClick={handleClose} mod={Button.mod.primary}>
               {t('modals.confirmLeaveRoom.actions.cancel')}
             </Button>
-            <Button onClick={handleConfirm}>{t('modals.confirmLeaveRoom.actions.confirm')}</Button>
+            <Button onClick={handleConfirm} disabled={isRoomJoining}>
+              {t('modals.confirmLeaveRoom.actions.confirm')}
+            </Button>
           </S.ModalActions>
         </div>
       </S.ModalContent>

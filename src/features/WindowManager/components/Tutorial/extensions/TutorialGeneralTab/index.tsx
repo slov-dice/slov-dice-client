@@ -1,5 +1,7 @@
-import sideMenuImage from './assets/sideMenu.webp'
-import windowImage from './assets/window.gif'
+import { isMobile } from 'react-device-detect'
+
+import sideMenuMedia from './assets/sideMenu.webp'
+import windowMedia from './assets/window.gif'
 
 import { useStoreSelector } from 'hooks/useStoreSelector'
 import { t } from 'languages'
@@ -15,11 +17,11 @@ export const TutorialGeneralTab = () => {
         <C.Divider h={8} md={4} />
         <p>{t('windowTutorial.general.paragraph1.text1')}</p>
         <C.Divider h={8} md={4} />
-        <C.Img src={windowImage} alt='side-menu' />
+        {!isMobile && <C.Img src={windowMedia} alt='side-menu' />}
         <C.Divider h={8} md={4} />
         <p>{t('windowTutorial.general.paragraph1.text2')}</p>
         <C.Divider h={8} md={4} />
-        <C.Img src={sideMenuImage} alt='side-menu' />
+        <C.Img src={sideMenuMedia} alt='side-menu' />
         <C.Divider h={16} md={8} />
       </div>
       <div>

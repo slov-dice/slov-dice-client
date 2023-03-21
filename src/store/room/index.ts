@@ -1,7 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import debounce from 'lodash.debounce'
 
-import { E_RoomType, I_FullRoom, I_RoomMessage, T_UserId } from 'models/shared/app'
+import { initialState } from './data'
+
+import { I_FullRoom, I_RoomMessage, T_UserId } from 'models/shared/app'
 import { E_Battlefield } from 'models/shared/game/battlefield'
 import {
   T_BaseCharacterBar,
@@ -21,45 +23,6 @@ import {
   I_SubscriptionData,
 } from 'models/shared/socket/lobbyRooms'
 import { socket } from 'services/socket'
-
-const initialState: I_FullRoom = {
-  id: '',
-  name: '',
-  password: '',
-  authorId: 0,
-  currentSize: 0,
-  size: 0,
-  type: E_RoomType.public,
-  users: [],
-  messages: [],
-  createdAt: null,
-  updatedAt: null,
-  game: {
-    characters: {
-      window: {
-        characters: [],
-      },
-      settings: {
-        bars: [],
-        effects: [],
-        specials: [],
-      },
-    },
-    battlefield: {
-      window: {
-        masterDummies: [],
-        masterField: [],
-        playersDummies: [],
-        playersField: [],
-      },
-    },
-    textEditor: {
-      window: {
-        docs: [],
-      },
-    },
-  },
-}
 
 const debounceUpdate = debounce(
   (args: I_EmitPayload[E_Emit.updateDoc]) => socket.emit(E_Emit.updateDoc, args),

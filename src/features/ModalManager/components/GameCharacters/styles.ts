@@ -5,6 +5,10 @@ import { BaseModal, BaseModalClose, BaseModalContent } from '../styles'
 export const Modal = styled(BaseModal)`
   width: 900px;
   height: 720px;
+
+  @media ${({ theme }) => theme.media.lg} {
+    height: 100%;
+  }
 `
 
 export const ModalClose = styled(BaseModalClose)``

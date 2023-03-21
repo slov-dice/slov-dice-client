@@ -7,6 +7,8 @@ import { setRooms, updateRoom } from './slice'
 import { modalManagerActions } from 'features/ModalManager/slice'
 import { E_Subscribe, I_SubscriptionData } from 'models/shared/socket/lobbyRooms'
 import { socket } from 'services/socket'
+import { appActions } from 'store/app'
+import { E_AppLoader } from 'store/app/data'
 import { joinRoom } from 'store/profile'
 import { roomActions } from 'store/room'
 import { LocalStorage } from 'utils/helpers/localStorage'
@@ -39,6 +41,8 @@ export const subscribe = createAsyncThunk(
       dispatch(modalManagerActions.closeModal())
       dispatch(roomActions.setRoom(data.fullRoom))
       dispatch(joinRoom())
+      dispatch(appActions.setLoading({ loader: E_AppLoader.isRoomCreating, status: false }))
+      dispatch(appActions.setLoading({ loader: E_AppLoader.isRoomJoining, status: false }))
       navigate(`/room/${data.fullRoom.id}`)
     })
   },

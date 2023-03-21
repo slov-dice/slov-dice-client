@@ -13,14 +13,17 @@ import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { useStoreSelector } from 'hooks/useStoreSelector'
 import { t } from 'languages'
 import { E_RoomType } from 'models/shared/app'
+import { appActions } from 'store/app'
+import { E_AppLoader } from 'store/app/data'
 import { roomActions } from 'store/room'
 import * as C from 'styles/components'
 
 export const CreateRoomModal = () => {
   const dispatch = useStoreDispatch()
 
-  const { isUserInRoom } = useStoreSelector((store) => ({
+  const { isUserInRoom, isRoomCreating } = useStoreSelector((store) => ({
     isUserInRoom: store.profile.statuses.inRoom,
+    isRoomCreating: store.app.loaders.isRoomCreating,
   }))
 
   const [form, setForm] = useState({
@@ -59,6 +62,8 @@ export const CreateRoomModal = () => {
 
   const handleCreateRoom = () => {
     if (!form['room-name'].trim() || (form['room-private'] && !form['room-password'].trim())) return
+    if (isRoomCreating) return
+    dispatch(appActions.setLoading({ loader: E_AppLoader.isRoomCreating, status: true }))
     const roomPassword = form['room-password']
     const roomType = form['room-private'] ? E_RoomType.private : E_RoomType.public
 
@@ -129,10 +134,12 @@ export const CreateRoomModal = () => {
         <div>
           <C.Divider decorated />
           <S.ModalActions>
-            <Button onClick={handleClose} mod={Button.mod.primary}>
+            <Button onClick={handleClose} mod={Button.mod.secondary}>
               {t('modals.createRoom.actions.cancel')}
             </Button>
-            <Button onClick={handleCreateRoom}>{t('modals.createRoom.actions.create')}</Button>
+            <Button disabled={isRoomCreating} onClick={handleCreateRoom}>
+              {t('modals.createRoom.actions.create')}
+            </Button>
           </S.ModalActions>
         </div>
       </S.ModalContent>

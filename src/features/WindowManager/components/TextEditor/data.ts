@@ -2,7 +2,6 @@ import { E_WindowOverlay, I_WindowOverlay } from 'features/WindowOverlayManager/
 
 export const initialOverlayStateSlice: I_WindowOverlay[] = [
   {
-    isOpen: false,
     name: E_WindowOverlay.gridDocs,
   },
 ]

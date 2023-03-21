@@ -9,6 +9,8 @@ import { modalManagerContext } from 'features/ModalManager/context'
 import { modalManagerActions } from 'features/ModalManager/slice'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { t } from 'languages'
+import { appActions } from 'store/app'
+import { E_AppLoader } from 'store/app/data'
 import { roomActions } from 'store/room'
 import * as C from 'styles/components'
 
@@ -27,6 +29,7 @@ export const EnterPasswordRoom = () => {
 
   const handleJoinRoom = () => {
     if (passwordValue.trim()) {
+      dispatch(appActions.setLoading({ loader: E_AppLoader.isRoomJoining, status: false }))
       dispatch(
         roomActions.emitJoinRoom({
           roomId: enterPasswordRoomPayload.roomId,

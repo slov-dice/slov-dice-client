@@ -1,6 +1,5 @@
 import { AnimatePresence } from 'framer-motion'
 import { useEffect, useState } from 'react'
-import { isMobile } from 'react-device-detect'
 import { useLocation } from 'react-router-dom'
 
 import { Control } from './components/Control'

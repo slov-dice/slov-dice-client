@@ -37,7 +37,7 @@ import { authAPI } from 'services/auth'
 const persistConfig = {
   key: 'slov-dice',
   storage,
-  whitelist: [appSlice.name],
+  whitelist: [],
 }
 
 const rootReducer = combineReducers({

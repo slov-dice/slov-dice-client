@@ -5,7 +5,7 @@ import * as S from './styles'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { useStoreSelector } from 'hooks/useStoreSelector'
 import { E_Locale } from 'models/shared/app'
-import { switchLanguage } from 'store/app'
+import { appActions } from 'store/app'
 
 export const LanguageSwitcher = () => {
   const language = useStoreSelector((store) => store.app.language)
@@ -13,7 +13,7 @@ export const LanguageSwitcher = () => {
 
   const handleSwitchLanguage = () => {
     const selectedLanguage = language === E_Locale.ru ? E_Locale.en : E_Locale.ru
-    dispatch(switchLanguage(selectedLanguage))
+    dispatch(appActions.switchLanguage(selectedLanguage))
   }
 
   return (

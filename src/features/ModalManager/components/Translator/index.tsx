@@ -8,7 +8,7 @@ import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { useStoreSelector } from 'hooks/useStoreSelector'
 import { t } from 'languages'
 import { E_Locale } from 'models/shared/app'
-import { switchLanguage } from 'store/app'
+import { appActions } from 'store/app'
 import * as C from 'styles/components'
 
 export const TranslatorModal = () => {
@@ -20,7 +20,7 @@ export const TranslatorModal = () => {
   }
 
   const handleSwitchLanguage = (option: T_SwitchOption) => {
-    dispatch(switchLanguage(option.value as E_Locale))
+    dispatch(appActions.switchLanguage(option.value as E_Locale))
   }
 
   return (
