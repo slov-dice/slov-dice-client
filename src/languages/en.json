@@ -73,7 +73,8 @@
         "listItem2": "Added support for mobile devices",
         "listItem3": "Added a modal window with a list of changes versions «Changelog» (Yes, this is it)",
         "listItem4": "Added PWA support",
-        "listItem5": "Updated overlay logic for windows"
+        "listItem5": "Updated overlay logic for windows",
+        "listItem6": "Updated window «Tutorial»"
       },
       "035": {
         "listItem1": "Added «Tutorial» window",
