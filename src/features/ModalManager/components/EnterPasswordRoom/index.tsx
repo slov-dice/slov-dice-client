@@ -8,6 +8,7 @@ import { TextField } from 'components/InputFields'
 import { modalManagerContext } from 'features/ModalManager/context'
 import { modalManagerActions } from 'features/ModalManager/slice'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
+import { useStoreSelector } from 'hooks/useStoreSelector'
 import { t } from 'languages'
 import { appActions } from 'store/app'
 import { E_AppLoader } from 'store/app/data'
@@ -16,6 +17,9 @@ import * as C from 'styles/components'
 
 export const EnterPasswordRoom = () => {
   const dispatch = useStoreDispatch()
+  const { isRoomJoining } = useStoreSelector((store) => ({
+    isRoomJoining: store.app.loaders.isRoomJoining,
+  }))
   const { enterPasswordRoomPayload } = useContext(modalManagerContext)
   const [passwordValue, setPasswordValue] = useState('')
 
@@ -29,7 +33,7 @@ export const EnterPasswordRoom = () => {
 
   const handleJoinRoom = () => {
     if (passwordValue.trim()) {
-      dispatch(appActions.setLoading({ loader: E_AppLoader.isRoomJoining, status: false }))
+      dispatch(appActions.setLoading({ loader: E_AppLoader.isRoomJoining, status: true }))
       dispatch(
         roomActions.emitJoinRoom({
           roomId: enterPasswordRoomPayload.roomId,
@@ -65,7 +69,9 @@ export const EnterPasswordRoom = () => {
             <Button onClick={handleClose} mod={Button.mod.primary}>
               {t('modals.enterPasswordRoom.actions.cancel')}
             </Button>
-            <Button onClick={handleJoinRoom}>{t('modals.enterPasswordRoom.actions.join')}</Button>
+            <Button disabled={isRoomJoining} onClick={handleJoinRoom}>
+              {t('modals.enterPasswordRoom.actions.join')}
+            </Button>
           </S.ModalActions>
         </div>
       </S.ModalContent>

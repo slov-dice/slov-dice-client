@@ -15,6 +15,7 @@ import { t } from 'languages'
 import { E_RoomType } from 'models/shared/app'
 import { appActions } from 'store/app'
 import { E_AppLoader } from 'store/app/data'
+import { profileActions } from 'store/profile'
 import { roomActions } from 'store/room'
 import * as C from 'styles/components'
 
@@ -62,7 +63,6 @@ export const CreateRoomModal = () => {
 
   const handleCreateRoom = () => {
     if (!form['room-name'].trim() || (form['room-private'] && !form['room-password'].trim())) return
-    if (isRoomCreating) return
     dispatch(appActions.setLoading({ loader: E_AppLoader.isRoomCreating, status: true }))
     const roomPassword = form['room-password']
     const roomType = form['room-private'] ? E_RoomType.private : E_RoomType.public
@@ -73,7 +73,9 @@ export const CreateRoomModal = () => {
       roomPassword: roomPassword,
       roomType,
     }
+
     if (isUserInRoom) {
+      dispatch(profileActions.leaveRoom())
       dispatch(roomActions.emitLeaveRoom())
     }
     dispatch(roomActions.emitCreateRoom(createRoomPayload))

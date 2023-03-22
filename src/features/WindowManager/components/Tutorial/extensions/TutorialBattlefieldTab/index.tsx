@@ -18,12 +18,28 @@ export const TutorialBattlefieldTab = () => {
         <C.Divider h={8} md={4} />
         <p>{t('windowTutorial.battlefield.paragraph1.text2')}</p>
         <p>{t('windowTutorial.battlefield.paragraph1.text3')}</p>
-        <C.Divider h={8} md={4} />
+        <C.Divider h={16} md={8} />
         <h2>{t('windowTutorial.battlefield.paragraph1.subTitle1')}</h2>
         <C.Divider h={8} md={4} />
         <p>{t('windowTutorial.battlefield.paragraph1.text4')}</p>
         <C.Divider h={8} md={4} />
         <C.Img src={actionsImage} alt='actions' />
+        <C.Divider h={8} md={4} />
+        <p>
+          <p>{t('windowTutorial.battlefield.paragraph1.text5')}</p>
+        </p>
+        <C.Divider h={16} md={8} />
+        <h3>{t('windowTutorial.battlefield.paragraph1.subTitle2')}</h3>
+        <C.Divider h={8} md={4} />
+        <div>
+          <p>{t('windowTutorial.battlefield.paragraph1.text6')}</p>
+          <i>{t('windowTutorial.battlefield.paragraph1.example1')}</i>
+        </div>
+        <C.Divider h={8} md={4} />
+        <div>
+          <p>{t('windowTutorial.battlefield.paragraph1.text7')}</p>
+          <i>{t('windowTutorial.battlefield.paragraph1.example2')}</i>
+        </div>
         <C.Divider h={16} md={8} />
       </div>
       <div>

@@ -37,12 +37,15 @@ export const subscribe = createAsyncThunk(
         toast[data.status](message)
       }
 
+      setTimeout(() => {
+        dispatch(appActions.setLoading({ loader: E_AppLoader.isRoomCreating, status: false }))
+        dispatch(appActions.setLoading({ loader: E_AppLoader.isRoomJoining, status: false }))
+      }, 500)
+
       if (!data.fullRoom) return
       dispatch(modalManagerActions.closeModal())
       dispatch(roomActions.setRoom(data.fullRoom))
       dispatch(joinRoom())
-      dispatch(appActions.setLoading({ loader: E_AppLoader.isRoomCreating, status: false }))
-      dispatch(appActions.setLoading({ loader: E_AppLoader.isRoomJoining, status: false }))
       navigate(`/room/${data.fullRoom.id}`)
     })
   },

@@ -31,6 +31,7 @@ export const ChangelogModal = () => {
             <li>{t('modals.changelog.040.listItem3')}</li>
             <li>{t('modals.changelog.040.listItem4')}</li>
             <li>{t('modals.changelog.040.listItem5')}</li>
+            <li>{t('modals.changelog.040.listItem6')}</li>
           </S.ChangeList>
         </S.VersionWrapper>
         <C.Divider />

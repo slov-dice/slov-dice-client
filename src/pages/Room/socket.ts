@@ -4,6 +4,8 @@ import { toast } from 'react-toastify'
 import { gameBattlefieldActions } from 'features/WindowManager/components/Battlefield/slice'
 import { E_Subscribe, I_SubscriptionData } from 'models/shared/socket/lobbyRooms'
 import { socket } from 'services/socket'
+import { appActions } from 'store/app'
+import { E_AppLoader } from 'store/app/data'
 import { joinRoom } from 'store/profile'
 import { roomActions } from 'store/room'
 import { LocalStorage } from 'utils/helpers/localStorage'
@@ -15,6 +17,8 @@ export const subscribe = createAsyncThunk('roomPage', async (_, { dispatch }) =>
       const message = data.message[language]
       toast[data.status](message)
     }
+    dispatch(appActions.setLoading({ loader: E_AppLoader.isRoomCreating, status: false }))
+    dispatch(appActions.setLoading({ loader: E_AppLoader.isRoomJoining, status: false }))
 
     if (!data.fullRoom) return
     dispatch(roomActions.setRoom(data.fullRoom))

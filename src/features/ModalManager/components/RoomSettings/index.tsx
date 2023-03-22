@@ -22,7 +22,6 @@ export const RoomSettingsModal = () => {
       </S.ModalClose>
       <C.Title>{t('modals.roomSettings.title')}</C.Title>
       <C.Divider />
-
       <S.ModalContent>
         <Tabs>
           <Tab id='bars' tabTitle='modals.roomSettings.tabs.bars.title'>

@@ -72,8 +72,8 @@
         "listItem1": "Added support for variables for value in the action editor",
         "listItem2": "Added support for mobile devices",
         "listItem3": "Added a modal window with a list of changes versions «Changelog» (Yes, this is it)",
-        "listItem4": "Improved overlay logic for windows",
-        "listItem5": "Added PWA support"
+        "listItem4": "Added PWA support",
+        "listItem5": "Updated overlay logic for windows"
       },
       "035": {
         "listItem1": "Added «Tutorial» window",
@@ -281,7 +281,12 @@
         "text2": "In the upper part there are the master's dummies.",
         "text3": "At the bottom are the characters and the dummies of the players.",
         "subTitle1": "Actions",
-        "text4": "Each character and dummy has actions that you can customize: name, description and target. Action has a target bar and an applied value to it. In the future, these actions will be displayed on the creature's card on the battlefield."
+        "text4": "Each character and dummy has actions that you can customize: name, description and target. Action has a target bar and an applied value to it. In the future, these actions will be displayed on the creature's card on the battlefield.",
+        "subTitle2": "Examples",
+        "text6": "1. Some attack that adds the «strength» attribute, takes a random number from a certain range and becomes negative:",
+        "example1": "-($Strength$ + [12,15])",
+        "text7": "2. Some heal that adds the initiator's last dice roll and the «intelligence» attribute:",
+        "example2": "$Roll$ + $Intelligence$"
       },
       "paragraph2": {
         "title": "Dummy creating",

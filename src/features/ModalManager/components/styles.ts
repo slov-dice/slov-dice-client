@@ -22,6 +22,7 @@ export const BaseModal = styled.div`
 
     width: 100%;
     height: 100%;
+    padding: 64px 16px 24px;
 
     background: ${({ theme }) => theme.colors.black_90};
     border-radius: 0;

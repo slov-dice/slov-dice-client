@@ -21,7 +21,7 @@ import { windowManagerActions } from 'features/WindowManager/slice'
 import { useStoreDispatch } from 'hooks/useStoreDispatch'
 import { useStoreSelector } from 'hooks/useStoreSelector'
 import { E_Routes } from 'models/routes'
-import { leaveRoom, logout } from 'store/profile'
+import { profileActions } from 'store/profile'
 import { roomActions } from 'store/room'
 import { E_AppIcon } from 'utils/icons/app'
 
@@ -46,7 +46,7 @@ export const Navigation = ({ toggleMenu }: NavigationProps) => {
 
     if (item.actionType === E_TaskItemActionType.replace) {
       if (item.actionPayload === E_CustomAction.logout) {
-        dispatch(logout({ roomId }))
+        dispatch(profileActions.logout({ roomId }))
         return
       }
       navigate(item.actionPayload as E_Routes)
@@ -70,7 +70,7 @@ export const Navigation = ({ toggleMenu }: NavigationProps) => {
 
     if (item.icon === E_AppIcon.leaveRoom) {
       dispatch(roomActions.emitLeaveRoom())
-      dispatch(leaveRoom())
+      dispatch(profileActions.leaveRoom())
       navigate('/lobby')
     }
 

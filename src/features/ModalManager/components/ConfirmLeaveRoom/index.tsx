@@ -13,6 +13,7 @@ import { t } from 'languages'
 import { E_RoomType } from 'models/shared/app'
 import { appActions } from 'store/app'
 import { E_AppLoader } from 'store/app/data'
+import { profileActions } from 'store/profile'
 import { roomActions } from 'store/room'
 import * as C from 'styles/components'
 
@@ -29,8 +30,11 @@ export const ConfirmLeaveRoom = () => {
   }
 
   const handleConfirm = () => {
+    // Отключаем пользователя от комнаты
     dispatch(roomActions.emitLeaveRoom())
+    dispatch(profileActions.leaveRoom())
 
+    // Если комната публичная, то запускаем пользователя
     if (confirmLeaveRoomPayload.roomType === E_RoomType.public) {
       dispatch(appActions.setLoading({ loader: E_AppLoader.isRoomJoining, status: false }))
       dispatch(
@@ -40,7 +44,9 @@ export const ConfirmLeaveRoom = () => {
       )
     }
 
+    // Если комната приватная, то вызываем модальное окно для ввода пароля
     if (confirmLeaveRoomPayload.roomType === E_RoomType.private) {
+      handleClose()
       setEnterPasswordRoomPayload({ roomId: confirmLeaveRoomPayload.roomId })
       dispatch(modalManagerActions.openModal(E_Modal.enterPasswordRoom))
     }
